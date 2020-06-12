@@ -485,7 +485,7 @@ end;
 
 procedure TProductsForm.FindEditChange(Sender: TObject);
 begin
-  if Length(Trim(FindEdit.Text))) = 0 then
+  if Length(Trim(FindEdit.Text)) = 0 then
     AppData.Products.Filtered := False;
 end;
 
@@ -497,7 +497,7 @@ end;
 
 procedure TProductsForm.FindBtnClick(Sender: TObject);
 begin
-  FindProduct(FieldCB.ItemIndex,  Trim(FindEdit.Text)));
+  FindProduct(FieldCB.ItemIndex,  Trim(FindEdit.Text));
 end;
 
 end.
