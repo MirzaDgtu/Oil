@@ -33,6 +33,9 @@ type
     SelectBtn: TBitBtn;
     procedure RangeBtnClick(Sender: TObject);
     procedure RefreshBtnClick(Sender: TObject);
+    procedure InsuranceGridDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     FlocUID: integer;
     FTypeF: Shortint;
@@ -158,6 +161,35 @@ begin
                AppData.InsuranceStory.Active := True;
             end;
   end;
+end;
+
+procedure TIsnuranceStoryForm.InsuranceGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+    if (AppData.Insurance.Active) and (not AppData.Insurance.IsEmpty) then
+    try
+      if AppData.Insurance.FieldByName('Reserve').AsBoolean = True then
+        InsuranceGrid.Canvas.Brush.Color := clRed;
+      if AppData.Insurance.FieldByName('Archive').AsString = '*' then
+        InsuranceGrid.Canvas.Brush.Color := clScrollBar;
+
+      if (Column.FieldName = 'ValidDay') and
+         (AppData.Insurance.FieldByName('Archive').AsString = EmptyStr) then
+          Begin
+           if (Column.Field.AsInteger > 5) then
+                 InsuranceGrid.Canvas.Brush.Color := clLime
+           else
+            if (Column.Field.AsInteger <= 5) and
+               (Column.Field.AsInteger > 0)  then
+                 InsuranceGrid.Canvas.Brush.Color := clOlive
+           else
+            if (Column.Field.AsInteger <= 0) then
+                 InsuranceGrid.Canvas.Brush.Color := clRed;
+          end;
+      finally
+        InsuranceGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+      end;
 end;
 
 end.

@@ -3,7 +3,6 @@ unit SConst;
 interface
 
 resourcestring
-
 {$I SEAST.INC}
 
   SRegAppKey       = '\Software\EastTrade\Oil';

@@ -1,6 +1,6 @@
 object InsuranceForm: TInsuranceForm
   Left = 380
-  Top = 421
+  Top = 360
   Width = 1345
   Height = 530
   Caption = #1056#1077#1077#1089#1090#1088' '#1089#1090#1088#1072#1093#1086#1074#1099#1093' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
@@ -19,8 +19,8 @@ object InsuranceForm: TInsuranceForm
   TextHeight = 13
   object SB: TStatusBar
     Left = 0
-    Top = 480
-    Width = 1337
+    Top = 472
+    Width = 1329
     Height = 19
     Panels = <
       item
@@ -37,10 +37,10 @@ object InsuranceForm: TInsuranceForm
       end>
   end
   object BtnsPanel: TPanel
-    Left = 1189
+    Left = 1181
     Top = 0
     Width = 148
-    Height = 480
+    Height = 472
     Align = alRight
     TabOrder = 1
     object Bevel1: TBevel
@@ -537,8 +537,8 @@ object InsuranceForm: TInsuranceForm
   object InsuranceGrid: TDBGrid
     Left = 0
     Top = 0
-    Width = 1189
-    Height = 480
+    Width = 1181
+    Height = 472
     Align = alClient
     DataSource = AppData.DS_Insurance
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]

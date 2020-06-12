@@ -33,24 +33,14 @@ type
     ExcelBtn: TSpeedButton;
     YearEdit: TSpinEdit;
     MonthCombo: TComboBox;
-    HeaderPanel: TPanel;
     BottomPanel: TPanel;
     SB: TStatusBar;
     AL: TActionList;
     CarsAction: TAction;
     InsuranceAction: TAction;
     IL: TImageList;
-    NaklGrid: TDBGrid;
-    MoveGrid: TDBGrid;
-    Splitter1: TSplitter;
-    PrintGB: TGroupBox;
-    PrintReestrBtn: TBitBtn;
-    PrintDocBtn: TBitBtn;
     PrintReestrAction: TAction;
     PrintDocAction: TAction;
-    RangeGB: TGroupBox;
-    RangeLbl: TLabel;
-    RefreshReestrBtn: TBitBtn;
     NewNaklAction: TAction;
     CorrNaklAction: TAction;
     DelNaklAction: TAction;
@@ -58,7 +48,6 @@ type
     CheckNaklAction: TAction;
     UnCheckNaklAction: TAction;
     RangeAction: TAction;
-    ArchiveChB: TCheckBox;
     NaklPop: TPopupMenu;
     AddNaklPop: TMenuItem;
     CorrNaklPop: TMenuItem;
@@ -66,12 +55,6 @@ type
     CheckNaklPop: TMenuItem;
     RangePop: TMenuItem;
     RefreshPop: TMenuItem;
-    DocGB: TGroupBox;
-    NewNaklBtn: TBitBtn;
-    CorrNaklBtn: TBitBtn;
-    DelNaklBtn: TBitBtn;
-    CheckNaklBtn: TBitBtn;
-    UnCheckNaklBtn: TBitBtn;
     UnCheckNaklPop: TMenuItem;
     ProductAction: TAction;
     ProdItemMenu: TMenuItem;
@@ -85,10 +68,7 @@ type
     procedure ExcelBtnClick(Sender: TObject);
     procedure CarsActionExecute(Sender: TObject);
     procedure InsuranceActionExecute(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure RangeActionExecute(Sender: TObject);
-    procedure RefreshNaklActionExecute(Sender: TObject);
-    procedure RangeLblClick(Sender: TObject);
     procedure CheckNaklActionExecute(Sender: TObject);
     procedure UnCheckNaklActionExecute(Sender: TObject);
     procedure NewNaklActionExecute(Sender: TObject);
@@ -110,7 +90,6 @@ type
     procedure RangeChanged;
     procedure MakeDataset;
     procedure LoadDataset;
-    procedure SetRangeDate(BegD, EndD: TDateTime);
 
     function GetYearMonth: Variant;
     procedure SetBegDate(const Value: TDateTime);
@@ -404,20 +383,6 @@ begin
    CreateChild(TInsuranceForm, InsuranceForm);
 end;
 
-procedure TMainForm.SetRangeDate(BegD, EndD: TDateTime);
-begin
-    BegDate := BegD;
-    EndDate := EndD;
-
-    RangeLbl.Caption := Format(SRange, [FormatDateTime('dd-mm-yyyy', BegDate),
-                                        FormatDateTime('dd-mm-yyyy', EndDate)]);
-end;
-
-procedure TMainForm.FormCreate(Sender: TObject);
-begin
-  SetRangeDate(Now(), Now()+1);
-end;
-
 procedure TMainForm.SetBegDate(const Value: TDateTime);
 begin
   FBegDate := Value;
@@ -439,34 +404,10 @@ begin
       Begin
         BegDP.Date := BegDate;
         EndDP.Date := EndDate;
-
-        if ShowModal = mrOk then
-          SetRangeDate(BegDP.Date, EndDP.Date);
       end;
   finally
     FreeAndNil(rangeF);
   end;
-end;
-
-procedure TMainForm.RefreshNaklActionExecute(Sender: TObject);
-begin
-  try
-    Screen.Cursor := crSQLWait;
-
-    AppData.Nakl.Active := False;
-    AppData.Nakl.CommandText := Format(SSQLGetNakl, [FormatDateTime('yyyy-mm-dd', BegDate),
-                                                     FormatDateTime('yyyy-mm-dd', EndDate),
-                                                     Byte(ArchiveChB.Checked)]);
-    AppData.Nakl.Active := True;
-
-  finally
-    Screen.Cursor := crDefault;
-  end;
-end;
-
-procedure TMainForm.RangeLblClick(Sender: TObject);
-begin
-  RangeActionExecute(Self);
 end;
 
 procedure TMainForm.CheckNaklActionExecute(Sender: TObject);
@@ -485,7 +426,7 @@ begin
                                                                        g_User]);
               AppData.Command.Execute;
             finally
-              RefreshNaklActionExecute(Self);
+             // RefreshNaklActionExecute(Self);
               AppData.Nakl.Locate('UNICUM_NUM', sUnicum_Num,  [loCaseInsensitive, loPartialKey]);
             end;
         end;
@@ -506,7 +447,7 @@ begin
                                                                    g_User]);
           AppData.Command.Execute;
         finally
-          RefreshNaklActionExecute(Self);
+//          RefreshNaklActionExecute(Self);
           AppData.Nakl.Locate('UNICUM_NUM', sUnicum_Num,  [loCaseInsensitive, loPartialKey]);
         end;
     end;
@@ -526,7 +467,7 @@ begin
             AppData.Command.CommandText := Format(SSQLDelNakl, [AppData.Nakl.FieldByName('UNICUM_NUM').AsInteger]);
             AppData.Command.Execute;
         finally
-           RefreshNaklActionExecute(Self);
+//           RefreshNaklActionExecute(Self);
         end;
     end;
 end;

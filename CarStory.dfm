@@ -17,16 +17,16 @@ object CarStoryForm: TCarStoryForm
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 397
-    Width = 1562
+    Top = 389
+    Width = 1554
     Height = 3
     Cursor = crVSplit
     Align = alBottom
   end
   object SB: TStatusBar
     Left = 0
-    Top = 542
-    Width = 1562
+    Top = 534
+    Width = 1554
     Height = 19
     Panels = <
       item
@@ -45,7 +45,7 @@ object CarStoryForm: TCarStoryForm
   object HeaderPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1562
+    Width = 1554
     Height = 30
     Align = alTop
     BorderStyle = bsSingle
@@ -189,8 +189,8 @@ object CarStoryForm: TCarStoryForm
   object GridsGB: TGroupBox
     Left = 0
     Top = 30
-    Width = 1562
-    Height = 367
+    Width = 1554
+    Height = 359
     Align = alClient
     Caption = '&'#1056#1077#1077#1089#1090#1088' '#1072#1074#1090#1086#1084#1086#1073#1080#1083#1077#1081
     Font.Charset = DEFAULT_CHARSET
@@ -203,8 +203,8 @@ object CarStoryForm: TCarStoryForm
     object CarGrid: TDBGrid
       Left = 2
       Top = 15
-      Width = 1558
-      Height = 350
+      Width = 1550
+      Height = 342
       Align = alClient
       DataSource = AppData.DS_CarStory
       Font.Charset = DEFAULT_CHARSET
@@ -221,6 +221,7 @@ object CarStoryForm: TCarStoryForm
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
+      OnDrawColumnCell = CarGridDrawColumnCell
       OnDblClick = CarGridDblClick
       Columns = <
         item
@@ -485,8 +486,8 @@ object CarStoryForm: TCarStoryForm
   end
   object DetailGB: TGroupBox
     Left = 0
-    Top = 400
-    Width = 1562
+    Top = 392
+    Width = 1554
     Height = 142
     Align = alBottom
     Caption = '&'#1055#1072#1088#1072#1084#1077#1090#1088#1099

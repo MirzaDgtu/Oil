@@ -15,8 +15,8 @@ object IsnuranceStoryForm: TIsnuranceStoryForm
   TextHeight = 13
   object SB: TStatusBar
     Left = 0
-    Top = 476
-    Width = 1381
+    Top = 468
+    Width = 1373
     Height = 19
     Panels = <
       item
@@ -35,8 +35,8 @@ object IsnuranceStoryForm: TIsnuranceStoryForm
   object InsuranceGrid: TDBGrid
     Left = 0
     Top = 27
-    Width = 1381
-    Height = 449
+    Width = 1373
+    Height = 441
     Align = alClient
     DataSource = AppData.DS_Insurance
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
@@ -47,6 +47,7 @@ object IsnuranceStoryForm: TIsnuranceStoryForm
     TitleFont.Height = -11
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = []
+    OnDrawColumnCell = InsuranceGridDrawColumnCell
     Columns = <
       item
         Expanded = False
@@ -288,7 +289,7 @@ object IsnuranceStoryForm: TIsnuranceStoryForm
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1381
+    Width = 1373
     Height = 27
     Align = alTop
     TabOrder = 2

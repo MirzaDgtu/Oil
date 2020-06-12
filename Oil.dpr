@@ -15,7 +15,9 @@ uses
   Child in 'Child.pas' {ChildForm},
   ProductDetail in 'ProductDetail.pas' {ProductDetailForm},
   CarStory in 'CarStory.pas' {CarStoryForm},
-  InsuranceStory in 'InsuranceStory.pas' {IsnuranceStoryForm};
+  InsuranceStory in 'InsuranceStory.pas' {IsnuranceStoryForm},
+  Reestr in 'Reestr.pas' {ReestrForm},
+  Login in '..\..\Common\Login.pas' {LoginDlg};
 
 {$R *.res}
 
@@ -25,6 +27,7 @@ begin
   Application.Initialize;
   Application.CreateForm(TAppData, AppData);
   Application.CreateForm(TMainForm, MainForm);
-  Application.CreateForm(TIsnuranceStoryForm, IsnuranceStoryForm);
+  Application.CreateForm(TReestrForm, ReestrForm);
+  Application.CreateForm(TLoginDlg, LoginDlg);
   Application.Run;
 end.

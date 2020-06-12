@@ -67,6 +67,8 @@ type
     procedure RefreshBtnClick(Sender: TObject);
     procedure RangeBtnClick(Sender: TObject);
     procedure CarGridDblClick(Sender: TObject);
+    procedure CarGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     FBegD: TDateTime;
     FEndD: TDateTime;
@@ -218,6 +220,25 @@ end;
 procedure TCarStoryForm.CarGridDblClick(Sender: TObject);
 begin
   SetCarDetail();
+end;
+
+procedure TCarStoryForm.CarGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if TypeF = g_New then
+    Begin
+      if AppData.Cars.FieldByName('Reserve').AsBoolean = True then
+         CarGrid.Canvas.Brush.Color := clRed;
+    end
+  else
+      if AppData.CarStory.FieldByName('Reserve').AsBoolean = True then
+         CarGrid.Canvas.Brush.Color := clRed;
+
+  if AppData.CarStory.FieldByName('Archive').AsString = '*' then
+      CarGrid.Canvas.Brush.Color := clScrollBar;
+
+    CarGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
 end.
