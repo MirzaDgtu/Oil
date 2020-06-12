@@ -88,20 +88,16 @@ type
     procedure RangeActionExecute(Sender: TObject);
     procedure TransferActionExecute(Sender: TObject);
     procedure DelActionExecute(Sender: TObject);
-    procedure StoryActionExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure StoryActionExecute(Sender: TObject);
   private
     FBegD: TDateTime;
     FEndD: TDateTime;
     FiTypeF: Shortint;
     { Private declarations }
-    procedure setLimitSettingModule();
-    procedure setStorySetting(UID: integer);
     procedure SetBegD(const Value: TDateTime);
     procedure SetEndD(const Value: TDateTime);
     procedure SetiTypeF(const Value: Shortint);
-
-    procedure CreateForm();
 
   protected
     property iTypeF: Shortint read FiTypeF write SetiTypeF;
@@ -109,8 +105,7 @@ type
     { Public declarations }
     procedure SetCarDetail();
 
-    constructor Create(Value: Shortint);
-    //constructor Create(AOwner: TComponent); overload; override;
+    constructor Create(AOwner: TComponent); override;
 
   published
     property BegD: TDateTime read FBegD write SetBegD;
@@ -122,7 +117,7 @@ var
 
 implementation
 
-uses AppDM, SConst, CarDetail, Globals, Range, DateUtils;
+uses AppDM, SConst, CarDetail, Globals, Range, DateUtils, CarStory;
 
 {$R *.dfm}
 
@@ -178,7 +173,6 @@ begin
                                                              StrToInt(IfThen(DocSerialEdit.Text = EmptyStr, '0', DocSerialEdit.Text)),
                                                              StrToInt(IfThen(DocNumEdit.Text = EmptyStr, '0', DocNumEdit.Text)),
                                                              Trim(CarD.PrimechMemo.Text)]);
-       // ShowMessage(AppData.Command.CommandText);
         AppData.Command.Execute;
         except
           on Err: Exception do
@@ -323,46 +317,6 @@ begin
    end;
 end;
 
-procedure TCarForm.setLimitSettingModule;
-begin
-
-    AppData.Cars.Active := False;
-    AppData.Cars.CommandText := Format(SSQLGetCars, [0,
-                                                     FormatDateTime('yyyy-mm-dd', BegD),
-                                                     FormatDateTime('yyyy-mm-dd', EndD)]);
-    AppData.Cars.Active := True;
-
-   try
-       AddBtn.Enabled := False;
-       CorrBtn.Enabled := False;
-       DelBtn.Enabled := False;
-       TransferBtn.Enabled := False;
-       ResevrChB.Enabled := False;
-       PrimechGB.Visible := False;
-
-       with CarGrid do
-        Begin
-          Columns[12].Visible := False;
-          Columns[14].Visible := False;
-          Columns[15].Visible := False;
-          Columns[17].Visible := False;
-          Columns[18].Visible := False;
-        end;
-
-       with SetInsDetailBtn do
-        Begin
-          Left := TransferBtn.Left;
-          Top := TransferBtn.Top;
-          Visible := True;
-          ModalResult := mrOk;
-        end;
-
-       Self.Height := 554;
-       Self.Width := 1040;
-   finally
-   end;
-end;
-
 procedure TCarForm.FindActionExecute(Sender: TObject);
 var
     strFilter: string;
@@ -483,98 +437,33 @@ begin
   FiTypeF := Value;
 end;
 
-procedure TCarForm.setStorySetting(UID: integer);
-var
-    i: integer;
-begin
-    AppData.CarStory.Active := False;
-    AppData.CarStory.CommandText := Format(SSQLGetCarArc, [UID]);
-    AppData.CarStory.Active := True;
-
-   try
-       AddBtn.Enabled := False;
-       DelBtn.Enabled := False;
-       TransferBtn.Enabled := False;
-       RangeBtn.Enabled := False;
-       ResevrChB.Enabled := False;
-
-       with CarGrid do
-        Begin
-           for i := 0 to Columns.Count - 1 do
-            Columns[i].Visible := True;
-        end;  
-   finally
-   end;
-end;
-
-procedure TCarForm.StoryActionExecute(Sender: TObject);
-var
-    CarF: TCarForm;
-    UID_Car: integer;
-begin
-  if (AppData.Cars.Active) and
-     (not AppData.Cars.IsEmpty) then
-      try
-        UID_Car := AppData.Cars.FieldbyName('UID').AsInteger;
-
-        CarF := TCarForm.Create(g_View);
-
-        CarF.ShowModal();
-      finally
-         FreeAndNil(CarF);
-         RefreshActionExecute(Self);
-         AppData.Cars.Locate('UID', IntToStr(UID_Car), [loCaseInsensitive, loPartialKey]);
-      end;
-end;
 
 procedure TCarForm.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := caFree;
 end;
 
-{
+
 constructor TCarForm.Create(AOwner: TComponent);
 begin
   inherited;
-
-
-  try
-  //
-
-    case Value of
-      g_New: ;                            // Нормальный запуск модуля
-      g_Corr: setLimitSettingModule();    // Вызов модуля из модуля Страховых документов
-      g_View: setStorySetting(AppData.Cars.FieldByName('UID').AsInteger);
-    end;
-    finally
-    end;
-end;}
-
-constructor TCarForm.Create(Value: Shortint);
-begin
-  inherited Create(Application);
-
   BegD := Now();
-  EndD := BegD + 1;
-  iTypeF := Value;
-
-  try
-    case Value of
-      g_New: ;                            // Нормальный запуск модуля
-      g_Corr: setLimitSettingModule();    // Вызов модуля из модуля Страховых документов
-      g_View: setStorySetting(AppData.Cars.FieldByName('UID').AsInteger);
-    end;
-  finally
-  end;
+  EndD := BegD + 1; 
 end;
 
-procedure TCarForm.CreateForm;
+procedure TCarForm.StoryActionExecute(Sender: TObject);
+var
+    StoryF: TCarStoryForm;
 begin
-    Visible := False;
-    FormStyle :=  fsNormal;
-    BorderStyle := bsSizeToolWin;
-    WindowState := wsNormal;
-    CarGrid.DataSource := AppData.DS_CarStory;
+  if (AppData.Cars.Active) and
+     (not AppData.Cars.IsEmpty) then
+      try
+        StoryF := TCarStoryForm.Create(g_View, AppData.Cars.FieldByName('UID').AsInteger);
+
+        StoryF.ShowModal;
+      finally
+        FreeAndNil(StoryF);
+      end;
 end;
 
 end.

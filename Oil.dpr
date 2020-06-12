@@ -13,7 +13,9 @@ uses
   Range in 'Range.pas' {RangeForm},
   Products in 'Products.pas' {ProductsForm},
   Child in 'Child.pas' {ChildForm},
-  ProductDetail in 'ProductDetail.pas' {ProductDetailForm};
+  ProductDetail in 'ProductDetail.pas' {ProductDetailForm},
+  CarStory in 'CarStory.pas' {CarStoryForm},
+  InsuranceStory in 'InsuranceStory.pas' {IsnuranceStoryForm};
 
 {$R *.res}
 
@@ -23,5 +25,6 @@ begin
   Application.Initialize;
   Application.CreateForm(TAppData, AppData);
   Application.CreateForm(TMainForm, MainForm);
+  Application.CreateForm(TIsnuranceStoryForm, IsnuranceStoryForm);
   Application.Run;
 end.

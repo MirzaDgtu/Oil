@@ -58,12 +58,10 @@ type
     procedure StoryActionExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
+    { Private declarations }
     FBegDate: TDateTime;
     FEndDate: TDateTime;
     FiTypeF: Shortint;
-    { Private declarations }
-    procedure setLimitSettingModule;
-    procedure setStorySetting(UID: integer);
     procedure setInfoSB();
     procedure SetBegDate(const Value: TDateTime);
     procedure SetEndDate(const Value: TDateTime);
@@ -74,11 +72,10 @@ type
   public
     { Public declarations }
 
-    constructor Create(Value: Shortint); overload;
+    constructor Create(AOwner: TComponent); override;
   published
     property BegDate: TDateTime read FBegDate write SetBegDate;
-    property EndDate: TDateTime read FEndDate write SetEndDate;
-
+    property EndDate: TDateTime read FEndDate write SetEndDate;   
   end;
 
 var
@@ -86,7 +83,7 @@ var
 
 implementation
 
-uses AppDM, Globals, SConst, InsuranceDetail, Range;
+uses AppDM, Globals, SConst, InsuranceDetail, Range, InsuranceStory;
 
 {$R *.dfm}
 
@@ -346,62 +343,6 @@ begin
       end;
 end;
 
-constructor TInsuranceForm.Create(Value: Shortint);
-begin
-  inherited Create(Application);
-  
-  BegDate := Now();
-  EndDate := BegDate + 1;
-  Self.iTypeF := Value;
-
-  case Value of
-    0: ;
-    1: setLimitSettingModule();
-    2: setStorySetting(AppData.Insurance.FieldbyName('UID').AsInteger);
-  end;
-
-
-end;
-
-procedure TInsuranceForm.setLimitSettingModule;
-begin
-  AppData.Insurance.Active := false;
-  AppData.Insurance.CommandText := Format(SSQLGetInsurance, [0,
-                                                             FormatDateTime('yyyy-mm-dd', BegDate),
-                                                             FormatDateTime('yyyy-mm-dd', EndDate)]);
-  AppData.Insurance.Active := True;
-
-  try
-       AddBtn.Enabled := False;
-       CorrBtn.Enabled := False;
-       DelBtn.Enabled := False;
-       TransferBtn.Enabled := False;
-       ReserveChB.Enabled := False;
-
-       with InsuranceGrid do
-        Begin
-          Columns[8].Visible := False;
-          Columns[9].Visible := False;
-          Columns[11].Visible := False;
-          Columns[12].Visible := False;
-          Columns[13].Visible := False;
-          Columns[14].Visible := False;
-          Columns[16].Visible := False;
-        end;
-
-       with SetInsDetailBtn do
-        Begin
-          Left := TransferBtn.Left;
-          Top := TransferBtn.Top;
-          Visible := True;
-          ModalResult := mrOk;
-        end;
-
-        Self.Width := 780;
-  finally
-  end;
-end;
-
 procedure TInsuranceForm.setInfoSB;
 var
     iRes: Smallint;
@@ -495,37 +436,20 @@ end;
 
 procedure TInsuranceForm.StoryActionExecute(Sender: TObject);
 var
-    InsF: TInsuranceForm;
-    UID_Ins: Integer;
+    InsF: TIsnuranceStoryForm;
+    UID_Ins: integer;
 begin
   if (AppData.Insurance.Active) and
      (not AppData.Insurance.IsEmpty) then
       try
         UID_Ins := AppData.Insurance.FieldByName('UID').AsInteger;
-        InsF := TInsuranceForm.Create(g_View);
+        InsF := TIsnuranceStoryForm.Create(g_View, AppData.Insurance.FieldbyName('UID').AsInteger);
         InsF.ShowModal();
       finally
         FreeAndNil(InsF);
         RefreshActionExecute(Self);
         AppData.Insurance.Locate('UID', IntToStr(UID_Ins), [loCaseInsensitive, loPartialKey]);
       end;
-end;
-
-procedure TInsuranceForm.setStorySetting(UID: integer);
-begin
-  AppData.Insurance.Active := false;
-  AppData.Insurance.CommandText := Format(SSQLGetIsnuranceArc, [UID]);
-  AppData.Insurance.Active := True;
-
-  try
-       AddBtn.Enabled := False;
-       DelBtn.Enabled := False;
-       TransferBtn.Enabled := False;
-       StoryBtn.Enabled := False;
-       RangeBtn.Enabled := False;
-       ReserveChB.Enabled := False; 
-  finally
-  end;
 end;
 
 procedure TInsuranceForm.SetiTypeF(const Value: Shortint);
@@ -537,6 +461,13 @@ procedure TInsuranceForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
     Action := caFree;
+end;
+
+constructor TInsuranceForm.Create(AOwner: TComponent);
+begin
+  inherited;
+  BegDate := Now();
+  EndDate := BegDate + 1;  
 end;
 
 end.

@@ -3,7 +3,7 @@ object AppData: TAppData
   Left = 691
   Top = 199
   Height = 512
-  Width = 628
+  Width = 679
   object Connection: TADOConnection
     ConnectionTimeout = 10
     LoginPrompt = False
@@ -129,8 +129,8 @@ object AppData: TAppData
     Connection = Connection
     BeforeOpen = CarDetailBeforeOpen
     Parameters = <>
-    Left = 392
-    Top = 24
+    Left = 376
+    Top = 16
     object CarDetailROWID: TIntegerField
       FieldName = 'ROWID'
     end
@@ -186,11 +186,6 @@ object AppData: TAppData
       FieldName = 'INS_UID'
     end
   end
-  object DS_CarDetail: TDataSource
-    DataSet = CarDetail
-    Left = 392
-    Top = 72
-  end
   object Command: TADOCommand
     Connection = Connection
     Parameters = <>
@@ -200,8 +195,8 @@ object AppData: TAppData
   object Insurance: TADODataSet
     Connection = Connection
     Parameters = <>
-    Left = 472
-    Top = 24
+    Left = 448
+    Top = 16
     object InsuranceUID: TIntegerField
       FieldName = 'UID'
     end
@@ -263,8 +258,8 @@ object AppData: TAppData
   object InsuranceDetail: TADODataSet
     Connection = Connection
     Parameters = <>
-    Left = 552
-    Top = 24
+    Left = 608
+    Top = 16
     object InsuranceDetailUID: TIntegerField
       FieldName = 'UID'
     end
@@ -329,8 +324,8 @@ object AppData: TAppData
   end
   object DS_Insurance: TDataSource
     DataSet = Insurance
-    Left = 472
-    Top = 72
+    Left = 448
+    Top = 64
   end
   object Nakl: TADODataSet
     Connection = Connection
@@ -747,5 +742,73 @@ object AppData: TAppData
       FieldName = 'TYPE_TOVR'
       Size = 10
     end
+  end
+  object InsuranceStory: TADODataSet
+    Connection = Connection
+    Parameters = <>
+    Left = 529
+    Top = 16
+    object IntegerField3: TIntegerField
+      FieldName = 'UID'
+    end
+    object IntegerField4: TIntegerField
+      FieldName = 'SERIAL'
+    end
+    object IntegerField5: TIntegerField
+      FieldName = 'NUMBER'
+    end
+    object DateTimeField5: TDateTimeField
+      FieldName = 'DOC_DATE'
+    end
+    object DateTimeField6: TDateTimeField
+      FieldName = 'BEG_DATE'
+    end
+    object DateTimeField7: TDateTimeField
+      FieldName = 'END_DATE'
+    end
+    object StringField25: TStringField
+      FieldName = 'FAMILY'
+      Size = 10
+    end
+    object StringField26: TStringField
+      FieldName = 'EmployeeName'
+      Size = 50
+    end
+    object DateTimeField8: TDateTimeField
+      FieldName = 'CREATE_DATE'
+    end
+    object StringField27: TStringField
+      FieldName = 'WHO_CORR'
+      Size = 10
+    end
+    object StringField28: TStringField
+      FieldName = 'sWho_Corr'
+      Size = 50
+    end
+    object DateTimeField9: TDateTimeField
+      FieldName = 'CORR_DATE'
+    end
+    object BooleanField2: TBooleanField
+      FieldName = 'RESERVE'
+    end
+    object StringField29: TStringField
+      FieldName = 'InsConcat'
+    end
+    object StringField30: TStringField
+      FieldName = 'PRIMECH'
+      Size = 200
+    end
+    object StringField31: TStringField
+      FieldName = 'Archive'
+      Size = 3
+    end
+    object IntegerField6: TIntegerField
+      FieldName = 'ValidDay'
+    end
+  end
+  object DS_InsuranceStory: TDataSource
+    DataSet = InsuranceStory
+    Left = 532
+    Top = 64
   end
 end

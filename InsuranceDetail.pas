@@ -61,7 +61,7 @@ var
 
 implementation
 
-uses Car, AppDM, DB, Globals;
+uses Car, AppDM, DB, Globals, CarStory;
 
 {$R *.dfm}
 
@@ -79,9 +79,9 @@ end;
 
 procedure TInsuranceDetailForm.CarBtnClick(Sender: TObject);
 var
-    CarF: TCarForm;
+    CarF: TCarStoryForm;
 begin
-  CarF := TCarForm.Create(g_Corr);
+  CarF := TCarStoryForm.Create(g_New, 0);
 
   try
         if CarF.ShowModal = mrOk then

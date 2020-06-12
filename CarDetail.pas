@@ -86,7 +86,7 @@ var
 
 implementation
 
-uses AppDM, Insurance, SConst, DB, Globals;
+uses AppDM, Insurance, SConst, DB, Globals, InsuranceStory;
 
 {$R *.dfm}
 
@@ -163,9 +163,9 @@ end;
 
 procedure TCarDetailForm.InsBtnClick(Sender: TObject);
 var
-    InsF: TInsuranceForm;
+    InsF: TIsnuranceStoryForm;
 begin
-    InsF := TInsuranceForm.Create(g_Corr);
+    InsF := TIsnuranceStoryForm.Create(g_New, 0);
 
     try
       with InsF do
