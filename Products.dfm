@@ -1,6 +1,6 @@
 object ProductsForm: TProductsForm
-  Left = 61
-  Top = 317
+  Left = 369
+  Top = 236
   BorderStyle = bsSingle
   Caption = #1058#1086#1074#1072#1088#1099
   ClientHeight = 644
@@ -170,6 +170,7 @@ object ProductsForm: TProductsForm
           Title.Alignment = taCenter
           Title.Caption = #1062#1077#1085#1072
           Title.Color = clSkyBlue
+          Width = 64
           Visible = True
         end
         item
@@ -179,6 +180,7 @@ object ProductsForm: TProductsForm
           Title.Alignment = taCenter
           Title.Caption = #1053#1044#1057
           Title.Color = clSkyBlue
+          Width = 64
           Visible = True
         end
         item
@@ -198,6 +200,7 @@ object ProductsForm: TProductsForm
           Title.Alignment = taCenter
           Title.Caption = #1054#1089#1090#1072#1090#1086#1082
           Title.Color = clSkyBlue
+          Width = 64
           Visible = True
         end
         item
@@ -207,6 +210,7 @@ object ProductsForm: TProductsForm
           Title.Alignment = taCenter
           Title.Caption = #1042#1077#1089
           Title.Color = clSkyBlue
+          Width = 64
           Visible = True
         end
         item
@@ -440,8 +444,26 @@ object ProductsForm: TProductsForm
       Top = 3
       Width = 141
       Height = 21
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       ItemHeight = 13
+      ItemIndex = 0
+      ParentFont = False
       TabOrder = 1
+      Text = #1040#1088#1090#1080#1082#1091#1083#1100#10
+      Items.Strings = (
+        #1040#1088#1090#1080#1082#1091#1083#1100#10
+        #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077#10
+        #1043#1088#1091#1087#1087#1072#10
+        #1055#1086#1076#1075#1088#1091#1087#1087#1072' 1'#10
+        #1055#1086#1076#1075#1088#1091#1087#1087#1072' 2'#10
+        #1055#1086#1076#1075#1088#1091#1087#1087#1072' 3'#10
+        #1055#1086#1076#1075#1088#1091#1087#1087#1072' 4'#10
+        #1055#1086#1076#1075#1088#1091#1087#1087#1072' 5'#10
+        #1058#1080#1087' '#1090#1086#1074#1072#1088#1072)
     end
     object FindEdit: TEdit
       Left = 426
@@ -449,6 +471,8 @@ object ProductsForm: TProductsForm
       Width = 121
       Height = 21
       TabOrder = 2
+      OnChange = FindEditChange
+      OnKeyPress = FindEditKeyPress
     end
     object FindBtn: TBitBtn
       Left = 550
@@ -463,6 +487,7 @@ object ProductsForm: TProductsForm
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
+      OnClick = FindBtnClick
       Glyph.Data = {
         E6040000424DE604000000000000360000002800000014000000140000000100
         180000000000B0040000C40E0000C40E00000000000000000000FFFFFFFFFFFF

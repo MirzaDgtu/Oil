@@ -81,6 +81,9 @@ type
     procedure DelProdActionExecute(Sender: TObject);
     procedure GroupTVGetImageIndex(Sender: TObject; Node: TTreeNode);
     procedure GroupTVGetSelectedIndex(Sender: TObject; Node: TTreeNode);
+    procedure FindEditChange(Sender: TObject);
+    procedure FindEditKeyPress(Sender: TObject; var Key: Char);
+    procedure FindBtnClick(Sender: TObject);
   private
     { Private declarations }
     FGroup: array [0..PRODUCT_CATEGORIES-1] of String[30];
@@ -89,6 +92,7 @@ type
     procedure ClearGroup();
     procedure GetGroups();
     procedure GetTypeTorv();
+    procedure FindProduct(Index: integer; FindStr: string);
   public
     { Public declarations }
     procedure SetTreeNodes(Tree: TTreeView);
@@ -446,6 +450,54 @@ begin
   inherited;
   GetTypeTorv();
   SetTreeNodes(GroupTV);
+end;
+
+procedure TProductsForm.FindProduct(Index: integer; FindStr: string);
+var
+    str : string;
+begin
+  str := EmptyStr;
+
+  if (Length(Trim(FindStr)) > 0) and
+      (AppData.Products.Active) and
+      (AppData.Products.IsEmpty) then
+    try
+      case Index of
+         0: Str := ' COD_ARTIC = ' + FindStr;
+         1: Str := ' NAME_ARTIC LIKE ' + QuotedStr('%' + FindStr + '%');
+         2: Str := ' NGROUP_TVR LIKE ' + QuotedStr('%' + FindStr + '%');
+         3: Str := ' NGROUP_TV2 LIKE ' + QuotedStr('%' + FindStr + '%');
+         4: Str := ' NGROUP_TV3 LIKE ' + QuotedStr('%' + FindStr + '%');
+         5: Str := ' NGROUP_TV4 LIKE ' + QuotedStr('%' + FindStr + '%');
+         6: Str := ' NGROUP_TV5 LIKE ' + QuotedStr('%' + FindStr + '%');
+         7: Str := ' NGROUP_TV6 LIKE ' + QuotedStr('%' + FindStr + '%');
+         8: Str := ' TYPE_TOVR LIKE ' + QuotedStr('%' + FindStr + '%');
+      end;
+    finally
+      if Length(Trim(Str)) > 0 then
+      begin
+        AppData.Products.Filtered := false;
+        AppData.Products.Filter := Str;
+        AppData.Products.Filtered := true;
+      end;
+    end;
+end;
+
+procedure TProductsForm.FindEditChange(Sender: TObject);
+begin
+  if Length(Trim(FindEdit.Text))) = 0 then
+    AppData.Products.Filtered := False;
+end;
+
+procedure TProductsForm.FindEditKeyPress(Sender: TObject; var Key: Char);
+begin
+  if FieldCB.ItemIndex = 0 then
+    if not (Key in ['0'..'9']) then Key := #0;
+end;
+
+procedure TProductsForm.FindBtnClick(Sender: TObject);
+begin
+  FindProduct(FieldCB.ItemIndex,  Trim(FindEdit.Text)));
 end;
 
 end.
