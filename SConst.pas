@@ -93,7 +93,8 @@ resourcestring
 
 
 
-
+ // Печать
+  SReestr = 'Template\Reestr';
 implementation
 
 end.

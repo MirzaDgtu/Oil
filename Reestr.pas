@@ -50,6 +50,8 @@ type
     FindAction: TAction;
     Report: TFlexCelReport;
     Adapter: TOLEAdapter;
+    PrintReestrAction: TAction;
+    PrintDocAction: TAction;
     procedure NaklGridTitleClick(Column: TColumn);
     procedure MoveGridTitleClick(Column: TColumn);
     procedure RangeActionExecute(Sender: TObject);
@@ -57,6 +59,7 @@ type
     procedure DelNaklActionExecute(Sender: TObject);
     procedure FindEditKeyPress(Sender: TObject; var Key: Char);
     procedure FindBtnClick(Sender: TObject);
+    procedure PrintReestrActionExecute(Sender: TObject);
   private
   { Private declarations }
     FBegD: TDateTime;
@@ -241,6 +244,22 @@ end;
 procedure TReestrForm.FindBtnClick(Sender: TObject);
 begin
   Find(FindCB.ItemIndex, FindEdit.Text);
+end;
+
+procedure TReestrForm.PrintReestrActionExecute(Sender: TObject);
+begin
+  if (AppData.Nakl.Active) and
+     (not AppData.Nakl.IsEmpty) then
+     try
+       AppData.Nakl.DisableControls;
+       Screen.Cursor := crSQLWait;
+
+       Report.Template := SReestr;
+       Report.Run;
+     finally
+       AppData.Nakl.EnableControls;
+       Screen.Cursor := crDefault;
+     end;
 end;
 
 end.
