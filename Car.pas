@@ -210,11 +210,15 @@ end;
 
 procedure TCarForm.RefreshActionExecute(Sender: TObject);
 begin
+  try
     AppData.Cars.Active := False;
     AppData.Cars.CommandText := Format(SSQLGetCars, [Byte(ResevrChB.Checked),
                                                      FormatDateTime('yyyy-mm-dd', BegD),
                                                      FormatDateTime('yyyy-mm-dd', EndD)]);
     AppData.Cars.Active := True;
+  finally
+    TAppData.SetInfoSB(AppData.Cars, SB);
+  end;
 end;
 
 procedure TCarForm.CarGridDblClick(Sender: TObject);

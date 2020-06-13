@@ -3,7 +3,7 @@ unit AppDM;
 interface
 
 uses
-  SysUtils, Classes, DB, ADODB;
+  SysUtils, Classes, DB, ADODB, ComCtrls;
 
 type
   TAppData = class(TDataModule)
@@ -229,6 +229,7 @@ type
   private
     procedure QuitApplication(const Msg: string);
   public
+    class procedure SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
     constructor Create(AOwner: TComponent); override;
   end;
 
@@ -308,4 +309,43 @@ begin
     TypeTovr.CommandText := SSQLGetTypeTovr;
 end;
 
+class procedure TAppData.SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
+var
+    ValueRes, ValueArch, locUID: integer;
+begin
+  ValueRes := 0;
+  ValueArch := 0;
+
+  if (DataSet.Active) and  (not DataSet.IsEmpty) then
+    Try
+      locUID := DataSet.FieldByName('UID').AsInteger;
+      DataSet.DisableControls;
+      DataSet.First;
+      while not DataSet.Eof do
+        Begin
+          if DataSet.FieldByName('Reserve').AsBoolean then
+            ValueRes := ValueRes + 1;
+
+          if DataSet.FieldByName('Archive').AsString = '*' then
+            ValueArch := ValueArch + 1;
+
+          DataSet.Next;
+        end;
+    finally
+      if SB.Panels.Count = 3 then
+        Begin
+         with SB do
+          Begin
+            Panels[0].Text := Format(SAllRows, [DataSet.RecordCount]);
+            if DataSet.Name = 'Insurance' then
+              Panels[1].Text := Format(SReserveRows, [ValueRes])
+            else
+              Panels[1].Text := Format(SReserveRows, [0]);
+            Panels[2].Text := Format(SArchiveRows, [ValueArch]);
+          end;
+         end;
+       DataSet.Locate('UID', locUID, [loCaseInsensitive, loPartialKey]);
+       DataSet.EnableControls;
+    end;
+end;
 end.

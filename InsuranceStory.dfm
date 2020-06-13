@@ -48,6 +48,7 @@ object IsnuranceStoryForm: TIsnuranceStoryForm
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = []
     OnDrawColumnCell = InsuranceGridDrawColumnCell
+    OnTitleClick = InsuranceGridTitleClick
     Columns = <
       item
         Expanded = False
@@ -286,7 +287,7 @@ object IsnuranceStoryForm: TIsnuranceStoryForm
         Visible = True
       end>
   end
-  object Panel1: TPanel
+  object HeaderPanel: TPanel
     Left = 0
     Top = 0
     Width = 1373

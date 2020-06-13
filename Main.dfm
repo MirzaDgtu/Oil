@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 273
-  Top = 225
+  Left = 310
+  Top = 275
   Width = 1529
   Height = 709
   Caption = #1056#1072#1089#1093#1086#1076' '#1090#1086#1087#1083#1080#1074#1072' '#1090#1088#1072#1085#1089#1087#1086#1088#1090#1085#1099#1084#1080' '#1089#1088#1077#1076#1089#1090#1074#1072#1084#1080
@@ -43,7 +43,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1513
     Height = 629
-    ActivePage = Report1PC
+    ActivePage = ReestrNaklPC
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

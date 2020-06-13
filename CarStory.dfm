@@ -223,6 +223,7 @@ object CarStoryForm: TCarStoryForm
       TitleFont.Style = []
       OnDrawColumnCell = CarGridDrawColumnCell
       OnDblClick = CarGridDblClick
+      OnTitleClick = CarGridTitleClick
       Columns = <
         item
           Expanded = False

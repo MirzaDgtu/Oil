@@ -20,16 +20,16 @@ object CarForm: TCarForm
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 365
-    Width = 1590
+    Top = 357
+    Width = 1582
     Height = 3
     Cursor = crVSplit
     Align = alBottom
   end
   object SB: TStatusBar
     Left = 0
-    Top = 510
-    Width = 1590
+    Top = 502
+    Width = 1582
     Height = 19
     Panels = <
       item
@@ -48,16 +48,16 @@ object CarForm: TCarForm
   object HeaderPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1590
+    Width = 1582
     Height = 25
     Align = alTop
     TabOrder = 1
   end
   object BtnsPanel: TPanel
-    Left = 1454
+    Left = 1446
     Top = 25
     Width = 136
-    Height = 340
+    Height = 332
     Align = alRight
     TabOrder = 2
     object Bevel1: TBevel
@@ -502,8 +502,8 @@ object CarForm: TCarForm
   object GridsGB: TGroupBox
     Left = 0
     Top = 25
-    Width = 1454
-    Height = 340
+    Width = 1446
+    Height = 332
     Align = alClient
     Caption = '&'#1056#1077#1077#1089#1090#1088' '#1072#1074#1090#1086#1084#1086#1073#1080#1083#1077#1081
     Font.Charset = DEFAULT_CHARSET
@@ -516,8 +516,8 @@ object CarForm: TCarForm
     object CarGrid: TDBGrid
       Left = 2
       Top = 15
-      Width = 1450
-      Height = 323
+      Width = 1442
+      Height = 315
       Align = alClient
       DataSource = AppData.DS_Cars
       Font.Charset = DEFAULT_CHARSET
@@ -800,8 +800,8 @@ object CarForm: TCarForm
   end
   object DetailGB: TGroupBox
     Left = 0
-    Top = 368
-    Width = 1590
+    Top = 360
+    Width = 1582
     Height = 142
     Align = alBottom
     Caption = '&'#1055#1072#1088#1072#1084#1077#1090#1088#1099

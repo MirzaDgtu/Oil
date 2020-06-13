@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, ImgList, Menus, ActnList, Grids, DBGrids, ComCtrls,
-  StdCtrls, Buttons;
+  StdCtrls, Buttons, ADODB, DB;
 
 type
   TIsnuranceStoryForm = class(TForm)
@@ -27,7 +27,7 @@ type
     TransferPop: TMenuItem;
     RefreshPop: TMenuItem;
     IL: TImageList;
-    Panel1: TPanel;
+    HeaderPanel: TPanel;
     RangeBtn: TBitBtn;
     RefreshBtn: TBitBtn;
     SelectBtn: TBitBtn;
@@ -36,6 +36,7 @@ type
     procedure InsuranceGridDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure InsuranceGridTitleClick(Column: TColumn);
   private
     FlocUID: integer;
     FTypeF: Shortint;
@@ -45,6 +46,7 @@ type
     procedure SetTypeF(const Value: Shortint);
     procedure SetBegD(const Value: TDateTime);
     procedure SetEndD(const Value: TDateTime);
+    //procedure SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
     { Private declarations }
   protected
     property TypeF: Shortint read FTypeF write SetTypeF;
@@ -64,7 +66,7 @@ var
 
 implementation
 
-uses AppDM, Globals, Range, SConst;
+uses AppDM, Globals, Range, SConst, DateUtils;
 
 {$R *.dfm}
 
@@ -161,6 +163,7 @@ begin
                AppData.InsuranceStory.Active := True;
             end;
   end;
+  TAppData.SetInfoSB(TADODataSet(InsuranceGrid.DataSource.DataSet), SB);
 end;
 
 procedure TIsnuranceStoryForm.InsuranceGridDrawColumnCell(Sender: TObject;
@@ -191,5 +194,65 @@ begin
         InsuranceGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
       end;
 end;
+
+procedure TIsnuranceStoryForm.InsuranceGridTitleClick(Column: TColumn);
+var
+  Str: string;
+begin
+  if Assigned(Column) and Assigned(Column.Field) and
+    (Column.Field.FieldKind = fkData) then
+    with TADODataset(Column.Grid.DataSource.Dataset) do
+    begin
+      Str := Column.FieldName;
+      if Pos(Str, IndexFieldNames) = 0 then
+        IndexFieldNames := Str
+      else
+        if Pos('DESC', IndexFieldNames) > 0 then
+          IndexFieldNames := Str
+        else
+          IndexFieldNames := Str + ' DESC';
+    end;
+end;
+
+{
+procedure TIsnuranceStoryForm.SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
+var
+    ValueRes, ValueArch, locUID: integer;
+begin
+  ValueRes := 0;
+  ValueArch := 0;
+
+  if (DataSet.Active) and  (not DataSet.IsEmpty) then
+    Try
+      locUID := DataSet.FieldByName('UID').AsInteger;
+      DataSet.DisableControls;
+      DataSet.First;
+      while not DataSet.Eof do
+        Begin
+          if DataSet.FieldByName('Reserve').AsBoolean then
+            ValueRes := ValueRes + 1;
+
+          if DataSet.FieldByName('Archive').AsString = '*' then
+            ValueArch := ValueArch + 1;
+
+          DataSet.Next;
+        end;
+    finally
+      if SB.Panels.Count = 3
+        Begin
+         with SB do
+          Begin
+            Panels[0].Text := Format(SAllRows, [DataSet.RecordCount]);
+            if DataSet.Name = 'Insurance' then
+              Panels[1].Text := Format(SReserveRows, [ValueRes])
+            else
+              Panels[1].Text := Format(SReserveRows, [0]);
+            Panels[2].Text := Format(SArchiveRows, [ValueArch]);
+          end;
+         end;
+       DataSet.Locate('UID', locUID, [loCaseInsensitive, loPartialKey]);
+       DataSet.EnableControls;
+    end;
+end;    }
 
 end.

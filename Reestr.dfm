@@ -1,6 +1,6 @@
 object ReestrForm: TReestrForm
-  Left = 328
-  Top = 177
+  Left = 361
+  Top = 241
   Width = 1239
   Height = 675
   Caption = #1056#1077#1077#1089#1090#1088' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
@@ -81,6 +81,7 @@ object ReestrForm: TReestrForm
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = [fsBold]
+      OnTitleClick = NaklGridTitleClick
       Columns = <
         item
           Alignment = taCenter
@@ -121,6 +122,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end
         item
@@ -135,6 +137,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end
         item
@@ -162,6 +165,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end
         item
@@ -176,6 +180,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end
         item
@@ -248,6 +253,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end
         item
@@ -290,6 +296,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end
         item
@@ -334,6 +341,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end
         item
@@ -348,6 +356,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end>
     end
@@ -374,6 +383,7 @@ object ReestrForm: TReestrForm
         TitleFont.Height = -11
         TitleFont.Name = 'MS Sans Serif'
         TitleFont.Style = [fsBold]
+        OnTitleClick = MoveGridTitleClick
         Columns = <
           item
             Alignment = taCenter
@@ -381,11 +391,6 @@ object ReestrForm: TReestrForm
             FieldName = 'ROWID'
             Title.Alignment = taCenter
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Visible = False
           end
           item
@@ -394,11 +399,6 @@ object ReestrForm: TReestrForm
             FieldName = 'UNICUM_NUM'
             Title.Alignment = taCenter
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Visible = False
           end
           item
@@ -407,11 +407,6 @@ object ReestrForm: TReestrForm
             FieldName = 'NUM_DOC'
             Title.Alignment = taCenter
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Visible = False
           end
           item
@@ -421,11 +416,6 @@ object ReestrForm: TReestrForm
             Title.Alignment = taCenter
             Title.Caption = #1040#1088#1090#1080#1082#1083
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Width = 91
             Visible = True
           end
@@ -436,11 +426,6 @@ object ReestrForm: TReestrForm
             Title.Alignment = taCenter
             Title.Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Width = 258
             Visible = True
           end
@@ -451,11 +436,6 @@ object ReestrForm: TReestrForm
             Title.Alignment = taCenter
             Title.Caption = #1050#1086#1083'-'#1074#1086
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Width = 117
             Visible = True
           end
@@ -466,11 +446,6 @@ object ReestrForm: TReestrForm
             Title.Alignment = taCenter
             Title.Caption = #1062#1077#1085#1072
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Width = 104
             Visible = True
           end
@@ -481,11 +456,6 @@ object ReestrForm: TReestrForm
             Title.Alignment = taCenter
             Title.Caption = #1057#1091#1084#1084#1072
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Width = 91
             Visible = True
           end
@@ -495,11 +465,6 @@ object ReestrForm: TReestrForm
             FieldName = 'FAMILY'
             Title.Alignment = taCenter
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Visible = False
           end
           item
@@ -508,11 +473,6 @@ object ReestrForm: TReestrForm
             FieldName = 'sFamily'
             Title.Alignment = taCenter
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Visible = False
           end
           item
@@ -521,11 +481,6 @@ object ReestrForm: TReestrForm
             FieldName = 'CREATE_DATE'
             Title.Alignment = taCenter
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Visible = False
           end
           item
@@ -534,11 +489,6 @@ object ReestrForm: TReestrForm
             FieldName = 'WHO_CORR'
             Title.Alignment = taCenter
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Visible = False
           end
           item
@@ -547,11 +497,6 @@ object ReestrForm: TReestrForm
             FieldName = 'sWho_Corr'
             Title.Alignment = taCenter
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Visible = False
           end
           item
@@ -560,11 +505,6 @@ object ReestrForm: TReestrForm
             FieldName = 'CORR_DATE'
             Title.Alignment = taCenter
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Visible = False
           end
           item
@@ -574,11 +514,6 @@ object ReestrForm: TReestrForm
             Title.Alignment = taCenter
             Title.Caption = #1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
             Title.Color = clSkyBlue
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clWindowText
-            Title.Font.Height = -11
-            Title.Font.Name = 'MS Sans Serif'
-            Title.Font.Style = [fsBold]
             Width = 278
             Visible = True
           end>
@@ -781,7 +716,7 @@ object ReestrForm: TReestrForm
       Top = 72
       Width = 100
       Height = 23
-      Caption = '&'#1059#1076#1072#1083#1080#1090#1100
+      Caption = ' &'#1059#1076#1072#1083#1080#1090#1100
       ParentShowHint = False
       ShowHint = True
       TabOrder = 4
@@ -1040,7 +975,7 @@ object ReestrForm: TReestrForm
     Left = 824
     Top = 192
     Bitmap = {
-      494C01011F002200040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C01011F002200040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000009000000001002000000000000090
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2232,7 +2167,8 @@ object ReestrForm: TReestrForm
       00000000FFFF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       00000000000000000000000000000000000000000000000000000000FFFF0000
-      00000000FFFF000000008200FFFF0000}
+      00000000FFFF000000008200FFFF000000000000000000000000000000000000
+      000000000000}
   end
   object NaklPopMenu: TPopupMenu
     Left = 736

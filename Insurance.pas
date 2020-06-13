@@ -162,6 +162,7 @@ begin
      AppData.Insurance.Active := True;
      setInfoSB();
    finally
+     TAppData.SetInfoSB(AppData.Insurance, SB);
      Screen.Cursor := crDefault;
    end;
 end;

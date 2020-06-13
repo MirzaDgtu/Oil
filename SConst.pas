@@ -21,6 +21,11 @@ resourcestring
   SRange          = '[%s] - [%s]';
 
   SAllCategories         = 'Товары всех групп';
+
+  // Строки для TStatusBar
+  SAllRows = 'Всего записей: %d';
+  SReserveRows = 'Резервных: %d';
+  SArchiveRows = 'Архивных: %d';
 { ============ SQL ==============================================}
 
   SSQLGetSubjects       = 'EXEC O_GetSubjects %d, %d';

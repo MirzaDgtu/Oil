@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Menus, ImgList, ActnList, StdCtrls, Grids, DBGrids, ExtCtrls,
-  ComCtrls, Buttons;
+  ComCtrls, Buttons, DB, ADODB;
 
 type
   TCarStoryForm = class(TForm)
@@ -69,6 +69,7 @@ type
     procedure CarGridDblClick(Sender: TObject);
     procedure CarGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure CarGridTitleClick(Column: TColumn);
   private
     FBegD: TDateTime;
     FEndD: TDateTime;
@@ -166,6 +167,8 @@ begin
                 AppData.CarStory.Active := True;
               end;
     end;
+
+    TAppData.SetInfoSB(TADODataSet(CarGrid.DataSource.DataSet));
 end;
 
 procedure TCarStoryForm.SetlocUID(const Value: integer);
@@ -239,6 +242,25 @@ begin
       CarGrid.Canvas.Brush.Color := clScrollBar;
 
     CarGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TCarStoryForm.CarGridTitleClick(Column: TColumn);
+var
+  Str: string;
+begin
+  if Assigned(Column) and Assigned(Column.Field) and
+    (Column.Field.FieldKind = fkData) then
+    with TADODataset(Column.Grid.DataSource.Dataset) do
+    begin
+      Str := Column.FieldName;
+      if Pos(Str, IndexFieldNames) = 0 then
+        IndexFieldNames := Str
+      else
+        if Pos('DESC', IndexFieldNames) > 0 then
+          IndexFieldNames := Str
+        else
+          IndexFieldNames := Str + ' DESC';
+    end;
 end;
 
 end.

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, Grids, DBGrids, Menus,
-  ImgList, ActnList;
+  ImgList, ActnList, ADODB, DB;
 
 type
   TReestrForm = class(TForm)
@@ -37,6 +37,8 @@ type
     RangeBtn: TBitBtn;
     AddAction: TAction;
     CorrAction: TAction;
+    procedure NaklGridTitleClick(Column: TColumn);
+    procedure MoveGridTitleClick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -49,5 +51,43 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TReestrForm.NaklGridTitleClick(Column: TColumn);
+var
+  Str: string;
+begin
+  if Assigned(Column) and Assigned(Column.Field) and
+    (Column.Field.FieldKind = fkData) then
+    with TADODataset(Column.Grid.DataSource.Dataset) do
+    begin
+      Str := Column.FieldName;
+      if Pos(Str, IndexFieldNames) = 0 then
+        IndexFieldNames := Str
+      else
+        if Pos('DESC', IndexFieldNames) > 0 then
+          IndexFieldNames := Str
+        else
+          IndexFieldNames := Str + ' DESC';
+    end;
+end;
+
+procedure TReestrForm.MoveGridTitleClick(Column: TColumn);
+var
+  Str: string;
+begin
+  if Assigned(Column) and Assigned(Column.Field) and
+    (Column.Field.FieldKind = fkData) then
+    with TADODataset(Column.Grid.DataSource.Dataset) do
+    begin
+      Str := Column.FieldName;
+      if Pos(Str, IndexFieldNames) = 0 then
+        IndexFieldNames := Str
+      else
+        if Pos('DESC', IndexFieldNames) > 0 then
+          IndexFieldNames := Str
+        else
+          IndexFieldNames := Str + ' DESC';
+    end;
+end;
 
 end.
