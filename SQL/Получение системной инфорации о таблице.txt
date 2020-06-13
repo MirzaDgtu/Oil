@@ -1,0 +1,12 @@
+SELECT  c.name AS sColumnName,
+    c.colid AS nColumnID,
+    c.length AS nColumnLength,
+    c.prec AS nColumnPrecision,
+    c.scale AS nColumnScale,
+    c.IsNullable,
+    SIGN(c.status & 128) AS IsIdentity,
+    t.name as sTypeName
+FROM    syscolumns c
+    INNER JOIN systypes t ON c.xtype = t.xtype and c.usertype = t.usertype
+WHERE   c.id = OBJECT_ID('O_ARTC')
+ORDER BY c.colid
