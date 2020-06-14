@@ -94,8 +94,10 @@ resourcestring
 
 
  // Печать
-  SReestr = 'Template\Reestr';     // Печать реестра
-  SNakl = 'Template\Nakl';         // Печать документа
+  SReestr = 'Template\Reestr';      // Печать реестра
+  SNakl = 'Template\Nakl';          // Печать документа
+  SCarReestr = 'Template\CarReestr'; // Печать реестра автомобилей
+  SCarDetail = 'Template\CarDetail'; // Печать информации об автомобиле
 implementation
 
 end.

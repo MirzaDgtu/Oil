@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ImgList, ExtCtrls, ComCtrls, ActnList, ToolWin, StdCtrls,
-  Buttons, Menus, Grids, DBGrids, ADODB, DB, StrUtils;
+  Buttons, Menus, Grids, DBGrids, ADODB, DB, StrUtils, UExcelAdapter,
+  OLEAdapter, UCustomFlexCelReport, UFlexCelReport;
 
 type
   TCarForm = class(TForm)
@@ -76,6 +77,13 @@ type
     N1: TMenuItem;
     StoryBtn: TBitBtn;
     StoryAction: TAction;
+    PrintCarReestrAction: TAction;
+    PrintCarDetailAction: TAction;
+    PrintGB: TGroupBox;
+    PrintCarReestrBtn: TBitBtn;
+    PrintCarDetailBtn: TBitBtn;
+    Report: TFlexCelReport;
+    Adapter: TOLEAdapter;
     procedure CarGridTitleClick(Column: TColumn);
     procedure AddActionExecute(Sender: TObject);
     procedure RefreshActionExecute(Sender: TObject);
@@ -91,6 +99,8 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure StoryActionExecute(Sender: TObject);
     procedure SBClick(Sender: TObject);
+    procedure PrintCarReestrActionExecute(Sender: TObject);
+    procedure PrintCarDetailActionExecute(Sender: TObject);
   private
     FBegD: TDateTime;
     FEndD: TDateTime;
@@ -104,7 +114,7 @@ type
     property iTypeF: Shortint read FiTypeF write SetiTypeF;
   public
     { Public declarations }
-    procedure SetCarDetail();
+    class procedure SetCarDetail();
 
     constructor Create(AOwner: TComponent); override;
 
@@ -186,9 +196,10 @@ begin
 
 end;
 
-procedure TCarForm.SetCarDetail;
+class procedure TCarForm.SetCarDetail;
 begin
     if not AppData.CarDetail.IsEmpty then
+     with CarForm do
       try
           PasSerNum.Caption := AppData.CarDetail.FieldByName('PASSPORT_SERIAL').AsString;
           PasNumLbl.Caption := AppData.CarDetail.FieldByName('PASSPORT_NUM').AsString;
@@ -224,7 +235,7 @@ end;
 
 procedure TCarForm.CarGridDblClick(Sender: TObject);
 begin
-    SetCarDetail();
+//    SetCarDetail();
 end;
 
 procedure TCarForm.CarGridDrawColumnCell(Sender: TObject;
@@ -395,22 +406,17 @@ begin
       try
          UID_Car := AppData.Cars.FieldByName('UID').AsInteger;
          if AppData.Cars.FieldByName('Reserve').AsBoolean = False then
-          Begin
+           Begin
             if MessageBox(Handle, '¬ы действительно желаете перевести автомобиль в резерв?', 'ѕеревод автомобил€ в/из резерв(а)', MB_ICONWARNING + MB_YESNO) = ID_YES  then
-              Begin
                 AppData.Command.CommandText := Format(SSQLTrancferCars, [AppData.Cars.FieldByName('UID').AsInteger,
                                                                          1,
                                                                          g_User]);
-                AppData.Command.Execute;
-              end;
-          end
+           end
          else
-          begin
                 AppData.Command.CommandText := Format(SSQLTrancferCars, [AppData.Cars.FieldByName('UID').AsInteger,
                                                                          0,
                                                                          g_User]);
-                AppData.Command.Execute;
-          end;
+         AppData.Command.Execute;
 
       finally
         RefreshActionExecute(Self);
@@ -475,6 +481,38 @@ end;
 procedure TCarForm.SBClick(Sender: TObject);
 begin
     ShowMessage(IntToStr(SB.Panels.Count));
+end;
+
+procedure TCarForm.PrintCarReestrActionExecute(Sender: TObject);
+begin
+  if (AppData.Cars.Active) and
+     (not AppData.Cars.IsEmpty) then
+      try
+         Screen.Cursor := crSQLWait;
+         AppData.Cars.DisableControls;
+
+         Report.Template := SCarReestr;
+         Report.Run;
+      finally
+         AppData.Cars.EnableControls;
+         Screen.Cursor := crDefault;
+      end;
+end;
+
+procedure TCarForm.PrintCarDetailActionExecute(Sender: TObject);
+begin
+  if (AppData.CarDetail.Active) and
+     (not AppData.CarDetail.IsEmpty) then
+      try
+         Screen.Cursor := crSQLWait;
+         AppData.Cars.DisableControls;
+
+         Report.Template := SCarDetail;
+         Report.Run;
+      finally
+         AppData.Cars.EnableControls;
+         Screen.Cursor := crDefault;
+      end;
 end;
 
 end.

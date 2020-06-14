@@ -405,6 +405,7 @@ object AppData: TAppData
   object Move: TADODataSet
     Connection = Connection
     BeforeOpen = MoveBeforeOpen
+    AfterOpen = MoveAfterOpen
     Parameters = <>
     Left = 96
     Top = 280

@@ -228,6 +228,7 @@ type
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
     procedure MoveBeforeOpen(DataSet: TDataSet);
     procedure NaklAfterScroll(DataSet: TDataSet);
+    procedure MoveAfterOpen(DataSet: TDataSet);
   private
     procedure QuitApplication(const Msg: string);
   public
@@ -241,7 +242,7 @@ var
 implementation
 
 uses
-  Windows, SConst, Login, Globals, Controls, Forms, Dialogs;
+  Windows, SConst, Login, Globals, Controls, Forms, Dialogs, Car;
 
 {$R *.dfm}
 
@@ -359,6 +360,11 @@ procedure TAppData.NaklAfterScroll(DataSet: TDataSet);
 begin
   Move.Active := False;
   Move.Active := True;
+end;
+
+procedure TAppData.MoveAfterOpen(DataSet: TDataSet);
+begin
+  TCarForm.SetCarDetail();
 end;
 
 end.

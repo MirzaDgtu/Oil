@@ -301,7 +301,7 @@ begin
   if (AppData.Nakl.Active) and
      (not AppData.Nakl.IsEmpty) then
     Result := AppData.fldUNICUM_NUM.AsString
-  elsed
+  else
     Result := 0;
 end;
 
