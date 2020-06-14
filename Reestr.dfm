@@ -842,6 +842,7 @@ object ReestrForm: TReestrForm
         Top = 42
         Width = 100
         Height = 23
+        Action = PrintDocAction
         Caption = '&'#1044#1086#1082#1091#1084#1077#1085#1090
         TabOrder = 0
         Glyph.Data = {
@@ -877,7 +878,8 @@ object ReestrForm: TReestrForm
         Top = 18
         Width = 100
         Height = 23
-        Caption = '     &'#1056#1077#1077#1089#1090#1088
+        Action = PrintReestrAction
+        Caption = '&'#1056#1077#1077#1089#1090#1088
         TabOrder = 1
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
@@ -1008,6 +1010,7 @@ object ReestrForm: TReestrForm
         Width = 99
         Height = 21
         TabOrder = 1
+        OnChange = FindEditChange
         OnKeyPress = FindEditKeyPress
       end
       object FindBtn: TBitBtn
@@ -1119,6 +1122,7 @@ object ReestrForm: TReestrForm
       Category = 'Print'
       Caption = '&'#1044#1086#1082#1091#1084#1077#1085#1090
       ImageIndex = 17
+      OnExecute = PrintDocActionExecute
     end
   end
   object IL: TImageList

@@ -329,10 +329,11 @@ object AppData: TAppData
   end
   object Nakl: TADODataSet
     Connection = Connection
+    AfterScroll = NaklAfterScroll
     Parameters = <>
     Left = 40
     Top = 280
-    object NaklUNICUM_NUM: TIntegerField
+    object fldUNICUM_NUM: TIntegerField
       FieldName = 'UNICUM_NUM'
     end
     object NaklNUM_DOC: TIntegerField
@@ -403,6 +404,7 @@ object AppData: TAppData
   end
   object Move: TADODataSet
     Connection = Connection
+    BeforeOpen = MoveBeforeOpen
     Parameters = <>
     Left = 96
     Top = 280

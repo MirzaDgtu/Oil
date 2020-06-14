@@ -97,7 +97,7 @@ type
     Move: TADODataSet;
     DS_Nakl: TDataSource;
     DS_Move: TDataSource;
-    NaklUNICUM_NUM: TIntegerField;
+    fldUNICUM_NUM: TIntegerField;
     NaklNUM_DOC: TIntegerField;
     NaklDATE_DOC: TDateTimeField;
     NaklSUM_DOC: TFloatField;
@@ -226,6 +226,8 @@ type
     procedure CarDetailBeforeOpen(DataSet: TDataSet);
     procedure CarsAfterScroll(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
+    procedure MoveBeforeOpen(DataSet: TDataSet);
+    procedure NaklAfterScroll(DataSet: TDataSet);
   private
     procedure QuitApplication(const Msg: string);
   public
@@ -348,4 +350,15 @@ begin
        DataSet.EnableControls;
     end;
 end;
+procedure TAppData.MoveBeforeOpen(DataSet: TDataSet);
+begin
+  Move.CommandText := Format(SSQLGetNaklDetail, [fldUNICUM_NUM.AsInteger, g_New]);
+end;
+
+procedure TAppData.NaklAfterScroll(DataSet: TDataSet);
+begin
+  Move.Active := False;
+  Move.Active := True;
+end;
+
 end.

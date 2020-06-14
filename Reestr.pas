@@ -60,6 +60,8 @@ type
     procedure FindEditKeyPress(Sender: TObject; var Key: Char);
     procedure FindBtnClick(Sender: TObject);
     procedure PrintReestrActionExecute(Sender: TObject);
+    procedure PrintDocActionExecute(Sender: TObject);
+    procedure FindEditChange(Sender: TObject);
   private
   { Private declarations }
     FBegD: TDateTime;
@@ -67,6 +69,10 @@ type
     procedure SetBegD(const Value: TDateTime);
     procedure SetEndD(const Value: TDateTime);
     procedure SetRangeCaprion(BegD, EndD: TDateTime);
+
+    function GetNumDoc: Variant;
+    function GetDateDoc: Variant;
+
     procedure Find(Index: integer; FindStr: string);
 
   protected
@@ -74,10 +80,12 @@ type
   public
     { Public declarations }
 
-    constructor Create(AOwner: TComponent); override;    
+    constructor Create(AOwner: TComponent); override;
   published
     property BegD: TDateTime read FBegD write SetBegD;
     property EndD: TDateTime read FEndD write SetEndD;
+    property NumDoc: Variant read GetNumDoc;
+    property DateDoc: Variant read GetDateDoc;
   end;
 
 var
@@ -247,19 +255,61 @@ begin
 end;
 
 procedure TReestrForm.PrintReestrActionExecute(Sender: TObject);
+var
+    sUN: integer;
 begin
   if (AppData.Nakl.Active) and
      (not AppData.Nakl.IsEmpty) then
      try
+       sUN := AppData.fldUNICUM_NUM.AsInteger;
        AppData.Nakl.DisableControls;
        Screen.Cursor := crSQLWait;
 
        Report.Template := SReestr;
        Report.Run;
      finally
+       AppData.Nakl.Locate('UNICUM_NUM', sUN, [loCaseInsensitive, loPartialKey]);
        AppData.Nakl.EnableControls;
        Screen.Cursor := crDefault;
      end;
+end;
+
+procedure TReestrForm.PrintDocActionExecute(Sender: TObject);
+begin
+  if (AppData.Nakl.Active) and
+     (not AppData.Nakl.IsEmpty) then
+      try
+        Screen.Cursor := crSQLWait;
+        AppData.Nakl.DisableControls;
+
+        Report.Template := SNakl;
+        Report.Run;
+      finally
+         Screen.Cursor := crDefault;
+         AppData.Nakl.EnableControls;
+      end;
+end;
+
+procedure TReestrForm.FindEditChange(Sender: TObject);
+begin
+  if Length(Trim(FindEdit.Text)) = 0 then
+      AppData.Nakl.Filtered := False;
+end;
+
+function TReestrForm.GetDateDoc: Variant;
+begin
+  if (AppData.Nakl.Active) and
+     (not AppData.Nakl.IsEmpty) then
+    Result := AppData.fldUNICUM_NUM.AsString
+  elsed
+    Result := 0;
+end;
+
+function TReestrForm.GetNumDoc: Variant;
+begin                               
+  if (AppData.Nakl.Active) and
+     (not AppData.Nakl.IsEmpty) then
+      Result := AppData.Nakl.FieldByName('DATE_DOC').AsDateTime;
 end;
 
 end.

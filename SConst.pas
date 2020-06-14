@@ -55,8 +55,8 @@ resourcestring
 
 
 // Модуль накладных
-  SSQLGetNakl = 'EXEC REPORTS..O_GetNakl ''%s'', ''%s'', %d';       // Получение списка накладных (BegDate, EndDate, Archive)
-  SSQLGetNaklDetail = 'EXEC REPORTS..O_GetNaklDetail %d, %d';       // Получение детализации накладной (Unicum_Num, Archive)
+  SSQLGetNakl = 'EXEC REPORTS..O_GetNakl ''%s'', ''%s'', %d';       // Получение списка накладных (BegDate, EndDate, Archive - 0,1)
+  SSQLGetNaklDetail = 'EXEC REPORTS..O_GetNaklDetail %d, %d';       // Получение детализации накладной (Unicum_Num, Archive - 0,1)
   SSQLInsNaklHead = 'EXEC REPORTSO_InsNaklHead ''%s'', ''%s'', ''%s'', %d, ''%s'', ''%s'', ''%s''';  // Создание новой накладной (Головная часть)
                                      // (DATE_DOC, SUM_DOC, DRIVER, Car_UID, Type_Doc, Family, Primech)
   SSQLInsNaklMove = 'EXEC REPORTS..O_InsNaklMove %d, %d, %d, %d, ''%s'', ''%s'', ''%s'', ''%s'', ''%s''';   // Создание новой накланой (Тело накладной)
@@ -94,7 +94,8 @@ resourcestring
 
 
  // Печать
-  SReestr = 'Template\Reestr';
+  SReestr = 'Template\Reestr';     // Печать реестра
+  SNakl = 'Template\Nakl';         // Печать документа
 implementation
 
 end.
