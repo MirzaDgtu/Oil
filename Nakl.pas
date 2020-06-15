@@ -80,7 +80,7 @@ var
 
 implementation
 
-uses AppDM, Globals, Products, SConst;
+uses AppDM, Globals, Products, SConst, DB;
 
 {$R *.dfm}
 
@@ -88,6 +88,7 @@ uses AppDM, Globals, Products, SConst;
 
 procedure TNaklForm.CorrNaklSetting(UNICUM_NUM: integer);
 begin
+  Self.Caption := Self.Caption + ' -> [Корректировка документа]';
   AppData.ProductDetail.Active := False;
   AppData.ProductDetail.CommandText := Format(SSQLGetNaklDetail, [UNICUM_NUM,
                                                                   g_New]);
@@ -125,6 +126,9 @@ end;
 constructor TNaklForm.Create(Unucim_Num, TypeF: integer);
 begin
   inherited Create(Application);
+  Self.UNICUM_NUM := Unucim_Num;
+  Self.iTypeF := TypeF;
+  DateDocDP.Date := Now();
 
   case TypeF of
     g_New: NewNaklSetting();
@@ -150,8 +154,21 @@ begin
 
        Cols[0].Text := '№';
        Cols[1].Text := 'Артикул';
-    finally
+       Cols[2].Text := 'Наименование';
+       Cols[3].Text := 'Цена';
+       Cols[4].Text := 'Количество';
+       Cols[5].Text := 'Сумма';
+       Cols[6].Text := 'Примечание';
 
+       ColWidths[0] := 30;
+       ColWidths[1] := 50;
+       ColWidths[2] := 150;
+       ColWidths[3] := 40;
+       ColWidths[4] := 60;
+       ColWidths[5] := 60;
+       ColWidths[6] := 150;
+    finally
+        ProductSG.DefaultRowHeight := 20;
     end;
 end;
 
@@ -166,8 +183,11 @@ begin
 end;
 
 procedure TNaklForm.ViewNaklSetting(UNICUM_NUM: integer);
+var
+   i: integer;
 begin
   // Ограничения на сохранение и какие либо изменения документа
+  Self.Caption := Self.Caption + ' -> [Просмотр документа]';
 
   AppData.ProductDetail.Active := False;
   AppData.ProductDetail.CommandText := Format(SSQLGetNaklDetail, [UNICUM_NUM,
@@ -189,7 +209,21 @@ begin
   if (AppData.ProductDetail.Active) and
      (not AppData.ProductDetail.IsEmpty) then
       try
-        ///
+        while not AppData.Move.Eof do
+          Begin
+            with ProductSG do
+              Begin
+                Cols[0].Text := 1;
+                Cols[1].Text := AppData.Move.FieldByName('COD_ARTIC').AsString;
+                Cols[2].Text := AppData.Move.FieldByName('NAME_ARTIC').AsString
+                Cols[3].Text := AppData.Move.FieldByName('SUM_PREDM').AsString;
+                Cols[4].Text := AppData.Move.FieldByName('KOLC_PREDM').AsString;
+                Cols[5].Text := AppData.Move.FieldByName('Res_Sum').AsString;
+                Cols[6].Text := AppData.Move.FieldByName('Primech').AsString;
+              end;
+
+            AppData.Move.Next;
+          end;
       except
         on Err: Exception do
           MessageDlg('Ошибка получения информации о документе!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);

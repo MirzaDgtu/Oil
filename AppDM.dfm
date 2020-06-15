@@ -1,9 +1,9 @@
 object AppData: TAppData
   OldCreateOrder = False
-  Left = 691
-  Top = 199
-  Height = 512
-  Width = 679
+  Left = 537
+  Top = 283
+  Height = 431
+  Width = 751
   object Connection: TADOConnection
     ConnectionTimeout = 10
     LoginPrompt = False

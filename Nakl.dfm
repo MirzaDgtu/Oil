@@ -18,7 +18,7 @@ object NaklForm: TNaklForm
   object ParametrsGB: TGroupBox
     Left = 0
     Top = 0
-    Width = 821
+    Width = 813
     Height = 134
     Align = alTop
     Caption = '&'#1055#1072#1088#1072#1084#1077#1090#1088#1099
@@ -240,7 +240,7 @@ object NaklForm: TNaklForm
     object PrimechPanel: TPanel
       Left = 556
       Top = 15
-      Width = 263
+      Width = 255
       Height = 117
       Align = alClient
       BorderStyle = bsSingle
@@ -248,7 +248,7 @@ object NaklForm: TNaklForm
       object PrimechGB: TGroupBox
         Left = 1
         Top = 1
-        Width = 257
+        Width = 249
         Height = 111
         Align = alClient
         Caption = '&'#1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
@@ -256,7 +256,7 @@ object NaklForm: TNaklForm
         object PrimechMemo: TMemo
           Left = 2
           Top = 15
-          Width = 253
+          Width = 245
           Height = 94
           Align = alClient
           TabOrder = 0
@@ -266,8 +266,8 @@ object NaklForm: TNaklForm
   end
   object SB: TStatusBar
     Left = 0
-    Top = 443
-    Width = 821
+    Top = 435
+    Width = 813
     Height = 24
     Panels = <
       item
@@ -282,8 +282,8 @@ object NaklForm: TNaklForm
   end
   object BottomTB: TToolBar
     Left = 0
-    Top = 416
-    Width = 821
+    Top = 408
+    Width = 813
     Height = 27
     Align = alBottom
     Caption = 'BottomTB'
@@ -310,7 +310,7 @@ object NaklForm: TNaklForm
   object HeaderTB: TToolBar
     Left = 0
     Top = 134
-    Width = 821
+    Width = 813
     Height = 27
     Caption = 'HeaderTB'
     Images = IL
@@ -336,8 +336,8 @@ object NaklForm: TNaklForm
   object ProductSG: TStringGrid
     Left = 0
     Top = 161
-    Width = 821
-    Height = 255
+    Width = 813
+    Height = 247
     Align = alClient
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowMoving, goColMoving, goEditing]
     TabOrder = 4
@@ -386,7 +386,7 @@ object NaklForm: TNaklForm
     Left = 440
     Top = 232
     Bitmap = {
-      494C010109000E00040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010109000E00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -918,7 +918,8 @@ object NaklForm: TNaklForm
       0000F8010000E7E70000F8010000C1830000E80100008181000080010000E007
       0000C0010000E0070000E0010000F81F0000C0010000F81F000080010000E007
       0000C8010000E0070000F801000081810000F8030000C1830000F8070000E7E7
-      0000F80F0000F7EF0000FFFF0000FFFF}
+      0000F80F0000F7EF0000FFFF0000FFFF00000000000000000000000000000000
+      000000000000}
   end
   object FD: TFontDialog
     Font.Charset = DEFAULT_CHARSET

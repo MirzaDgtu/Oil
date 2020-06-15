@@ -20,8 +20,8 @@ object MainForm: TMainForm
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 637
-    Width = 1281
+    Top = 629
+    Width = 1273
     Height = 21
     Panels = <
       item
@@ -268,7 +268,7 @@ object MainForm: TMainForm
   object MainTB: TToolBar
     Left = 0
     Top = 0
-    Width = 1281
+    Width = 1273
     Height = 29
     Caption = 'MainTB'
     Images = IL
