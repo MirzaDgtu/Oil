@@ -62,6 +62,7 @@ type
     procedure PrintReestrActionExecute(Sender: TObject);
     procedure PrintDocActionExecute(Sender: TObject);
     procedure FindEditChange(Sender: TObject);
+    procedure NewNaklActionExecute(Sender: TObject);
   private
   { Private declarations }
     FBegD: TDateTime;
@@ -93,7 +94,7 @@ var
 
 implementation
 
-uses Range, AppDM, Globals, SConst;
+uses Range, AppDM, Globals, SConst, Nakl;
 
 {$R *.dfm}
 
@@ -310,6 +311,19 @@ begin
   if (AppData.Nakl.Active) and
      (not AppData.Nakl.IsEmpty) then
       Result := AppData.Nakl.FieldByName('DATE_DOC').AsDateTime;
+end;
+
+procedure TReestrForm.NewNaklActionExecute(Sender: TObject);
+var
+    NaklF: TNaklForm;
+begin
+    NaklF := TNaklForm.Create(Application);
+
+    try
+       NaklF.ShowModal();
+    finally
+      FreeAndNil(NaklF);
+    end;
 end;
 
 end.

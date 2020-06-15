@@ -1,6 +1,6 @@
 object CarForm: TCarForm
-  Left = 219
-  Top = 159
+  Left = 254
+  Top = 232
   Width = 1598
   Height = 771
   Caption = #1059#1095#1077#1090' '#1084#1072#1096#1080#1085
@@ -20,16 +20,16 @@ object CarForm: TCarForm
   TextHeight = 13
   object Splitter1: TSplitter
     Left = 0
-    Top = 568
-    Width = 1582
+    Top = 576
+    Width = 1590
     Height = 3
     Cursor = crVSplit
     Align = alBottom
   end
   object SB: TStatusBar
     Left = 0
-    Top = 713
-    Width = 1582
+    Top = 721
+    Width = 1590
     Height = 19
     Panels = <
       item
@@ -49,16 +49,16 @@ object CarForm: TCarForm
   object HeaderPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1582
+    Width = 1590
     Height = 25
     Align = alTop
     TabOrder = 1
   end
   object BtnsPanel: TPanel
-    Left = 1446
+    Left = 1454
     Top = 25
     Width = 136
-    Height = 543
+    Height = 551
     Align = alRight
     TabOrder = 2
     object Bevel1: TBevel
@@ -590,11 +590,245 @@ object CarForm: TCarForm
       end
     end
   end
+  object DetailGB: TGroupBox
+    Left = 0
+    Top = 579
+    Width = 1590
+    Height = 142
+    Align = alBottom
+    Caption = '&'#1055#1072#1088#1072#1084#1077#1090#1088#1099
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+    object PassportGB: TGroupBox
+      Left = 2
+      Top = 15
+      Width = 287
+      Height = 125
+      Align = alLeft
+      Caption = #1055#1072#1089#1087#1086#1090#1088
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      object Label1: TLabel
+        Left = 144
+        Top = 24
+        Width = 44
+        Height = 13
+        Caption = '&'#1053#1086#1084#1077#1088':'
+      end
+      object PasNumLbl: TLabel
+        Left = 200
+        Top = 24
+        Width = 81
+        Height = 13
+        AutoSize = False
+      end
+      object Label2: TLabel
+        Left = 16
+        Top = 24
+        Width = 41
+        Height = 13
+        Caption = '&'#1057#1077#1088#1080#1103':'
+      end
+      object PasSerNum: TLabel
+        Left = 64
+        Top = 24
+        Width = 57
+        Height = 13
+        AutoSize = False
+      end
+      object Label3: TLabel
+        Left = 16
+        Top = 60
+        Width = 160
+        Height = 13
+        Caption = #1056#1072#1079#1088#1077#1096#1077#1085#1085#1072#1103' '#1084#1072#1082#1089'. '#1084#1072#1089#1089#1072
+      end
+      object Label4: TLabel
+        Left = 16
+        Top = 96
+        Width = 122
+        Height = 13
+        Caption = '&'#1052#1072#1089#1089#1072' '#1073#1077#1079' '#1085#1072#1075#1088#1091#1079#1082#1080
+      end
+      object MasMaxLbl: TLabel
+        Left = 200
+        Top = 60
+        Width = 81
+        Height = 13
+        AutoSize = False
+      end
+      object MassLoudOutLbl: TLabel
+        Left = 200
+        Top = 96
+        Width = 81
+        Height = 13
+        AutoSize = False
+      end
+    end
+    object InsuranceGB: TGroupBox
+      Left = 289
+      Top = 15
+      Width = 280
+      Height = 125
+      Align = alLeft
+      Caption = '&'#1057#1090#1088#1072#1093#1086#1074#1082#1072
+      TabOrder = 1
+      object Label5: TLabel
+        Left = 16
+        Top = 24
+        Width = 41
+        Height = 13
+        Caption = '&'#1057#1077#1088#1080#1103':'
+      end
+      object InsSerLbl: TLabel
+        Left = 64
+        Top = 24
+        Width = 57
+        Height = 13
+        AutoSize = False
+      end
+      object Label7: TLabel
+        Left = 144
+        Top = 24
+        Width = 44
+        Height = 13
+        Caption = '&'#1053#1086#1084#1077#1088':'
+      end
+      object InsNumLbl: TLabel
+        Left = 191
+        Top = 24
+        Width = 81
+        Height = 13
+        AutoSize = False
+      end
+      object Label9: TLabel
+        Left = 16
+        Top = 60
+        Width = 9
+        Height = 13
+        Caption = '&'#1057
+      end
+      object Label10: TLabel
+        Left = 16
+        Top = 96
+        Width = 18
+        Height = 13
+        Caption = #1044#1086
+      end
+      object BeginDateLbl: TLabel
+        Left = 104
+        Top = 64
+        Width = 113
+        Height = 13
+        AutoSize = False
+      end
+      object EndDateLbl: TLabel
+        Left = 104
+        Top = 96
+        Width = 113
+        Height = 13
+        AutoSize = False
+      end
+    end
+    object DocumentGB: TGroupBox
+      Left = 569
+      Top = 15
+      Width = 289
+      Height = 125
+      Align = alLeft
+      Caption = '&'#1057#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074#1086' '#1086' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1080
+      TabOrder = 2
+      object Label6: TLabel
+        Left = 16
+        Top = 24
+        Width = 41
+        Height = 13
+        Caption = '&'#1057#1077#1088#1080#1103':'
+      end
+      object DocSerLbl: TLabel
+        Left = 64
+        Top = 24
+        Width = 57
+        Height = 13
+        AutoSize = False
+      end
+      object Label11: TLabel
+        Left = 144
+        Top = 24
+        Width = 44
+        Height = 13
+        Caption = '&'#1053#1086#1084#1077#1088':'
+      end
+      object DocNumLbl: TLabel
+        Left = 199
+        Top = 24
+        Width = 81
+        Height = 13
+        AutoSize = False
+      end
+      object Label8: TLabel
+        Left = 16
+        Top = 60
+        Width = 39
+        Height = 13
+        Caption = '&'#1064#1072#1089#1089#1080
+      end
+      object Label12: TLabel
+        Left = 16
+        Top = 96
+        Width = 64
+        Height = 13
+        Caption = '&'#1057#1086#1089#1090#1086#1103#1085#1080#1077
+      end
+      object ShassisLbl: TLabel
+        Left = 122
+        Top = 60
+        Width = 113
+        Height = 13
+        AutoSize = False
+      end
+      object StateLbl: TLabel
+        Left = 122
+        Top = 96
+        Width = 113
+        Height = 13
+        AutoSize = False
+      end
+    end
+    object PrimechGB: TGroupBox
+      Left = 858
+      Top = 15
+      Width = 263
+      Height = 125
+      Align = alLeft
+      Caption = '&'#1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
+      TabOrder = 3
+      object PrimechMemo: TMemo
+        Left = 2
+        Top = 15
+        Width = 259
+        Height = 108
+        Align = alClient
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+  end
   object GridsGB: TGroupBox
     Left = 0
     Top = 25
-    Width = 1446
-    Height = 543
+    Width = 1454
+    Height = 551
     Align = alClient
     Caption = '&'#1056#1077#1077#1089#1090#1088' '#1072#1074#1090#1086#1084#1086#1073#1080#1083#1077#1081
     Font.Charset = DEFAULT_CHARSET
@@ -603,12 +837,12 @@ object CarForm: TCarForm
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
-    TabOrder = 3
+    TabOrder = 4
     object CarGrid: TDBGrid
       Left = 2
       Top = 15
-      Width = 1442
-      Height = 526
+      Width = 1450
+      Height = 534
       Align = alClient
       DataSource = AppData.DS_Cars
       Font.Charset = DEFAULT_CHARSET
@@ -889,240 +1123,6 @@ object CarForm: TCarForm
         end>
     end
   end
-  object DetailGB: TGroupBox
-    Left = 0
-    Top = 571
-    Width = 1582
-    Height = 142
-    Align = alBottom
-    Caption = '&'#1055#1072#1088#1072#1084#1077#1090#1088#1099
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 4
-    object PassportGB: TGroupBox
-      Left = 2
-      Top = 15
-      Width = 287
-      Height = 125
-      Align = alLeft
-      Caption = #1055#1072#1089#1087#1086#1090#1088
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-      object Label1: TLabel
-        Left = 144
-        Top = 24
-        Width = 44
-        Height = 13
-        Caption = '&'#1053#1086#1084#1077#1088':'
-      end
-      object PasNumLbl: TLabel
-        Left = 200
-        Top = 24
-        Width = 81
-        Height = 13
-        AutoSize = False
-      end
-      object Label2: TLabel
-        Left = 16
-        Top = 24
-        Width = 41
-        Height = 13
-        Caption = '&'#1057#1077#1088#1080#1103':'
-      end
-      object PasSerNum: TLabel
-        Left = 64
-        Top = 24
-        Width = 57
-        Height = 13
-        AutoSize = False
-      end
-      object Label3: TLabel
-        Left = 16
-        Top = 60
-        Width = 160
-        Height = 13
-        Caption = #1056#1072#1079#1088#1077#1096#1077#1085#1085#1072#1103' '#1084#1072#1082#1089'. '#1084#1072#1089#1089#1072
-      end
-      object Label4: TLabel
-        Left = 16
-        Top = 96
-        Width = 122
-        Height = 13
-        Caption = '&'#1052#1072#1089#1089#1072' '#1073#1077#1079' '#1085#1072#1075#1088#1091#1079#1082#1080
-      end
-      object MasMaxLbl: TLabel
-        Left = 200
-        Top = 60
-        Width = 81
-        Height = 13
-        AutoSize = False
-      end
-      object MassLoudOutLbl: TLabel
-        Left = 200
-        Top = 96
-        Width = 81
-        Height = 13
-        AutoSize = False
-      end
-    end
-    object InsuranceGB: TGroupBox
-      Left = 289
-      Top = 15
-      Width = 280
-      Height = 125
-      Align = alLeft
-      Caption = '&'#1057#1090#1088#1072#1093#1086#1074#1082#1072
-      TabOrder = 1
-      object Label5: TLabel
-        Left = 16
-        Top = 24
-        Width = 41
-        Height = 13
-        Caption = '&'#1057#1077#1088#1080#1103':'
-      end
-      object InsSerLbl: TLabel
-        Left = 64
-        Top = 24
-        Width = 57
-        Height = 13
-        AutoSize = False
-      end
-      object Label7: TLabel
-        Left = 144
-        Top = 24
-        Width = 44
-        Height = 13
-        Caption = '&'#1053#1086#1084#1077#1088':'
-      end
-      object InsNumLbl: TLabel
-        Left = 191
-        Top = 24
-        Width = 81
-        Height = 13
-        AutoSize = False
-      end
-      object Label9: TLabel
-        Left = 16
-        Top = 60
-        Width = 9
-        Height = 13
-        Caption = '&'#1057
-      end
-      object Label10: TLabel
-        Left = 16
-        Top = 96
-        Width = 18
-        Height = 13
-        Caption = #1044#1086
-      end
-      object BeginDateLbl: TLabel
-        Left = 104
-        Top = 64
-        Width = 113
-        Height = 13
-        AutoSize = False
-      end
-      object EndDateLbl: TLabel
-        Left = 104
-        Top = 96
-        Width = 113
-        Height = 13
-        AutoSize = False
-      end
-    end
-    object DocumentGB: TGroupBox
-      Left = 569
-      Top = 15
-      Width = 289
-      Height = 125
-      Align = alLeft
-      Caption = '&'#1057#1074#1080#1076#1077#1090#1077#1083#1100#1089#1090#1074#1086' '#1086' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1080
-      TabOrder = 2
-      object Label6: TLabel
-        Left = 16
-        Top = 24
-        Width = 41
-        Height = 13
-        Caption = '&'#1057#1077#1088#1080#1103':'
-      end
-      object DocSerLbl: TLabel
-        Left = 64
-        Top = 24
-        Width = 57
-        Height = 13
-        AutoSize = False
-      end
-      object Label11: TLabel
-        Left = 144
-        Top = 24
-        Width = 44
-        Height = 13
-        Caption = '&'#1053#1086#1084#1077#1088':'
-      end
-      object DocNumLbl: TLabel
-        Left = 199
-        Top = 24
-        Width = 81
-        Height = 13
-        AutoSize = False
-      end
-      object Label8: TLabel
-        Left = 16
-        Top = 60
-        Width = 39
-        Height = 13
-        Caption = '&'#1064#1072#1089#1089#1080
-      end
-      object Label12: TLabel
-        Left = 16
-        Top = 96
-        Width = 64
-        Height = 13
-        Caption = '&'#1057#1086#1089#1090#1086#1103#1085#1080#1077
-      end
-      object ShassisLbl: TLabel
-        Left = 122
-        Top = 60
-        Width = 113
-        Height = 13
-        AutoSize = False
-      end
-      object StateLbl: TLabel
-        Left = 122
-        Top = 96
-        Width = 113
-        Height = 13
-        AutoSize = False
-      end
-    end
-    object PrimechGB: TGroupBox
-      Left = 858
-      Top = 15
-      Width = 263
-      Height = 125
-      Align = alLeft
-      Caption = '&'#1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
-      TabOrder = 3
-      object PrimechMemo: TMemo
-        Left = 2
-        Top = 15
-        Width = 259
-        Height = 108
-        Align = alClient
-        ReadOnly = True
-        TabOrder = 0
-      end
-    end
-  end
   object AL: TActionList
     Images = IL
     Left = 448
@@ -1193,7 +1193,7 @@ object CarForm: TCarForm
     Left = 504
     Top = 184
     Bitmap = {
-      494C01010A000E00040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C01010A000E00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1725,7 +1725,8 @@ object CarForm: TCarForm
       E7E78003E001C3FFC1830001E007C3FF81810040E007C3FFE0071CF8E007C10F
       E0073FFCE007E003F81F3FFCE007F001F81F3FFCE007F001E0073FFCE007F001
       E0071F38E007F00181810200E007F001C1838001E00FF803E7E7C003E01FF803
-      F7EFFF3FE03FFC07FFFFFFFFFFFFFF1F}
+      F7EFFF3FE03FFC07FFFFFFFFFFFFFF1F00000000000000000000000000000000
+      000000000000}
   end
   object PopMenu: TPopupMenu
     Images = IL
@@ -1749,17 +1750,5 @@ object CarForm: TCarForm
     object RefreshItemPop: TMenuItem
       Action = RefreshAction
     end
-  end
-  object Report: TFlexCelReport
-    AutoClose = False
-    Adapter = Adapter
-    DataModule = Owner
-    Left = 504
-    Top = 241
-  end
-  object Adapter: TOLEAdapter
-    SaveFormatExtended = []
-    Left = 560
-    Top = 241
   end
 end

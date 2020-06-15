@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, ExtCtrls, ComCtrls, Buttons, StdCtrls, Spin, Globals,
   UCustomFlexCelReport, UFlexCelReport, UExcelAdapter, OLEAdapter, DB,
-  DBClient, Menus, ActnList, ImgList, DBGrids, DateUtils, ADODB;
+  DBClient, Menus, ActnList, ImgList, DBGrids, DateUtils, ADODB, ToolWin;
 
 type
   TMainForm = class(TForm)
@@ -41,12 +41,6 @@ type
     IL: TImageList;
     PrintReestrAction: TAction;
     PrintDocAction: TAction;
-    NewNaklAction: TAction;
-    CorrNaklAction: TAction;
-    DelNaklAction: TAction;
-    RefreshNaklAction: TAction;
-    CheckNaklAction: TAction;
-    UnCheckNaklAction: TAction;
     RangeAction: TAction;
     NaklPop: TPopupMenu;
     AddNaklPop: TMenuItem;
@@ -60,6 +54,12 @@ type
     ProdItemMenu: TMenuItem;
     ReestrtemMenu: TMenuItem;
     ReestrAction: TAction;
+    MainTB: TToolBar;
+    CarTBI: TToolButton;
+    InsuranceTBI: TToolButton;
+    ProductTBI: TToolButton;
+    ToolButton4: TToolButton;
+    ReestrTBI: TToolButton;
     procedure NextBtnClick(Sender: TObject);
     procedure PrevBtnClick(Sender: TObject);
     procedure DrawSheetCell(Sender: TObject; ACol, ARow: Integer;

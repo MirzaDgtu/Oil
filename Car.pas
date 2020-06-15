@@ -38,8 +38,6 @@ type
     DelItemPop: TMenuItem;
     TransferItemPop: TMenuItem;
     RefreshItemPop: TMenuItem;
-    GridsGB: TGroupBox;
-    CarGrid: TDBGrid;
     Splitter1: TSplitter;
     DetailGB: TGroupBox;
     PassportGB: TGroupBox;
@@ -82,8 +80,8 @@ type
     PrintGB: TGroupBox;
     PrintCarReestrBtn: TBitBtn;
     PrintCarDetailBtn: TBitBtn;
-    Report: TFlexCelReport;
-    Adapter: TOLEAdapter;
+    GridsGB: TGroupBox;
+    CarGrid: TDBGrid;
     procedure CarGridTitleClick(Column: TColumn);
     procedure AddActionExecute(Sender: TObject);
     procedure RefreshActionExecute(Sender: TObject);
@@ -491,8 +489,8 @@ begin
          Screen.Cursor := crSQLWait;
          AppData.Cars.DisableControls;
 
-         Report.Template := SCarReestr;
-         Report.Run;
+         AppData.Report.Template := SCarReestr;
+         AppData.Report.Run;
       finally
          AppData.Cars.EnableControls;
          Screen.Cursor := crDefault;
@@ -507,8 +505,8 @@ begin
          Screen.Cursor := crSQLWait;
          AppData.Cars.DisableControls;
 
-         Report.Template := SCarDetail;
-         Report.Run;
+         AppData.Report.Template := SCarDetail;
+         AppData.Report.Run;
       finally
          AppData.Cars.EnableControls;
          Screen.Cursor := crDefault;

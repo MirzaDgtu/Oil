@@ -19,8 +19,8 @@ object ReestrForm: TReestrForm
   TextHeight = 13
   object SB: TStatusBar
     Left = 0
-    Top = 613
-    Width = 1140
+    Top = 621
+    Width = 1148
     Height = 23
     Panels = <
       item
@@ -39,7 +39,7 @@ object ReestrForm: TReestrForm
   object HeaderPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1140
+    Width = 1148
     Height = 25
     Align = alTop
     TabOrder = 1
@@ -47,8 +47,8 @@ object ReestrForm: TReestrForm
   object DocReestrGB: TGroupBox
     Left = 0
     Top = 25
-    Width = 1013
-    Height = 588
+    Width = 1021
+    Height = 596
     Align = alClient
     Caption = '&'#1044#1086#1082#1091#1084#1077#1085#1090#1099
     Font.Charset = DEFAULT_CHARSET
@@ -60,8 +60,8 @@ object ReestrForm: TReestrForm
     TabOrder = 2
     object Splitter1: TSplitter
       Left = 2
-      Top = 478
-      Width = 1009
+      Top = 486
+      Width = 1017
       Height = 3
       Cursor = crVSplit
       Align = alBottom
@@ -69,8 +69,8 @@ object ReestrForm: TReestrForm
     object NaklGrid: TDBGrid
       Left = 2
       Top = 15
-      Width = 1009
-      Height = 463
+      Width = 1017
+      Height = 471
       Align = alClient
       DataSource = AppData.DS_Nakl
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -354,8 +354,8 @@ object ReestrForm: TReestrForm
     end
     object MoveGB: TGroupBox
       Left = 2
-      Top = 481
-      Width = 1009
+      Top = 489
+      Width = 1017
       Height = 105
       Align = alBottom
       Caption = '&'#1057#1086#1076#1077#1088#1078#1080#1084#1086#1077' '#1076'-'#1090#1072
@@ -363,7 +363,7 @@ object ReestrForm: TReestrForm
       object MoveGrid: TDBGrid
         Left = 2
         Top = 15
-        Width = 1005
+        Width = 1013
         Height = 88
         Align = alClient
         DataSource = AppData.DS_Move
@@ -513,10 +513,10 @@ object ReestrForm: TReestrForm
     end
   end
   object BtnsRightPanel: TPanel
-    Left = 1013
+    Left = 1021
     Top = 25
     Width = 127
-    Height = 588
+    Height = 596
     Align = alRight
     TabOrder = 3
     object Bevel1: TBevel
@@ -1065,6 +1065,7 @@ object ReestrForm: TReestrForm
       Category = 'Nakl'
       Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
       ImageIndex = 23
+      OnExecute = NewNaklActionExecute
     end
     object CorrNaklAction: TAction
       Category = 'Nakl'

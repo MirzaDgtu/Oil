@@ -33,9 +33,9 @@ object ProductDetailForm: TProductDetailForm
     object Label1: TLabel
       Left = 16
       Top = 45
-      Width = 60
+      Width = 53
       Height = 13
-      Caption = '&'#1040#1088#1090#1080#1082#1091#1083#1100':'
+      Caption = '&'#1040#1088#1090#1080#1082#1091#1083':'
     end
     object Label2: TLabel
       Left = 12

@@ -3,7 +3,8 @@ unit AppDM;
 interface
 
 uses
-  SysUtils, Classes, DB, ADODB, ComCtrls;
+  SysUtils, Classes, DB, ADODB, ComCtrls, UCustomFlexCelReport,
+  UFlexCelReport, UExcelAdapter, OLEAdapter;
 
 type
   TAppData = class(TDataModule)
@@ -221,6 +222,9 @@ type
     StringField31: TStringField;
     IntegerField6: TIntegerField;
     DS_InsuranceStory: TDataSource;
+    Adapter: TOLEAdapter;
+    Report: TFlexCelReport;
+    NaklMADEYEAR: TIntegerField;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure CarDetailBeforeOpen(DataSet: TDataSet);

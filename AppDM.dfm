@@ -401,6 +401,9 @@ object AppData: TAppData
       FieldName = 'WHO_CORR'
       Size = 10
     end
+    object NaklMADEYEAR: TIntegerField
+      FieldName = 'MADEYEAR'
+    end
   end
   object Move: TADODataSet
     Connection = Connection
@@ -813,5 +816,17 @@ object AppData: TAppData
     DataSet = InsuranceStory
     Left = 532
     Top = 64
+  end
+  object Adapter: TOLEAdapter
+    SaveFormatExtended = []
+    Left = 624
+    Top = 121
+  end
+  object Report: TFlexCelReport
+    AutoClose = False
+    Adapter = Adapter
+    DataModule = Owner
+    Left = 560
+    Top = 121
   end
 end

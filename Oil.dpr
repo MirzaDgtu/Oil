@@ -17,7 +17,8 @@ uses
   CarStory in 'CarStory.pas' {CarStoryForm},
   InsuranceStory in 'InsuranceStory.pas' {IsnuranceStoryForm},
   Reestr in 'Reestr.pas' {ReestrForm},
-  Login in '..\..\Common\Login.pas' {LoginDlg};
+  Login in '..\..\Common\Login.pas' {LoginDlg},
+  Nakl in 'Nakl.pas' {NaklForm};
 
 {$R *.res}
 

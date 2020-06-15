@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 310
-  Top = 275
+  Left = 365
+  Top = 181
   Width = 1289
   Height = 709
   Caption = #1056#1072#1089#1093#1086#1076' '#1090#1086#1087#1083#1080#1074#1072' '#1090#1088#1072#1085#1089#1087#1086#1088#1090#1085#1099#1084#1080' '#1089#1088#1077#1076#1089#1090#1074#1072#1084#1080
@@ -20,8 +20,8 @@ object MainForm: TMainForm
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 629
-    Width = 1273
+    Top = 637
+    Width = 1281
     Height = 21
     Panels = <
       item
@@ -40,11 +40,10 @@ object MainForm: TMainForm
   end
   object PC: TPageControl
     Left = 0
-    Top = 0
-    Width = 1273
-    Height = 629
+    Top = 80
+    Width = 1281
+    Height = 329
     ActivePage = Report1PC
-    Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -89,8 +88,8 @@ object MainForm: TMainForm
       object OilSheet: TStringGrid
         Left = 0
         Top = 35
-        Width = 1265
-        Height = 566
+        Width = 1273
+        Height = 266
         Align = alClient
         ColCount = 2
         DefaultRowHeight = 20
@@ -102,7 +101,7 @@ object MainForm: TMainForm
       object ToolPanel: TPanel
         Left = 0
         Top = 0
-        Width = 1265
+        Width = 1273
         Height = 35
         Align = alTop
         BevelInner = bvLowered
@@ -266,6 +265,51 @@ object MainForm: TMainForm
       end
     end
   end
+  object MainTB: TToolBar
+    Left = 0
+    Top = 0
+    Width = 1281
+    Height = 29
+    Caption = 'MainTB'
+    Images = IL
+    TabOrder = 2
+    object CarTBI: TToolButton
+      Left = 0
+      Top = 2
+      Action = CarsAction
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object InsuranceTBI: TToolButton
+      Left = 23
+      Top = 2
+      Action = InsuranceAction
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ProductTBI: TToolButton
+      Left = 46
+      Top = 2
+      Action = ProductAction
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton4: TToolButton
+      Left = 69
+      Top = 2
+      Width = 8
+      Caption = 'ToolButton4'
+      ImageIndex = 3
+      Style = tbsSeparator
+    end
+    object ReestrTBI: TToolButton
+      Left = 77
+      Top = 2
+      Action = ReestrAction
+      ParentShowHint = False
+      ShowHint = True
+    end
+  end
   object Data: TClientDataSet
     Aggregates = <>
     FieldDefs = <
@@ -320,12 +364,14 @@ object MainForm: TMainForm
     object CarsAction: TAction
       Category = 'Directory'
       Caption = '&'#1040#1074#1090#1086#1084#1086#1073#1080#1083#1080
+      Hint = #1056#1077#1077#1089#1090#1088' '#1072#1074#1090#1086#1084#1086#1073#1080#1083#1077#1081
       ImageIndex = 4
       OnExecute = CarsActionExecute
     end
     object InsuranceAction: TAction
       Category = 'Directory'
       Caption = '&'#1057#1090#1088#1072#1093#1086#1074#1099#1077' '#1076'-'#1090#1099
+      Hint = #1056#1077#1077#1089#1090#1088' '#1089#1090#1088#1072#1093#1086#1074#1099#1093' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
       ImageIndex = 5
       OnExecute = InsuranceActionExecute
     end
@@ -338,53 +384,6 @@ object MainForm: TMainForm
       Category = 'Print'
       Caption = '&'#1044#1086#1082#1091#1084#1077#1085#1090
       ImageIndex = 21
-    end
-    object NewNaklAction: TAction
-      Category = 'NaklAction'
-      Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
-      Hint = #1057#1086#1079#1076#1072#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-      ImageIndex = 13
-      ShortCut = 16429
-      OnExecute = NewNaklActionExecute
-    end
-    object CorrNaklAction: TAction
-      Category = 'NaklAction'
-      Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
-      Hint = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-      ImageIndex = 15
-      ShortCut = 115
-      OnExecute = CorrNaklActionExecute
-    end
-    object DelNaklAction: TAction
-      Category = 'NaklAction'
-      Caption = '&'#1059#1076#1072#1083#1080#1090#1100
-      Hint = #1059#1076#1072#1083#1077#1085#1080#1077' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-      ImageIndex = 10
-      ShortCut = 16430
-      OnExecute = DelNaklActionExecute
-    end
-    object RefreshNaklAction: TAction
-      Category = 'NaklAction'
-      Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
-      Hint = #1054#1073#1085#1086#1074#1083#1077#1085#1080#1077' '#1088#1077#1077#1089#1090#1088#1072
-      ImageIndex = 16
-      ShortCut = 116
-    end
-    object CheckNaklAction: TAction
-      Category = 'NaklAction'
-      Caption = '&'#1054#1090#1084#1077#1090#1080#1090#1100
-      Hint = #1055#1086#1089#1090#1072#1074#1080#1090#1100' '#1086#1090#1084#1077#1090#1082#1091' '#1085#1072' '#1076#1086#1082#1091#1084#1077#1085#1090
-      ImageIndex = 7
-      ShortCut = 16416
-      OnExecute = CheckNaklActionExecute
-    end
-    object UnCheckNaklAction: TAction
-      Category = 'NaklAction'
-      Caption = '&'#1057#1085#1103#1090#1100' '#1086#1090#1084#1077#1090#1082#1091
-      Hint = #1057#1085#1103#1090#1100' '#1086#1090#1084#1077#1090#1082#1091' '#1089' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-      ImageIndex = 18
-      ShortCut = 24608
-      OnExecute = UnCheckNaklActionExecute
     end
     object RangeAction: TAction
       Category = 'Directory'
@@ -401,6 +400,7 @@ object MainForm: TMainForm
     object ReestrAction: TAction
       Category = 'Directory'
       Caption = '&'#1056#1077#1077#1089#1090#1088
+      Hint = #1056#1077#1077#1089#1090#1088' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074' '#1043#1057#1052
       ImageIndex = 24
       OnExecute = ReestrActionExecute
     end
@@ -1477,25 +1477,48 @@ object MainForm: TMainForm
     Left = 760
     Top = 176
     object AddNaklPop: TMenuItem
-      Action = NewNaklAction
+      Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
+      Hint = #1057#1086#1079#1076#1072#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+      ImageIndex = 13
+      ShortCut = 16429
+      OnClick = NewNaklActionExecute
     end
     object CorrNaklPop: TMenuItem
-      Action = CorrNaklAction
+      Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
+      Hint = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+      ImageIndex = 15
+      ShortCut = 115
+      OnClick = CorrNaklActionExecute
     end
     object DelNaklPop: TMenuItem
-      Action = DelNaklAction
+      Caption = '&'#1059#1076#1072#1083#1080#1090#1100
+      Hint = #1059#1076#1072#1083#1077#1085#1080#1077' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+      ImageIndex = 10
+      ShortCut = 16430
+      OnClick = DelNaklActionExecute
     end
     object CheckNaklPop: TMenuItem
-      Action = CheckNaklAction
+      Caption = '&'#1054#1090#1084#1077#1090#1080#1090#1100
+      Hint = #1055#1086#1089#1090#1072#1074#1080#1090#1100' '#1086#1090#1084#1077#1090#1082#1091' '#1085#1072' '#1076#1086#1082#1091#1084#1077#1085#1090
+      ImageIndex = 7
+      ShortCut = 16416
+      OnClick = CheckNaklActionExecute
     end
     object UnCheckNaklPop: TMenuItem
-      Action = UnCheckNaklAction
+      Caption = '&'#1057#1085#1103#1090#1100' '#1086#1090#1084#1077#1090#1082#1091
+      Hint = #1057#1085#1103#1090#1100' '#1086#1090#1084#1077#1090#1082#1091' '#1089' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+      ImageIndex = 18
+      ShortCut = 24608
+      OnClick = UnCheckNaklActionExecute
     end
     object RangePop: TMenuItem
       Action = RangeAction
     end
     object RefreshPop: TMenuItem
-      Action = RefreshNaklAction
+      Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
+      Hint = #1054#1073#1085#1086#1074#1083#1077#1085#1080#1077' '#1088#1077#1077#1089#1090#1088#1072
+      ImageIndex = 16
+      ShortCut = 116
     end
   end
 end
