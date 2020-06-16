@@ -227,12 +227,9 @@ type
     NaklMADEYEAR: TIntegerField;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
-    procedure CarDetailBeforeOpen(DataSet: TDataSet);
-    procedure CarsAfterScroll(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
     procedure MoveBeforeOpen(DataSet: TDataSet);
     procedure NaklAfterScroll(DataSet: TDataSet);
-    procedure MoveAfterOpen(DataSet: TDataSet);
   private
     procedure QuitApplication(const Msg: string);
   public
@@ -299,18 +296,6 @@ begin
   Consumptions.CommandText := Format(SSQLGetConsumptions, [g_Year, g_Month]);
 end;
 
-procedure TAppData.CarDetailBeforeOpen(DataSet: TDataSet);
-begin
-    CarDetail.CommandText := Format(SSQLGetCarDetail, [Cars.FieldByName('UID').AsInteger,
-                                                       Cars.FieldByName('Archive').AsString]);
-end;
-
-procedure TAppData.CarsAfterScroll(DataSet: TDataSet);
-begin
-    CarDetail.Active := False;
-    CarDetail.Active := True;
-end;
-
 procedure TAppData.TypeTovrBeforeOpen(DataSet: TDataSet);
 begin
     TypeTovr.CommandText := SSQLGetTypeTovr;
@@ -364,11 +349,6 @@ procedure TAppData.NaklAfterScroll(DataSet: TDataSet);
 begin
   Move.Active := False;
   Move.Active := True;
-end;
-
-procedure TAppData.MoveAfterOpen(DataSet: TDataSet);
-begin
-  TCarForm.SetCarDetail();
 end;
 
 end.

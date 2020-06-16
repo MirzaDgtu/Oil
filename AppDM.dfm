@@ -46,7 +46,6 @@ object AppData: TAppData
   end
   object Cars: TADODataSet
     Connection = Connection
-    AfterScroll = CarsAfterScroll
     Parameters = <>
     Left = 240
     Top = 16
@@ -127,7 +126,6 @@ object AppData: TAppData
   end
   object CarDetail: TADODataSet
     Connection = Connection
-    BeforeOpen = CarDetailBeforeOpen
     Parameters = <>
     Left = 376
     Top = 16
@@ -408,7 +406,6 @@ object AppData: TAppData
   object Move: TADODataSet
     Connection = Connection
     BeforeOpen = MoveBeforeOpen
-    AfterOpen = MoveAfterOpen
     Parameters = <>
     Left = 96
     Top = 280
@@ -585,7 +582,6 @@ object AppData: TAppData
   end
   object CarStory: TADODataSet
     Connection = Connection
-    AfterScroll = CarsAfterScroll
     Parameters = <>
     Left = 304
     Top = 16

@@ -20,8 +20,8 @@ object MainForm: TMainForm
   TextHeight = 13
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 629
-    Width = 1273
+    Top = 637
+    Width = 1281
     Height = 21
     Panels = <
       item
@@ -43,7 +43,7 @@ object MainForm: TMainForm
     Top = 80
     Width = 1281
     Height = 329
-    ActivePage = Report1PC
+    ActivePage = ReestrNaklPC
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -56,16 +56,16 @@ object MainForm: TMainForm
       Caption = #1056#1077#1077#1089#1090#1088
       object BottomPanel: TPanel
         Left = 0
-        Top = 578
-        Width = 1513
+        Top = 270
+        Width = 1273
         Height = 31
         Align = alBottom
         TabOrder = 0
       end
       object SB: TStatusBar
         Left = 0
-        Top = 559
-        Width = 1513
+        Top = 251
+        Width = 1273
         Height = 19
         Panels = <
           item
@@ -268,7 +268,7 @@ object MainForm: TMainForm
   object MainTB: TToolBar
     Left = 0
     Top = 0
-    Width = 1273
+    Width = 1281
     Height = 29
     Caption = 'MainTB'
     Images = IL

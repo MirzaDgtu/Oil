@@ -34,7 +34,7 @@ resourcestring
 
   // Модуль автомобилей
   SSQLGetCars = 'EXEC REPORTS..O_GetCars %d, ''%s'', ''%s'' ';
-  SSQLGetCarDetail = 'EXEC REPORTS..O_GetCarDetail %d, ''%s''';
+  SSQLGetCarDetail = 'EXEC REPORTS..O_GetCarDetail %d, ''%s''';       // UID, Archive
   SSQLGetCarArc = 'EXEC REPORTS..O_GetCarArc %d';                     //Вывод архивных версий автомобиля (UID)
   SSQLInsCar = 'EXEC REPORTS..O_InsCar ''%s'',  ''%s'', ''%s'', ''%s'', ''%s'', %d, ''%s'', ''%s'', ''%s'', ''%s'', %d, ''%s'', ' +
                                        '%d, %d, ''%s'', ''%s'', %d, ''%s'', ''%s'', %d, %d,  ''%s''';

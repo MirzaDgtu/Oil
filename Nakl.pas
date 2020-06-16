@@ -52,12 +52,18 @@ type
     FontAction: TAction;
     FD: TFontDialog;
     FontTBI: TToolButton;
+    DriverAction: TAction;
+    CarAction: TAction;
+    procedure DriverActionExecute(Sender: TObject);
+    procedure CarActionExecute(Sender: TObject);
   private
     FUNICUM_NUM: integer;
     FiTypeF: Shortint;
+    FUID_Car: integer;
     procedure SetiTypeF(const Value: Shortint);
     procedure SetUNICUM_NUM(const Value: integer);
     procedure SetFieldsSG();
+    procedure SetUID_Car(const Value: integer);
     { Private declarations }
 
   protected
@@ -73,6 +79,8 @@ type
 
     constructor Create(AOwner: TComponent); overload; override;
     constructor Create(Unucim_Num, TypeF: integer); overload;
+   published
+     property UID_Car: integer read FUID_Car write SetUID_Car;
   end;
 
 var
@@ -80,7 +88,7 @@ var
 
 implementation
 
-uses AppDM, Globals, Products, SConst, DB;
+uses AppDM, Globals, Products, SConst, DB, CarStory;
 
 {$R *.dfm}
 
@@ -120,6 +128,7 @@ constructor TNaklForm.Create(AOwner: TComponent);
 begin
   inherited;
   DateDocDP.Date := Now();
+  Self.Caption := Self.Caption + ' - [Новый документ]';
   SetFieldsSG();
 end;
 
@@ -148,7 +157,7 @@ begin
    with ProductSG do
     try
        RowCount := 2;
-       ColCount := 6;
+       ColCount := 7;
        FixedCols := 1;
        FixedCols := 1;
 
@@ -161,12 +170,12 @@ begin
        Cols[6].Text := 'Примечание';
 
        ColWidths[0] := 30;
-       ColWidths[1] := 50;
-       ColWidths[2] := 150;
-       ColWidths[3] := 40;
-       ColWidths[4] := 60;
-       ColWidths[5] := 60;
-       ColWidths[6] := 150;
+       ColWidths[1] := 80;
+       ColWidths[2] := 230;
+       ColWidths[3] := 70;
+       ColWidths[4] := 90;
+       ColWidths[5] := 90;
+       ColWidths[6] := 220;
     finally
         ProductSG.DefaultRowHeight := 20;
     end;
@@ -213,9 +222,9 @@ begin
           Begin
             with ProductSG do
               Begin
-                Cols[0].Text := 1;
+                Cols[0].Text := '1';
                 Cols[1].Text := AppData.Move.FieldByName('COD_ARTIC').AsString;
-                Cols[2].Text := AppData.Move.FieldByName('NAME_ARTIC').AsString
+                Cols[2].Text := AppData.Move.FieldByName('NAME_ARTIC').AsString;
                 Cols[3].Text := AppData.Move.FieldByName('SUM_PREDM').AsString;
                 Cols[4].Text := AppData.Move.FieldByName('KOLC_PREDM').AsString;
                 Cols[5].Text := AppData.Move.FieldByName('Res_Sum').AsString;
@@ -244,6 +253,42 @@ begin
   DeleteTBI.Enabled := False;
   CarBtn.Enabled := False;
 
+end;
+
+procedure TNaklForm.DriverActionExecute(Sender: TObject);
+var
+    Str: string;
+begin
+  if InputQuery('Водитель', 'ФИО', Str) then
+  begin
+    Str := Trim(Str);
+    DriverCB.Items.Add(Str);
+    DriverCB.ItemIndex := DriverCB.Items.IndexOf(Str);
+  end;
+end;
+
+procedure TNaklForm.CarActionExecute(Sender: TObject);
+var
+    CarF: TCarStoryForm;
+begin
+  CarF :=  TCarStoryForm.Create(Application);
+
+   if CarF.ShowModal = mrOk then
+   try
+      ModelEdit.Text := AppData.Cars.FieldByName('Model').AsString;
+      RegSymbolEdit.Text := AppData.Cars.FieldByName('REG_SYMBOL').AsString;
+      TypeEdit.Text := AppData.Cars.FieldByName('TYPE_TC').AsString;
+      ColorEdit.Text := AppData.Cars.FieldByName('Color').AsString;
+      YearEdit.Text := AppData.Cars.FieldByName('MADEYEAR').AsString;
+      UID_Car := AppData.Cars.FieldByName('UID').AsInteger;
+    finally
+      FreeAndNil(CarF);
+    end;
+end;
+
+procedure TNaklForm.SetUID_Car(const Value: integer);
+begin
+  FUID_Car := Value;
 end;
 
 end.

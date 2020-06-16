@@ -385,7 +385,6 @@ object CarStoryForm: TCarStoryForm
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
-          Width = 64
           Visible = True
         end
         item
@@ -482,7 +481,6 @@ object CarStoryForm: TCarStoryForm
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
-          Width = 64
           Visible = True
         end>
     end

@@ -196,6 +196,11 @@ end;
 
 class procedure TCarForm.SetCarDetail;
 begin
+    AppData.CarDetail.Active := False;
+    AppData.CarDetail.CommandText := Format(SSQLGetCarDetail, [AppData.Cars.FieldByName('UID').AsInteger,
+                                                               AppData.Cars.FieldByName('Archive').AsString]);
+    AppData.CarDetail.Active := True;
+
     if not AppData.CarDetail.IsEmpty then
      with CarForm do
       try
@@ -233,7 +238,7 @@ end;
 
 procedure TCarForm.CarGridDblClick(Sender: TObject);
 begin
-//    SetCarDetail();
+    SetCarDetail();
 end;
 
 procedure TCarForm.CarGridDrawColumnCell(Sender: TObject;
