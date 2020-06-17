@@ -1,6 +1,6 @@
 object ReestrForm: TReestrForm
-  Left = 357
-  Top = 209
+  Left = 299
+  Top = 156
   Width = 1156
   Height = 675
   Caption = #1056#1077#1077#1089#1090#1088' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074

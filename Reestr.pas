@@ -329,19 +329,29 @@ begin
 
     try
        if NaklF.ShowModal = mrOk then
-        try
-            AppData.Command.CommandText := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
-                                                                    NaklF.SumDoc,
-                                                                    NaklF.DriverCB.Text,
-                                                                    UID_Car,
-                                                                    NaklF.TypeDocCB.Text,
-                                                                    g_User,
-                                                                    NaklF.PrimechMemo.Text]);
-            AppData.Command.Execute;
-        except
-          on Err: Exception do
-            MessageDlg('Ошибка сохранения головной части документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
-        end;
+         Begin
+            try
+                AppData.Command.CommandText := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
+                                                                        NaklF.SumDoc,
+                                                                        NaklF.DriverCB.Text,
+                                                                        UID_Car,
+                                                                        NaklF.TypeDocCB.Text,
+                                                                        g_User,
+                                                                        NaklF.PrimechMemo.Text]);
+                AppData.Command.Execute;
+            except
+              on Err: Exception do
+                MessageDlg('Ошибка сохранения головной части документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+            end;
+
+            try
+                AppData.Command.CommandText := Format(SSQLInsNaklMove, []);
+                AppData.Command.Execute;
+            except
+               on Err: Exception do
+                MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+            end;
+         end;
     finally
       FreeAndNil(NaklF);
     end;
