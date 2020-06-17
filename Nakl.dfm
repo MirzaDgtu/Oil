@@ -19,7 +19,7 @@ object NaklForm: TNaklForm
     Left = 0
     Top = 0
     Width = 821
-    Height = 134
+    Height = 132
     Align = alTop
     Caption = '&'#1055#1072#1088#1072#1084#1077#1090#1088#1099
     Font.Charset = DEFAULT_CHARSET
@@ -33,7 +33,7 @@ object NaklForm: TNaklForm
       Left = 2
       Top = 15
       Width = 229
-      Height = 117
+      Height = 115
       Align = alLeft
       BorderStyle = bsSingle
       TabOrder = 0
@@ -46,17 +46,24 @@ object NaklForm: TNaklForm
       end
       object Label2: TLabel
         Left = 8
-        Top = 41
+        Top = 40
         Width = 31
         Height = 13
         Caption = '&'#1044#1072#1090#1072
       end
       object Label3: TLabel
         Left = 8
-        Top = 70
+        Top = 64
         Width = 57
         Height = 13
         Caption = '&'#1042#1086#1076#1080#1090#1077#1083#1100
+      end
+      object Label4: TLabel
+        Left = 8
+        Top = 89
+        Width = 51
+        Height = 13
+        Caption = '&'#1058#1080#1087' '#1076'-'#1090#1072
       end
       object NumDocEdit: TEdit
         Left = 77
@@ -68,7 +75,7 @@ object NaklForm: TNaklForm
       end
       object DateDocDP: TDateTimePicker
         Left = 77
-        Top = 37
+        Top = 36
         Width = 99
         Height = 21
         Date = 43997.461838310180000000
@@ -77,7 +84,7 @@ object NaklForm: TNaklForm
       end
       object DriverCB: TComboBox
         Left = 76
-        Top = 65
+        Top = 60
         Width = 125
         Height = 22
         Style = csOwnerDrawFixed
@@ -86,11 +93,55 @@ object NaklForm: TNaklForm
       end
       object AddDriverBtn: TBitBtn
         Left = 200
-        Top = 64
+        Top = 59
         Width = 21
-        Height = 23
+        Height = 22
         Action = DriverAction
         TabOrder = 3
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+          FBF6F1F8EFE6F8EFE6F8EFE6F8EFE6F8EFE6F5E8DAFAF2EAE9C9AAE7BA8CE8B7
+          85E7BC90F1DFCBFFFFFFFFFFFFFFFFFFE6CAADF4E7DAF4E7DAF4E7DAF4E7DAF4
+          E7DAF5E9DFE9CAA9F4C28DFDCC98FEDCB9FDCC98ECBB86F2E0CDFFFFFFFFFFFF
+          E8CFB5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFDFCE7B887FDCC98FDCC98FFF5
+          EAFDCC98FDCC98E7BD91FFFFFFFFFFFFE8CFB5FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFF7EDE4EFBD88FEE4C9FFF5EAFFFDFBFFF5EAFEDCB9E8B887FFFFFFFFFFFF
+          E8CFB5FFFFFFFCF9F6E5C7A9E5C7A9E5C7A9ECD6BFE7B680FDCC98FDCC98FFF5
+          EAFDCC98FDCC98E7BC8EFFFFFFFFFFFFE8CFB5FFFFFFFDFBF9ECD7C2ECD7C2EC
+          D7C2EDD9C5E2B88DFAC894FDCC98FEE4C9FDCC98F4C28CEBCFB0FFFFFFFFFFFF
+          E8CFB5FFFFFFFEFDFBF8EFE6F8EFE6F8EFE6F8EFE6F6EBDFE3BB90EBBA87F0C0
+          8CE8B784EACBAAFFFFFEFFFFFFFFFFFFE8CFB5FFFFFFFEFEFDF4E7DAF4E7DAF4
+          E7DAF4E7DAF4E7DAF6EBE0FDFCF9F9F1EAF6EBE2FFFFFFFFFFFFFFFFFFFFFFFF
+          E8CFB5FFFFFFFDFAF8E9CFB5E9CFB5E9CFB5E9CFB5F4E7DAFFFFFFFFFFFFFFFF
+          FFDFBB96FFFFFFFFFFFFFFFFFFFFFFFFE8CFB5FFFFFFFCF9F6E5C7A9E5C7A9E5
+          C7A9E5C7A9E5C7A9E5C7A9FCF9F6FFFFFFE7CEB3FFFFFFFFFFFFFFFFFFFFFFFF
+          E8CFB5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFE8CFB5FFFFFFFFFFFFFFFFFFFFFFFFE8CFB5FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFEDD8C2E4C29FE4C29FE1BB94DCB388FFFFFFFFFFFFFFFFFFFFFFFF
+          E8CFB5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9CDB1FEF0DFFCECD8DCB1
+          86FBF7F3FFFFFFFFFFFFFFFFFFFFFFFFE8CFB5FFFFFFFFFFFFFFFFFFFFFFFFFF
+          FFFFFFFFFFE9CDB1FCECD8DDB489FBF7F3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+          E7CCB0F8EFE6F8EFE6F8EFE6F8EFE6F8EFE6F8EFE6E5C5A4DDB389FDFBF9FFFF
+          FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F1E9F4E7DAF4E7DAF4E7DAF4E7DAF4
+          E7DAF4E7DAF1E0CFFDFDFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      end
+      object TypeDocCB: TComboBox
+        Left = 76
+        Top = 85
+        Width = 125
+        Height = 22
+        Style = csOwnerDrawFixed
+        ItemHeight = 16
+        TabOrder = 4
+      end
+      object AddTypeDocBtn: TBitBtn
+        Left = 200
+        Top = 83
+        Width = 21
+        Height = 22
+        Action = DriverAction
+        TabOrder = 5
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
           18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -124,7 +175,7 @@ object NaklForm: TNaklForm
       Left = 231
       Top = 15
       Width = 325
-      Height = 117
+      Height = 115
       Align = alLeft
       BorderStyle = bsSingle
       TabOrder = 1
@@ -173,9 +224,9 @@ object NaklForm: TNaklForm
       end
       object CarBtn: TBitBtn
         Left = 287
-        Top = 16
+        Top = 10
         Width = 29
-        Height = 15
+        Height = 20
         Action = CarAction
         TabOrder = 1
         Glyph.Data = {
@@ -243,7 +294,7 @@ object NaklForm: TNaklForm
       Left = 556
       Top = 15
       Width = 263
-      Height = 117
+      Height = 115
       Align = alClient
       BorderStyle = bsSingle
       TabOrder = 2
@@ -251,7 +302,7 @@ object NaklForm: TNaklForm
         Left = 1
         Top = 1
         Width = 257
-        Height = 111
+        Height = 109
         Align = alClient
         Caption = '&'#1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
         TabOrder = 0
@@ -259,7 +310,7 @@ object NaklForm: TNaklForm
           Left = 2
           Top = 15
           Width = 253
-          Height = 94
+          Height = 92
           Align = alClient
           TabOrder = 0
         end
@@ -311,7 +362,7 @@ object NaklForm: TNaklForm
   end
   object HeaderTB: TToolBar
     Left = 0
-    Top = 134
+    Top = 132
     Width = 821
     Height = 27
     Caption = 'HeaderTB'
@@ -337,9 +388,9 @@ object NaklForm: TNaklForm
   end
   object ProductSG: TStringGrid
     Left = 0
-    Top = 161
+    Top = 159
     Width = 821
-    Height = 255
+    Height = 257
     Align = alClient
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowMoving, goColMoving, goEditing]
     TabOrder = 4
@@ -359,6 +410,7 @@ object NaklForm: TNaklForm
       Caption = 'AddRowAction'
       Hint = #1044#1086#1073#1072#1074#1080#1090#1100' '#1089#1090#1088#1086#1082#1091
       ImageIndex = 0
+      OnExecute = AddRowActionExecute
     end
     object CancelNaklAction: TAction
       Category = 'NaklMove'
@@ -371,6 +423,7 @@ object NaklForm: TNaklForm
       Caption = 'DelRowAction'
       Hint = #1059#1076#1072#1083#1080#1090#1100' '#1089#1090#1088#1086#1082#1091
       ImageIndex = 2
+      OnExecute = DelRowActionExecute
     end
     object PrintAction: TAction
       Category = 'NaklMove'
@@ -382,6 +435,7 @@ object NaklForm: TNaklForm
       Category = 'GS'
       Caption = '&'#1064#1088#1080#1092#1090
       ImageIndex = 4
+      OnExecute = FontActionExecute
     end
     object DriverAction: TAction
       Category = 'Header'

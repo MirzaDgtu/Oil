@@ -57,6 +57,8 @@ type
     N3: TMenuItem;
     N4: TMenuItem;
     N5: TMenuItem;
+    BitBtn1: TBitBtn;
+    ViewNaklAction: TAction;
     procedure NaklGridTitleClick(Column: TColumn);
     procedure MoveGridTitleClick(Column: TColumn);
     procedure RangeActionExecute(Sender: TObject);
@@ -68,6 +70,8 @@ type
     procedure PrintDocActionExecute(Sender: TObject);
     procedure FindEditChange(Sender: TObject);
     procedure NewNaklActionExecute(Sender: TObject);
+    procedure ViewNaklActionExecute(Sender: TObject);
+    procedure CorrNaklActionExecute(Sender: TObject);
   private
   { Private declarations }
     FBegD: TDateTime;
@@ -80,7 +84,6 @@ type
     function GetDateDoc: Variant;
 
     procedure Find(Index: integer; FindStr: string);
-
   protected
 
   public
@@ -322,13 +325,56 @@ procedure TReestrForm.NewNaklActionExecute(Sender: TObject);
 var
     NaklF: TNaklForm;
 begin
-    NaklF := TNaklForm.Create(Application);
+    NaklF := TNaklForm.Create(g_New, g_New);
 
     try
-       NaklF.ShowModal();
+       if NaklF.ShowModal = mrOk then
+        try
+            AppData.Command.CommandText := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
+                                                                    NaklF.SumDoc,
+                                                                    NaklF.DriverCB.Text,
+                                                                    UID_Car,
+                                                                    NaklF.TypeDocCB.Text,
+                                                                    g_User,
+                                                                    NaklF.PrimechMemo.Text]);
+            AppData.Command.Execute;
+        except
+          on Err: Exception do
+            MessageDlg('Ошибка сохранения головной части документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+        end;
     finally
       FreeAndNil(NaklF);
     end;
+end;
+
+procedure TReestrForm.ViewNaklActionExecute(Sender: TObject);
+var
+   NaklF: TNaklForm;
+begin
+  if (AppData.Nakl.Active) and
+     (not AppData.Nakl.IsEmpty) then
+   try
+     NaklF := TNaklForm.Create(g_View, AppData.fldUNICUM_NUM.AsInteger);
+
+     NaklF.ShowModal();
+   finally
+      FreeAndNil(NaklF);
+   end;
+end;
+
+procedure TReestrForm.CorrNaklActionExecute(Sender: TObject);
+var
+   NaklF: TNaklForm;
+begin
+  if (AppData.Nakl.Active) and
+     (not AppData.Nakl.IsEmpty) then
+   try
+     NaklF := TNaklForm.Create(g_Corr, AppData.fldUNICUM_NUM.AsInteger);
+
+     NaklF.ShowModal();
+   finally
+      FreeAndNil(NaklF);
+   end;
 end;
 
 end.

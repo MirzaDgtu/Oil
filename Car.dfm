@@ -44,7 +44,6 @@ object CarForm: TCarForm
       item
         Width = 50
       end>
-    OnClick = SBClick
   end
   object HeaderPanel: TPanel
     Left = 0

@@ -96,7 +96,6 @@ type
     procedure DelActionExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure StoryActionExecute(Sender: TObject);
-    procedure SBClick(Sender: TObject);
     procedure PrintCarReestrActionExecute(Sender: TObject);
     procedure PrintCarDetailActionExecute(Sender: TObject);
   private
@@ -479,11 +478,6 @@ begin
       finally
         FreeAndNil(StoryF);
       end;
-end;
-
-procedure TCarForm.SBClick(Sender: TObject);
-begin
-    ShowMessage(IntToStr(SB.Panels.Count));
 end;
 
 procedure TCarForm.PrintCarReestrActionExecute(Sender: TObject);

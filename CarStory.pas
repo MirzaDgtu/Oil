@@ -195,6 +195,13 @@ end;
 procedure TCarStoryForm.SetCarDetail;
 begin
     AppData.CarDetail.Active := False;
+    case TypeF of
+      g_New :  AppData.CarDetail.CommandText := Format(SSQLGetCarDetail, [AppData.Cars.FieldByName('UID').AsInteger,
+                                                                          AppData.Cars.FieldByName('Archive').AsString]);
+      g_View : AppData.CarDetail.CommandText := Format(SSQLGetCarDetail, [AppData.CarStory.FieldByName('UID').AsInteger,
+                                                                          AppData.CarStory.FieldByName('Archive').AsString]);
+    end;
+
     AppData.CarDetail.Active := True;
 
       if (AppData.CarDetail.Active) and
@@ -221,7 +228,18 @@ end;
 
 procedure TCarStoryForm.CarGridDblClick(Sender: TObject);
 begin
-  SetCarDetail();
+  case TypeF of
+    g_New: Begin
+            if (AppData.Cars.Active) and
+               (not AppData.Cars.IsEmpty) then
+                SetCarDetail();
+           end;
+    g_View:Begin
+            if (AppData.CarStory.Active) and
+               (not AppData.CarStory.IsEmpty) then
+                SetCarDetail();
+           end;
+  end;
 end;
 
 procedure TCarStoryForm.CarGridDrawColumnCell(Sender: TObject;

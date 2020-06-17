@@ -54,8 +54,14 @@ type
     FontTBI: TToolButton;
     DriverAction: TAction;
     CarAction: TAction;
+    Label4: TLabel;
+    TypeDocCB: TComboBox;
+    AddTypeDocBtn: TBitBtn;
     procedure DriverActionExecute(Sender: TObject);
     procedure CarActionExecute(Sender: TObject);
+    procedure DelRowActionExecute(Sender: TObject);
+    procedure AddRowActionExecute(Sender: TObject);
+    procedure FontActionExecute(Sender: TObject);
   private
     FUNICUM_NUM: integer;
     FiTypeF: Shortint;
@@ -64,7 +70,9 @@ type
     procedure SetUNICUM_NUM(const Value: integer);
     procedure SetFieldsSG();
     procedure SetUID_Car(const Value: integer);
-    procedure  DeleteRow(StringGrid: TStringGrid; ARow: Integer);
+    procedure DeleteRow(StringGrid: TStringGrid; ARow: Integer);
+    procedure SetNumSG(SG: TStringGrid; Value: integer);
+    function GetSumDoc: Real;
     { Private declarations }
 
   protected
@@ -72,16 +80,16 @@ type
     property iTypeF: Shortint read FiTypeF write SetiTypeF;
   public
     { Public declarations }
-   // procedure SetSettingGrid(Value: Shortint);  // -- Принимает g_New, g_Corr, g_View
+
     // Блок настроек формы
     procedure NewNaklSetting();
     procedure CorrNaklSetting(UNICUM_NUM: integer);
     procedure ViewNaklSetting(UNICUM_NUM: integer);
 
-    constructor Create(AOwner: TComponent); overload; override;
     constructor Create(Unucim_Num, TypeF: integer); overload;
    published
      property UID_Car: integer read FUID_Car write SetUID_Car;
+     property SumDoc: Real read GetSumDoc;
   end;
 
 var
@@ -89,7 +97,7 @@ var
 
 implementation
 
-uses AppDM, Globals, Products, SConst, DB, CarStory;
+uses AppDM, Globals, Products, SConst, DB, CarStory, Math;
 
 {$R *.dfm}
 
@@ -125,26 +133,21 @@ begin
       end;
 end;
 
-constructor TNaklForm.Create(AOwner: TComponent);
-begin
-  inherited;
-  DateDocDP.Date := Now();
-  Self.Caption := Self.Caption + ' - [Новый документ]';
-  SetFieldsSG();
-end;
-
 constructor TNaklForm.Create(Unucim_Num, TypeF: integer);
 begin
   inherited Create(Application);
   Self.UNICUM_NUM := Unucim_Num;
   Self.iTypeF := TypeF;
   DateDocDP.Date := Now();
+  SetFieldsSG();
 
   case TypeF of
     g_New: NewNaklSetting();
     g_Corr: CorrNaklSetting(AppData.fldUNICUM_NUM.AsInteger);
     g_View: ViewNaklSetting(AppData.fldUNICUM_NUM.AsInteger);
   end;
+
+  SetNumSG(Self.ProductSG, Self.ProductSG.RowCount);
 end;
 
 procedure TNaklForm.NewNaklSetting;
@@ -295,15 +298,79 @@ end;
 procedure TNaklForm.DeleteRow(StringGrid: TStringGrid; ARow: Integer);
 var i, j: Integer;
 begin
-  with StringGrid do
-  begin
-    for i:=ARow+1 to RowCount-1 do
-      for j:=0 to ColCount-1 do
-        Cells[j, i-1]:=Cells[j, i];
-    for i:=1 to ColCount-1 do
-      Cells[i, RowCount-1]:='';
-    RowCount:=RowCount-1;
+  if (ProductSG.ColCount > 1) and
+     (ProductSG.Row <> 1) then
+   try
+      with StringGrid do
+      try
+        for i:=ARow+1 to RowCount-1 do
+          for j:=0 to ColCount-1 do
+            Cells[j, i-1]:=Cells[j, i];
+        for i:=1 to ColCount-1 do
+          Cells[i, RowCount-1]:='';
+        RowCount:=RowCount-1;
+      except
+        on Err: Exception do
+          MessageDlg('Ошибка удаления строки!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+      end;
+
+      if ProductSG.RowCount = 1 then
+         ProductSG.RowCount := ProductSG.RowCount + 1; 
+   finally
+     SetNumSG(ProductSG, ProductSG.RowCount);
+   end;
+end;
+
+procedure TNaklForm.DelRowActionExecute(Sender: TObject);
+begin
+  DeleteRow(Self.ProductSG, Self.ProductSG.Row);
+end;
+
+procedure TNaklForm.SetNumSG(SG: TStringGrid; Value: integer);
+var
+  i: integer;
+begin
+
+  if Value > 0 then
+    try
+      for i := 1 to Value do
+        SG.Rows[i].Text := IntToStr(i);
+    except
+      on Err: Exception do
+        MessageDlg('Ошибка привоения нумерации!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+    end;
+end;
+
+procedure TNaklForm.AddRowActionExecute(Sender: TObject);
+begin
+  try
+    ProductSG.RowCount := ProductSG.RowCount + 1;
+  finally
+    SetNumSG(ProductSG, ProductSG.RowCount);
   end;
+end;
+
+function TNaklForm.GetSumDoc: Real;
+var
+    i: integer;
+    resSum: real;
+begin
+  resSum := 0;
+
+  if Self.ProductSG.RowCount > 1 then
+    try
+      for i := 1 to Self.ProductSG.RowCount Do
+        resSum := resSum + StrToFloat(Self.ProductSG.Cols[5]);
+    finally
+      Result := resSum;
+    end;
+
+end;
+
+procedure TNaklForm.FontActionExecute(Sender: TObject);
+begin
+    If FD.Execute then
+      ProductSG.Font := FD.Font; 
 end;
 
 end.
