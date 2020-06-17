@@ -175,7 +175,7 @@ begin
        ColWidths[3] := 70;
        ColWidths[4] := 90;
        ColWidths[5] := 90;
-       ColWidths[6] := 220;
+       ColWidths[6] := 200;
     finally
         ProductSG.DefaultRowHeight := 20;
     end;
