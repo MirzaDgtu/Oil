@@ -352,9 +352,9 @@ object MainForm: TMainForm
       object ProdItemMenu: TMenuItem
         Action = ProductAction
       end
-      object ReestrtemMenu: TMenuItem
-        Action = ReestrAction
-      end
+    end
+    object ReestrtemMenu: TMenuItem
+      Action = ReestrAction
     end
   end
   object AL: TActionList
@@ -1471,54 +1471,5 @@ object MainForm: TMainForm
       00000000000000000000000000000000000000000000000000000000FFFF0000
       00000000FFFF000000008200FFFF000000000000000000000000000000000000
       000000000000}
-  end
-  object NaklPop: TPopupMenu
-    Images = IL
-    Left = 760
-    Top = 176
-    object AddNaklPop: TMenuItem
-      Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
-      Hint = #1057#1086#1079#1076#1072#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-      ImageIndex = 13
-      ShortCut = 16429
-      OnClick = NewNaklActionExecute
-    end
-    object CorrNaklPop: TMenuItem
-      Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
-      Hint = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-      ImageIndex = 15
-      ShortCut = 115
-      OnClick = CorrNaklActionExecute
-    end
-    object DelNaklPop: TMenuItem
-      Caption = '&'#1059#1076#1072#1083#1080#1090#1100
-      Hint = #1059#1076#1072#1083#1077#1085#1080#1077' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-      ImageIndex = 10
-      ShortCut = 16430
-      OnClick = DelNaklActionExecute
-    end
-    object CheckNaklPop: TMenuItem
-      Caption = '&'#1054#1090#1084#1077#1090#1080#1090#1100
-      Hint = #1055#1086#1089#1090#1072#1074#1080#1090#1100' '#1086#1090#1084#1077#1090#1082#1091' '#1085#1072' '#1076#1086#1082#1091#1084#1077#1085#1090
-      ImageIndex = 7
-      ShortCut = 16416
-      OnClick = CheckNaklActionExecute
-    end
-    object UnCheckNaklPop: TMenuItem
-      Caption = '&'#1057#1085#1103#1090#1100' '#1086#1090#1084#1077#1090#1082#1091
-      Hint = #1057#1085#1103#1090#1100' '#1086#1090#1084#1077#1090#1082#1091' '#1089' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-      ImageIndex = 18
-      ShortCut = 24608
-      OnClick = UnCheckNaklActionExecute
-    end
-    object RangePop: TMenuItem
-      Action = RangeAction
-    end
-    object RefreshPop: TMenuItem
-      Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
-      Hint = #1054#1073#1085#1086#1074#1083#1077#1085#1080#1077' '#1088#1077#1077#1089#1090#1088#1072
-      ImageIndex = 16
-      ShortCut = 116
-    end
   end
 end

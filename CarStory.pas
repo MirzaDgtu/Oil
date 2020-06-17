@@ -83,7 +83,6 @@ type
     { Private declarations }
   public
     { Public declarations }
-    constructor Create(AOwner: TComponent); overload; override;
     constructor Create(Value: Shortint; UID: integer); overload;
 
   protected
@@ -120,10 +119,10 @@ begin
      case Value of
         g_New:  Begin
                  SelectBtn.Visible := True;
-                 CarGrid.DataSource := AppData.DS_Cars;
+                 Self.CarGrid.DataSource := AppData.DS_Cars;
                 end;
 
-        g_View: CarGrid.DataSource := AppData.DS_CarStory;
+        g_View: Self.CarGrid.DataSource := AppData.DS_CarStory;
      end;
   finally
      RefreshBtnClick(Self);
@@ -147,18 +146,18 @@ end;
 
 procedure TCarStoryForm.RefreshBtnClick(Sender: TObject);
 begin
-    AppData.Cars.Active := False;
-    AppData.CarStory.Active := False;
 
     case TypeF of
       g_New: Begin
-               AppData.Cars.CommandText := Format(SSQLGetCars,     [0,
+               AppData.Cars.Active := False;
+               AppData.Cars.CommandText := Format(SSQLGetCars,     [g_New,
                                                                     FormatDateTime('yyyy-mm-dd', BegD),
                                                                     FormatDateTime('yyyy-mm-dd', EndD)]);
                AppData.Cars.Active := True;
              end;
       g_Corr: ;
-      g_View: Begin        
+      g_View: Begin
+                AppData.CarStory.Active := False;
                 AppData.CarStory.CommandText := Format(SSQLGetCarArc, [locUID]);
                 AppData.CarStory.Active := True;
               end;
@@ -267,16 +266,4 @@ begin
           IndexFieldNames := Str + ' DESC';
     end;
 end;
-
-constructor TCarStoryForm.Create(AOwner: TComponent);
-begin
-  inherited;
-     BegD  := Now();
-     EndD  := BegD +1;
-     TypeF := g_New;
-     SelectBtn.Visible := True;
-     CarGrid.DataSource := AppData.DS_Cars;
-     RefreshBtnClick(Self);
-end;
-
 end.

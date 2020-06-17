@@ -42,14 +42,6 @@ type
     PrintReestrAction: TAction;
     PrintDocAction: TAction;
     RangeAction: TAction;
-    NaklPop: TPopupMenu;
-    AddNaklPop: TMenuItem;
-    CorrNaklPop: TMenuItem;
-    DelNaklPop: TMenuItem;
-    CheckNaklPop: TMenuItem;
-    RangePop: TMenuItem;
-    RefreshPop: TMenuItem;
-    UnCheckNaklPop: TMenuItem;
     ProductAction: TAction;
     ProdItemMenu: TMenuItem;
     ReestrtemMenu: TMenuItem;

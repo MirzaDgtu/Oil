@@ -271,7 +271,7 @@ procedure TNaklForm.CarActionExecute(Sender: TObject);
 var
     CarF: TCarStoryForm;
 begin
-  CarF :=  TCarStoryForm.Create(Application);
+  CarF :=  TCarStoryForm.Create(g_New, g_New);
 
    if CarF.ShowModal = mrOk then
    try
