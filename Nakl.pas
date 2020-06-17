@@ -64,6 +64,7 @@ type
     procedure SetUNICUM_NUM(const Value: integer);
     procedure SetFieldsSG();
     procedure SetUID_Car(const Value: integer);
+    procedure  DeleteRow(StringGrid: TStringGrid; ARow: Integer);
     { Private declarations }
 
   protected
@@ -289,6 +290,20 @@ end;
 procedure TNaklForm.SetUID_Car(const Value: integer);
 begin
   FUID_Car := Value;
+end;
+
+procedure TNaklForm.DeleteRow(StringGrid: TStringGrid; ARow: Integer);
+var i, j: Integer;
+begin
+  with StringGrid do
+  begin
+    for i:=ARow+1 to RowCount-1 do
+      for j:=0 to ColCount-1 do
+        Cells[j, i-1]:=Cells[j, i];
+    for i:=1 to ColCount-1 do
+      Cells[i, RowCount-1]:='';
+    RowCount:=RowCount-1;
+  end;
 end;
 
 end.
