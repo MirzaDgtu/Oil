@@ -97,7 +97,8 @@ var
 
 implementation
 
-uses AppDM, Globals, Products, SConst, DB, CarStory, Math;
+uses AppDM, Globals, Products, SConst, DB, CarStory, Math, ProductModal,
+  ProductPrice;
 
 {$R *.dfm}
 
@@ -342,11 +343,28 @@ begin
 end;
 
 procedure TNaklForm.AddRowActionExecute(Sender: TObject);
+var
+    ProdF: TProductFrameModalForm;
 begin
+  ProdF := TProductFrameModalForm.Create(Application);
+
   try
-    ProductSG.RowCount := ProductSG.RowCount + 1;
+    if ProdF.ShowModal = mrOk then
+      Begin
+        ProductSG.RowCount := ProductSG.RowCount + 1;
+        with ProductSG do
+          Begin
+            Cells[1, ProductSG.RowCount-1] := AppData.Products.FieldByName('COD_ARTIC').AsString;
+            Cells[2, ProductSG.RowCount-1] := AppData.Products.FieldByName('NAME_ARTIC').AsString;
+            Cells[3, ProductSG.RowCount-1] := AppData.Products.FieldByName('CENA_ARTC').AsString;
+            Cells[4, ProductSG.RowCount-1] := ProdF.CountProd;
+            Cells[5, ProductSG.RowCount-1] := ProdF.SumProdP;
+            Cells[6, ProductSG.RowCount-1] := ProdF.PrimechProd;
+          end;
+      end;
   finally
     SetNumSG(ProductSG, ProductSG.RowCount);
+    FreeAndNil(ProdF);
   end;
 end;
 
@@ -360,7 +378,7 @@ begin
   if Self.ProductSG.RowCount > 1 then
     try
       for i := 1 to Self.ProductSG.RowCount Do
-        resSum := resSum + StrToFloat(Self.ProductSG.Cols[5]);
+        resSum := resSum + StrToFloat(Self.ProductSG.Cols[5].Text);
     finally
       Result := resSum;
     end;

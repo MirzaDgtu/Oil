@@ -18,7 +18,10 @@ uses
   InsuranceStory in 'InsuranceStory.pas' {IsnuranceStoryForm},
   Reestr in 'Reestr.pas' {ReestrForm},
   Login in '..\..\Common\Login.pas' {LoginDlg},
-  Nakl in 'Nakl.pas' {NaklForm};
+  Nakl in 'Nakl.pas' {NaklForm},
+  FrameProduct in 'FrameProduct.pas' {ProductFrame: TFrame},
+  ProductModal in 'ProductModal.pas' {ProductFrameModalForm},
+  ProductPrice in 'ProductPrice.pas' {ProductPriceForm};
 
 {$R *.res}
 
@@ -28,5 +31,6 @@ begin
   Application.Initialize;
   Application.CreateForm(TAppData, AppData);
   Application.CreateForm(TMainForm, MainForm);
+  Application.CreateForm(TProductPriceForm, ProductPriceForm);
   Application.Run;
 end.

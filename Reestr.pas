@@ -334,7 +334,7 @@ begin
                 AppData.Command.CommandText := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
                                                                         NaklF.SumDoc,
                                                                         NaklF.DriverCB.Text,
-                                                                        UID_Car,
+                                                                        NaklF.UID_Car,
                                                                         NaklF.TypeDocCB.Text,
                                                                         g_User,
                                                                         NaklF.PrimechMemo.Text]);

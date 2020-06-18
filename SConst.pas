@@ -23,6 +23,8 @@ resourcestring
 
   SAllCategories         = 'Товары всех групп';
 
+  SSumProd  = ' Количество [%s] * Цена [%s] = Сумма [%s]';
+
   // Строки для TStatusBar
   SAllRows = 'Всего записей: %d';
   SReserveRows = 'Резервных: %d';

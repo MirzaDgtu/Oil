@@ -137,7 +137,7 @@ object NaklForm: TNaklForm
       end
       object AddTypeDocBtn: TBitBtn
         Left = 200
-        Top = 83
+        Top = 85
         Width = 21
         Height = 22
         Action = DriverAction

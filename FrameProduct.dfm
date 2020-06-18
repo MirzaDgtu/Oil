@@ -1,34 +1,18 @@
-object ProductsForm: TProductsForm
-  Left = 24
-  Top = 276
-  BorderStyle = bsSingle
-  Caption = #1058#1086#1074#1072#1088#1099
-  ClientHeight = 644
-  ClientWidth = 1829
-  Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
-  Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
-  Font.Style = []
-  FormStyle = fsMDIChild
-  Menu = Menu
-  OldCreateOrder = False
-  Position = poScreenCenter
-  Visible = True
-  WindowState = wsMaximized
-  OnClose = FormClose
-  PixelsPerInch = 96
-  TextHeight = 13
+object ProductFrame: TProductFrame
+  Left = 0
+  Top = 0
+  Width = 1619
+  Height = 786
+  TabOrder = 0
   object PanelSplitter: TSplitter
     Left = 201
     Top = 32
-    Height = 593
+    Height = 735
   end
   object SB: TStatusBar
     Left = 0
-    Top = 625
-    Width = 1829
+    Top = 767
+    Width = 1619
     Height = 19
     Panels = <
       item
@@ -48,7 +32,7 @@ object ProductsForm: TProductsForm
     Left = 0
     Top = 32
     Width = 201
-    Height = 593
+    Height = 735
     Align = alLeft
     Caption = '&'#1043#1088#1091#1087#1087#1099' '#1090#1086#1074#1072#1088#1086#1074
     Font.Charset = DEFAULT_CHARSET
@@ -62,7 +46,7 @@ object ProductsForm: TProductsForm
       Left = 2
       Top = 15
       Width = 197
-      Height = 551
+      Height = 693
       Align = alClient
       Images = Images
       Indent = 19
@@ -74,7 +58,7 @@ object ProductsForm: TProductsForm
     end
     object GroupBottomTB: TToolBar
       Left = 2
-      Top = 566
+      Top = 708
       Width = 197
       Height = 25
       Align = alBottom
@@ -117,8 +101,8 @@ object ProductsForm: TProductsForm
   object ProductsGB: TGroupBox
     Left = 204
     Top = 32
-    Width = 1625
-    Height = 593
+    Width = 1415
+    Height = 735
     Align = alClient
     Caption = #1058#1086#1074#1072#1088#1099
     Font.Charset = DEFAULT_CHARSET
@@ -131,8 +115,8 @@ object ProductsForm: TProductsForm
     object ProductsGrid: TDBGrid
       Left = 2
       Top = 15
-      Width = 1621
-      Height = 532
+      Width = 1411
+      Height = 674
       Align = alClient
       DataSource = AppData.DS_Products
       PopupMenu = ProductsPM
@@ -324,8 +308,8 @@ object ProductsForm: TProductsForm
     end
     object ProductBottomTB: TToolBar
       Left = 2
-      Top = 566
-      Width = 1621
+      Top = 708
+      Width = 1411
       Height = 25
       Cursor = crHandPoint
       Align = alBottom
@@ -361,8 +345,8 @@ object ProductsForm: TProductsForm
     end
     object ProdSB: TStatusBar
       Left = 2
-      Top = 547
-      Width = 1621
+      Top = 689
+      Width = 1411
       Height = 19
       Panels = <
         item
@@ -382,7 +366,7 @@ object ProductsForm: TProductsForm
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1829
+    Width = 1619
     Height = 32
     Align = alTop
     BorderStyle = bsSingle
@@ -625,15 +609,16 @@ object ProductsForm: TProductsForm
     end
     object FontSettingGroupAction: TAction
       Category = 'Group'
+      Caption = 'FontSettingGroupAction'
       Hint = #1048#1079#1084#1077#1085#1080#1090#1100' '#1087#1072#1088#1072#1084#1077#1090#1088#1099' '#1096#1088#1080#1092#1090#1072
       ImageIndex = 13
       OnExecute = FontSettingGroupActionExecute
     end
     object FontProdAction: TAction
       Category = 'Products'
+      Caption = 'FontProdAction'
       Hint = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1096#1088#1080#1092#1090#1072' '#1090#1086#1074#1072#1088#1086#1074
       ImageIndex = 13
-      OnExecute = FontProdActionExecute
     end
   end
   object IL: TImageList
@@ -1745,7 +1730,7 @@ object ProductsForm: TProductsForm
       Action = RefreshGroupAction
     end
   end
-  object FD: TFontDialog
+  object ProdFD: TFontDialog
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -1896,5 +1881,14 @@ object ProductsForm: TProductsForm
       0000C00300000000C000C00300000000C000C00300000000C007C00300000000
       C007FFFF00000000C007FFFF0000000000000000000000000000000000000000
       000000000000}
+  end
+  object GroupFD: TFontDialog
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    Left = 288
+    Top = 264
   end
 end
