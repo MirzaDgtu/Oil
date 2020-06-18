@@ -354,12 +354,12 @@ begin
         ProductSG.RowCount := ProductSG.RowCount + 1;
         with ProductSG do
           Begin
-            Cells[1, ProductSG.RowCount-1] := AppData.Products.FieldByName('COD_ARTIC').AsString;
-            Cells[2, ProductSG.RowCount-1] := AppData.Products.FieldByName('NAME_ARTIC').AsString;
-            Cells[3, ProductSG.RowCount-1] := AppData.Products.FieldByName('CENA_ARTC').AsString;
-            Cells[4, ProductSG.RowCount-1] := ProdF.CountProd;
-            Cells[5, ProductSG.RowCount-1] := ProdF.SumProdP;
-            Cells[6, ProductSG.RowCount-1] := ProdF.PrimechProd;
+            Cells[1, RowCount-1] := AppData.Products.FieldByName('COD_ARTIC').AsString;
+            Cells[2, RowCount-1] := AppData.Products.FieldByName('NAME_ARTIC').AsString;
+            Cells[3, RowCount-1] := AppData.Products.FieldByName('CENA_ARTC').AsString;
+            Cells[4, RowCount-1] := ProdF.CountProd;
+            Cells[5, RowCount-1] := ProdF.SumProdP;
+            Cells[6, RowCount-1] := ProdF.PrimechProd;
           end;
       end;
   finally
