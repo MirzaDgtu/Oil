@@ -192,24 +192,23 @@ object ProductPriceForm: TProductPriceForm
       ReadOnly = True
       TabOrder = 2
     end
-    object CountEdit: TSpinEdit
-      Left = 154
-      Top = 47
-      Width = 74
-      Height = 22
-      MaxValue = 0
-      MinValue = 0
-      TabOrder = 3
-      Value = 0
-      OnChange = CountEditChange
-    end
     object EdnVUpakEdit: TEdit
       Left = 327
       Top = 47
       Width = 70
       Height = 21
       ReadOnly = True
+      TabOrder = 3
+    end
+    object CountEdit: TEdit
+      Left = 152
+      Top = 48
+      Width = 77
+      Height = 21
       TabOrder = 4
+      Text = '0'
+      OnChange = CountEditChange
+      OnKeyPress = CountEditKeyPress
     end
   end
   object BtnsPanel: TPanel
@@ -388,6 +387,7 @@ object ProductPriceForm: TProductPriceForm
       Height = 86
       Align = alClient
       TabOrder = 0
+      OnKeyPress = PrimechMemoKeyPress
     end
   end
 end

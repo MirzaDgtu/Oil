@@ -65,6 +65,8 @@ type
     procedure ProductSGKeyPress(Sender: TObject; var Key: Char);
     procedure ProductSGSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
+    procedure ProductSGSetEditText(Sender: TObject; ACol, ARow: Integer;
+      const Value: String);
   private
     FUNICUM_NUM: integer;
     FiTypeF: Shortint;
@@ -76,6 +78,7 @@ type
     procedure DeleteRow(StringGrid: TStringGrid; ARow: Integer);
     procedure SetNumSG(SG: TStringGrid; Value: integer);
     function GetSumDoc: Real;
+    function SetSumProd(CountProd, PriceProd: real): Variant;
     { Private declarations }
 
   protected
@@ -338,7 +341,8 @@ begin
   if Value > 0 then
     try
       for i := 1 to Value do
-        SG.Rows[i].Text := IntToStr(i);
+        //SG.Rows[i].Text := IntToStr(i);
+        SG.Cells[0,i] := IntToStr(i);
     except
       on Err: Exception do
         MessageDlg('Ошибка привоения нумерации!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
@@ -357,7 +361,7 @@ begin
       Begin
         ProdP := TProductPriceForm.Create(Application);
         with ProdP do
-          Begin
+          try
             NameEdit.Text := AppData.Products.FieldByName('NAME_ARTIC').AsString;
             ArticulEdit.Text := AppData.Products.FieldByName('COD_ARTIC').AsString;
             EdnIzmerEdit.Text := AppData.Products.FieldByName('EDIN_IZMER').AsString;
@@ -369,24 +373,25 @@ begin
 
             if ProdP.ShowModal = mrOk then
               Begin
-                with ProductSG do
+                with Self.ProductSG do
                   Begin
                     if Cells[1,1] <> EmptyStr then
                         RowCount := RowCount + 1;
                     Cells[1, RowCount-1] := AppData.Products.FieldByName('COD_ARTIC').AsString;
                     Cells[2, RowCount-1] := AppData.Products.FieldByName('NAME_ARTIC').AsString;
                     Cells[3, RowCount-1] := AppData.Products.FieldByName('CENA_ARTC').AsString;
-                    Cells[4, RowCount-1] := IntToStr(ProdP.CountEdit.Value);
+                    Cells[4, RowCount-1] := ProdP.CountEdit.Text;
                     Cells[5, RowCount-1] := ProdP.SumProd;
                     Cells[6, RowCount-1] := ProdP.PrimechMemo.Text;
                   end;
               end;
+          finally
+            FreeAndNil(ProdP);
           end;
       end;
   finally
     SetNumSG(ProductSG, ProductSG.RowCount);
     FreeAndNil(ProdF);
-    FreeAndNil(ProdP);
   end;
 end;
 
@@ -436,17 +441,33 @@ begin
           else
              Key := #0;
         end;
-      end;
+      end
+    else
+      if Col = 6 then
+        if Key in ['''', '"', '~', '`'] then
+           Key := #0;
   end;
 end;
 
 procedure TNaklForm.ProductSGSelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
-  if ACol = 4 then
+  if ACol in [4, 6] then
     ProductSG.Options := ProductSG.Options + [goEditing]
   else
     ProductSG.Options := ProductSG.Options - [goEditing];
+end;
+
+function TNaklForm.SetSumProd(CountProd, PriceProd: real): Variant;
+begin
+   Result := FloatToStr(CountProd * PriceProd);
+end;
+
+procedure TNaklForm.ProductSGSetEditText(Sender: TObject; ACol,
+  ARow: Integer; const Value: String);
+begin
+  if ACol = 4 then
+    ProductSG.Cells[5, ARow] := SetSumProd(StrToFloat(IfThen(ProductSG.Cells[4,ARow] = EmptyStr, '0', ProductSG.Cells[4, ARow])), StrToFloat(IfThen(ProductSG.Cells[3, ARow] = EmptyStr, '0', ProductSG.Cells[3, ARow])));
 end;
 
 end.

@@ -402,6 +402,7 @@ object NaklForm: TNaklForm
     TabOrder = 4
     OnKeyPress = ProductSGKeyPress
     OnSelectCell = ProductSGSelectCell
+    OnSetEditText = ProductSGSetEditText
   end
   object AL: TActionList
     Images = IL
@@ -418,6 +419,7 @@ object NaklForm: TNaklForm
       Caption = 'AddRowAction'
       Hint = #1044#1086#1073#1072#1074#1080#1090#1100' '#1089#1090#1088#1086#1082#1091
       ImageIndex = 0
+      ShortCut = 45
       OnExecute = AddRowActionExecute
     end
     object CancelNaklAction: TAction
@@ -431,6 +433,7 @@ object NaklForm: TNaklForm
       Caption = 'DelRowAction'
       Hint = #1059#1076#1072#1083#1080#1090#1100' '#1089#1090#1088#1086#1082#1091
       ImageIndex = 2
+      ShortCut = 16430
       OnExecute = DelRowActionExecute
     end
     object PrintAction: TAction
