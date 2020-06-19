@@ -38,36 +38,10 @@ uses AppDM, Globals, SConst, ProductPrice;
 
 procedure TProductFrameModalForm.ProductFrameProductsGridDblClick(
   Sender: TObject);
-var
-    ProdF: TProductPriceForm;
 begin
-  if (AppData.Products.Active) and
+if (AppData.Products.Active) and
      (not AppData.Products.IsEmpty) then
-    try
-      ProdF := TProductPriceForm.Create(Application);
-
-      with ProdF do
-        Begin
-           NameEdit.Text := AppData.Products.FieldByName('NAME_ARTIC').AsString;
-           ArticulEdit.Text := AppData.Products.FieldByName('COD_ARTIC').AsString;
-           EdnIzmerEdit.Text := AppData.Products.FieldByName('EDIN_IZMER').AsString;
-           TypeTovrEdit.Text := AppData.Products.FieldByName('TYPE_TOVR').AsString;
-           WeightEdit.Text := AppData.Products.FieldByName('VES_EDINIC').AsString;
-           PowerEdit.Text := AppData.Products.FieldByName('KON_KOLCH').AsString;
-           PriceEdit.Text := AppData.Products.FieldByName('CENA_ARTC').AsString;
-           EdnVUpakEdit.Text := AppData.Products.FieldByName('EDN_V_UPAK').AsString;
-
-          if ShowModal = mrok then
-            Begin
-              CountProd := IntToStr(CountEdit.Value);
-              SumProdP := SumProd;
-              PrimechProd := PrimechMemo.Text;
-              Self.ModalResult := mrOk;
-            end;
-        end;
-    finally
-      FreeAndNil(ProdF);
-    end;
+     Self.ModalResult := mrOk;
 end;
 
 procedure TProductFrameModalForm.ProductFrameAddProdTBIClick(

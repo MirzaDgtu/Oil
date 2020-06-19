@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls, ToolWin, Grids, ActnList,
-  ImgList;
+  ImgList, StrUtils, ComObj;
 
 type
   TNaklForm = class(TForm)
@@ -36,7 +36,6 @@ type
     SB: TStatusBar;
     BottomTB: TToolBar;
     HeaderTB: TToolBar;
-    ProductSG: TStringGrid;
     AL: TActionList;
     IL: TImageList;
     SaveNaklAction: TAction;
@@ -57,11 +56,15 @@ type
     Label4: TLabel;
     TypeDocCB: TComboBox;
     AddTypeDocBtn: TBitBtn;
+    ProductSG: TStringGrid;
     procedure DriverActionExecute(Sender: TObject);
     procedure CarActionExecute(Sender: TObject);
     procedure DelRowActionExecute(Sender: TObject);
     procedure AddRowActionExecute(Sender: TObject);
     procedure FontActionExecute(Sender: TObject);
+    procedure ProductSGKeyPress(Sender: TObject; var Key: Char);
+    procedure ProductSGSelectCell(Sender: TObject; ACol, ARow: Integer;
+      var CanSelect: Boolean);
   private
     FUNICUM_NUM: integer;
     FiTypeF: Shortint;
@@ -345,26 +348,45 @@ end;
 procedure TNaklForm.AddRowActionExecute(Sender: TObject);
 var
     ProdF: TProductFrameModalForm;
+    ProdP: TProductPriceForm;
 begin
   ProdF := TProductFrameModalForm.Create(Application);
 
   try
     if ProdF.ShowModal = mrOk then
       Begin
-        ProductSG.RowCount := ProductSG.RowCount + 1;
-        with ProductSG do
+        ProdP := TProductPriceForm.Create(Application);
+        with ProdP do
           Begin
-            Cells[1, RowCount-1] := AppData.Products.FieldByName('COD_ARTIC').AsString;
-            Cells[2, RowCount-1] := AppData.Products.FieldByName('NAME_ARTIC').AsString;
-            Cells[3, RowCount-1] := AppData.Products.FieldByName('CENA_ARTC').AsString;
-            Cells[4, RowCount-1] := ProdF.CountProd;
-            Cells[5, RowCount-1] := ProdF.SumProdP;
-            Cells[6, RowCount-1] := ProdF.PrimechProd;
+            NameEdit.Text := AppData.Products.FieldByName('NAME_ARTIC').AsString;
+            ArticulEdit.Text := AppData.Products.FieldByName('COD_ARTIC').AsString;
+            EdnIzmerEdit.Text := AppData.Products.FieldByName('EDIN_IZMER').AsString;
+            TypeTovrEdit.Text := AppData.Products.FieldByName('TYPE_TOVR').AsString;
+            WeightEdit.Text := AppData.Products.FieldByName('VES_EDINIC').AsString;
+            PowerEdit.Text := AppData.Products.FieldByName('KON_KOLCH').AsString;
+            PriceEdit.Text := AppData.Products.FieldByName('CENA_ARTC').AsString;
+            EdnVUpakEdit.Text := AppData.Products.FieldByName('EDN_V_UPAK').AsString;
+
+            if ProdP.ShowModal = mrOk then
+              Begin
+                with ProductSG do
+                  Begin
+                    if Cells[1,1] <> EmptyStr then
+                        RowCount := RowCount + 1;
+                    Cells[1, RowCount-1] := AppData.Products.FieldByName('COD_ARTIC').AsString;
+                    Cells[2, RowCount-1] := AppData.Products.FieldByName('NAME_ARTIC').AsString;
+                    Cells[3, RowCount-1] := AppData.Products.FieldByName('CENA_ARTC').AsString;
+                    Cells[4, RowCount-1] := IntToStr(ProdP.CountEdit.Value);
+                    Cells[5, RowCount-1] := ProdP.SumProd;
+                    Cells[6, RowCount-1] := ProdP.PrimechMemo.Text;
+                  end;
+              end;
           end;
       end;
   finally
     SetNumSG(ProductSG, ProductSG.RowCount);
     FreeAndNil(ProdF);
+    FreeAndNil(ProdP);
   end;
 end;
 
@@ -389,6 +411,42 @@ procedure TNaklForm.FontActionExecute(Sender: TObject);
 begin
     If FD.Execute then
       ProductSG.Font := FD.Font; 
+end;
+
+procedure TNaklForm.ProductSGKeyPress(Sender: TObject; var Key: Char);
+begin
+  with (Sender as TStringGrid) do
+  Begin
+    if (Col = 4) then
+      Begin
+        case Key of
+          '0'..'9', #8, #13, #26: ;
+          ',', '.': Begin
+                       if Key <> DecimalSeparator then
+                          Key := DecimalSeparator;
+
+                       if Pos(DecimalSeparator, Cells[Col, Row]) > 0 then Key := #0;
+                     end;
+          #27:       Begin
+                        keybd_event(VK_LCONTROL, 0, 0, 0);               // Нажатие клавищи Ctrl
+                        keybd_event(Ord('Z'), 0, 0, 0);                  // Нажатие клавищи Z
+                        keybd_event(Ord('Z'), 0, KEYEVENTF_KEYUP, 0);    // Отпускание клавищи Ctrl
+                        keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0); // Отпускание клавищи Z
+                     end;
+          else
+             Key := #0;
+        end;
+      end;
+  end;
+end;
+
+procedure TNaklForm.ProductSGSelectCell(Sender: TObject; ACol,
+  ARow: Integer; var CanSelect: Boolean);
+begin
+  if ACol = 4 then
+    ProductSG.Options := ProductSG.Options + [goEditing]
+  else
+    ProductSG.Options := ProductSG.Options - [goEditing];
 end;
 
 end.

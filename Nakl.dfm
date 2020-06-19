@@ -1,6 +1,6 @@
 object NaklForm: TNaklForm
-  Left = 464
-  Top = 303
+  Left = 631
+  Top = 292
   Width = 829
   Height = 498
   BorderStyle = bsSizeToolWin
@@ -392,8 +392,16 @@ object NaklForm: TNaklForm
     Width = 821
     Height = 257
     Align = alClient
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowMoving, goColMoving, goEditing]
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowMoving, goColMoving, goTabs]
+    ParentFont = False
     TabOrder = 4
+    OnKeyPress = ProductSGKeyPress
+    OnSelectCell = ProductSGSelectCell
   end
   object AL: TActionList
     Images = IL
