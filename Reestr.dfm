@@ -1,6 +1,6 @@
 object ReestrForm: TReestrForm
-  Left = 299
-  Top = 156
+  Left = 307
+  Top = 228
   Width = 1156
   Height = 675
   Caption = #1056#1077#1077#1089#1090#1088' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
@@ -108,6 +108,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 82
           Visible = True
         end
         item
@@ -136,6 +137,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 92
           Visible = True
         end
         item
@@ -163,6 +165,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 139
           Visible = True
         end
         item
@@ -177,6 +180,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 131
           Visible = True
         end
         item
@@ -191,7 +195,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 135
+          Width = 198
           Visible = True
         end
         item
@@ -249,6 +253,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 109
           Visible = True
         end
         item
@@ -291,6 +296,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 114
           Visible = True
         end
         item
@@ -305,7 +311,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 77
+          Width = 89
           Visible = True
         end
         item
@@ -320,7 +326,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 100
+          Width = 146
           Visible = True
         end
         item
@@ -335,6 +341,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end
         item
@@ -349,6 +356,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end>
     end
@@ -920,6 +928,7 @@ object ReestrForm: TReestrForm
         Top = 17
         Width = 95
         Height = 34
+        Alignment = taCenter
         AutoSize = False
         Caption = 'RangeLbl'
         Font.Charset = DEFAULT_CHARSET
@@ -1141,6 +1150,7 @@ object ReestrForm: TReestrForm
       Category = 'DlgForm'
       Caption = '&'#1055#1077#1088#1080#1086#1076
       ImageIndex = 3
+      ShortCut = 16466
       OnExecute = RangeActionExecute
     end
     object FindAction: TAction

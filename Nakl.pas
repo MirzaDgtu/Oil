@@ -10,7 +10,7 @@ uses
 type
   TNaklForm = class(TForm)
     ParametrsGB: TGroupBox;
-    Panel1: TPanel;
+    ParamPanel: TPanel;
     Label1: TLabel;
     NumDocEdit: TEdit;
     DateDocDP: TDateTimePicker;
@@ -75,6 +75,7 @@ type
     procedure SaveNaklActionExecute(Sender: TObject);
     procedure CancelNaklActionExecute(Sender: TObject);
   private
+    { Private declarations }
     FUNICUM_NUM: integer;
     FiTypeF: Shortint;
     FUID_Car: integer;
@@ -86,11 +87,11 @@ type
     procedure SetNumSG(SG: TStringGrid; Value: integer);
     function GetSumDoc: Real;
     function SetSumProd(CountProd, PriceProd: real): Variant;
-    { Private declarations }
 
   protected
     property UNICUM_NUM: integer read FUNICUM_NUM write SetUNICUM_NUM;
     property iTypeF: Shortint read FiTypeF write SetiTypeF;
+    
   public
     { Public declarations }
 
@@ -98,6 +99,9 @@ type
     procedure NewNaklSetting();
     procedure CorrNaklSetting(UNICUM_NUM: integer);
     procedure ViewNaklSetting(UNICUM_NUM: integer);
+    procedure setDrivers(Name: string);
+    procedure setTypeDocs(Name: string);
+
 
     constructor Create(Unucim_Num, TypeF: integer); overload;
    published
@@ -118,29 +122,54 @@ uses AppDM, Globals, Products, SConst, DB, CarStory, Math, ProductModal,
 { TNaklForm }
 
 procedure TNaklForm.CorrNaklSetting(UNICUM_NUM: integer);
+var
+  i: integer;
 begin
   Self.Caption := Self.Caption + ' -> [Корректировка документа]';
-  AppData.ProductDetail.Active := False;
-  AppData.ProductDetail.CommandText := Format(SSQLGetNaklDetail, [UNICUM_NUM,
+
+  AppData.Move.Active := False;
+  AppData.Move.CommandText := Format(SSQLGetNaklDetail, [UNICUM_NUM,
                                                                   g_New]);
-  AppData.ProductDetail.Active := True;
+  AppData.Move.Active := True;
 
   // Головная часть документа
   NumDocEdit.Text := AppData.Nakl.FieldbyName('NUM_DOC').AsString;
   DateDocDP.Date := AppData.Nakl.FieldByName('DATE_DOC').AsDateTime;
-  DriverCB.ItemIndex := DriverCB.Items.IndexOf(AppData.Nakl.FieldByName('Driver').AsString);
+  //DriverCB.ItemIndex := DriverCB.Items.IndexOf(AppData.Nakl.FieldByName('Driver').AsString);
   ModelEdit.Text := AppData.Nakl.FieldByName('MODEL').AsString;
   RegSymbolEdit.Text := AppData.Nakl.FieldByName('REG_SYMBOL').AsString;
-  TypeEdit.Text := AppData.Nakl.FieldByName('TYPE_DOC').AsString;
+  TypeEdit.Text := AppData.Nakl.FieldByName('TYPE_TC').AsString;
   ColorEdit.Text := AppData.Nakl.FieldByName('COLOR').AsString;
   YearEdit.Text := AppData.Nakl.FieldByName('MADEYEAR').AsString;
   PrimechMemo.Text := AppData.Nakl.FieldByName('PRIMECH').AsString;
 
-  // Тело документа
-  if (AppData.ProductDetail.Active) and
-     (not AppData.ProductDetail.IsEmpty) then
-      try
+  setDrivers(AppData.Nakl.FieldByName('Driver').AsString);
+  setTypeDocs(AppData.Nakl.FieldByName('TYPE_DOC').AsString);
 
+
+  // Тело документа
+  if (AppData.Move.Active) and
+     (not AppData.Move.IsEmpty) then
+      try
+        ProductSG.RowCount := AppData.Move.RecordCount + 1;
+        while not AppData.Move.Eof do
+          Begin
+            for i := 1 to ProductSG.RowCount - 1 do
+              Begin
+                with ProductSG do
+                  Begin
+                    Cells[1,i] := AppData.Move.FieldByName('NUM_PREDM').AsString;
+                    Cells[2,i] := AppData.Move.FieldByName('NAME_PREDM').AsString;
+                    Cells[3,i] := AppData.Move.FieldByName('SUM_PREDM').AsString;
+                    Cells[4,i] := AppData.Move.FieldByName('KOLC_PREDM').AsString;
+                    Cells[5,i] := AppData.Move.FieldByName('Res_Sum').AsString;
+                    Cells[6,i] := AppData.Move.FieldByName('Primech').AsString;
+                  end;
+                  AppData.Move.Next;
+              end;
+          end;
+
+          SetNumSG(ProductSG, ProductSG.RowCount);
       except
         on Err: Exception do
           MessageDlg('Ошибка получения информации о документе!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
@@ -157,8 +186,8 @@ begin
 
   case TypeF of
     g_New: NewNaklSetting();
-    g_Corr: CorrNaklSetting(AppData.fldUNICUM_NUM.AsInteger);
-    g_View: ViewNaklSetting(AppData.fldUNICUM_NUM.AsInteger);
+    g_Corr: CorrNaklSetting(Unucim_Num);
+    g_View: ViewNaklSetting(Unucim_Num);
   end;
 
   SetNumSG(Self.ProductSG, Self.ProductSG.RowCount);
@@ -168,6 +197,8 @@ procedure TNaklForm.NewNaklSetting;
 begin
   DateDocDP.Date := Now();
   Self.Caption := Self.Caption + ' -> [Новый документ]';
+  setTypeDocs(EmptyStr);
+  setDrivers(EmptyStr);
 end;
 
 procedure TNaklForm.SetFieldsSG;
@@ -216,41 +247,49 @@ begin
   // Ограничения на сохранение и какие либо изменения документа
   Self.Caption := Self.Caption + ' -> [Просмотр документа]';
 
-  AppData.ProductDetail.Active := False;
-  AppData.ProductDetail.CommandText := Format(SSQLGetNaklDetail, [UNICUM_NUM,
+  AppData.Move.Active := False;
+  AppData.Move.CommandText := Format(SSQLGetNaklDetail, [UNICUM_NUM,
                                                                   g_New]);
-  AppData.ProductDetail.Active := True;
+  AppData.Move.Active := True;
 
   // Головная часть документа
   NumDocEdit.Text := AppData.Nakl.FieldbyName('NUM_DOC').AsString;
   DateDocDP.Date := AppData.Nakl.FieldByName('DATE_DOC').AsDateTime;
-  DriverCB.ItemIndex := DriverCB.Items.IndexOf(AppData.Nakl.FieldByName('Driver').AsString);
+  //DriverCB.ItemIndex := DriverCB.Items.IndexOf(AppData.Nakl.FieldByName('Driver').AsString);
   ModelEdit.Text := AppData.Nakl.FieldByName('MODEL').AsString;
   RegSymbolEdit.Text := AppData.Nakl.FieldByName('REG_SYMBOL').AsString;
-  TypeEdit.Text := AppData.Nakl.FieldByName('TYPE_DOC').AsString;
+  TypeEdit.Text := AppData.Nakl.FieldByName('TYPE_TC').AsString;
   ColorEdit.Text := AppData.Nakl.FieldByName('COLOR').AsString;
   YearEdit.Text := AppData.Nakl.FieldByName('MADEYEAR').AsString;
   PrimechMemo.Text := AppData.Nakl.FieldByName('PRIMECH').AsString;
 
+  setDrivers(AppData.Nakl.FieldByName('Driver').AsString);
+  setTypeDocs(AppData.Nakl.FieldByName('TYPE_DOC').AsString);
+
+
   // Тело документа
-  if (AppData.ProductDetail.Active) and
-     (not AppData.ProductDetail.IsEmpty) then
+  if (AppData.Move.Active) and
+     (not AppData.Move.IsEmpty) then
       try
+        ProductSG.RowCount := AppData.Move.RecordCount + 1;
         while not AppData.Move.Eof do
           Begin
-            with ProductSG do
+            for i := 1 to ProductSG.RowCount - 1 do
               Begin
-                Cols[0].Text := '1';
-                Cols[1].Text := AppData.Move.FieldByName('COD_ARTIC').AsString;
-                Cols[2].Text := AppData.Move.FieldByName('NAME_ARTIC').AsString;
-                Cols[3].Text := AppData.Move.FieldByName('SUM_PREDM').AsString;
-                Cols[4].Text := AppData.Move.FieldByName('KOLC_PREDM').AsString;
-                Cols[5].Text := AppData.Move.FieldByName('Res_Sum').AsString;
-                Cols[6].Text := AppData.Move.FieldByName('Primech').AsString;
+                with ProductSG do
+                  Begin
+                    Cells[1,i] := AppData.Move.FieldByName('NUM_PREDM').AsString;
+                    Cells[2,i] := AppData.Move.FieldByName('NAME_PREDM').AsString;
+                    Cells[3,i] := AppData.Move.FieldByName('SUM_PREDM').AsString;
+                    Cells[4,i] := AppData.Move.FieldByName('KOLC_PREDM').AsString;
+                    Cells[5,i] := AppData.Move.FieldByName('Res_Sum').AsString;
+                    Cells[6,i] := AppData.Move.FieldByName('Primech').AsString;
+                  end;
+                  AppData.Move.Next;
               end;
-
-            AppData.Move.Next;
           end;
+
+          SetNumSG(ProductSG, ProductSG.RowCount);
       except
         on Err: Exception do
           MessageDlg('Ошибка получения информации о документе!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
@@ -263,10 +302,12 @@ begin
   ProductSG.Options := ProductSG.Options - [goEditing];
   DateDocDP.Enabled := False;
   DriverCB.Enabled := False;
+  TypeDocCB.Enabled := False;
 
   // Кнопки
   SaveTBI.Enabled := False;
   AddDriverBtn.Enabled := False;
+  AddTypeDocBtn.Enabled := False;
   AddRowTBI.Enabled := False;
   DeleteTBI.Enabled := False;
   CarBtn.Enabled := False;
@@ -410,12 +451,11 @@ begin
 
   if Self.ProductSG.RowCount > 1 then
     try
-      for i := 1 to Self.ProductSG.RowCount Do
+       for i := 1 to Self.ProductSG.RowCount - 1 Do
           resSum := resSum + StrToFloat(Self.ProductSG.Cells[5,i]);
     finally
       Result := resSum;
-    end;
-
+    end;  
 end;
 
 procedure TNaklForm.FontActionExecute(Sender: TObject);
@@ -496,6 +536,56 @@ end;
 procedure TNaklForm.CancelNaklActionExecute(Sender: TObject);
 begin
   Self.ModalResult := mrCancel;
+end;
+
+procedure TNaklForm.setDrivers(Name: string);
+begin
+  AppData.Drivers.Active := False;
+  AppData.Drivers.CommandText := SSQLGetDrivers;
+  AppData.Drivers.Active := True;
+
+  if not AppData.Drivers.IsEmpty then
+    try
+       DriverCB.Items.BeginUpdate;
+       DriverCB.Items.Clear;
+
+       while not AppData.Drivers.Eof do
+        Begin
+          if AppData.Drivers.FieldByName('Driver').AsString <> EmptyStr then
+            DriverCB.Items.Add(AppData.Drivers.FieldByName('Driver').AsString);
+          AppData.Drivers.Next;
+        end;
+    finally
+       DriverCB.Items.EndUpdate;
+       AppData.Drivers.Active := False;
+       if Length(Trim(Name)) > 0 then
+          DriverCB.ItemIndex := DriverCB.Items.IndexOf(Name);
+    end;
+end;
+
+procedure TNaklForm.setTypeDocs(Name: string);
+begin
+    AppData.TypeDocs.Active := False;
+    AppData.TypeDocs.CommandText := SSQLGetTypeDocs;
+    AppData.TypeDocs.Active := True;
+
+    if not AppData.TypeDocs.IsEmpty then
+      try
+        TypeDocCB.Items.BeginUpdate;
+        TypeDocCB.Items.Clear;
+
+        while not AppData.TypeDocs.Eof do
+          Begin
+            if AppData.TypeDocs.FieldByName('TYPE_DOC').AsString <> EmptyStr then
+              TypeDocCB.Items.Add(AppData.TypeDocs.FieldByName('TYPE_DOC').AsString);
+            AppData.TypeDocs.Next;
+          end;
+      finally
+        TypeDocCB.Items.EndUpdate;
+        AppData.TypeDocs.Active := False;
+        if Length(Trim(Name)) > 0 then
+          TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf(AppData.Nakl.FieldByName('TYPE_DOC').AsString);
+      end;
 end;
 
 end.

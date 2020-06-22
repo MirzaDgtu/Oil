@@ -402,6 +402,14 @@ object AppData: TAppData
     object NaklMADEYEAR: TIntegerField
       FieldName = 'MADEYEAR'
     end
+    object NaklTYPE_TC: TStringField
+      FieldName = 'TYPE_TC'
+      Size = 30
+    end
+    object NaklDRIVER: TStringField
+      FieldName = 'DRIVER'
+      Size = 40
+    end
   end
   object Move: TADODataSet
     Connection = Connection
@@ -830,5 +838,30 @@ object AppData: TAppData
     Parameters = <>
     Left = 48
     Top = 120
+    object CommandQUNICUM_NUM: TIntegerField
+      FieldName = 'UNICUM_NUM'
+    end
+    object CommandQNUM_DOC: TIntegerField
+      FieldName = 'NUM_DOC'
+    end
+  end
+  object Drivers: TADODataSet
+    Connection = Connection
+    Parameters = <>
+    Left = 224
+    Top = 336
+    object DriversDriver: TStringField
+      FieldName = 'Driver'
+      Size = 40
+    end
+  end
+  object TypeDocs: TADODataSet
+    Connection = Connection
+    Parameters = <>
+    Left = 296
+    Top = 328
+    object TypeDocsTYPE_DOC: TStringField
+      FieldName = 'TYPE_DOC'
+    end
   end
 end

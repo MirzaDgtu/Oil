@@ -331,6 +331,8 @@ var
     UNICUM_NUM, NUM_DOC, i: integer;
 begin
     NaklF := TNaklForm.Create(g_New, g_New);
+    UNICUM_NUM := g_New;
+    NUM_DOC := g_New;
 
     try
        if NaklF.ShowModal = mrOk then
@@ -338,28 +340,28 @@ begin
             try
                 AppData.CommandQ.Active := False;
                 AppData.CommandQ.SQL.Text  := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
-                                                                        NaklF.SumDoc,
-                                                                        NaklF.DriverCB.Text,
-                                                                        NaklF.UID_Car,
-                                                                        NaklF.TypeDocCB.Text,
-                                                                        g_User,
-                                                                        NaklF.PrimechMemo.Text]);
-                ShowMessage(AppData.CommandQ.SQL.Text);
+                                                                       FloatToStr(NaklF.SumDoc),
+                                                                       NaklF.DriverCB.Text,
+                                                                       NaklF.UID_Car,
+                                                                       NaklF.TypeDocCB.Text,
+                                                                       g_User,
+                                                                       NaklF.PrimechMemo.Text]);
+               // ShowMessage(AppData.CommandQ.SQL.Text);
                 AppData.CommandQ.Active := True;
                 UNICUM_NUM := AppData.CommandQ.FieldByName('UNICUM_NUM').AsInteger;
                 NUM_DOC := AppData.CommandQ.FieldByName('NUM_DOC').AsInteger;
 
-                ShowMessage(IntToStr(UNICUM_NUM) + IntToStr(NUM_DOC));
-                //AppData.CommandQ.ExecSQL();
             except
               on Err: Exception do
                 MessageDlg('Ошибка сохранения головной части документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
             end;
 
-            for i := 1 to NaklF.ProductSG.RowCount do
+            for i := 1 to NaklF.ProductSG.RowCount-1 do
             try
                 AppData.Command.CommandText := Format(SSQLInsNaklMove, [UNICUM_NUM,
                                                                         NUM_DOC,
+                                                                        3,
+                                                                        1,
                                                                         StrToInt(NaklF.ProductSG.Cells[1,i]),
                                                                         NaklF.ProductSG.Cells[2,i],
                                                                         NaklF.ProductSG.Cells[4,i],
@@ -367,11 +369,11 @@ begin
                                                                         g_User,
                                                                         NaklF.TypeDocCB.Text,
                                                                         NaklF.ProductSG.Cells[6,i]]);
-                ShowMessage(AppData.Command.CommandText);
+                //ShowMessage(AppData.Command.CommandText);
                 AppData.Command.Execute;
             except
                on Err: Exception do
-                MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+                MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);  
             end;
          end;
     finally
@@ -383,30 +385,38 @@ end;
 procedure TReestrForm.ViewNaklActionExecute(Sender: TObject);
 var
    NaklF: TNaklForm;
+   un_Num: integer;
 begin
   if (AppData.Nakl.Active) and
      (not AppData.Nakl.IsEmpty) then
    try
-     NaklF := TNaklForm.Create(g_View, AppData.fldUNICUM_NUM.AsInteger);
+     NaklF := TNaklForm.Create(AppData.fldUNICUM_NUM.AsInteger, g_View);
+     un_Num := AppData.fldUNICUM_NUM.AsInteger;
 
      NaklF.ShowModal();
    finally
       FreeAndNil(NaklF);
+      RefreshNaklActionExecute(Self);
+      AppData.Nakl.Locate('UNICUM_NUM', un_Num, [loCaseInsensitive, loPartialKey]);
    end;
 end;
 
 procedure TReestrForm.CorrNaklActionExecute(Sender: TObject);
 var
    NaklF: TNaklForm;
+   un_Num: integer;
 begin
   if (AppData.Nakl.Active) and
      (not AppData.Nakl.IsEmpty) then
    try
-     NaklF := TNaklForm.Create(g_Corr, AppData.fldUNICUM_NUM.AsInteger);
+     NaklF := TNaklForm.Create(AppData.fldUNICUM_NUM.AsInteger, g_Corr);
+     un_Num := AppData.fldUNICUM_NUM.AsInteger;
 
      NaklF.ShowModal();
    finally
       FreeAndNil(NaklF);
+      RefreshNaklActionExecute(Self);
+      AppData.Nakl.Locate('UNICUM_NUM', un_Num, [loCaseInsensitive, loPartialKey]);
    end;
 end;
 

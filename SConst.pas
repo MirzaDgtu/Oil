@@ -59,17 +59,21 @@ resourcestring
 // Модуль накладных
   SSQLGetNakl = 'EXEC REPORTS..O_GetNakl ''%s'', ''%s'', %d';       // Получение списка накладных (BegDate, EndDate, Archive - 0,1)
   SSQLGetNaklDetail = 'EXEC REPORTS..O_GetNaklDetail %d, %d';       // Получение детализации накладной (Unicum_Num, Archive - 0,1)
-  SSQLInsNaklHead = 'EXEC REPORTSO_InsNaklHead ''%s'', ''%s'', ''%s'', %d, ''%s'', ''%s'', ''%s''';  // Создание новой накладной (Головная часть)
+  SSQLInsNaklHead = 'EXEC REPORTS..O_InsNaklHead ''%s'', ''%s'', ''%s'', %d, ''%s'', ''%s'', ''%s''';  // Создание новой накладной (Головная часть)
                                      // (DATE_DOC, SUM_DOC, DRIVER, Car_UID, Type_Doc, Family, Primech)
-  SSQLInsNaklMove = 'EXEC REPORTS..O_InsNaklMove %d, %d, %d, %d, ''%s'', ''%s'', ''%s'', ''%s'', ''%s''';   // Создание новой накланой (Тело накладной)
+  SSQLInsNaklMove = 'EXEC REPORTS..O_InsNaklMove %d, %d, %d, ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s''';   // Создание новой накланой (Тело накладной)
                                      // (Unicum_Num, Num_Doc, Num_Predm, Name_Predm, KOLC_Predm, Sum_Predm, Family, Type_Doc, Primech)
   SSQLTrancferNakl = 'EXEC REPORTS..O_TrancferNakl %d, %d, ''%s''';   // Отметка накладной (Unicum_Num, Otmetka, Family)
   SSQLDelNakl = 'EXEC REPORTS..O_DelNakl %d';                         // Удаление накладной
 
+// Получение информации в справочники документа
+  SSQLGetDrivers = 'EXEC REPORTS..O_GetDrivers';    // Получение списка водителей
+  SSQLGetTypeDocs = 'EXEC REPORTS..O_GetTypeDocs';  // Получение списка типов документа
 
 // Модуль товаров
   SSQLGetProducts = 'EXEC REPORTS..O_GetProducts ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s''';                      // Получение списка ГСМ товаров
   SSQLGetProdCategories = 'EXEC REPORTS..O_GetProdCategories';                                                     // Получение списка категорий
+
   // Получение групп
   SSQLGetGroup1 = 'EXEC REPORTS..O_GetGroup1';
   SSQLGetGroup2 = 'EXEC REPORTS..O_GetGroup2';

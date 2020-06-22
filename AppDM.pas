@@ -226,6 +226,14 @@ type
     Report: TFlexCelReport;
     NaklMADEYEAR: TIntegerField;
     CommandQ: TADOQuery;
+    CommandQUNICUM_NUM: TIntegerField;
+    CommandQNUM_DOC: TIntegerField;
+    Drivers: TADODataSet;
+    TypeDocs: TADODataSet;
+    DriversDriver: TStringField;
+    TypeDocsTYPE_DOC: TStringField;
+    NaklTYPE_TC: TStringField;
+    NaklDRIVER: TStringField;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);

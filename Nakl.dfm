@@ -29,7 +29,7 @@ object NaklForm: TNaklForm
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
-    object Panel1: TPanel
+    object ParamPanel: TPanel
       Left = 2
       Top = 15
       Width = 229
@@ -139,7 +139,7 @@ object NaklForm: TNaklForm
       end
       object AddTypeDocBtn: TBitBtn
         Left = 200
-        Top = 85
+        Top = 84
         Width = 21
         Height = 22
         Action = TypeDocAction

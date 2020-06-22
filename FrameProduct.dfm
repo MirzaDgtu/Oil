@@ -428,16 +428,18 @@ object ProductFrame: TProductFrame
       Left = 281
       Top = 3
       Width = 141
-      Height = 21
+      Height = 19
+      Style = csOwnerDrawFixed
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ItemHeight = 13
+      ItemIndex = 0
       ParentFont = False
       TabOrder = 1
-      Text = #1040#1088#1090#1080#1082#1091#1083#1100#10
+      Text = #1040#1088#1090#1080#1082#1091#1083#10
       Items.Strings = (
         #1040#1088#1090#1080#1082#1091#1083#10
         ''
@@ -557,6 +559,7 @@ object ProductFrame: TProductFrame
       Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
       Hint = #1044#1086#1073#1072#1074#1083#1077#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1090#1086#1074#1072#1088#1072
       ImageIndex = 17
+      ShortCut = 16429
       OnExecute = AddProdActionExecute
     end
     object CorrProdAction: TAction
@@ -564,19 +567,26 @@ object ProductFrame: TProductFrame
       Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
       Hint = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1090#1086#1074#1072#1088#1072
       ImageIndex = 19
+      ShortCut = 115
       OnExecute = CorrProdActionExecute
+    end
+    object CorrCategoriesProdAction: TAction
+      Category = 'Group'
+      Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100' '#1082#1072#1090#1077#1088#1080#1080
     end
     object DelProdAction: TAction
       Category = 'Products'
       Caption = '&'#1059#1076#1072#1083#1080#1090#1100
       Hint = #1059#1076#1072#1083#1077#1085#1080#1077' '#1090#1086#1074#1072#1088#1072
       ImageIndex = 10
+      ShortCut = 16430
       OnExecute = DelProdActionExecute
     end
     object RefreshProdAction: TAction
       Category = 'Products'
       Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
       ImageIndex = 20
+      ShortCut = 116
       OnExecute = RefreshProdActionExecute
     end
     object FindAction: TAction
@@ -599,12 +609,8 @@ object ProductFrame: TProductFrame
       ImageIndex = 25
       OnExecute = CloseAllTreeActionExecute
     end
-    object CorrCategoriesProdAction: TAction
-      Category = 'Products'
-      Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100' '#1082#1072#1090#1077#1088#1080#1080
-    end
     object CorrPriceProdAction: TAction
-      Category = 'Products'
+      Category = 'Group'
       Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100' '#1094#1077#1085#1091
     end
     object FontSettingGroupAction: TAction
@@ -619,6 +625,7 @@ object ProductFrame: TProductFrame
       Caption = 'FontProdAction'
       Hint = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1096#1088#1080#1092#1090#1072' '#1090#1086#1074#1072#1088#1086#1074
       ImageIndex = 13
+      ShortCut = 16457
     end
   end
   object IL: TImageList
