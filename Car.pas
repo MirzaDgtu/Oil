@@ -395,6 +395,8 @@ begin
   finally
     FreeAndNil(rangeF);
     RefreshActionExecute(Self);
+    AppData.gBegD := BegD;
+    AppData.gEndD := EndD;
   end;
 end;
 
@@ -462,6 +464,10 @@ begin
   inherited;
   BegD := Now();
   EndD := BegD + 1;
+
+  AppData.gBegD := BegD;
+  AppData.gEndD := EndD;
+
   RefreshActionExecute(Self);
 end;
 

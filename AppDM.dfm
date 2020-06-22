@@ -815,7 +815,7 @@ object AppData: TAppData
   end
   object Adapter: TOLEAdapter
     SaveFormatExtended = []
-    Left = 624
+    Left = 616
     Top = 121
   end
   object Report: TFlexCelReport
@@ -824,5 +824,11 @@ object AppData: TAppData
     DataModule = Owner
     Left = 560
     Top = 121
+  end
+  object CommandQ: TADOQuery
+    Connection = Connection
+    Parameters = <>
+    Left = 48
+    Top = 120
   end
 end

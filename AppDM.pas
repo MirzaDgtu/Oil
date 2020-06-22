@@ -225,16 +225,25 @@ type
     Adapter: TOLEAdapter;
     Report: TFlexCelReport;
     NaklMADEYEAR: TIntegerField;
+    CommandQ: TADOQuery;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
     procedure MoveBeforeOpen(DataSet: TDataSet);
     procedure NaklAfterScroll(DataSet: TDataSet);
   private
+    FgBegD: variant;
+    FgEndD: variant;
     procedure QuitApplication(const Msg: string);
+    procedure SetgBegD(const Value: variant);
+    procedure SetgEndD(const Value: variant);
   public
     class procedure SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
     constructor Create(AOwner: TComponent); override;
+
+  published
+    property gBegD: variant read FgBegD write SetgBegD;
+    property gEndD: variant read FgEndD write SetgEndD;
   end;
 
 var
@@ -349,6 +358,16 @@ procedure TAppData.NaklAfterScroll(DataSet: TDataSet);
 begin
   Move.Active := False;
   Move.Active := True;
+end;
+
+procedure TAppData.SetgBegD(const Value: variant);
+begin
+  FgBegD := Value;
+end;
+
+procedure TAppData.SetgEndD(const Value: variant);
+begin
+  FgEndD := Value;
 end;
 
 end.

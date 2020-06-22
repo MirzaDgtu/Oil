@@ -932,7 +932,7 @@ object ReestrForm: TReestrForm
       end
       object RangeBtn: TBitBtn
         Left = 16
-        Top = 53
+        Top = 52
         Width = 75
         Height = 22
         Action = RangeAction

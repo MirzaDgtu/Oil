@@ -408,6 +408,9 @@ begin
     finally
       FreeAndNil(RangeF);
       RefreshActionExecute(Self);
+      
+      AppData.gBegD := BegDate;
+      AppData.gEndD := EndDate;
     end;
 end;
 
@@ -463,7 +466,10 @@ constructor TInsuranceForm.Create(AOwner: TComponent);
 begin
   inherited;
   BegDate := Now();
-  EndDate := BegDate + 1;  
+  EndDate := BegDate + 1;
+
+  AppData.gBegD := BegDate;
+  AppData.gEndD := EndDate;
 end;
 
 end.

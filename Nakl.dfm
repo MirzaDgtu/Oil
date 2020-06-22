@@ -97,6 +97,8 @@ object NaklForm: TNaklForm
         Width = 21
         Height = 22
         Action = DriverAction
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 3
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
@@ -140,7 +142,9 @@ object NaklForm: TNaklForm
         Top = 85
         Width = 21
         Height = 22
-        Action = DriverAction
+        Action = TypeDocAction
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 5
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
@@ -397,8 +401,9 @@ object NaklForm: TNaklForm
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowMoving, goColMoving, goTabs]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goRowSizing, goColSizing, goRowMoving, goTabs]
     ParentFont = False
+    PopupMenu = MovePop
     TabOrder = 4
     OnKeyPress = ProductSGKeyPress
     OnSelectCell = ProductSGSelectCell
@@ -413,6 +418,7 @@ object NaklForm: TNaklForm
       Caption = 'SaveNaklAction'
       Hint = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1076#1086#1082#1091#1084#1077#1085#1090
       ImageIndex = 8
+      OnExecute = SaveNaklActionExecute
     end
     object AddRowAction: TAction
       Category = 'GS'
@@ -427,6 +433,7 @@ object NaklForm: TNaklForm
       Caption = 'CancelNaklAction'
       Hint = #1047#1072#1082#1088#1099#1090#1100' '#1076#1086#1082#1091#1084#1077#1085#1090
       ImageIndex = 1
+      OnExecute = CancelNaklActionExecute
     end
     object DelRowAction: TAction
       Category = 'GS'
@@ -459,6 +466,12 @@ object NaklForm: TNaklForm
       Hint = #1042#1099#1073#1088#1072#1090#1100' '#1072#1074#1090#1086#1084#1086#1073#1080#1083#1100
       ImageIndex = 9
       OnExecute = CarActionExecute
+    end
+    object TypeDocAction: TAction
+      Category = 'Header'
+      Hint = #1044#1086#1073#1072#1074#1080#1090#1100' '#1090#1080#1087' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+      ImageIndex = 5
+      OnExecute = TypeDocActionExecute
     end
   end
   object IL: TImageList
@@ -1008,5 +1021,18 @@ object NaklForm: TNaklForm
     Font.Style = []
     Left = 480
     Top = 232
+  end
+  object MovePop: TPopupMenu
+    Images = IL
+    Left = 400
+    Top = 288
+    object AddRowAction1: TMenuItem
+      Action = AddRowAction
+      Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
+    end
+    object DelRowAction1: TMenuItem
+      Action = DelRowAction
+      Caption = '&'#1059#1076#1072#1083#1080#1090#1100
+    end
   end
 end

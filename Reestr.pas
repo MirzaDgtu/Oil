@@ -162,6 +162,8 @@ begin
   finally
     FreeAndNil(RangeF);
     RefreshNaklActionExecute(Self);
+    AppData.gBegD := BegD;
+    AppData.gEndD := EndD;
   end;
 end;
 
@@ -170,6 +172,8 @@ begin
   inherited;
   BegD := Now();
   EndD := BegD + 1;
+  AppData.gBegD := BegD;
+  AppData.gEndD := EndD;
   RefreshNaklActionExecute(Self);
 end;
 
@@ -324,6 +328,7 @@ end;
 procedure TReestrForm.NewNaklActionExecute(Sender: TObject);
 var
     NaklF: TNaklForm;
+    UNICUM_NUM, NUM_DOC, i: integer;
 begin
     NaklF := TNaklForm.Create(g_New, g_New);
 
@@ -331,21 +336,38 @@ begin
        if NaklF.ShowModal = mrOk then
          Begin
             try
-                AppData.Command.CommandText := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
+                AppData.CommandQ.Active := False;
+                AppData.CommandQ.SQL.Text  := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
                                                                         NaklF.SumDoc,
                                                                         NaklF.DriverCB.Text,
                                                                         NaklF.UID_Car,
                                                                         NaklF.TypeDocCB.Text,
                                                                         g_User,
                                                                         NaklF.PrimechMemo.Text]);
-                AppData.Command.Execute;
+                ShowMessage(AppData.CommandQ.SQL.Text);
+                AppData.CommandQ.Active := True;
+                UNICUM_NUM := AppData.CommandQ.FieldByName('UNICUM_NUM').AsInteger;
+                NUM_DOC := AppData.CommandQ.FieldByName('NUM_DOC').AsInteger;
+
+                ShowMessage(IntToStr(UNICUM_NUM) + IntToStr(NUM_DOC));
+                //AppData.CommandQ.ExecSQL();
             except
               on Err: Exception do
                 MessageDlg('Ошибка сохранения головной части документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
             end;
 
+            for i := 1 to NaklF.ProductSG.RowCount do
             try
-                AppData.Command.CommandText := Format(SSQLInsNaklMove, []);
+                AppData.Command.CommandText := Format(SSQLInsNaklMove, [UNICUM_NUM,
+                                                                        NUM_DOC,
+                                                                        StrToInt(NaklF.ProductSG.Cells[1,i]),
+                                                                        NaklF.ProductSG.Cells[2,i],
+                                                                        NaklF.ProductSG.Cells[4,i],
+                                                                        NaklF.ProductSG.Cells[5,i],
+                                                                        g_User,
+                                                                        NaklF.TypeDocCB.Text,
+                                                                        NaklF.ProductSG.Cells[6,i]]);
+                ShowMessage(AppData.Command.CommandText);
                 AppData.Command.Execute;
             except
                on Err: Exception do
@@ -354,6 +376,7 @@ begin
          end;
     finally
       FreeAndNil(NaklF);
+      RefreshNaklActionExecute(Self);
     end;
 end;
 

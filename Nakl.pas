@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls, ToolWin, Grids, ActnList,
-  ImgList, StrUtils, ComObj;
+  ImgList, StrUtils, ComObj, Menus;
 
 type
   TNaklForm = class(TForm)
@@ -57,6 +57,10 @@ type
     TypeDocCB: TComboBox;
     AddTypeDocBtn: TBitBtn;
     ProductSG: TStringGrid;
+    MovePop: TPopupMenu;
+    AddRowAction1: TMenuItem;
+    DelRowAction1: TMenuItem;
+    TypeDocAction: TAction;
     procedure DriverActionExecute(Sender: TObject);
     procedure CarActionExecute(Sender: TObject);
     procedure DelRowActionExecute(Sender: TObject);
@@ -67,6 +71,9 @@ type
       var CanSelect: Boolean);
     procedure ProductSGSetEditText(Sender: TObject; ACol, ARow: Integer;
       const Value: String);
+    procedure TypeDocActionExecute(Sender: TObject);
+    procedure SaveNaklActionExecute(Sender: TObject);
+    procedure CancelNaklActionExecute(Sender: TObject);
   private
     FUNICUM_NUM: integer;
     FiTypeF: Shortint;
@@ -341,7 +348,6 @@ begin
   if Value > 0 then
     try
       for i := 1 to Value do
-        //SG.Rows[i].Text := IntToStr(i);
         SG.Cells[0,i] := IntToStr(i);
     except
       on Err: Exception do
@@ -405,7 +411,7 @@ begin
   if Self.ProductSG.RowCount > 1 then
     try
       for i := 1 to Self.ProductSG.RowCount Do
-        resSum := resSum + StrToFloat(Self.ProductSG.Cols[5].Text);
+          resSum := resSum + StrToFloat(Self.ProductSG.Cells[5,i]);
     finally
       Result := resSum;
     end;
@@ -468,6 +474,28 @@ procedure TNaklForm.ProductSGSetEditText(Sender: TObject; ACol,
 begin
   if ACol = 4 then
     ProductSG.Cells[5, ARow] := SetSumProd(StrToFloat(IfThen(ProductSG.Cells[4,ARow] = EmptyStr, '0', ProductSG.Cells[4, ARow])), StrToFloat(IfThen(ProductSG.Cells[3, ARow] = EmptyStr, '0', ProductSG.Cells[3, ARow])));
+end;
+
+procedure TNaklForm.TypeDocActionExecute(Sender: TObject);
+var
+    Str: string;
+begin
+  if InputQuery('Тип документа', 'Наименование', Str) then
+  begin
+    Str := Trim(Str);
+    TypeDocCB.Items.Add(Str);
+    TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf(Str);
+  end;
+end;
+
+procedure TNaklForm.SaveNaklActionExecute(Sender: TObject);
+begin
+  Self.ModalResult := mrOk;
+end;
+
+procedure TNaklForm.CancelNaklActionExecute(Sender: TObject);
+begin
+  Self.ModalResult := mrCancel;
 end;
 
 end.

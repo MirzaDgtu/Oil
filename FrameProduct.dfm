@@ -2,16 +2,16 @@ object ProductFrame: TProductFrame
   Left = 0
   Top = 0
   Width = 1619
-  Height = 786
+  Height = 774
   TabOrder = 0
   object PanelSplitter: TSplitter
     Left = 201
     Top = 32
-    Height = 735
+    Height = 723
   end
   object SB: TStatusBar
     Left = 0
-    Top = 767
+    Top = 755
     Width = 1619
     Height = 19
     Panels = <
@@ -32,7 +32,7 @@ object ProductFrame: TProductFrame
     Left = 0
     Top = 32
     Width = 201
-    Height = 735
+    Height = 723
     Align = alLeft
     Caption = '&'#1043#1088#1091#1087#1087#1099' '#1090#1086#1074#1072#1088#1086#1074
     Font.Charset = DEFAULT_CHARSET
@@ -46,7 +46,7 @@ object ProductFrame: TProductFrame
       Left = 2
       Top = 15
       Width = 197
-      Height = 693
+      Height = 681
       Align = alClient
       Images = Images
       Indent = 19
@@ -58,7 +58,7 @@ object ProductFrame: TProductFrame
     end
     object GroupBottomTB: TToolBar
       Left = 2
-      Top = 708
+      Top = 696
       Width = 197
       Height = 25
       Align = alBottom
@@ -102,7 +102,7 @@ object ProductFrame: TProductFrame
     Left = 204
     Top = 32
     Width = 1415
-    Height = 735
+    Height = 723
     Align = alClient
     Caption = #1058#1086#1074#1072#1088#1099
     Font.Charset = DEFAULT_CHARSET
@@ -116,7 +116,7 @@ object ProductFrame: TProductFrame
       Left = 2
       Top = 15
       Width = 1411
-      Height = 674
+      Height = 662
       Align = alClient
       DataSource = AppData.DS_Products
       PopupMenu = ProductsPM
@@ -308,7 +308,7 @@ object ProductFrame: TProductFrame
     end
     object ProductBottomTB: TToolBar
       Left = 2
-      Top = 708
+      Top = 696
       Width = 1411
       Height = 25
       Cursor = crHandPoint
@@ -345,7 +345,7 @@ object ProductFrame: TProductFrame
     end
     object ProdSB: TStatusBar
       Left = 2
-      Top = 689
+      Top = 677
       Width = 1411
       Height = 19
       Panels = <

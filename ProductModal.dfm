@@ -1,6 +1,6 @@
 object ProductFrameModalForm: TProductFrameModalForm
-  Left = 271
-  Top = 176
+  Left = 170
+  Top = 246
   Width = 1622
   Height = 863
   Caption = #1058#1086#1074#1072#1088#1099
