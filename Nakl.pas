@@ -61,6 +61,8 @@ type
     AddRowAction1: TMenuItem;
     DelRowAction1: TMenuItem;
     TypeDocAction: TAction;
+    HelpAction: TAction;
+    HelpBTI: TToolButton;
     procedure DriverActionExecute(Sender: TObject);
     procedure CarActionExecute(Sender: TObject);
     procedure DelRowActionExecute(Sender: TObject);
@@ -74,6 +76,7 @@ type
     procedure TypeDocActionExecute(Sender: TObject);
     procedure SaveNaklActionExecute(Sender: TObject);
     procedure CancelNaklActionExecute(Sender: TObject);
+    procedure HelpActionExecute(Sender: TObject);
   private
     { Private declarations }
     FUNICUM_NUM: integer;
@@ -87,6 +90,7 @@ type
     procedure SetNumSG(SG: TStringGrid; Value: integer);
     function GetSumDoc: Real;
     function SetSumProd(CountProd, PriceProd: real): Variant;
+    function CheckFullNessDoc: Boolean;
 
   protected
     property UNICUM_NUM: integer read FUNICUM_NUM write SetUNICUM_NUM;
@@ -99,6 +103,7 @@ type
     procedure NewNaklSetting();
     procedure CorrNaklSetting(UNICUM_NUM: integer);
     procedure ViewNaklSetting(UNICUM_NUM: integer);
+    
     procedure setDrivers(Name: string);
     procedure setTypeDocs(Name: string);
 
@@ -135,7 +140,6 @@ begin
   // Головная часть документа
   NumDocEdit.Text := AppData.Nakl.FieldbyName('NUM_DOC').AsString;
   DateDocDP.Date := AppData.Nakl.FieldByName('DATE_DOC').AsDateTime;
-  //DriverCB.ItemIndex := DriverCB.Items.IndexOf(AppData.Nakl.FieldByName('Driver').AsString);
   ModelEdit.Text := AppData.Nakl.FieldByName('MODEL').AsString;
   RegSymbolEdit.Text := AppData.Nakl.FieldByName('REG_SYMBOL').AsString;
   TypeEdit.Text := AppData.Nakl.FieldByName('TYPE_TC').AsString;
@@ -401,45 +405,57 @@ var
     ProdF: TProductFrameModalForm;
     ProdP: TProductPriceForm;
 begin
-  ProdF := TProductFrameModalForm.Create(Application);
+  if TypeDocCB.Text = EmptyStr then
+    Begin
+       MessageDlg('Не выбран тип документа.' + #13 + 'По умолчанию выставлен приходный документ!', mtWarning, [mbOK], 0);
+       if TypeDocCB.Items.IndexOf('Приход') = -1 then
+         Begin
+            TypeDocCB.Items.Add('Приход');
+            TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf('Приход');
+         end
+       else
+           TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf('Приход');
+    end;
 
-  try
-    if ProdF.ShowModal = mrOk then
-      Begin
-        ProdP := TProductPriceForm.Create(Application);
-        with ProdP do
-          try
-            NameEdit.Text := AppData.Products.FieldByName('NAME_ARTIC').AsString;
-            ArticulEdit.Text := AppData.Products.FieldByName('COD_ARTIC').AsString;
-            EdnIzmerEdit.Text := AppData.Products.FieldByName('EDIN_IZMER').AsString;
-            TypeTovrEdit.Text := AppData.Products.FieldByName('TYPE_TOVR').AsString;
-            WeightEdit.Text := AppData.Products.FieldByName('VES_EDINIC').AsString;
-            PowerEdit.Text := AppData.Products.FieldByName('KON_KOLCH').AsString;
-            PriceEdit.Text := AppData.Products.FieldByName('CENA_ARTC').AsString;
-            EdnVUpakEdit.Text := AppData.Products.FieldByName('EDN_V_UPAK').AsString;
+      ProdF := TProductFrameModalForm.Create(Application);
 
-            if ProdP.ShowModal = mrOk then
-              Begin
-                with Self.ProductSG do
+      try
+        if ProdF.ShowModal = mrOk then
+          Begin
+            ProdP := TProductPriceForm.Create(TypeDocCB.Text);
+            with ProdP do
+              try
+                NameEdit.Text := AppData.Products.FieldByName('NAME_ARTIC').AsString;
+                ArticulEdit.Text := AppData.Products.FieldByName('COD_ARTIC').AsString;
+                EdnIzmerEdit.Text := AppData.Products.FieldByName('EDIN_IZMER').AsString;
+                TypeTovrEdit.Text := AppData.Products.FieldByName('TYPE_TOVR').AsString;
+                WeightEdit.Text := AppData.Products.FieldByName('VES_EDINIC').AsString;
+                PowerEdit.Text := AppData.Products.FieldByName('KON_KOLCH').AsString;
+                PriceEdit.Text := AppData.Products.FieldByName('CENA_ARTC').AsString;
+                EdnVUpakEdit.Text := AppData.Products.FieldByName('EDN_V_UPAK').AsString;
+
+                if ProdP.ShowModal = mrOk then
                   Begin
-                    if Cells[1,1] <> EmptyStr then
-                        RowCount := RowCount + 1;
-                    Cells[1, RowCount-1] := AppData.Products.FieldByName('COD_ARTIC').AsString;
-                    Cells[2, RowCount-1] := AppData.Products.FieldByName('NAME_ARTIC').AsString;
-                    Cells[3, RowCount-1] := AppData.Products.FieldByName('CENA_ARTC').AsString;
-                    Cells[4, RowCount-1] := ProdP.CountEdit.Text;
-                    Cells[5, RowCount-1] := ProdP.SumProd;
-                    Cells[6, RowCount-1] := ProdP.PrimechMemo.Text;
+                    with Self.ProductSG do
+                      Begin
+                        if Cells[1,1] <> EmptyStr then
+                            RowCount := RowCount + 1;
+                        Cells[1, RowCount-1] := AppData.Products.FieldByName('COD_ARTIC').AsString;
+                        Cells[2, RowCount-1] := AppData.Products.FieldByName('NAME_ARTIC').AsString;
+                        Cells[3, RowCount-1] := AppData.Products.FieldByName('CENA_ARTC').AsString;
+                        Cells[4, RowCount-1] := ProdP.CountEdit.Text;
+                        Cells[5, RowCount-1] := ProdP.SumProd;
+                        Cells[6, RowCount-1] := ProdP.PrimechMemo.Text;
+                      end;
                   end;
+              finally
+                FreeAndNil(ProdP);
               end;
-          finally
-            FreeAndNil(ProdP);
           end;
+      finally
+        SetNumSG(ProductSG, ProductSG.RowCount);
+        FreeAndNil(ProdF);
       end;
-  finally
-    SetNumSG(ProductSG, ProductSG.RowCount);
-    FreeAndNil(ProdF);
-  end;
 end;
 
 function TNaklForm.GetSumDoc: Real;
@@ -530,7 +546,16 @@ end;
 
 procedure TNaklForm.SaveNaklActionExecute(Sender: TObject);
 begin
-  Self.ModalResult := mrOk;
+  if CheckFullNessDoc then
+    Self.ModalResult := mrOk
+  else
+    Begin
+       if MessageDlg('Заполните все поля!' + #13 +
+                     'Для получения большей информации ' + #13 +
+                     'нажмите на кнопку подсказки.' + #13 +
+                     'Продолжить заполнение документа?', mtInformation, [mbYes, mbNo], 0) = ID_NO then
+         Self.ModalResult := mrCancel;
+    end;
 end;
 
 procedure TNaklForm.CancelNaklActionExecute(Sender: TObject);
@@ -586,6 +611,26 @@ begin
         if Length(Trim(Name)) > 0 then
           TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf(AppData.Nakl.FieldByName('TYPE_DOC').AsString);
       end;
+end;
+
+function TNaklForm.CheckFullNessDoc: Boolean;
+begin
+  if //(DriverCB.ItemIndex > -1) and
+     (TypeDocCB.ItemIndex > -1) and
+     //(UID_Car > 0)  and
+     (ProductSG.Cells[1,1] <> EmptyStr) then
+       Result := True
+  else
+       Result := False;  
+end;
+
+procedure TNaklForm.HelpActionExecute(Sender: TObject);
+begin
+  MessageBox(Handle, 'Проверьте заполнение след. условий: ' + #13 + '1. Выбран(добавлен) водитель.' + #13 +
+                                                                    '2. Выбран тип документа(обязательное условие).' + #13 +
+                                                                    '3. Выбран автомобиль.' + #13 +
+                                                                    '4. Добавить, как минимум 1, товар.',
+             'Помощь заполнения документа', MB_ICONINFORMATION + MB_OK);
 end;
 
 end.

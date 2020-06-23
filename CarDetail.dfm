@@ -1,10 +1,10 @@
 object CarDetailForm: TCarDetailForm
   Left = 728
   Top = 198
-  Width = 409
-  Height = 688
-  BorderStyle = bsSizeToolWin
+  BorderStyle = bsToolWindow
   Caption = 'CarDetailForm'
+  ClientHeight = 657
+  ClientWidth = 401
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -38,6 +38,14 @@ object CarDetailForm: TCarDetailForm
       Height = 13
       Hint = #1054#1073#1103#1079#1072#1090#1077#1083#1100#1085#1072' '#1082' '#1079#1072#1087#1086#1083#1085#1077#1085#1080#1102
       Caption = '&'#1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1086#1085#1085#1099#1081' '#1079#1085#1072#1082'*'
+      Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
     object Label2: TLabel
       Left = 6
@@ -46,6 +54,14 @@ object CarDetailForm: TCarDetailForm
       Height = 13
       Hint = #1054#1073#1103#1079#1072#1090#1077#1083#1100#1085#1072' '#1082' '#1079#1072#1087#1086#1083#1085#1077#1085#1080#1102
       Caption = '&'#1048#1076#1077#1085#1090#1080#1092#1080#1082#1072#1094#1080#1086#1085#1085#1099#1081' '#1085#1086#1084#1077#1088' (VIN)*'
+      Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
     object Label3: TLabel
       Left = 8
@@ -540,18 +556,36 @@ object CarDetailForm: TCarDetailForm
     ShowHint = True
     TabOrder = 3
     object Label12: TLabel
-      Left = 202
-      Top = 18
+      Left = 216
+      Top = 20
       Width = 45
       Height = 13
+      Hint = #1054#1073#1103#1079#1072#1090#1077#1083#1100#1085#1072' '#1082' '#1079#1072#1087#1086#1083#1085#1077#1085#1080#1102
       Caption = '&'#1053#1086#1084#1077#1088'*'
+      Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
     object Label13: TLabel
       Left = 16
-      Top = 18
+      Top = 20
       Width = 42
       Height = 13
+      Hint = #1054#1073#1103#1079#1072#1090#1077#1083#1100#1085#1072' '#1082' '#1079#1072#1087#1086#1083#1085#1077#1085#1080#1102
       Caption = '&'#1057#1077#1088#1080#1103'*'
+      Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
     object Label14: TLabel
       Left = 16
@@ -624,14 +658,32 @@ object CarDetailForm: TCarDetailForm
       Top = 24
       Width = 45
       Height = 13
+      Hint = #1054#1073#1103#1079#1072#1090#1077#1083#1100#1085#1086' '#1082' '#1079#1072#1087#1086#1083#1085#1077#1085#1080#1102
       Caption = '&'#1053#1086#1084#1077#1088'*'
+      Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
     object Label17: TLabel
       Left = 16
       Top = 24
       Width = 42
       Height = 13
+      Hint = #1054#1073#1103#1079#1072#1090#1077#1083#1100#1085#1086' '#1082' '#1079#1072#1087#1086#1083#1085#1077#1085#1080#1102
       Caption = '&'#1057#1077#1088#1080#1103'*'
+      Color = clBtnFace
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
     end
     object DocNumEdit: TEdit
       Left = 268

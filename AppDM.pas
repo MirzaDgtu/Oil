@@ -225,9 +225,6 @@ type
     Adapter: TOLEAdapter;
     Report: TFlexCelReport;
     NaklMADEYEAR: TIntegerField;
-    CommandQ: TADOQuery;
-    CommandQUNICUM_NUM: TIntegerField;
-    CommandQNUM_DOC: TIntegerField;
     Drivers: TADODataSet;
     TypeDocs: TADODataSet;
     DriversDriver: TStringField;

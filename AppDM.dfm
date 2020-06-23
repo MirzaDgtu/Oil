@@ -833,18 +833,6 @@ object AppData: TAppData
     Left = 560
     Top = 121
   end
-  object CommandQ: TADOQuery
-    Connection = Connection
-    Parameters = <>
-    Left = 48
-    Top = 120
-    object CommandQUNICUM_NUM: TIntegerField
-      FieldName = 'UNICUM_NUM'
-    end
-    object CommandQNUM_DOC: TIntegerField
-      FieldName = 'NUM_DOC'
-    end
-  end
   object Drivers: TADODataSet
     Connection = Connection
     Parameters = <>

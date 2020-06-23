@@ -338,18 +338,20 @@ begin
        if NaklF.ShowModal = mrOk then
          Begin
             try
-                AppData.CommandQ.Active := False;
-                AppData.CommandQ.SQL.Text  := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
+                AppData.Command.CommandText  := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
                                                                        FloatToStr(NaklF.SumDoc),
                                                                        NaklF.DriverCB.Text,
                                                                        NaklF.UID_Car,
                                                                        NaklF.TypeDocCB.Text,
                                                                        g_User,
                                                                        NaklF.PrimechMemo.Text]);
-               // ShowMessage(AppData.CommandQ.SQL.Text);
-                AppData.CommandQ.Active := True;
-                UNICUM_NUM := AppData.CommandQ.FieldByName('UNICUM_NUM').AsInteger;
-                NUM_DOC := AppData.CommandQ.FieldByName('NUM_DOC').AsInteger;
+
+                AppData.Command.Execute;
+                RefreshNaklActionExecute(Self);
+                AppData.Nakl.Last;
+
+                UNICUM_NUM := AppData.Nakl.FieldByName('UNICUM_NUM').AsInteger;
+                NUM_DOC := AppData.Nakl.FieldByName('NUM_DOC').AsInteger;
 
             except
               on Err: Exception do
@@ -359,9 +361,7 @@ begin
             for i := 1 to NaklF.ProductSG.RowCount-1 do
             try
                 AppData.Command.CommandText := Format(SSQLInsNaklMove, [UNICUM_NUM,
-                                                                        NUM_DOC,
-                                                                        3,
-                                                                        1,
+                                                                        NUM_DOC,    
                                                                         StrToInt(NaklF.ProductSG.Cells[1,i]),
                                                                         NaklF.ProductSG.Cells[2,i],
                                                                         NaklF.ProductSG.Cells[4,i],
@@ -369,8 +369,7 @@ begin
                                                                         g_User,
                                                                         NaklF.TypeDocCB.Text,
                                                                         NaklF.ProductSG.Cells[6,i]]);
-                //ShowMessage(AppData.Command.CommandText);
-                AppData.Command.Execute;
+                  AppData.Command.Execute;
             except
                on Err: Exception do
                 MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);  

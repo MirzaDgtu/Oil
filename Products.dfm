@@ -1,6 +1,6 @@
 object ProductsForm: TProductsForm
-  Left = 364
-  Top = 255
+  Left = 200
+  Top = 197
   BorderStyle = bsSingle
   Caption = #1058#1086#1074#1072#1088#1099
   ClientHeight = 644
@@ -575,6 +575,7 @@ object ProductsForm: TProductsForm
       Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
       Hint = #1044#1086#1073#1072#1074#1083#1077#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1090#1086#1074#1072#1088#1072
       ImageIndex = 17
+      ShortCut = 16429
       OnExecute = AddProdActionExecute
     end
     object CorrProdAction: TAction
@@ -582,6 +583,7 @@ object ProductsForm: TProductsForm
       Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
       Hint = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1090#1086#1074#1072#1088#1072
       ImageIndex = 19
+      ShortCut = 115
       OnExecute = CorrProdActionExecute
     end
     object DelProdAction: TAction
@@ -589,12 +591,14 @@ object ProductsForm: TProductsForm
       Caption = '&'#1059#1076#1072#1083#1080#1090#1100
       Hint = #1059#1076#1072#1083#1077#1085#1080#1077' '#1090#1086#1074#1072#1088#1072
       ImageIndex = 10
+      ShortCut = 16430
       OnExecute = DelProdActionExecute
     end
     object RefreshProdAction: TAction
       Category = 'Products'
       Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
       ImageIndex = 20
+      ShortCut = 116
       OnExecute = RefreshProdActionExecute
     end
     object FindAction: TAction
@@ -635,6 +639,7 @@ object ProductsForm: TProductsForm
       Category = 'Products'
       Hint = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1096#1088#1080#1092#1090#1072' '#1090#1086#1074#1072#1088#1086#1074
       ImageIndex = 13
+      ShortCut = 16457
       OnExecute = FontProdActionExecute
     end
   end

@@ -42,12 +42,17 @@ type
   private
     { Private declarations }
     FSumProd: Variant;
+    FtypeDoc: string;
     procedure SetSumProd(const Value: Variant);
     procedure SetSummProduct(Count, Price: real);
+    procedure SettypeDoc(const Value: string);
+
+  protected
+    property typeDoc: string read FtypeDoc write SettypeDoc;
 
   public
     { Public declarations }
-    constructor Create(AOwner: TComponent); override;
+    constructor Create(TypeDoc: string); overload;
 
   published
     property SumProd: Variant read FSumProd write SetSumProd;
@@ -64,10 +69,10 @@ uses SConst;
 
 { TProductPriceForm }
 
-constructor TProductPriceForm.Create(AOwner: TComponent);
+constructor TProductPriceForm.Create(TypeDoc: string);
 begin
-  inherited;
-  
+  inherited Create(Application);
+     Self.typeDoc := TypeDoc;
 end;
 
 procedure TProductPriceForm.SetSummProduct(Count, Price: real);
@@ -91,6 +96,12 @@ procedure TProductPriceForm.CountEditChange(Sender: TObject);
 begin
   if Length(Trim(CountEdit.Text)) = 0 then
      CountEdit.Text := '0';
+
+  if Self.typeDoc <> 'Приход' then
+    if (Length(Trim(CountEdit.Text)) > 0) and
+       (StrToFloat(Trim(CountEdit.Text)) > StrToFloat(Trim(PowerEdit.Text))) then
+         CountEdit.Text := PowerEdit.Text;
+
   SetSummProduct(StrToFloat(IfThen(CountEdit.Text = EmptyStr, '0', Trim(CountEdit.Text))), StrToFloat(PriceEdit.Text));
 end;
 
@@ -116,6 +127,11 @@ procedure TProductPriceForm.PrimechMemoKeyPress(Sender: TObject;
 begin
  if Key in ['''', '"', '~', '`'] then
       Key := #0;
+end;
+
+procedure TProductPriceForm.SettypeDoc(const Value: string);
+begin
+  FtypeDoc := Value;
 end;
 
 end.
