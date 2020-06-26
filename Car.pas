@@ -504,12 +504,17 @@ end;
 
 procedure TCarForm.PrintCarDetailActionExecute(Sender: TObject);
 begin
-  if (AppData.CarDetail.Active) and
-     (not AppData.CarDetail.IsEmpty) then
+  if (AppData.Cars.Active) and
+     (not AppData.Cars.IsEmpty) then
       try
          Screen.Cursor := crSQLWait;
          AppData.Cars.DisableControls;
 
+         AppData.CarDetail.Active := False;
+         AppData.CarDetail.CommandText :=  Format(SSQLGetCarDetail, [AppData.Cars.FieldByName('UID').AsInteger,
+                                                                                                     AppData.Cars.FieldByName('Archive').AsString]);
+         AppData.CarDetail.Active := True;
+         
          AppData.Report.Template := SCarDetail;
          AppData.Report.Run;
       finally

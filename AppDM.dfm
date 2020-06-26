@@ -1,7 +1,7 @@
 object AppData: TAppData
   OldCreateOrder = False
-  Left = 537
-  Top = 283
+  Left = 792
+  Top = 179
   Height = 431
   Width = 751
   object Connection: TADOConnection
@@ -52,14 +52,14 @@ object AppData: TAppData
     object CarsUID: TIntegerField
       FieldName = 'UID'
     end
-    object CarsREG_SYMBOL: TStringField
+    object fldREG_SYMBOL: TStringField
       FieldName = 'REG_SYMBOL'
       Size = 15
     end
     object CarsVIN: TStringField
       FieldName = 'VIN'
     end
-    object CarsMODEL: TStringField
+    object fldMODEL: TStringField
       FieldName = 'MODEL'
       Size = 50
     end
@@ -81,9 +81,6 @@ object AppData: TAppData
     object CarsCOLOR: TStringField
       FieldName = 'COLOR'
       Size = 40
-    end
-    object CarsMOTOR_POWER: TFloatField
-      FieldName = 'MOTOR_POWER'
     end
     object CarsECOLOGY: TStringField
       FieldName = 'ECOLOGY'
@@ -117,6 +114,9 @@ object AppData: TAppData
     object CarsArchive: TStringField
       FieldName = 'Archive'
       Size = 3
+    end
+    object CarsMOTOR_POWER: TFloatField
+      FieldName = 'MOTOR_POWER'
     end
   end
   object DS_Cars: TDataSource
@@ -182,6 +182,46 @@ object AppData: TAppData
     end
     object CarDetailINS_UID: TIntegerField
       FieldName = 'INS_UID'
+    end
+    object CarDetailREG_SYMBOL: TStringField
+      FieldName = 'REG_SYMBOL'
+      Size = 15
+    end
+    object CarDetailVIN: TStringField
+      FieldName = 'VIN'
+    end
+    object CarDetailMADEYEAR: TIntegerField
+      FieldName = 'MADEYEAR'
+    end
+    object CarDetailCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 40
+    end
+    object CarDetailMODEL: TStringField
+      FieldName = 'MODEL'
+      Size = 50
+    end
+    object CarDetailTYPE_TC: TStringField
+      FieldName = 'TYPE_TC'
+      Size = 30
+    end
+    object CarDetailCARCASS: TStringField
+      FieldName = 'CARCASS'
+      Size = 12
+    end
+    object CarDetailRESERVE: TBooleanField
+      FieldName = 'RESERVE'
+    end
+    object CarDetailECOLOGY: TStringField
+      FieldName = 'ECOLOGY'
+      Size = 30
+    end
+    object CarDetailMOTOR_POWER: TFloatField
+      FieldName = 'MOTOR_POWER'
+    end
+    object CarDetailCATEGORY: TStringField
+      FieldName = 'CATEGORY'
+      Size = 5
     end
   end
   object Command: TADOCommand
@@ -337,7 +377,7 @@ object AppData: TAppData
     object fldNUM_DOC: TIntegerField
       FieldName = 'NUM_DOC'
     end
-    object NaklDATE_DOC: TDateTimeField
+    object fldDATE_DOC: TDateTimeField
       FieldName = 'DATE_DOC'
     end
     object NaklSUM_DOC: TFloatField
@@ -387,7 +427,7 @@ object AppData: TAppData
       FieldName = 'OTMETKA'
       Size = 3
     end
-    object NaklPRIMECH: TStringField
+    object fldPRIMECH: TStringField
       FieldName = 'PRIMECH'
       Size = 200
     end
@@ -402,11 +442,11 @@ object AppData: TAppData
     object NaklMADEYEAR: TIntegerField
       FieldName = 'MADEYEAR'
     end
-    object NaklTYPE_TC: TStringField
+    object fldTYPE_TC: TStringField
       FieldName = 'TYPE_TC'
       Size = 30
     end
-    object NaklDRIVER: TStringField
+    object fldDRIVER: TStringField
       FieldName = 'DRIVER'
       Size = 40
     end
@@ -607,7 +647,7 @@ object AppData: TAppData
       FieldName = 'MODEL'
       Size = 50
     end
-    object StringField4: TStringField
+    object CarStoryTYPE_TC: TStringField
       FieldName = 'TYPE_TC'
       Size = 30
     end

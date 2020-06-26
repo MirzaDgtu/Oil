@@ -20,14 +20,13 @@ type
     DS_Cars: TDataSource;
     CarDetail: TADODataSet;
     CarsUID: TIntegerField;
-    CarsREG_SYMBOL: TStringField;
-    CarsMODEL: TStringField;
+    fldREG_SYMBOL: TStringField;
+    fldMODEL: TStringField;
     CarsTYPE_TC: TStringField;
     CarsCATEGORY: TStringField;
     CarsMADEYEAR: TIntegerField;
     CarsCARCASS: TStringField;
     CarsCOLOR: TStringField;
-    CarsMOTOR_POWER: TFloatField;
     CarsECOLOGY: TStringField;
     CarsRESERVE: TBooleanField;
     CarDetailROWID: TIntegerField;
@@ -100,7 +99,7 @@ type
     DS_Move: TDataSource;
     fldUNICUM_NUM: TIntegerField;
     fldNUM_DOC: TIntegerField;
-    NaklDATE_DOC: TDateTimeField;
+    fldDATE_DOC: TDateTimeField;
     NaklSUM_DOC: TFloatField;
     NaklCAR_UID: TIntegerField;
     NaklREG_SYMBOL: TStringField;
@@ -114,7 +113,7 @@ type
     NaklCORR_DATE: TDateTimeField;
     NaklTYPE_DOC: TStringField;
     NaklOTMETKA: TStringField;
-    NaklPRIMECH: TStringField;
+    fldPRIMECH: TStringField;
     NaklArchive: TStringField;
     MoveROWID: TIntegerField;
     MoveUNICUM_NUM: TIntegerField;
@@ -165,7 +164,7 @@ type
     StringField1: TStringField;
     StringField2: TStringField;
     StringField3: TStringField;
-    StringField4: TStringField;
+    CarStoryTYPE_TC: TStringField;
     StringField5: TStringField;
     IntegerField2: TIntegerField;
     StringField6: TStringField;
@@ -229,8 +228,20 @@ type
     TypeDocs: TADODataSet;
     DriversDriver: TStringField;
     TypeDocsTYPE_DOC: TStringField;
-    NaklTYPE_TC: TStringField;
-    NaklDRIVER: TStringField;
+    fldTYPE_TC: TStringField;
+    fldDRIVER: TStringField;
+    CarDetailREG_SYMBOL: TStringField;
+    CarDetailVIN: TStringField;
+    CarDetailMODEL: TStringField;
+    CarDetailTYPE_TC: TStringField;
+    CarDetailCATEGORY: TStringField;
+    CarDetailMADEYEAR: TIntegerField;
+    CarDetailCARCASS: TStringField;
+    CarDetailCOLOR: TStringField;
+    CarsMOTOR_POWER: TFloatField;
+    CarDetailMOTOR_POWER: TFloatField;
+    CarDetailECOLOGY: TStringField;
+    CarDetailRESERVE: TBooleanField;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
@@ -242,6 +253,16 @@ type
     procedure QuitApplication(const Msg: string);
     procedure SetgBegD(const Value: variant);
     procedure SetgEndD(const Value: variant);
+    function GetNumDoc: Variant;
+    function GetDateDoc: Variant;
+    function GetDriverDoc: Variant;
+    function GetTypeDoc: Variant;
+    function GetPrimechDoc: Variant;
+    function GetModelCarDoc: Variant;
+    function GetRegSymbolDoc: Variant;
+    function GetTypeTcDoc: Variant;
+    function GetColorDoc: Variant;
+    function GetYearCarDoc: Variant;
   public
     class procedure SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
     constructor Create(AOwner: TComponent); override;
@@ -249,6 +270,21 @@ type
   published
     property gBegD: variant read FgBegD write SetgBegD;
     property gEndD: variant read FgEndD write SetgEndD;
+
+    // Свойство используются при печати документа
+      // Свойства документа (Nakl)
+    property NumDoc: variant read GetNumDoc;
+    property DateDoc: Variant read GetDateDoc;
+    property DriverDoc: Variant read GetDriverDoc;
+    property TypeDoc: Variant read GetTypeDoc;
+    property PrimechDoc: Variant read GetPrimechDoc;
+
+      // Свойства автомобиля из документа (Car)
+    property ModelCarDoc: Variant read GetModelCarDoc;
+    property RegSymbolCarDoc: Variant read GetRegSymbolDoc;
+    property TypeTcCarDoc: Variant read GetTypeTcDoc;
+    property ColorCarDoc: Variant read GetColorDoc;
+    property YearCarDoc: Variant read GetYearCarDoc;
   end;
 
 var
@@ -373,6 +409,76 @@ end;
 procedure TAppData.SetgEndD(const Value: variant);
 begin
   FgEndD := Value;
+end;
+
+function TAppData.GetNumDoc: Variant;
+begin
+  if (Nakl.Active) and
+     (not Nakl.IsEmpty) then
+      Result := fldNUM_DOC.AsString;
+end;
+
+function TAppData.GetDateDoc: Variant;
+begin
+  if (Nakl.Active) and
+     (not Nakl.IsEmpty) then
+       Result := FormatDateTime('yyyy-mm-dd', fldDATE_DOC.AsDateTime);
+end;
+
+function TAppData.GetDriverDoc: Variant;
+begin
+  if (Nakl.Active) and
+     (not Nakl.IsEmpty) then
+       Result := fldDRIVER.AsString;
+end;
+
+function TAppData.GetTypeDoc: Variant;
+begin
+  if (Nakl.Active) and
+     (not Nakl.IsEmpty) then
+      Result := NaklTYPE_DOC.AsString;
+end;
+
+function TAppData.GetPrimechDoc: Variant;
+begin
+  if (Nakl.Active) and
+     (not Nakl.IsEmpty) then
+       Result := fldPRIMECH.AsString;
+end;
+
+function TAppData.GetModelCarDoc: Variant;
+begin
+   if (Cars.Active) and
+      (not Cars.IsEmpty) then
+        Result := AppData.Nakl.FieldByName('MODEL').AsString;
+end;
+
+function TAppData.GetRegSymbolDoc: Variant;
+begin
+  if (Nakl.Active) and
+     (not Nakl.IsEmpty) then
+        Result := NaklREG_SYMBOL.AsString;
+end;
+
+function TAppData.GetTypeTcDoc: Variant;
+begin
+  if (Nakl.Active) and
+     (not Nakl.IsEmpty) then
+      Result := fldTYPE_TC.AsString;
+end;
+
+function TAppData.GetColorDoc: Variant;
+begin
+  if (Nakl.Active) and
+     (not Nakl.IsEmpty) then
+      Result := NaklCOLOR.AsString;
+end;
+
+function TAppData.GetYearCarDoc: Variant;
+begin
+  if (Nakl.Active) and
+     (not Nakl.IsEmpty) then
+       Result := NaklMADEYEAR.AsString;
 end;
 
 end.

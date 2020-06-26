@@ -278,8 +278,8 @@ begin
        AppData.Nakl.DisableControls;
        Screen.Cursor := crSQLWait;
 
-       Report.Template := SReestr;
-       Report.Run;
+       AppData.Report.Template := SReestr;
+       AppData.Report.Run;
      finally
        AppData.Nakl.Locate('UNICUM_NUM', sUN, [loCaseInsensitive, loPartialKey]);
        AppData.Nakl.EnableControls;
@@ -295,8 +295,8 @@ begin
         Screen.Cursor := crSQLWait;
         AppData.Nakl.DisableControls;
 
-        Report.Template := SNakl;
-        Report.Run;
+        AppData.Report.Template := SNakl;
+        AppData.Report.Run;
       finally
          Screen.Cursor := crDefault;
          AppData.Nakl.EnableControls;
