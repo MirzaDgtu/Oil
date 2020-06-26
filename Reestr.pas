@@ -339,12 +339,12 @@ begin
          Begin
             try
                 AppData.Command.CommandText  := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
-                                                                       FloatToStr(NaklF.SumDoc),
-                                                                       NaklF.DriverCB.Text,
-                                                                       NaklF.UID_Car,
-                                                                       NaklF.TypeDocCB.Text,
-                                                                       g_User,
-                                                                       NaklF.PrimechMemo.Text]);
+                                                                         FloatToStr(NaklF.SumDoc),
+                                                                         NaklF.DriverCB.Text,
+                                                                         NaklF.UID_Car,
+                                                                         NaklF.TypeDocCB.Text,
+                                                                         g_User,
+                                                                         NaklF.PrimechMemo.Text]);
 
                 AppData.Command.Execute;
                 RefreshNaklActionExecute(Self);
@@ -361,18 +361,18 @@ begin
             for i := 1 to NaklF.ProductSG.RowCount-1 do
             try
                 AppData.Command.CommandText := Format(SSQLInsNaklMove, [UNICUM_NUM,
-                                                                        NUM_DOC,    
+                                                                        NUM_DOC,
                                                                         StrToInt(NaklF.ProductSG.Cells[1,i]),
                                                                         NaklF.ProductSG.Cells[2,i],
                                                                         NaklF.ProductSG.Cells[4,i],
-                                                                        NaklF.ProductSG.Cells[5,i],
+                                                                        NaklF.ProductSG.Cells[3,i],
                                                                         g_User,
                                                                         NaklF.TypeDocCB.Text,
                                                                         NaklF.ProductSG.Cells[6,i]]);
                   AppData.Command.Execute;
             except
                on Err: Exception do
-                MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);  
+                MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
             end;
          end;
     finally
@@ -403,7 +403,7 @@ end;
 procedure TReestrForm.CorrNaklActionExecute(Sender: TObject);
 var
    NaklF: TNaklForm;
-   un_Num: integer;
+   un_Num, i: integer;
 begin
   if (AppData.Nakl.Active) and
      (not AppData.Nakl.IsEmpty) then
@@ -411,7 +411,40 @@ begin
      NaklF := TNaklForm.Create(AppData.fldUNICUM_NUM.AsInteger, g_Corr);
      un_Num := AppData.fldUNICUM_NUM.AsInteger;
 
-     NaklF.ShowModal();
+     if NaklF.ShowModal = mrOk then
+       Begin
+        try
+           AppData.Command.CommandText := Format(SSQLCorrNaklHead, [AppData.fldUNICUM_NUM.AsInteger,
+                                                                    FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
+                                                                    FloatToStr(NaklF.SumDoc),
+                                                                    NaklF.DriverCB.Text,
+                                                                    NaklF.UID_Car,
+                                                                    NaklF.TypeDocCB.Text,
+                                                                    g_User,
+                                                                    NaklF.PrimechMemo.Text]);
+           AppData.Command.Execute;
+        except
+           on Err: Exception do
+            MessageDlg('При изменении документа произошла ошибка!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+        end;
+
+        for i := 1 to NaklF.ProductSG.RowCount-1 do
+         try
+                AppData.Command.CommandText := Format(SSQLCorrNaklMove, [AppData.fldUNICUM_NUM.AsInteger,
+                                                                         AppData.fldNUM_DOC.AsInteger,
+                                                                         StrToInt(NaklF.ProductSG.Cells[1,i]),
+                                                                         NaklF.ProductSG.Cells[2,i],
+                                                                         NaklF.ProductSG.Cells[4,i],
+                                                                         NaklF.ProductSG.Cells[3,i],
+                                                                         g_User,
+                                                                         NaklF.TypeDocCB.Text,
+                                                                         NaklF.ProductSG.Cells[6,i]]);
+                  AppData.Command.Execute;
+         except
+               on Err: Exception do
+                MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+         end;
+       end;
    finally
       FreeAndNil(NaklF);
       RefreshNaklActionExecute(Self);

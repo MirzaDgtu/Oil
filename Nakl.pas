@@ -77,6 +77,7 @@ type
     procedure SaveNaklActionExecute(Sender: TObject);
     procedure CancelNaklActionExecute(Sender: TObject);
     procedure HelpActionExecute(Sender: TObject);
+    procedure ProductSGDblClick(Sender: TObject);
   private
     { Private declarations }
     FUNICUM_NUM: integer;
@@ -631,6 +632,11 @@ begin
                                                                     '3. Выбран автомобиль.' + #13 +
                                                                     '4. Добавить, как минимум 1, товар.',
              'Помощь заполнения документа', MB_ICONINFORMATION + MB_OK);
+end;
+
+procedure TNaklForm.ProductSGDblClick(Sender: TObject);
+begin
+  AddRowActionExecute(Self);
 end;
 
 end.

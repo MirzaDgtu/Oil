@@ -334,7 +334,7 @@ object AppData: TAppData
     object fldUNICUM_NUM: TIntegerField
       FieldName = 'UNICUM_NUM'
     end
-    object NaklNUM_DOC: TIntegerField
+    object fldNUM_DOC: TIntegerField
       FieldName = 'NUM_DOC'
     end
     object NaklDATE_DOC: TDateTimeField

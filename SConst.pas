@@ -63,7 +63,13 @@ resourcestring
                                      // (DATE_DOC, SUM_DOC, DRIVER, Car_UID, Type_Doc, Family, Primech)
   SSQLInsNaklMove = 'EXEC REPORTS..O_InsNaklMove %d, %d, %d, ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s''';   // Создание новой накланой (Тело накладной)
                                      // (Unicum_Num, Num_Doc, Num_Predm, Name_Predm, KOLC_Predm, Sum_Predm, Family, Type_Doc, Primech)
-  SSQLTrancferNakl = 'EXEC REPORTS..O_TrancferNakl %d, %d, ''%s''';   // Отметка накладной (Unicum_Num, Otmetka, Family)
+  SSQLTrancferNakl = 'EXEC REPORTS..O_TrancferNakl %d, %d, ''%s''';   // Отметка накладной (Unicum_Num, Otmetka, Family) (Отложен до востребования)
+
+                                // Процедуры корректировки документа
+  SSQLCorrNaklHead = 'EXEC REPORTS..O_CorrNaklHead %d, ''%s'', ''%s'', ''%s'', %d, ''%s'', ''%s'', ''%s''';
+
+  SSQLCorrNaklMove = 'EXEC REPORTS..O_CorrNaklMove %d, %d, %d, ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s''';
+
   SSQLDelNakl = 'EXEC REPORTS..O_DelNakl %d';                         // Удаление накладной
 
 // Получение информации в справочники документа

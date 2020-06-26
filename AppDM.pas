@@ -99,7 +99,7 @@ type
     DS_Nakl: TDataSource;
     DS_Move: TDataSource;
     fldUNICUM_NUM: TIntegerField;
-    NaklNUM_DOC: TIntegerField;
+    fldNUM_DOC: TIntegerField;
     NaklDATE_DOC: TDateTimeField;
     NaklSUM_DOC: TFloatField;
     NaklCAR_UID: TIntegerField;
