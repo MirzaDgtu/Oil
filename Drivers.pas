@@ -68,6 +68,7 @@ type
     IL: TImageList;
     procedure DriversGridTitleClick(Column: TColumn);
     procedure RefreshActionExecute(Sender: TObject);
+    procedure AddActionExecute(Sender: TObject);
   private
     { Private declarations }
     procedure SetInfoSB(KolDriver, KolAvailableDriver: integer);
@@ -81,7 +82,7 @@ var
 
 implementation
 
-uses AppDM, SConst, Globals;
+uses AppDM, SConst, Globals, DriverDetail;
 
 {$R *.dfm}
 
@@ -161,6 +162,21 @@ procedure TDriversFrame.SetInfoSB(KolDriver, KolAvailableDriver: integer);
 begin
   SB.Panels[0].Text := Format('Водителей: %d', [KolDriver]);
   SB.Panels[1].Text := Format('Уволенных: %d', [KolAvailableDriver]);
+end;
+
+procedure TDriversFrame.AddActionExecute(Sender: TObject);
+var
+    DriverD: TDriverDetailDialog;
+begin
+    DriverD := TDriverDetailDialog.Create(Application);
+
+    try
+       if DriverD.ShowModal = 1 then
+        ShowMessage('dd');
+    finally
+       FreeAndNil(DriverD);
+       RefreshActionExecute(Sender);
+    end;
 end;
 
 end.

@@ -34,6 +34,5 @@ begin
   Application.Initialize;
   Application.CreateForm(TAppData, AppData);
   Application.CreateForm(TMainForm, MainForm);
-  Application.CreateForm(TDriverDetailDialog, DriverDetailDialog);
   Application.Run;
 end.

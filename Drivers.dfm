@@ -1,14 +1,14 @@
 object DriversFrame: TDriversFrame
   Left = 0
   Top = 0
-  Width = 1359
-  Height = 682
+  Width = 1355
+  Height = 646
   Align = alClient
   TabOrder = 0
   object SB: TStatusBar
     Left = 0
-    Top = 663
-    Width = 1359
+    Top = 627
+    Width = 1355
     Height = 19
     Panels = <
       item
@@ -22,10 +22,10 @@ object DriversFrame: TDriversFrame
       end>
   end
   object BtnsPanel: TPanel
-    Left = 1221
+    Left = 1217
     Top = 25
     Width = 138
-    Height = 431
+    Height = 395
     Align = alRight
     TabOrder = 1
     object Bevel1: TBevel
@@ -360,7 +360,7 @@ object DriversFrame: TDriversFrame
   object HeaderPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1359
+    Width = 1355
     Height = 25
     Align = alTop
     TabOrder = 2
@@ -368,8 +368,8 @@ object DriversFrame: TDriversFrame
   object DriversGrid: TDBGrid
     Left = 0
     Top = 25
-    Width = 1221
-    Height = 431
+    Width = 1217
+    Height = 395
     Align = alClient
     DataSource = AppData.DS_DriversL
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -475,7 +475,6 @@ object DriversFrame: TDriversFrame
         Title.Font.Height = -11
         Title.Font.Name = 'MS Sans Serif'
         Title.Font.Style = [fsBold]
-        Width = -1
         Visible = False
       end
       item
@@ -489,7 +488,6 @@ object DriversFrame: TDriversFrame
         Title.Font.Height = -11
         Title.Font.Name = 'MS Sans Serif'
         Title.Font.Style = [fsBold]
-        Width = -1
         Visible = False
       end
       item
@@ -633,14 +631,13 @@ object DriversFrame: TDriversFrame
         Title.Font.Height = -11
         Title.Font.Name = 'MS Sans Serif'
         Title.Font.Style = [fsBold]
-        Width = -1
         Visible = False
       end>
   end
   object DriverInfoPanel: TPanel
     Left = 0
-    Top = 456
-    Width = 1359
+    Top = 420
+    Width = 1355
     Height = 207
     Align = alBottom
     TabOrder = 4
@@ -949,6 +946,7 @@ object DriversFrame: TDriversFrame
       Category = 'Driver'
       Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
       ImageIndex = 1
+      OnExecute = AddActionExecute
     end
     object CorrAction: TAction
       Category = 'Driver'
@@ -981,7 +979,7 @@ object DriversFrame: TDriversFrame
     Left = 1032
     Top = 168
     Bitmap = {
-      494C010106000900040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010106000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1381,6 +1379,7 @@ object DriversFrame: TDriversFrame
       E7E7E007E001F01BC183E007E007E0038181E007E007E003E007E007E007E703
       E007E007E007EF83F81FE007E007FE03F81FE007E00781FFE007E007E00781E7
       E007E007E00781C78181E007E0078007C183E007E00F800FE7E7E01FE01F901F
-      F7EFE01FE03FB83FFFFFFFFFFFFFFFFF}
+      F7EFE01FE03FB83FFFFFFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
 end
