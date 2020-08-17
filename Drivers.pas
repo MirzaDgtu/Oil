@@ -28,6 +28,35 @@ type
     LicenseGB: TGroupBox;
     CarGB: TGroupBox;
     PrimechGB: TGroupBox;
+    Label1: TLabel;
+    Label2: TLabel;
+    PassSerialLbl: TLabel;
+    PassNumLbl: TLabel;
+    PassGaveGB: TGroupBox;
+    PassGaveMemo: TMemo;
+    Label3: TLabel;
+    Label4: TLabel;
+    LicenseNumLbl: TLabel;
+    LicenseSerialLbl: TLabel;
+    Label5: TLabel;
+    LicenseCategoriesLbl: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    LicenseBegDatelbl: TLabel;
+    LicenseEndDateLbl: TLabel;
+    LicenseGaveGB: TGroupBox;
+    LicenseGaveMemo: TMemo;
+    PrimechMemo: TMemo;
+    Label8: TLabel;
+    ModelEdit: TEdit;
+    Label9: TLabel;
+    RegSymbolEdit: TEdit;
+    Label10: TLabel;
+    TypeEdit: TEdit;
+    Label11: TLabel;
+    ColorEdit: TEdit;
+    Label12: TLabel;
+    YearEdit: TEdit;
     procedure DriversGridTitleClick(Column: TColumn);
   private
     { Private declarations }

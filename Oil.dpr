@@ -22,7 +22,8 @@ uses
   FrameProduct in 'FrameProduct.pas' {ProductFrame: TFrame},
   ProductModal in 'ProductModal.pas' {ProductFrameModalForm},
   ProductPrice in 'ProductPrice.pas' {ProductPriceForm},
-  Drivers in 'Drivers.pas' {DriversFrame: TFrame};
+  Drivers in 'Drivers.pas' {DriversFrame: TFrame},
+  DriversF in 'DriversF.pas' {DriversForm};
 
 {$R *.res}
 
@@ -32,6 +33,5 @@ begin
   Application.Initialize;
   Application.CreateForm(TAppData, AppData);
   Application.CreateForm(TMainForm, MainForm);
-  Application.CreateForm(TProductPriceForm, ProductPriceForm);
   Application.Run;
 end.

@@ -2,12 +2,12 @@ object DriversFrame: TDriversFrame
   Left = 0
   Top = 0
   Width = 1359
-  Height = 692
+  Height = 682
   Align = alClient
   TabOrder = 0
   object SB: TStatusBar
     Left = 0
-    Top = 673
+    Top = 663
     Width = 1359
     Height = 19
     Panels = <
@@ -25,7 +25,7 @@ object DriversFrame: TDriversFrame
     Left = 1221
     Top = 25
     Width = 138
-    Height = 519
+    Height = 431
     Align = alRight
     TabOrder = 1
     object Bevel1: TBevel
@@ -363,7 +363,7 @@ object DriversFrame: TDriversFrame
     Left = 0
     Top = 25
     Width = 1221
-    Height = 519
+    Height = 431
     Align = alClient
     DataSource = AppData.DS_DriversL
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -516,7 +516,7 @@ object DriversFrame: TDriversFrame
         Expanded = False
         FieldName = 'License_BegDate'
         Title.Alignment = taCenter
-        Title.Caption = #1042#1099#1076#1072#1085' ('#1074#1086#1076'. '#1091#1076#1086#1089#1090'.)'
+        Title.Caption = #1057' ('#1074#1086#1076'. '#1091#1076#1086#1089#1090'.)'
         Title.Color = clSkyBlue
         Title.Font.Charset = DEFAULT_CHARSET
         Title.Font.Color = clWindowText
@@ -633,16 +633,16 @@ object DriversFrame: TDriversFrame
   end
   object DriverInfoPanel: TPanel
     Left = 0
-    Top = 544
+    Top = 456
     Width = 1359
-    Height = 129
+    Height = 207
     Align = alBottom
     TabOrder = 4
     object PassGB: TGroupBox
       Left = 1
       Top = 1
       Width = 208
-      Height = 127
+      Height = 205
       Align = alLeft
       Caption = '&'#1055#1072#1089#1087#1086#1088#1090
       Font.Charset = DEFAULT_CHARSET
@@ -652,12 +652,70 @@ object DriversFrame: TDriversFrame
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
+      object Label1: TLabel
+        Left = 8
+        Top = 19
+        Width = 41
+        Height = 13
+        Caption = '&'#1057#1077#1088#1080#1103':'
+      end
+      object Label2: TLabel
+        Left = 8
+        Top = 40
+        Width = 44
+        Height = 13
+        Caption = '&'#1053#1086#1084#1077#1088':'
+      end
+      object PassSerialLbl: TLabel
+        Left = 72
+        Top = 19
+        Width = 97
+        Height = 13
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'PassSerialLbl'
+        WordWrap = True
+      end
+      object PassNumLbl: TLabel
+        Left = 72
+        Top = 40
+        Width = 97
+        Height = 13
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'PassNumLbl'
+        WordWrap = True
+      end
+      object PassGaveGB: TGroupBox
+        Left = 2
+        Top = 118
+        Width = 204
+        Height = 85
+        Align = alBottom
+        Caption = '&'#1050#1077#1084' '#1074#1099#1076#1072#1085
+        TabOrder = 0
+        object PassGaveMemo: TMemo
+          Left = 2
+          Top = 15
+          Width = 200
+          Height = 68
+          Align = alClient
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
     end
     object LicenseGB: TGroupBox
       Left = 209
       Top = 1
       Width = 264
-      Height = 127
+      Height = 205
       Align = alLeft
       Caption = '&'#1042#1086#1076#1080#1090#1077#1083#1100#1089#1082#1086#1077' '#1091#1076#1086#1089#1090#1086#1074#1077#1088#1077#1085#1080#1077
       Font.Charset = DEFAULT_CHARSET
@@ -667,12 +725,113 @@ object DriversFrame: TDriversFrame
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 1
+      object Label3: TLabel
+        Left = 8
+        Top = 19
+        Width = 41
+        Height = 13
+        Caption = '&'#1057#1077#1088#1080#1103':'
+      end
+      object Label4: TLabel
+        Left = 8
+        Top = 40
+        Width = 44
+        Height = 13
+        Caption = '&'#1053#1086#1084#1077#1088':'
+      end
+      object LicenseNumLbl: TLabel
+        Left = 88
+        Top = 40
+        Width = 97
+        Height = 13
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'LicenseNumLbl'
+        WordWrap = True
+      end
+      object LicenseSerialLbl: TLabel
+        Left = 88
+        Top = 19
+        Width = 97
+        Height = 13
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'LicenseSerialLbl'
+        WordWrap = True
+      end
+      object Label5: TLabel
+        Left = 8
+        Top = 61
+        Width = 67
+        Height = 13
+        Caption = '&'#1050#1072#1090#1077#1075#1086#1088#1080#1080':'
+      end
+      object LicenseCategoriesLbl: TLabel
+        Left = 88
+        Top = 61
+        Width = 122
+        Height = 13
+        Alignment = taCenter
+        Caption = 'LicenseCategoriesLbl'
+      end
+      object Label6: TLabel
+        Left = 8
+        Top = 82
+        Width = 9
+        Height = 13
+        Caption = '&'#1057
+      end
+      object Label7: TLabel
+        Left = 8
+        Top = 103
+        Width = 18
+        Height = 13
+        Caption = '&'#1044#1086
+      end
+      object LicenseBegDatelbl: TLabel
+        Left = 88
+        Top = 82
+        Width = 107
+        Height = 13
+        Caption = 'LicenseBegDatelbl'
+      end
+      object LicenseEndDateLbl: TLabel
+        Left = 88
+        Top = 103
+        Width = 111
+        Height = 13
+        Caption = 'LicenseEndDateLbl'
+      end
+      object LicenseGaveGB: TGroupBox
+        Left = 2
+        Top = 118
+        Width = 260
+        Height = 85
+        Align = alBottom
+        Caption = '&'#1050#1077#1084' '#1074#1099#1076#1072#1085
+        TabOrder = 0
+        object LicenseGaveMemo: TMemo
+          Left = 2
+          Top = 15
+          Width = 256
+          Height = 68
+          Align = alClient
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+          ScrollBars = ssVertical
+          TabOrder = 0
+        end
+      end
     end
     object CarGB: TGroupBox
       Left = 473
       Top = 1
       Width = 280
-      Height = 127
+      Height = 205
       Align = alLeft
       Caption = '&'#1040#1074#1090#1086#1084#1086#1073#1080#1083#1100
       Font.Charset = DEFAULT_CHARSET
@@ -682,12 +841,87 @@ object DriversFrame: TDriversFrame
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 2
+      object Label8: TLabel
+        Left = 8
+        Top = 19
+        Width = 50
+        Height = 13
+        Caption = '&'#1052#1086#1076#1077#1083#1100':'
+      end
+      object Label9: TLabel
+        Left = 8
+        Top = 54
+        Width = 62
+        Height = 13
+        Caption = '&'#1056#1077#1075'. '#1079#1085#1072#1082':'
+      end
+      object Label10: TLabel
+        Left = 8
+        Top = 86
+        Width = 27
+        Height = 13
+        Caption = '&'#1058#1080#1087':'
+      end
+      object Label11: TLabel
+        Left = 8
+        Top = 116
+        Width = 30
+        Height = 13
+        Caption = '&'#1062#1074#1077#1090
+      end
+      object Label12: TLabel
+        Left = 8
+        Top = 147
+        Width = 26
+        Height = 13
+        Caption = '&'#1043#1086#1076':'
+      end
+      object ModelEdit: TEdit
+        Left = 75
+        Top = 18
+        Width = 196
+        Height = 21
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object RegSymbolEdit: TEdit
+        Left = 75
+        Top = 50
+        Width = 196
+        Height = 21
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object TypeEdit: TEdit
+        Left = 75
+        Top = 82
+        Width = 196
+        Height = 21
+        ReadOnly = True
+        TabOrder = 2
+      end
+      object ColorEdit: TEdit
+        Left = 75
+        Top = 112
+        Width = 196
+        Height = 21
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object YearEdit: TEdit
+        Left = 126
+        Top = 144
+        Width = 77
+        Height = 21
+        ReadOnly = True
+        TabOrder = 4
+      end
     end
     object PrimechGB: TGroupBox
       Left = 753
       Top = 1
       Width = 280
-      Height = 127
+      Height = 205
       Align = alLeft
       Caption = '&'#1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
       Font.Charset = DEFAULT_CHARSET
@@ -697,6 +931,15 @@ object DriversFrame: TDriversFrame
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
+      object PrimechMemo: TMemo
+        Left = 2
+        Top = 15
+        Width = 276
+        Height = 188
+        Align = alClient
+        ScrollBars = ssBoth
+        TabOrder = 0
+      end
     end
   end
 end

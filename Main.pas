@@ -52,6 +52,9 @@ type
     ProductTBI: TToolButton;
     ToolButton4: TToolButton;
     ReestrTBI: TToolButton;
+    DriversAction: TAction;
+    DriversItemMenu: TMenuItem;
+    DriversTBI: TToolButton;
     procedure NextBtnClick(Sender: TObject);
     procedure PrevBtnClick(Sender: TObject);
     procedure DrawSheetCell(Sender: TObject; ACol, ARow: Integer;
@@ -70,6 +73,7 @@ type
     procedure NaklGridTitleClick(Column: TColumn);
     procedure MoveGridTitleClick(Column: TColumn);
     procedure ReestrActionExecute(Sender: TObject);
+    procedure DriversActionExecute(Sender: TObject);
   private
     FDayCount: Integer;
     FItems: TList;
@@ -104,7 +108,7 @@ var
 implementation
 
 uses
-   SConst, AppDM, Car, Insurance, Range, Products, Child, Reestr;
+   SConst, AppDM, Car, Insurance, Range, Products, Child, Reestr, DriversF;
 
 {$R *.dfm}
 
@@ -525,6 +529,11 @@ end;
 procedure TMainForm.ReestrActionExecute(Sender: TObject);
 begin
   CreateChild(TReestrForm, ReestrForm);
+end;
+
+procedure TMainForm.DriversActionExecute(Sender: TObject);
+begin
+  CreateChild(TDriversForm, DriversForm);
 end;
 
 end.
