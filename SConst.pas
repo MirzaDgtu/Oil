@@ -103,6 +103,16 @@ resourcestring
   SSQLGetProductDetail = 'EXEC REPORTS..O_GetProductDetail %d';                                   // Получение информации о товаре
 
 
+  // Модуль водителей
+  SSQLInsDriver = 'EXEC REPORTS..O_InsDriver ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ' +     // Добавление нового водителя
+                                             '''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ' +
+                                             '''%s'', ''%s'', %d, ''%s'', %d, ''%s''';
+
+  SSQLGetDriversL = 'EXEC REPORTS..O_GetDriversL %d';   // Получение списка водителей (0 - без уволенных, 1 - Все)
+
+
+
+
 
 
  // Печать

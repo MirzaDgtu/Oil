@@ -21,7 +21,8 @@ uses
   Nakl in 'Nakl.pas' {NaklForm},
   FrameProduct in 'FrameProduct.pas' {ProductFrame: TFrame},
   ProductModal in 'ProductModal.pas' {ProductFrameModalForm},
-  ProductPrice in 'ProductPrice.pas' {ProductPriceForm};
+  ProductPrice in 'ProductPrice.pas' {ProductPriceForm},
+  Drivers in 'Drivers.pas' {DriversFrame: TFrame};
 
 {$R *.res}
 

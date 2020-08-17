@@ -1,7 +1,7 @@
 object AppData: TAppData
   OldCreateOrder = False
-  Left = 792
-  Top = 179
+  Left = 573
+  Top = 132
   Height = 431
   Width = 751
   object Connection: TADOConnection
@@ -887,9 +887,89 @@ object AppData: TAppData
     Connection = Connection
     Parameters = <>
     Left = 296
-    Top = 328
+    Top = 336
     object TypeDocsTYPE_DOC: TStringField
       FieldName = 'TYPE_DOC'
     end
+  end
+  object DriversL: TADODataSet
+    Connection = Connection
+    Parameters = <>
+    Left = 424
+    Top = 280
+    object DriversLUID: TIntegerField
+      FieldName = 'UID'
+    end
+    object DriversLFamily: TStringField
+      FieldName = 'Family'
+      Size = 35
+    end
+    object DriversLName: TStringField
+      FieldName = 'Name'
+      Size = 15
+    end
+    object DriversLLastName: TStringField
+      FieldName = 'LastName'
+      Size = 40
+    end
+    object DriversLBirthDay: TDateField
+      FieldName = 'BirthDay'
+    end
+    object DriversLPass_Serial: TStringField
+      FieldName = 'Pass_Serial'
+      Size = 6
+    end
+    object DriversLPass_Num: TStringField
+      FieldName = 'Pass_Num'
+      Size = 10
+    end
+    object DriversLLicense_Serial: TStringField
+      FieldName = 'License_Serial'
+      Size = 6
+    end
+    object DriversLLicense_Num: TStringField
+      FieldName = 'License_Num'
+      Size = 10
+    end
+    object DriversLLicense_BegDate: TDateField
+      FieldName = 'License_BegDate'
+    end
+    object DriversLLicense_EndDate: TDateField
+      FieldName = 'License_EndDate'
+    end
+    object DriversLLicense_Gave: TStringField
+      FieldName = 'License_Gave'
+      Size = 50
+    end
+    object DriversLLicense_Access: TStringField
+      FieldName = 'License_Access'
+      Size = 30
+    end
+    object DriversLAdress: TStringField
+      FieldName = 'Adress'
+      Size = 150
+    end
+    object DriversLUID_Car: TIntegerField
+      FieldName = 'UID_Car'
+    end
+    object DriversLDate_Hiring: TDateTimeField
+      FieldName = 'Date_Hiring'
+    end
+    object DriversLAvailable: TBooleanField
+      FieldName = 'Available'
+    end
+    object DriversLPrimech: TStringField
+      FieldName = 'Primech'
+      Size = 250
+    end
+    object DriversLPass_Gave: TStringField
+      FieldName = 'Pass_Gave'
+      Size = 70
+    end
+  end
+  object DS_DriversL: TDataSource
+    DataSet = DriversL
+    Left = 424
+    Top = 336
   end
 end
