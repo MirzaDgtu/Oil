@@ -13,6 +13,8 @@ type
     { Private declarations }
   public
     { Public declarations }
+
+    constructor Create(AOwner: TComponent); override;
   end;
 
 var
@@ -22,4 +24,11 @@ implementation
 
 {$R *.dfm}
 
+{ TDriversForm }
+
+constructor TDriversForm.Create(AOwner: TComponent);
+begin
+  inherited;
+    DriversFrame1.RefreshActionExecute(Self);
+end;
 end.

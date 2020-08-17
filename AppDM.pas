@@ -247,13 +247,10 @@ type
     DriversLFamily: TStringField;
     DriversLName: TStringField;
     DriversLLastName: TStringField;
-    DriversLBirthDay: TDateField;
     DriversLPass_Serial: TStringField;
     DriversLPass_Num: TStringField;
     DriversLLicense_Serial: TStringField;
     DriversLLicense_Num: TStringField;
-    DriversLLicense_BegDate: TDateField;
-    DriversLLicense_EndDate: TDateField;
     DriversLLicense_Gave: TStringField;
     DriversLLicense_Access: TStringField;
     DriversLAdress: TStringField;
@@ -263,6 +260,14 @@ type
     DriversLPrimech: TStringField;
     DriversLPass_Gave: TStringField;
     DS_DriversL: TDataSource;
+    DriversLMODEL: TStringField;
+    DriversLREG_SYMBOL: TStringField;
+    DriversLTYPE_TC: TStringField;
+    DriversLCOLOR: TStringField;
+    DriversLMADEYEAR: TIntegerField;
+    DriversLBirthDay: TWideStringField;
+    DriversLLicense_BegDate: TWideStringField;
+    DriversLLicense_EndDate: TWideStringField;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);

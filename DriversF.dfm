@@ -1,6 +1,6 @@
 object DriversForm: TDriversForm
-  Left = 281
-  Top = 275
+  Left = 271
+  Top = 302
   Width = 1305
   Height = 675
   Caption = #1042#1086#1076#1080#1090#1077#1083#1080
@@ -25,28 +25,19 @@ object DriversForm: TDriversForm
     Align = alClient
     TabOrder = 0
     inherited SB: TStatusBar
-      Top = 472
+      Top = 625
       Width = 1297
     end
     inherited BtnsPanel: TPanel
       Left = 1159
-      Height = 447
-      inherited FindGB: TGroupBox
-        inherited FindEdit: TEdit
-          OnChange = nil
-          OnKeyPress = nil
-        end
-        inherited FindBtn: TBitBtn
-          OnClick = nil
-        end
-      end
+      Height = 393
     end
     inherited HeaderPanel: TPanel
       Width = 1297
     end
     inherited DriversGrid: TDBGrid
       Width = 1159
-      Height = 447
+      Height = 393
       Columns = <
         item
           Expanded = False
@@ -302,7 +293,7 @@ object DriversForm: TDriversForm
         end>
     end
     inherited DriverInfoPanel: TPanel
-      Top = 491
+      Top = 418
       Width = 1297
       inherited PassGB: TGroupBox
         inherited PassSerialLbl: TLabel

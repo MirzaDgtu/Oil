@@ -912,9 +912,6 @@ object AppData: TAppData
       FieldName = 'LastName'
       Size = 40
     end
-    object DriversLBirthDay: TDateField
-      FieldName = 'BirthDay'
-    end
     object DriversLPass_Serial: TStringField
       FieldName = 'Pass_Serial'
       Size = 6
@@ -923,6 +920,10 @@ object AppData: TAppData
       FieldName = 'Pass_Num'
       Size = 10
     end
+    object DriversLPass_Gave: TStringField
+      FieldName = 'Pass_Gave'
+      Size = 70
+    end
     object DriversLLicense_Serial: TStringField
       FieldName = 'License_Serial'
       Size = 6
@@ -930,12 +931,6 @@ object AppData: TAppData
     object DriversLLicense_Num: TStringField
       FieldName = 'License_Num'
       Size = 10
-    end
-    object DriversLLicense_BegDate: TDateField
-      FieldName = 'License_BegDate'
-    end
-    object DriversLLicense_EndDate: TDateField
-      FieldName = 'License_EndDate'
     end
     object DriversLLicense_Gave: TStringField
       FieldName = 'License_Gave'
@@ -962,9 +957,36 @@ object AppData: TAppData
       FieldName = 'Primech'
       Size = 250
     end
-    object DriversLPass_Gave: TStringField
-      FieldName = 'Pass_Gave'
-      Size = 70
+    object DriversLMODEL: TStringField
+      FieldName = 'MODEL'
+      Size = 50
+    end
+    object DriversLREG_SYMBOL: TStringField
+      FieldName = 'REG_SYMBOL'
+      Size = 15
+    end
+    object DriversLTYPE_TC: TStringField
+      FieldName = 'TYPE_TC'
+      Size = 30
+    end
+    object DriversLCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 40
+    end
+    object DriversLMADEYEAR: TIntegerField
+      FieldName = 'MADEYEAR'
+    end
+    object DriversLBirthDay: TWideStringField
+      FieldName = 'BirthDay'
+      Size = 0
+    end
+    object DriversLLicense_BegDate: TWideStringField
+      FieldName = 'License_BegDate'
+      Size = 0
+    end
+    object DriversLLicense_EndDate: TWideStringField
+      FieldName = 'License_EndDate'
+      Size = 0
     end
   end
   object DS_DriversL: TDataSource
