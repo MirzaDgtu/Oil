@@ -126,14 +126,14 @@ begin
         NameEdit.Text := AppData.DriversL.FieldByName('Name').AsString;
         LastNameEdit.Text := AppData.DriversL.FieldByName('LastName').AsString;
         AdressEdit.Text := AppData.DriversL.FieldByName('Adress').AsString;
-        BirthDayDP.Date := AppData.DriversL.FieldByName('BirthDay').AsDateTime;
+        BirthDayDP.DateTime := AppData.DriversL.FieldByName('BirthDay').AsDateTime  ;
         HiringDP.Date := AppData.DriversL.FieldByName('Date_Hiring').AsDateTime;
         AvailableChB.Checked := AppData.DriversL.FieldByName('Available').AsBoolean;
 
         // Паспорт
         PassSerialEdit.Text := AppData.DriversL.FieldByName('Pass_Serial').AsString;
         PassNumEdit.Text := AppData.DriversL.FieldByName('Pass_Num').AsString;
-        PassGaveMemo.Lines.Add(AppData.DriversL.FieldByName('Pass_Gave').AsString);
+        PassGaveMemo.Lines.Text := AppData.DriversL.FieldByName('Pass_Gave').AsString;
 
         // Водительское удостоверение
         LicenseSerialEdit.Text := AppData.DriversL.FieldByName('License_Serial').AsString;
@@ -141,7 +141,7 @@ begin
         LicenseCategoriesEdit.Text := AppData.DriversL.FieldByName('License_Access').AsString;
         LicenseBegDP.Date := AppData.DriversL.FieldByName('License_BegDate').AsDateTime;
         LicenseEndDP.Date := AppData.DriversL.FieldByName('License_EndDate').AsDateTime;
-        LicenseGaveMemo.Lines.Add(AppData.DriversL.FieldByName('License_Gave').AsString);
+        LicenseGaveMemo.Lines.Text := AppData.DriversL.FieldByName('License_Gave').AsString;
 
         // Автомобиль
         ModelEdit.Text := AppData.DriversL.FieldByName('MODEL').AsString;
@@ -152,9 +152,8 @@ begin
         UID_Car := AppData.DriversL.FieldByName('UID_Car').AsInteger;
 
         // Примечание
-        PrimechMemo.Lines.Add(AppData.DriversL.FieldByName('Primech').AsString)
+        PrimechMemo.Lines.Text := AppData.DriversL.FieldByName('Primech').AsString;
       finally
-
       end;
 end;
 

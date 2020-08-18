@@ -977,17 +977,14 @@ object AppData: TAppData
     object DriversLMADEYEAR: TIntegerField
       FieldName = 'MADEYEAR'
     end
-    object DriversLBirthDay: TWideStringField
+    object DriversLBirthDay: TDateTimeField
       FieldName = 'BirthDay'
-      Size = 0
     end
-    object DriversLLicense_BegDate: TWideStringField
+    object DriversLLicense_BegDate: TDateTimeField
       FieldName = 'License_BegDate'
-      Size = 0
     end
-    object DriversLLicense_EndDate: TWideStringField
+    object DriversLLicense_EndDate: TDateTimeField
       FieldName = 'License_EndDate'
-      Size = 0
     end
   end
   object DS_DriversL: TDataSource

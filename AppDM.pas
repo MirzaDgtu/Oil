@@ -265,9 +265,9 @@ type
     DriversLTYPE_TC: TStringField;
     DriversLCOLOR: TStringField;
     DriversLMADEYEAR: TIntegerField;
-    DriversLBirthDay: TWideStringField;
-    DriversLLicense_BegDate: TWideStringField;
-    DriversLLicense_EndDate: TWideStringField;
+    DriversLBirthDay: TDateTimeField;
+    DriversLLicense_BegDate: TDateTimeField;
+    DriversLLicense_EndDate: TDateTimeField;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
@@ -320,7 +320,7 @@ var
 implementation
 
 uses
-  Windows, SConst, Login, Globals, Controls, Forms, Dialogs, Car, Drivers;
+  Windows, SConst, Login, Globals, Controls, Forms, Dialogs, Car, DriversF;
 
 {$R *.dfm}
 
@@ -510,7 +510,7 @@ end;
 
 procedure TAppData.DriversLAfterScroll(DataSet: TDataSet);
 begin
-  TDriversFrame.SetDriverDetail();
+  TDriversForm.SetDriverDetail;
 end;
 
 end.

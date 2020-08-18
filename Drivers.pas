@@ -66,15 +66,19 @@ type
     RefreshAction: TAction;
     FindAction: TAction;
     IL: TImageList;
+    AvailableAction: TAction;
+    BitBtn1: TBitBtn;
     procedure DriversGridTitleClick(Column: TColumn);
     procedure RefreshActionExecute(Sender: TObject);
     procedure AddActionExecute(Sender: TObject);
+    procedure CorrActionExecute(Sender: TObject);
+    procedure DelActionExecute(Sender: TObject);
+    procedure AvailableActionExecute(Sender: TObject);
   private
     { Private declarations }
     procedure SetInfoSB(KolDriver, KolAvailableDriver: integer);
   public
     { Public declarations }
-    class procedure SetDriverDetail();
   end;
 
 var
@@ -102,41 +106,6 @@ begin
           IndexFieldNames := Str
         else
           IndexFieldNames := Str + ' DESC';
-    end;
-end;
-
-class procedure TDriversFrame.SetDriverDetail;
-begin
-  if AppData.DriversL.Active = True then
-    try
-      with DriversF do
-        Begin
-          // Паспорт
-          PassSerialLbl.Caption := AppData.DriversL.FieldByName('Pass_Serial').AsString;
-          PassNumLbl.Caption := AppData.DriversL.FieldByName('Pass_Num').AsString;
-          PassGaveMemo.Lines.Add(AppData.DriversL.FieldByName('Pass_Gave').AsString);
-
-          // Водительское удостоверение
-          LicenseSerialLbl.Caption := AppData.DriversL.FieldByName('License_Serial').AsString;
-          LicenseNumLbl.Caption := AppData.DriversL.FieldByName('License_Num').AsString;
-          LicenseCategoriesLbl.Caption := AppData.DriversL.FieldByName('License_Access').AsString;
-          LicenseBegDatelbl.Caption := AppData.DriversL.FieldByName('License_BegDate').AsString;
-          LicenseEndDateLbl.Caption := AppData.DriversL.FieldByName('License_EndDate').AsString;
-          LicenseGaveMemo.Lines.Add(AppData.DriversL.FieldByName('License_Gave').AsString);
-
-          // Автомобиль
-          ModelEdit.Text := AppData.DriversL.FieldByName('MODEL').AsString;
-          RegSymbolEdit.Text := AppData.DriversL.FieldByName('REG_SYMBOL').AsString;
-          TypeEdit.Text := AppData.DriversL.FieldByName('TYPE_TC').AsString;
-          ColorEdit.Text := AppData.DriversL.FieldByName('COLOR').AsString;
-          YearEdit.Text := AppData.DriversL.FieldByName('MADEYEAR').AsString;
-
-          // Примечание
-          PrimechMemo.Text := AppData.DriversL.FieldByName('Primech').AsString;
-        end;
-    except
-      on Ex: Exception do
-        MessageDlg('Ошибка получения детализации водителя!' + #13 + 'Сообщение: ' + Ex.Message, mtError, [mbOK], 0);
     end;
 end;
 
@@ -192,16 +161,83 @@ begin
                                                                    FormatDateTime('yyyy-mm-dd', HiringDP.Date),
                                                                    Byte(DriverD.AvailableChB.Checked),
                                                                    PrimechMemo.Text]);
-             ShowMessage(AppData.Command.CommandText);
              AppData.Command.Execute;
           except
              on ex: Exception do
-               MessageDlg('Ошибка добавления нового пользователя!' + #13 + 'Сообщение: ' + ex.Message, mtError, [mbOK], 0);
+               MessageDlg('Ошибка добавления нового водителя!' + #13 + 'Сообщение: ' + ex.Message, mtError, [mbOK], 0);
           end;
     finally
        FreeAndNil(DriverD);
        RefreshActionExecute(Sender);
     end;
+end;
+
+procedure TDriversFrame.CorrActionExecute(Sender: TObject);
+var
+    DriverD: TDriverDetailDialog;
+begin
+   DriverD := TDriverDetailDialog.Create(Application, g_Corr);
+
+   with DriverD do
+   try
+       if DriverD.ShowModal = mrOk then
+         try
+             AppData.Command.CommandText := Format(SSQLCorrDriver, [AppData.DriversL.FieldByName('UID').AsInteger,
+                                                                    FamilyEdit.Text,
+                                                                    NameEdit.Text,
+                                                                    LastNameEdit.Text,
+                                                                    FormatDateTime('yyyy-mm-dd', BirthDayDP.Date),
+                                                                    PassSerialEdit.Text,
+                                                                    PassNumEdit.Text,
+                                                                    PassGaveMemo.Text,
+                                                                    LicenseSerialEdit.Text,
+                                                                    LicenseNumEdit.Text,
+                                                                    FormatDateTime('yyyy-mm-dd', LicenseBegDP.Date),
+                                                                    FormatDateTime('yyyy-mm-dd', LicenseEndDP.Date),
+                                                                    LicenseGaveMemo.Text,
+                                                                    LicenseCategoriesEdit.Text,
+                                                                    AdressEdit.Text,
+                                                                    UID_Car,
+                                                                    FormatDateTime('yyyy-mm-dd', HiringDP.Date),
+                                                                    Byte(DriverD.AvailableChB.Checked),
+                                                                    PrimechMemo.Text]);
+             AppData.Command.Execute;
+          except
+             on ex: Exception do
+               MessageDlg('Ошибка изменения информации водителя!' + #13 + 'Сообщение: ' + ex.Message, mtError, [mbOK], 0);
+          end;
+   finally
+      FreeAndNil(DriverD);   
+      RefreshActionExecute(Sender);
+   end;
+end;
+
+procedure TDriversFrame.DelActionExecute(Sender: TObject);
+begin
+  if MessageBox(Handle, 'Вы действительно желаете удалить водителя?', 'Удаление водителя', MB_ICONWARNING+MB_YESNO) = ID_YES then
+    try
+       AppData.Command.CommandText := Format(SSQLDelDriver, [AppData.DriversL.FieldByName('UID').AsInteger]);
+       AppData.Command.Execute;
+    finally
+      RefreshActionExecute(Sender);
+    end;
+end;
+
+procedure TDriversFrame.AvailableActionExecute(Sender: TObject);
+begin
+   try
+    case Byte(AppData.DriversL.FieldByName('Available').AsBoolean) of
+      0: if MessageBox(Handle, 'Вы действительно желаете уволить водителя?', 'Увольнение', MB_ICONWARNING+MB_YESNO) = ID_YES then
+           AppData.Command.CommandText := Format(SSQLTransferDriver, [AppData.DriversL.FieldByName('UID').AsInteger,
+                                                                      1]);
+      1:   AppData.Command.CommandText := Format(SSQLTransferDriver, [AppData.DriversL.FieldByName('UID').AsInteger,
+                                                                      0]);
+    end;
+
+    AppData.Command.Execute();
+   finally
+     RefreshActionExecute(Sender);
+   end;
 end;
 
 end.

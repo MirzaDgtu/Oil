@@ -108,6 +108,14 @@ resourcestring
                                              '''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ' +
                                              '''%s'', ''%s'', %d, ''%s'', %d, ''%s''';
 
+  SSQLCorrDriver = 'EXEC REPORTS..O_CorrDriver %d, ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ' +     // Изменение данных водителя
+                                             '''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ' +
+                                             '''%s'', ''%s'', %d, ''%s'', %d, ''%s''';
+
+  SSQLDelDriver = 'EXEC REPORTS..O_DelDriver %d';                                                   // Удаление водителя
+
+  SSQLTransferDriver = 'EXEC REPORTS..O_TransferDriver %d, %d';                                    //  Увольнение/Возврат на работу
+
   SSQLGetDriversL = 'EXEC REPORTS..O_GetDriversL %d';   // Получение списка водителей (0 - без уволенных, 1 - Все)
 
 
