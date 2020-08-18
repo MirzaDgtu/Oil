@@ -1,10 +1,10 @@
 object DriverDetailDialog: TDriverDetailDialog
-  Left = -418
-  Top = 161
+  Left = -1341
+  Top = 130
   BorderStyle = bsToolWindow
   Caption = #1044#1077#1090#1072#1083#1080#1079#1072#1094#1080#1103' '#1074#1086#1076#1080#1090#1077#1083#1103
-  ClientHeight = 650
-  ClientWidth = 310
+  ClientHeight = 592
+  ClientWidth = 510
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object DriverDetailDialog: TDriverDetailDialog
   object DriverGB: TGroupBox
     Left = 0
     Top = 0
-    Width = 310
-    Height = 127
+    Width = 510
+    Height = 122
     Align = alTop
     Caption = '&'#1042#1086#1076#1080#1090#1077#1083#1100
     Font.Charset = DEFAULT_CHARSET
@@ -51,11 +51,25 @@ object DriverDetailDialog: TDriverDetailDialog
       Caption = '&'#1054#1090#1095#1077#1089#1090#1074#1086':'
     end
     object Label4: TLabel
-      Left = 8
-      Top = 104
-      Width = 105
-      Height = 17
+      Left = 312
+      Top = 28
+      Width = 97
+      Height = 13
       Caption = '&'#1044#1072#1090#1072' '#1088#1086#1078#1076#1077#1085#1080#1103':'
+    end
+    object Label17: TLabel
+      Left = 8
+      Top = 100
+      Width = 37
+      Height = 13
+      Caption = '&'#1040#1076#1088#1077#1089
+    end
+    object Label18: TLabel
+      Left = 312
+      Top = 53
+      Width = 91
+      Height = 13
+      Caption = '&'#1055#1088#1080#1085#1103#1090' '#1085#1072' '#1088#1072#1073'.'
     end
     object FamilyEdit: TEdit
       Left = 110
@@ -81,8 +95,8 @@ object DriverDetailDialog: TDriverDetailDialog
       TabOrder = 2
     end
     object BirthDayDP: TDateTimePicker
-      Left = 110
-      Top = 98
+      Left = 414
+      Top = 25
       Width = 91
       Height = 21
       Date = 44060.690885787040000000
@@ -90,8 +104,8 @@ object DriverDetailDialog: TDriverDetailDialog
       TabOrder = 3
     end
     object AvailableChB: TCheckBox
-      Left = 224
-      Top = 102
+      Left = 312
+      Top = 75
       Width = 80
       Height = 17
       Alignment = taLeftJustify
@@ -104,12 +118,34 @@ object DriverDetailDialog: TDriverDetailDialog
       ParentFont = False
       TabOrder = 4
     end
+    object AdressEdit: TEdit
+      Left = 110
+      Top = 96
+      Width = 390
+      Height = 21
+      TabOrder = 5
+    end
+    object HiringDP: TDateTimePicker
+      Left = 414
+      Top = 50
+      Width = 91
+      Height = 21
+      Date = 44060.690885787040000000
+      Time = 44060.690885787040000000
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 6
+    end
   end
   object PassportGB: TGroupBox
     Left = 0
-    Top = 127
-    Width = 310
-    Height = 122
+    Top = 122
+    Width = 510
+    Height = 104
     Align = alTop
     Caption = '&'#1055#1072#1089#1087#1086#1088#1090
     Font.Charset = DEFAULT_CHARSET
@@ -120,37 +156,37 @@ object DriverDetailDialog: TDriverDetailDialog
     ParentFont = False
     TabOrder = 1
     object Label5: TLabel
-      Left = 8
-      Top = 25
+      Left = 104
+      Top = 20
       Width = 41
       Height = 13
       Caption = '&'#1057#1077#1088#1080#1103':'
     end
     object Label6: TLabel
-      Left = 152
-      Top = 25
+      Left = 248
+      Top = 20
       Width = 44
       Height = 13
       Caption = '&'#1053#1086#1084#1077#1088':'
     end
     object PassSerialEdit: TEdit
-      Left = 66
-      Top = 21
+      Left = 162
+      Top = 16
       Width = 71
       Height = 21
       TabOrder = 0
     end
     object PassNumEdit: TEdit
-      Left = 210
-      Top = 21
+      Left = 306
+      Top = 16
       Width = 95
       Height = 21
       TabOrder = 1
     end
     object PassGaveGB: TGroupBox
       Left = 2
-      Top = 56
-      Width = 306
+      Top = 38
+      Width = 506
       Height = 64
       Align = alBottom
       Caption = '&'#1050#1077#1084' '#1074#1099#1076#1072#1085
@@ -158,23 +194,24 @@ object DriverDetailDialog: TDriverDetailDialog
       object PassGaveMemo: TMemo
         Left = 2
         Top = 15
-        Width = 302
+        Width = 502
         Height = 47
         Align = alClient
+        ScrollBars = ssVertical
         TabOrder = 0
       end
     end
   end
   object BtnsPanel: TPanel
     Left = 0
-    Top = 618
-    Width = 310
+    Top = 560
+    Width = 510
     Height = 32
     Align = alBottom
     BorderStyle = bsSingle
     TabOrder = 2
     object OkBtn: TBitBtn
-      Left = 80
+      Left = 176
       Top = 2
       Width = 59
       Height = 23
@@ -216,7 +253,7 @@ object DriverDetailDialog: TDriverDetailDialog
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     end
     object CancelBtn: TBitBtn
-      Left = 176
+      Left = 272
       Top = 2
       Width = 75
       Height = 23
@@ -260,9 +297,9 @@ object DriverDetailDialog: TDriverDetailDialog
   end
   object CarGB: TGroupBox
     Left = 0
-    Top = 433
-    Width = 310
-    Height = 120
+    Top = 385
+    Width = 510
+    Height = 107
     Align = alTop
     Caption = '&'#1040#1074#1090#1086#1084#1086#1073#1080#1083#1100
     Font.Charset = DEFAULT_CHARSET
@@ -273,46 +310,47 @@ object DriverDetailDialog: TDriverDetailDialog
     ParentFont = False
     TabOrder = 3
     object Label7: TLabel
-      Left = 16
-      Top = 40
+      Left = 104
+      Top = 34
       Width = 143
       Height = 13
       Caption = '&'#1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1086#1085#1085#1099#1081' '#1079#1085#1072#1082':'
     end
     object Label8: TLabel
-      Left = 16
-      Top = 19
+      Left = 104
+      Top = 13
       Width = 50
       Height = 13
       Caption = '&'#1052#1086#1076#1077#1083#1100':'
     end
     object Label9: TLabel
-      Left = 16
-      Top = 63
+      Left = 104
+      Top = 57
       Width = 27
       Height = 13
       Caption = '&'#1058#1080#1087':'
     end
     object Label10: TLabel
-      Left = 208
-      Top = 90
+      Left = 296
+      Top = 84
       Width = 26
       Height = 13
       Caption = '&'#1043#1086#1076':'
     end
     object Label11: TLabel
-      Left = 16
-      Top = 90
+      Left = 104
+      Top = 84
       Width = 30
       Height = 13
       Caption = '&'#1062#1074#1077#1090
     end
     object CarBtn: TBitBtn
-      Left = 276
-      Top = 15
+      Left = 396
+      Top = 9
       Width = 27
       Height = 21
       TabOrder = 0
+      OnClick = CarBtnClick
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
         18000000000000030000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -342,40 +380,40 @@ object DriverDetailDialog: TDriverDetailDialog
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     end
     object ModelEdit: TEdit
-      Left = 80
-      Top = 16
+      Left = 200
+      Top = 10
       Width = 193
       Height = 21
       ReadOnly = True
       TabOrder = 1
     end
     object RegSymbolEdit: TEdit
-      Left = 168
-      Top = 40
+      Left = 256
+      Top = 34
       Width = 137
       Height = 21
       ReadOnly = True
       TabOrder = 2
     end
     object TypeEdit: TEdit
-      Left = 80
-      Top = 64
+      Left = 168
+      Top = 58
       Width = 225
       Height = 21
       ReadOnly = True
       TabOrder = 3
     end
     object ColorEdit: TEdit
-      Left = 80
-      Top = 88
+      Left = 168
+      Top = 82
       Width = 121
       Height = 21
       ReadOnly = True
       TabOrder = 4
     end
     object YearEdit: TEdit
-      Left = 240
-      Top = 88
+      Left = 328
+      Top = 82
       Width = 65
       Height = 21
       ReadOnly = True
@@ -384,9 +422,9 @@ object DriverDetailDialog: TDriverDetailDialog
   end
   object PrimechGB: TGroupBox
     Left = 0
-    Top = 553
-    Width = 310
-    Height = 65
+    Top = 492
+    Width = 510
+    Height = 68
     Align = alClient
     Caption = '&'#1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
     Font.Charset = DEFAULT_CHARSET
@@ -399,17 +437,18 @@ object DriverDetailDialog: TDriverDetailDialog
     object PrimechMemo: TMemo
       Left = 2
       Top = 15
-      Width = 306
-      Height = 48
+      Width = 506
+      Height = 51
       Align = alClient
+      ScrollBars = ssVertical
       TabOrder = 0
     end
   end
   object LicenseGB: TGroupBox
     Left = 0
-    Top = 249
-    Width = 310
-    Height = 184
+    Top = 226
+    Width = 510
+    Height = 159
     Align = alTop
     Caption = '&'#1042#1086#1076#1080#1090#1077#1083#1100#1089#1082#1086#1077' '#1091#1076#1086#1089#1090#1086#1074#1077#1088#1077#1085#1080#1077
     Font.Charset = DEFAULT_CHARSET
@@ -420,53 +459,53 @@ object DriverDetailDialog: TDriverDetailDialog
     ParentFont = False
     TabOrder = 5
     object Label12: TLabel
-      Left = 8
+      Left = 104
       Top = 19
       Width = 41
       Height = 13
       Caption = '&'#1057#1077#1088#1080#1103':'
     end
     object Label13: TLabel
-      Left = 152
+      Left = 248
       Top = 19
       Width = 44
       Height = 13
       Caption = '&'#1053#1086#1084#1077#1088':'
     end
     object Label14: TLabel
-      Left = 8
+      Left = 104
       Top = 45
       Width = 67
       Height = 13
       Caption = '&'#1050#1072#1090#1077#1075#1086#1088#1080#1080':'
     end
     object Label15: TLabel
-      Left = 8
-      Top = 74
+      Left = 103
+      Top = 71
       Width = 13
       Height = 13
       Caption = '&'#1057':'
     end
     object Label16: TLabel
-      Left = 160
-      Top = 74
+      Left = 268
+      Top = 71
       Width = 22
       Height = 13
       Caption = '&'#1044#1086':'
     end
     object LicenseGaveGB: TGroupBox
       Left = 2
-      Top = 97
-      Width = 306
-      Height = 85
+      Top = 96
+      Width = 506
+      Height = 61
       Align = alBottom
       Caption = '&'#1050#1077#1084' '#1074#1099#1076#1072#1085
       TabOrder = 0
       object LicenseGaveMemo: TMemo
         Left = 2
         Top = 15
-        Width = 302
-        Height = 68
+        Width = 502
+        Height = 44
         Align = alClient
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -479,28 +518,28 @@ object DriverDetailDialog: TDriverDetailDialog
       end
     end
     object LicenseSerialEdit: TEdit
-      Left = 66
+      Left = 162
       Top = 16
       Width = 71
       Height = 21
       TabOrder = 1
     end
     object LicenseNumEdit: TEdit
-      Left = 210
+      Left = 306
       Top = 16
       Width = 96
       Height = 21
       TabOrder = 2
     end
     object LicenseCategoriesEdit: TEdit
-      Left = 110
+      Left = 182
       Top = 43
-      Width = 195
+      Width = 219
       Height = 21
       TabOrder = 3
     end
     object LicenseBegDP: TDateTimePicker
-      Left = 64
+      Left = 140
       Top = 68
       Width = 91
       Height = 21
@@ -509,7 +548,7 @@ object DriverDetailDialog: TDriverDetailDialog
       TabOrder = 4
     end
     object LicenseEndDP: TDateTimePicker
-      Left = 212
+      Left = 311
       Top = 68
       Width = 91
       Height = 21

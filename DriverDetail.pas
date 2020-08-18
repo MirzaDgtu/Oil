@@ -55,10 +55,22 @@ type
     LicenseCategoriesEdit: TEdit;
     LicenseBegDP: TDateTimePicker;
     LicenseEndDP: TDateTimePicker;
+    AdressEdit: TEdit;
+    Label17: TLabel;
+    HiringDP: TDateTimePicker;
+    Label18: TLabel;
+    procedure CarBtnClick(Sender: TObject);
   private
+    FUID_Car: integer;
+    procedure SetUID_Car(const Value: integer);
+    procedure SetNewDriver();
+    procedure SetCorrDriver();
     { Private declarations }
   public
     { Public declarations }
+    constructor Create(AOwner: TComponent; TypeView: integer); overload;
+
+    property UID_Car: integer read FUID_Car write SetUID_Car;
   end;
 
 var
@@ -66,6 +78,97 @@ var
 
 implementation
 
+uses Car, CarStory, AppDM, Globals, DB;
+
 {$R *.dfm}
+
+procedure TDriverDetailDialog.CarBtnClick(Sender: TObject);
+var
+    CarF: TCarStoryForm;
+begin
+  CarF := TCarStoryForm.Create(g_New, 0);
+
+  try
+        if CarF.ShowModal = mrOk then
+          try
+             ModelEdit.Text := AppData.Cars.FieldByName('Model').AsString;
+             RegSymbolEdit.Text := AppData.Cars.FieldByName('REG_SYMBOL').AsString;
+             TypeEdit.Text := AppData.Cars.FieldByName('TYPE_TC').AsString;
+             ColorEdit.Text := AppData.Cars.FieldByName('Color').AsString;
+             YearEdit.Text := AppData.Cars.FieldByName('MADEYEAR').AsString;
+             UID_Car := AppData.Cars.FieldByName('UID').AsInteger;
+          finally
+          end;
+  finally
+    FreeAndNil(CarF);
+  end;
+end;
+
+constructor TDriverDetailDialog.Create(AOwner: TComponent;
+  TypeView: integer);
+begin
+  inherited Create(AOwner);
+
+  case TypeView of
+    g_New: SetNewDriver();
+    g_Corr: SetCorrDriver();
+    g_View: ;
+  end;
+end;
+
+procedure TDriverDetailDialog.SetCorrDriver;
+begin
+   if (AppData.DriversL.Active) and
+      (AppData.DriversL.RecordCount > 0) then
+      try
+        // Водитель
+        FamilyEdit.Text := AppData.DriversL.FieldByName('Family').AsString;
+        NameEdit.Text := AppData.DriversL.FieldByName('Name').AsString;
+        LastNameEdit.Text := AppData.DriversL.FieldByName('LastName').AsString;
+        AdressEdit.Text := AppData.DriversL.FieldByName('Adress').AsString;
+        BirthDayDP.Date := AppData.DriversL.FieldByName('BirthDay').AsDateTime;
+        HiringDP.Date := AppData.DriversL.FieldByName('Date_Hiring').AsDateTime;
+        AvailableChB.Checked := AppData.DriversL.FieldByName('Available').AsBoolean;
+
+        // Паспорт
+        PassSerialEdit.Text := AppData.DriversL.FieldByName('Pass_Serial').AsString;
+        PassNumEdit.Text := AppData.DriversL.FieldByName('Pass_Num').AsString;
+        PassGaveMemo.Lines.Add(AppData.DriversL.FieldByName('Pass_Gave').AsString);
+
+        // Водительское удостоверение
+        LicenseSerialEdit.Text := AppData.DriversL.FieldByName('License_Serial').AsString;
+        LicenseNumEdit.Text := AppData.DriversL.FieldByName('License_Num').AsString;
+        LicenseCategoriesEdit.Text := AppData.DriversL.FieldByName('License_Access').AsString;
+        LicenseBegDP.Date := AppData.DriversL.FieldByName('License_BegDate').AsDateTime;
+        LicenseEndDP.Date := AppData.DriversL.FieldByName('License_EndDate').AsDateTime;
+        LicenseGaveMemo.Lines.Add(AppData.DriversL.FieldByName('License_Gave').AsString);
+
+        // Автомобиль
+        ModelEdit.Text := AppData.DriversL.FieldByName('MODEL').AsString;
+        RegSymbolEdit.Text := AppData.DriversL.FieldByName('REG_SYMBOL').AsString;
+        TypeEdit.Text := AppData.DriversL.FieldByName('TYPE_TC').AsString;
+        ColorEdit.Text := AppData.DriversL.FieldByName('COLOR').AsString;
+        YearEdit.Text := AppData.DriversL.FieldByName('MADEYEAR').AsString;
+        UID_Car := AppData.DriversL.FieldByName('UID_Car').AsInteger;
+
+        // Примечание
+        PrimechMemo.Lines.Add(AppData.DriversL.FieldByName('Primech').AsString)
+      finally
+
+      end;
+end;
+
+procedure TDriverDetailDialog.SetNewDriver;
+begin
+  BirthDayDP.Date := Now();
+  HiringDP.Date := Now();
+  LicenseBegDP.Date := Now();
+  LicenseEndDP.Date := Now();
+end;
+
+procedure TDriverDetailDialog.SetUID_Car(const Value: integer);
+begin
+  FUID_Car := Value;
+end;
 
 end.

@@ -273,6 +273,7 @@ type
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
     procedure MoveBeforeOpen(DataSet: TDataSet);
     procedure NaklAfterScroll(DataSet: TDataSet);
+    procedure DriversLAfterScroll(DataSet: TDataSet);
   private
     FgBegD: variant;
     FgEndD: variant;
@@ -319,7 +320,7 @@ var
 implementation
 
 uses
-  Windows, SConst, Login, Globals, Controls, Forms, Dialogs, Car;
+  Windows, SConst, Login, Globals, Controls, Forms, Dialogs, Car, Drivers;
 
 {$R *.dfm}
 
@@ -505,6 +506,11 @@ begin
   if (Nakl.Active) and
      (not Nakl.IsEmpty) then
        Result := NaklMADEYEAR.AsString;
+end;
+
+procedure TAppData.DriversLAfterScroll(DataSet: TDataSet);
+begin
+  TDriversFrame.SetDriverDetail();
 end;
 
 end.

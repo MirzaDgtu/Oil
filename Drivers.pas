@@ -168,11 +168,36 @@ procedure TDriversFrame.AddActionExecute(Sender: TObject);
 var
     DriverD: TDriverDetailDialog;
 begin
-    DriverD := TDriverDetailDialog.Create(Application);
+    DriverD := TDriverDetailDialog.Create(Application, g_New);
 
+    with DriverD do
     try
-       if DriverD.ShowModal = 1 then
-        ShowMessage('dd');
+       if ShowModal = mrOk then
+          try
+             AppData.Command.CommandText := Format(SSQLInsDriver, [FamilyEdit.Text,
+                                                                   NameEdit.Text,
+                                                                   LastNameEdit.Text,
+                                                                   FormatDateTime('yyyy-mm-dd', BirthDayDP.Date),
+                                                                   PassSerialEdit.Text,
+                                                                   PassNumEdit.Text,
+                                                                   PassGaveMemo.Text,
+                                                                   LicenseSerialEdit.Text,
+                                                                   LicenseNumEdit.Text,
+                                                                   FormatDateTime('yyyy-mm-dd', LicenseBegDP.Date),
+                                                                   FormatDateTime('yyyy-mm-dd', LicenseEndDP.Date),
+                                                                   LicenseGaveMemo.Text,
+                                                                   LicenseCategoriesEdit.Text,
+                                                                   AdressEdit.Text,
+                                                                   UID_Car,
+                                                                   FormatDateTime('yyyy-mm-dd', HiringDP.Date),
+                                                                   Byte(DriverD.AvailableChB.Checked),
+                                                                   PrimechMemo.Text]);
+             ShowMessage(AppData.Command.CommandText);
+             AppData.Command.Execute;
+          except
+             on ex: Exception do
+               MessageDlg('Ошибка добавления нового пользователя!' + #13 + 'Сообщение: ' + ex.Message, mtError, [mbOK], 0);
+          end;
     finally
        FreeAndNil(DriverD);
        RefreshActionExecute(Sender);

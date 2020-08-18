@@ -894,6 +894,7 @@ object AppData: TAppData
   end
   object DriversL: TADODataSet
     Connection = Connection
+    AfterScroll = DriversLAfterScroll
     Parameters = <>
     Left = 424
     Top = 280
