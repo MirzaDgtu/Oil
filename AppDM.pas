@@ -510,7 +510,8 @@ end;
 
 procedure TAppData.DriversLAfterScroll(DataSet: TDataSet);
 begin
-  TDriversForm.SetDriverDetail;
+  if Assigned(DriversForm) then
+  TDriversForm.SetDriverDetail();
 end;
 
 end.

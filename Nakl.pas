@@ -566,27 +566,24 @@ end;
 
 procedure TNaklForm.setDrivers(Name: string);
 begin
-  AppData.Drivers.Active := False;
-  AppData.Drivers.CommandText := SSQLGetDrivers;
-  AppData.Drivers.Active := True;
+    AppData.DriversL.Active := False;
+    AppData.DriversL.CommandText := Format(SSQLGetDriversL, [0]);
+    AppData.DriversL.Active := True;
 
-  if not AppData.Drivers.IsEmpty then
-    try
-       DriverCB.Items.BeginUpdate;
-       DriverCB.Items.Clear;
+    if not AppData.DriversL.IsEmpty then
+        try
+          DriverCB.Items.BeginUpdate;
+          DriverCB.Items.Clear;
 
-       while not AppData.Drivers.Eof do
-        Begin
-          if AppData.Drivers.FieldByName('Driver').AsString <> EmptyStr then
-            DriverCB.Items.Add(AppData.Drivers.FieldByName('Driver').AsString);
-          AppData.Drivers.Next;
-        end;
-    finally
-       DriverCB.Items.EndUpdate;
-       AppData.Drivers.Active := False;
-       if Length(Trim(Name)) > 0 then
-          DriverCB.ItemIndex := DriverCB.Items.IndexOf(Name);
-    end;
+          while not AppData.DriversL.Eof do
+            Begin
+               DriverCB.Items.Add(AppData.DriversL.FieldByName('Family').AsString + ' ' +
+                                  AppData.DriversL.FieldByName('Name').AsString);
+               AppData.DriversL.Next;
+            end;
+        finally
+            DriverCB.Items.EndUpdate;
+        end;       
 end;
 
 procedure TNaklForm.setTypeDocs(Name: string);
