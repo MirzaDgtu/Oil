@@ -268,6 +268,7 @@ object DriversFrame: TDriversFrame
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 5
+      OnClick = RefreshActionExecute
     end
     object FindGB: TGroupBox
       Left = 16
@@ -304,6 +305,8 @@ object DriversFrame: TDriversFrame
         Width = 99
         Height = 21
         TabOrder = 1
+        OnChange = FindEditChange
+        OnKeyPress = FindEditKeyPress
       end
       object FindBtn: TBitBtn
         Left = 16
@@ -313,6 +316,7 @@ object DriversFrame: TDriversFrame
         Action = FindAction
         Caption = '&'#1053#1072#1081#1090#1080
         TabOrder = 2
+        OnClick = FindBtnClick
         Glyph.Data = {
           E6040000424DE604000000000000360000002800000014000000140000000100
           180000000000B0040000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -363,6 +367,8 @@ object DriversFrame: TDriversFrame
       Height = 23
       Action = AvailableAction
       Caption = '  &'#1059#1074#1086#1083#1080#1090#1100
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 7
       Glyph.Data = {
         36030000424D3603000000000000360000002800000010000000100000000100
@@ -1098,29 +1104,34 @@ object DriversFrame: TDriversFrame
     object AddAction: TAction
       Category = 'Driver'
       Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
+      Hint = '&'#1057#1086#1079#1076#1072#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1074#1086#1076#1080#1090#1077#1083#1103
       ImageIndex = 1
       OnExecute = AddActionExecute
     end
     object CorrAction: TAction
       Category = 'Driver'
       Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
+      Hint = '&'#1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1076#1072#1085#1085#1099#1093' '#1074#1086#1076#1080#1090#1077#1083#1103
       ImageIndex = 2
       OnExecute = CorrActionExecute
     end
     object ViewAction: TAction
       Category = 'Driver'
       Caption = '&'#1055#1088#1086#1089#1084#1086#1090#1088
+      Hint = '&'#1055#1088#1086#1089#1084#1086#1090#1088' '#1076#1072#1085#1085#1099#1093' '#1074#1086#1076#1080#1090#1077#1083#1103
       ImageIndex = 5
     end
     object DelAction: TAction
       Category = 'Driver'
       Caption = '  &'#1059#1076#1072#1083#1080#1090#1100
+      Hint = '&'#1059#1076#1072#1083#1077#1085#1080#1077' '#1074#1086#1076#1080#1090#1077#1083#1103
       ImageIndex = 0
       OnExecute = DelActionExecute
     end
     object RefreshAction: TAction
       Category = 'Driver'
       Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
+      Hint = '&'#1054#1073#1085#1086#1074#1083#1077#1085#1080#1077' '#1089#1087#1080#1089#1082#1072' '#1074#1086#1076#1080#1090#1077#1083#1077#1081
       ImageIndex = 3
       OnExecute = RefreshActionExecute
     end
@@ -1132,6 +1143,7 @@ object DriversFrame: TDriversFrame
     object AvailableAction: TAction
       Category = 'Driver'
       Caption = '  &'#1059#1074#1086#1083#1080#1090#1100
+      Hint = '&'#1059#1074#1086#1083#1100#1085#1077#1085#1080'/'#1042#1086#1079#1074#1088#1072#1090' '#1085#1072' '#1088#1072#1073#1086#1090#1091' '#1088#1072#1073#1086#1090#1085#1080#1082#1072
       ImageIndex = 6
       OnExecute = AvailableActionExecute
     end

@@ -74,9 +74,13 @@ type
     procedure CorrActionExecute(Sender: TObject);
     procedure DelActionExecute(Sender: TObject);
     procedure AvailableActionExecute(Sender: TObject);
+    procedure FindEditKeyPress(Sender: TObject; var Key: Char);
+    procedure FindEditChange(Sender: TObject);
+    procedure FindBtnClick(Sender: TObject);
   private
     { Private declarations }
     procedure SetInfoSB(KolDriver, KolAvailableDriver: integer);
+    procedure SearchDriver(Index: integer; StrSearch: String);
   public
     { Public declarations }
   end;
@@ -238,6 +242,43 @@ begin
    finally
      RefreshActionExecute(Sender);
    end;
+end;
+
+procedure TDriversFrame.SearchDriver(Index: integer; StrSearch: String);
+var
+    Str: String;
+begin
+  case Index of
+    0: Str := 'UID = '  + Trim(FindEdit.Text);
+    1: Str := 'Family LIKE ' + QuotedStr('%' + Trim(FindEdit.Text) + '%');
+    2: Str := 'Name LIKE ' + QuotedStr('%' + Trim(FindEdit.Text) + '%');
+    3: Str := 'LastName LIKE ' + QuotedStr('%' + Trim(FindEdit.Text) + '%');
+  end;
+
+   if Length(Trim(Str)) > 0 then
+    Begin
+      AppData.DriversL.Filter := Str;
+      AppData.DriversL.Filtered := True;
+    end;
+end;
+
+procedure TDriversFrame.FindEditKeyPress(Sender: TObject; var Key: Char);
+begin
+  if FindCB.ItemIndex = 0 then
+    if not(Key in ['0'..'9', #13, #8]) then
+      Key := #0;
+end;
+
+procedure TDriversFrame.FindEditChange(Sender: TObject);
+begin
+  if Length(Trim(FindEdit.Text)) = 0 then
+      AppData.DriversL.Filtered := False;
+end;
+
+procedure TDriversFrame.FindBtnClick(Sender: TObject);
+begin
+    if Length(Trim(FindEdit.Text)) > 0 then
+      SearchDriver(FindCB.ItemIndex, Trim(FindEdit.Text));
 end;
 
 end.
