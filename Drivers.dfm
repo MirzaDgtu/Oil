@@ -1,14 +1,14 @@
 object DriversFrame: TDriversFrame
   Left = 0
   Top = 0
-  Width = 1372
-  Height = 596
+  Width = 1294
+  Height = 622
   Align = alClient
   TabOrder = 0
   object SB: TStatusBar
     Left = 0
-    Top = 577
-    Width = 1372
+    Top = 603
+    Width = 1294
     Height = 19
     Panels = <
       item
@@ -22,10 +22,10 @@ object DriversFrame: TDriversFrame
       end>
   end
   object BtnsPanel: TPanel
-    Left = 1234
+    Left = 1156
     Top = 25
     Width = 138
-    Height = 345
+    Height = 371
     Align = alRight
     TabOrder = 1
     object Bevel1: TBevel
@@ -316,7 +316,6 @@ object DriversFrame: TDriversFrame
         Action = FindAction
         Caption = '&'#1053#1072#1081#1090#1080
         TabOrder = 2
-        OnClick = FindBtnClick
         Glyph.Data = {
           E6040000424DE604000000000000360000002800000014000000140000000100
           180000000000B0040000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -402,7 +401,7 @@ object DriversFrame: TDriversFrame
   object HeaderPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1372
+    Width = 1294
     Height = 25
     Align = alTop
     TabOrder = 2
@@ -410,8 +409,8 @@ object DriversFrame: TDriversFrame
   object DriversGrid: TDBGrid
     Left = 0
     Top = 25
-    Width = 1234
-    Height = 345
+    Width = 1156
+    Height = 371
     Align = alClient
     DataSource = AppData.DS_DriversL
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -793,8 +792,8 @@ object DriversFrame: TDriversFrame
   end
   object DriverInfoPanel: TPanel
     Left = 0
-    Top = 370
-    Width = 1372
+    Top = 396
+    Width = 1294
     Height = 207
     Align = alBottom
     TabOrder = 4
@@ -1100,13 +1099,14 @@ object DriversFrame: TDriversFrame
   end
   object AL: TActionList
     Images = IL
-    Left = 1032
+    Left = 1024
     Top = 104
     object AddAction: TAction
       Category = 'Driver'
       Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
       Hint = '&'#1057#1086#1079#1076#1072#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1074#1086#1076#1080#1090#1077#1083#1103
       ImageIndex = 1
+      ShortCut = 16429
       OnExecute = AddActionExecute
     end
     object CorrAction: TAction
@@ -1114,6 +1114,7 @@ object DriversFrame: TDriversFrame
       Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
       Hint = '&'#1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1076#1072#1085#1085#1099#1093' '#1074#1086#1076#1080#1090#1077#1083#1103
       ImageIndex = 2
+      ShortCut = 115
       OnExecute = CorrActionExecute
     end
     object ViewAction: TAction
@@ -1128,6 +1129,7 @@ object DriversFrame: TDriversFrame
       Caption = '  &'#1059#1076#1072#1083#1080#1090#1100
       Hint = '&'#1059#1076#1072#1083#1077#1085#1080#1077' '#1074#1086#1076#1080#1090#1077#1083#1103
       ImageIndex = 0
+      ShortCut = 16430
       OnExecute = DelActionExecute
     end
     object RefreshAction: TAction
@@ -1135,6 +1137,7 @@ object DriversFrame: TDriversFrame
       Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
       Hint = '&'#1054#1073#1085#1086#1074#1083#1077#1085#1080#1077' '#1089#1087#1080#1089#1082#1072' '#1074#1086#1076#1080#1090#1077#1083#1077#1081
       ImageIndex = 3
+      ShortCut = 116
       OnExecute = RefreshActionExecute
     end
     object FindAction: TAction
@@ -1147,6 +1150,7 @@ object DriversFrame: TDriversFrame
       Caption = '  &'#1059#1074#1086#1083#1080#1090#1100
       Hint = '&'#1059#1074#1086#1083#1100#1085#1077#1085#1080'/'#1042#1086#1079#1074#1088#1072#1090' '#1085#1072' '#1088#1072#1073#1086#1090#1091' '#1088#1072#1073#1086#1090#1085#1080#1082#1072
       ImageIndex = 6
+      ShortCut = 16416
       OnExecute = AvailableActionExecute
     end
   end
@@ -1154,7 +1158,7 @@ object DriversFrame: TDriversFrame
     Left = 1032
     Top = 168
     Bitmap = {
-      494C010107000900040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010107000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1554,7 +1558,8 @@ object DriversFrame: TDriversFrame
       E7E7E007E001F01BC183E007E007E0038181E007E007E003E007E007E007E703
       E007E007E007EF83F81FE007E007FE03F81FE007E00781FFE007E007E00781E7
       E007E007E00781C78181E007E0078007C183E007E00F800FE7E7E01FE01F901F
-      F7EFE01FE03FB83FFFFFFFFFFFFFFFFF}
+      F7EFE01FE03FB83FFFFFFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
   object DriverMenu: TPopupMenu
     Images = IL

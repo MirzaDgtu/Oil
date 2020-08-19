@@ -992,4 +992,32 @@ object AppData: TAppData
     Left = 424
     Top = 336
   end
+  object DriverCar: TADODataSet
+    Connection = Connection
+    Parameters = <>
+    Left = 488
+    Top = 280
+    object DriverCarUID: TIntegerField
+      FieldName = 'UID'
+    end
+    object DriverCarMODEL: TStringField
+      FieldName = 'MODEL'
+      Size = 50
+    end
+    object DriverCarREG_SYMBOL: TStringField
+      FieldName = 'REG_SYMBOL'
+      Size = 15
+    end
+    object DriverCarTYPE_TC: TStringField
+      FieldName = 'TYPE_TC'
+      Size = 30
+    end
+    object DriverCarCOLOR: TStringField
+      FieldName = 'COLOR'
+      Size = 40
+    end
+    object DriverCarMADEYEAR: TIntegerField
+      FieldName = 'MADEYEAR'
+    end
+  end
 end

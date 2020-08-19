@@ -118,6 +118,8 @@ resourcestring
 
   SSQLGetDriversL = 'EXEC REPORTS..O_GetDriversL %d';   // Получение списка водителей (0 - без уволенных, 1 - Все)
 
+  SSQLGetDriverCar = 'EXEC REPORTS..O_GetDriverCar %d'; //Получение информации о автомобиле водителя
+
 
 
 

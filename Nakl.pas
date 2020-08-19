@@ -78,6 +78,7 @@ type
     procedure CancelNaklActionExecute(Sender: TObject);
     procedure HelpActionExecute(Sender: TObject);
     procedure ProductSGDblClick(Sender: TObject);
+    procedure DriverCBChange(Sender: TObject);
   private
     { Private declarations }
     FUNICUM_NUM: integer;
@@ -89,9 +90,11 @@ type
     procedure SetUID_Car(const Value: integer);
     procedure DeleteRow(StringGrid: TStringGrid; ARow: Integer);
     procedure SetNumSG(SG: TStringGrid; Value: integer);
+    procedure SetCarInfo(Uid_Driver: integer);
     function GetSumDoc: Real;
     function SetSumProd(CountProd, PriceProd: real): Variant;
     function CheckFullNessDoc: Boolean;
+
 
   protected
     property UNICUM_NUM: integer read FUNICUM_NUM write SetUNICUM_NUM;
@@ -121,7 +124,7 @@ var
 implementation
 
 uses AppDM, Globals, Products, SConst, DB, CarStory, Math, ProductModal,
-  ProductPrice;
+  ProductPrice, DriverDetail;
 
 {$R *.dfm}
 
@@ -321,14 +324,51 @@ end;
 
 procedure TNaklForm.DriverActionExecute(Sender: TObject);
 var
-    Str: string;
+//    Str: string;
+    DriverD: TDriverDetailDialog;
 begin
-  if InputQuery('Водитель', 'ФИО', Str) then
-  begin
-    Str := Trim(Str);
-    DriverCB.Items.Add(Str);
-    DriverCB.ItemIndex := DriverCB.Items.IndexOf(Str);
-  end;
+ // if InputQuery('Водитель', 'ФИО', Str) then
+ // begin
+ //   Str := Trim(Str);
+ //   DriverCB.Items.Add(Str);
+  //  DriverCB.ItemIndex := DriverCB.Items.IndexOf(Str);
+ // end;
+
+ DriverD := TDriverDetailDialog.Create(Application, g_New);
+
+    with DriverD do
+    try
+      if ShowModal = mrOk then
+        if (Length(Trim(FamilyEdit.Text)) > 0) and
+           (Length(Trim(NameEdit.Text)) > 0) then
+          try
+             AppData.Command.CommandText := Format(SSQLInsDriver, [FamilyEdit.Text,
+                                                                   NameEdit.Text,
+                                                                   LastNameEdit.Text,
+                                                                   FormatDateTime('yyyy-mm-dd', BirthDayDP.Date),
+                                                                   PassSerialEdit.Text,
+                                                                   PassNumEdit.Text,
+                                                                   PassGaveMemo.Text,
+                                                                   LicenseSerialEdit.Text,
+                                                                   LicenseNumEdit.Text,
+                                                                   FormatDateTime('yyyy-mm-dd', LicenseBegDP.Date),
+                                                                   FormatDateTime('yyyy-mm-dd', LicenseEndDP.Date),
+                                                                   LicenseGaveMemo.Text,
+                                                                   LicenseCategoriesEdit.Text,
+                                                                   AdressEdit.Text,
+                                                                   UID_Car,
+                                                                   FormatDateTime('yyyy-mm-dd', HiringDP.Date),
+                                                                   Byte(DriverD.AvailableChB.Checked),
+                                                                   PrimechMemo.Text]);
+             AppData.Command.Execute;
+             setDrivers(FamilyEdit.Text + ' ' + NameEdit.Text);
+          except
+             on ex: Exception do
+               MessageDlg('Ошибка добавления нового водителя!' + #13 + 'Сообщение: ' + ex.Message, mtError, [mbOK], 0);
+          end;
+    finally
+       FreeAndNil(DriverD);
+    end;
 end;
 
 procedure TNaklForm.CarActionExecute(Sender: TObject);
@@ -583,6 +623,8 @@ begin
             end;
         finally
             DriverCB.Items.EndUpdate;
+            if Trim(Name) <> EmptyStr then
+              DriverCB.ItemIndex := DriverCB.Items.IndexOf(Name);
         end;       
 end;
 
@@ -634,6 +676,42 @@ end;
 procedure TNaklForm.ProductSGDblClick(Sender: TObject);
 begin
   AddRowActionExecute(Self);
+end;
+
+procedure TNaklForm.DriverCBChange(Sender: TObject);
+var
+    family, name: string;
+begin
+  if DriverCB.ItemIndex > -1 then
+    try
+      family := DriverCB.Text;
+      name := DriverCB.Text;
+
+      Delete(family, 1, pos(' ', family));
+      Delete(name, pos(' ', name), Length(name) - pos(' ', name) + 1);
+    finally
+      AppData.DriversL.Locate('Family;Name', VarArrayOf([family, name]), [loCaseInsensitive, loPartialKey]);
+      SetCarInfo(AppData.DriversL.FieldByName('UID').AsInteger);
+    end;
+end;
+
+procedure TNaklForm.SetCarInfo(Uid_Driver: integer);
+begin
+  if (Uid_Driver <> 0) and
+     (DriverCB.ItemIndex <> -1) then
+    try
+      AppData.DriverCar.Active := False;
+      AppData.DriverCar.CommandText := Format(SSQLGetDriverCar, [Uid_Driver]);
+      AppData.DriverCar.Active := True;
+
+      ModelEdit.Text := AppData.DriverCar.FieldByName('Model').AsString;
+      RegSymbolEdit.Text := AppData.DriverCar.FieldByName('REG_SYMBOL').AsString;
+      TypeEdit.Text := AppData.DriverCar.FieldByName('TYPE_TC').AsString;
+      ColorEdit.Text := AppData.DriverCar.FieldByName('Color').AsString;
+      YearEdit.Text := AppData.DriverCar.FieldByName('MADEYEAR').AsString;
+      UID_Car := AppData.DriverCar.FieldByName('UID').AsInteger;
+    finally 
+    end;
 end;
 
 end.

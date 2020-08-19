@@ -90,6 +90,7 @@ object NaklForm: TNaklForm
         Style = csOwnerDrawFixed
         ItemHeight = 16
         TabOrder = 2
+        OnChange = DriverCBChange
       end
       object AddDriverBtn: TBitBtn
         Left = 200

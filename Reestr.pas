@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, Grids, DBGrids, Menus,
   ImgList, ActnList, ADODB, DB, UExcelAdapter, OLEAdapter,
-  UCustomFlexCelReport, UFlexCelReport;
+  UCustomFlexCelReport, UFlexCelReport, StrUtils;
 
 type
   TReestrForm = class(TForm)
@@ -78,7 +78,7 @@ type
     FEndD: TDateTime;
     procedure SetBegD(const Value: TDateTime);
     procedure SetEndD(const Value: TDateTime);
-    procedure SetRangeCaprion(BegD, EndD: TDateTime);
+    procedure SetRangeCaption(BegD, EndD: TDateTime);
 
     function GetNumDoc: Variant;
     function GetDateDoc: Variant;
@@ -200,11 +200,11 @@ begin
   finally
      Screen.Cursor := crDefault;
      AppData.Nakl.EnableControls;
-     SetRangeCaprion(BegD, EndD);
+     SetRangeCaption(BegD, EndD);
   end;
 end;
 
-procedure TReestrForm.SetRangeCaprion(BegD, EndD: TDateTime);
+procedure TReestrForm.SetRangeCaption(BegD, EndD: TDateTime);
 begin
     RangeLbl.Caption := Format(SRangeT, [FormatDateTime('yyyy-mm-dd', BegD),
                                          FormatDateTime('yyyy-mm-dd', EndD)]);
@@ -340,7 +340,7 @@ begin
             try
                 AppData.Command.CommandText  := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
                                                                          FloatToStr(NaklF.SumDoc),
-                                                                         NaklF.DriverCB.Text,
+                                                                         IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
                                                                          NaklF.UID_Car,
                                                                          NaklF.TypeDocCB.Text,
                                                                          g_User,
@@ -451,5 +451,4 @@ begin
       AppData.Nakl.Locate('UNICUM_NUM', un_Num, [loCaseInsensitive, loPartialKey]);
    end;
 end;
-
 end.

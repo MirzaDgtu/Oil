@@ -268,6 +268,13 @@ type
     DriversLBirthDay: TDateTimeField;
     DriversLLicense_BegDate: TDateTimeField;
     DriversLLicense_EndDate: TDateTimeField;
+    DriverCar: TADODataSet;
+    DriverCarUID: TIntegerField;
+    DriverCarMODEL: TStringField;
+    DriverCarREG_SYMBOL: TStringField;
+    DriverCarTYPE_TC: TStringField;
+    DriverCarCOLOR: TStringField;
+    DriverCarMADEYEAR: TIntegerField;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
