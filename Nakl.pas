@@ -631,7 +631,7 @@ end;
 procedure TNaklForm.setTypeDocs(Name: string);
 begin
     AppData.TypeDocs.Active := False;
-    AppData.TypeDocs.CommandText := SSQLGetTypeDocs;
+    AppData.TypeDocs.CommandText := Format(SSQLGetTypeDocs, [0]);
     AppData.TypeDocs.Active := True;
 
     if not AppData.TypeDocs.IsEmpty then

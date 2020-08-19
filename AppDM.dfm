@@ -886,10 +886,20 @@ object AppData: TAppData
   object TypeDocs: TADODataSet
     Connection = Connection
     Parameters = <>
-    Left = 296
-    Top = 336
+    Left = 560
+    Top = 280
     object TypeDocsTYPE_DOC: TStringField
       FieldName = 'TYPE_DOC'
+    end
+    object TypeDocsUID: TIntegerField
+      FieldName = 'UID'
+    end
+    object TypeDocsDESCRIPTION: TStringField
+      FieldName = 'DESCRIPTION'
+      Size = 40
+    end
+    object TypeDocsRESERVE: TBooleanField
+      FieldName = 'RESERVE'
     end
   end
   object DriversL: TADODataSet
@@ -1019,5 +1029,10 @@ object AppData: TAppData
     object DriverCarMADEYEAR: TIntegerField
       FieldName = 'MADEYEAR'
     end
+  end
+  object DS_TypeDocs: TDataSource
+    DataSet = TypeDocs
+    Left = 560
+    Top = 336
   end
 end

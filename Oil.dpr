@@ -24,7 +24,8 @@ uses
   ProductPrice in 'ProductPrice.pas' {ProductPriceForm},
   Drivers in 'Drivers.pas' {DriversFrame: TFrame},
   DriversF in 'DriversF.pas' {DriversForm},
-  DriverDetail in 'DriverDetail.pas' {DriverDetailDialog};
+  DriverDetail in 'DriverDetail.pas' {DriverDetailDialog},
+  TypeDoc in 'TypeDoc.pas' {TypeDocForm};
 
 {$R *.res}
 

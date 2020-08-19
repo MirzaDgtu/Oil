@@ -90,6 +90,7 @@ type
     { Public declarations }
 
     constructor Create(AOwner: TComponent); override;
+    
   published
     property BegD: TDateTime read FBegD write SetBegD;
     property EndD: TDateTime read FEndD write SetEndD;

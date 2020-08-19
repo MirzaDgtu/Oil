@@ -74,7 +74,14 @@ resourcestring
 
 // Получение информации в справочники документа
   SSQLGetDrivers = 'EXEC REPORTS..O_GetDrivers';    // Получение списка водителей
-  SSQLGetTypeDocs = 'EXEC REPORTS..O_GetTypeDocs';  // Получение списка типов документа
+
+// Модуль типов документов
+  SSQLInsTypeDocs = 'EXEC REPORTS..O_InsTypeDocs ''%s'', ''%s'', %d';           // Добавление типа документа
+  SSQLCorrTypeDoc = 'EXEC REPORTS..O_CorrTypeDoc %d, ''%s'', ''%s'', %d';       // Изменение типа документа
+  SSQLDelTypeDocs = 'EXEC REPORTS..O_DelTypeDocs %d';                           // Удаление типа документа
+  SSQLTransferTypeDoc = 'EXEC REPORTS..O_TransferTypeDoc %d, %d';               // Перевод типа документа в\из резерв(а)
+  SSQLGetTypeDocs = 'EXEC REPORTS..O_GetTypeDocs %d';                           // Получение списка типов документа
+
 
 // Модуль товаров
   SSQLGetProducts = 'EXEC REPORTS..O_GetProducts ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s''';                      // Получение списка ГСМ товаров

@@ -275,6 +275,10 @@ type
     DriverCarTYPE_TC: TStringField;
     DriverCarCOLOR: TStringField;
     DriverCarMADEYEAR: TIntegerField;
+    TypeDocsUID: TIntegerField;
+    TypeDocsDESCRIPTION: TStringField;
+    TypeDocsRESERVE: TBooleanField;
+    DS_TypeDocs: TDataSource;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
