@@ -25,7 +25,8 @@ uses
   Drivers in 'Drivers.pas' {DriversFrame: TFrame},
   DriversF in 'DriversF.pas' {DriversForm},
   DriverDetail in 'DriverDetail.pas' {DriverDetailDialog},
-  TypeDoc in 'TypeDoc.pas' {TypeDocForm};
+  TypeDoc in 'TypeDoc.pas' {TypeDocForm},
+  TypeDocDetail in 'TypeDocDetail.pas' {TypeDocDetailForm};
 
 {$R *.res}
 
@@ -35,5 +36,6 @@ begin
   Application.Initialize;
   Application.CreateForm(TAppData, AppData);
   Application.CreateForm(TMainForm, MainForm);
+  Application.CreateForm(TTypeDocDetailForm, TypeDocDetailForm);
   Application.Run;
 end.
