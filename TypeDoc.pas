@@ -33,6 +33,7 @@ type
     N4: TMenuItem;
     N5: TMenuItem;
     procedure AddActionExecute(Sender: TObject);
+    procedure RefreshActionExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -70,6 +71,12 @@ begin
     finally
       FreeAndNil(typeDetail);
     end;
+end;
+
+procedure TTypeDocForm.RefreshActionExecute(Sender: TObject);
+begin
+  AppData.TypeDocs.Active := False;
+  AppData.TypeDocs.CommandText := Format(SSQLGetTypeDocs, [Byte(ResevrChB.Checked)]);
 end;
 
 end.

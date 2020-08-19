@@ -39,9 +39,9 @@ object TypeDocDetailForm: TTypeDocDetailForm
     object Label2: TLabel
       Left = 16
       Top = 52
-      Width = 102
+      Width = 140
       Height = 13
-      Caption = '&'#1050#1088#1072#1090#1082#1086#1077' '#1085#1072#1080#1084'-'#1080#1077
+      Caption = '&'#1050#1088#1072#1090#1082#1086#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
     end
     object DescriptionEdit: TEdit
       Left = 128

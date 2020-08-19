@@ -387,6 +387,7 @@ object TypeDocForm: TTypeDocForm
       Category = 'TypeDoc'
       Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
       ImageIndex = 4
+      OnExecute = RefreshActionExecute
     end
   end
   object IL: TImageList
