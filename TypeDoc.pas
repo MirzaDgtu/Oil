@@ -22,6 +22,16 @@ type
     AL: TActionList;
     IL: TImageList;
     PopMenu: TPopupMenu;
+    AddAction: TAction;
+    CorrAction: TAction;
+    DelAction: TAction;
+    TransferAction: TAction;
+    RefreshAction: TAction;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
   private
     { Private declarations }
   public

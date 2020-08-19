@@ -55,6 +55,8 @@ type
     DriversAction: TAction;
     DriversItemMenu: TMenuItem;
     DriversTBI: TToolButton;
+    TypeDocAction: TAction;
+    TypeDocTBI: TToolButton;
     procedure NextBtnClick(Sender: TObject);
     procedure PrevBtnClick(Sender: TObject);
     procedure DrawSheetCell(Sender: TObject; ACol, ARow: Integer;
@@ -74,6 +76,7 @@ type
     procedure MoveGridTitleClick(Column: TColumn);
     procedure ReestrActionExecute(Sender: TObject);
     procedure DriversActionExecute(Sender: TObject);
+    procedure TypeDocActionExecute(Sender: TObject);
   private
     FDayCount: Integer;
     FItems: TList;
@@ -108,7 +111,8 @@ var
 implementation
 
 uses
-   SConst, AppDM, Car, Insurance, Range, Products, Child, Reestr, DriversF;
+   SConst, AppDM, Car, Insurance, Range, Products, Child, Reestr, DriversF,
+  TypeDoc;
 
 {$R *.dfm}
 
@@ -534,6 +538,20 @@ end;
 procedure TMainForm.DriversActionExecute(Sender: TObject);
 begin
   CreateChild(TDriversForm, DriversForm);
+end;
+
+procedure TMainForm.TypeDocActionExecute(Sender: TObject);
+var
+    TypeD: TTypeDocForm;
+begin
+      TypeD := TTypeDocForm.Create(MainForm);
+
+      try
+         TypeD.ShowModal();
+      finally
+         FreeAndNil(TypeD);
+      end;
+
 end;
 
 end.
