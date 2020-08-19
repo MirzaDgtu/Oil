@@ -372,16 +372,19 @@ object TypeDocForm: TTypeDocForm
       Category = 'TypeDoc'
       Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
       ImageIndex = 3
+      OnExecute = CorrActionExecute
     end
     object DelAction: TAction
       Category = 'TypeDoc'
       Caption = '&'#1059#1076#1072#1083#1080#1090#1100
       ImageIndex = 0
+      OnExecute = DelActionExecute
     end
     object TransferAction: TAction
       Category = 'TypeDoc'
       Caption = '&'#1055#1077#1088#1077#1074#1077#1089#1090#1080
       ImageIndex = 1
+      OnExecute = TransferActionExecute
     end
     object RefreshAction: TAction
       Category = 'TypeDoc'

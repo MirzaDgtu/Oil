@@ -1,6 +1,6 @@
 object TypeDocDetailForm: TTypeDocDetailForm
-  Left = -593
-  Top = 573
+  Left = -590
+  Top = 32
   BorderStyle = bsToolWindow
   Caption = #1044#1077#1090#1072#1083#1080' '#1090#1080#1087#1072' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
   ClientHeight = 130
