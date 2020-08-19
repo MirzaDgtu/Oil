@@ -32,6 +32,7 @@ type
     N3: TMenuItem;
     N4: TMenuItem;
     N5: TMenuItem;
+    procedure AddActionExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,8 +44,32 @@ var
 
 implementation
 
-uses AppDM, Globals, SConst;
+uses AppDM, Globals, SConst, TypeDocDetail;
 
 {$R *.dfm}
+
+procedure TTypeDocForm.AddActionExecute(Sender: TObject);
+var
+    typeDetail: TTypeDocDetailForm;
+begin
+    typeDetail := TTypeDocDetailForm.Create(Application);
+
+    try
+      if typeDetail.ShowModal = mrOk then
+        if Length(Trim(typeDetail.DescriptionEdit.Text)) > 0 and
+           Length(Trim(typeDetail.NameEdit.Text)) > 0 then
+        try
+          AppData.Command.CommandText := Format(SSQLInsTypeDocs, [Trim(typeDetail.NameEdit.Text),
+                                                                  Trim(typeDetail.DescriptionEdit.Text),
+                                                                  Byte(typeDetail.ReserveChB.Checked)]);
+          AppData.Command.Execute;
+        except
+          on Ex: Exception do
+            MessageDlg('Ошибка добавления нового типа документа' + #13 + 'Сообщение: ' + ex.Message, mtError, [mbOK], 0);
+        end;
+    finally
+      FreeAndNil(typeDetail);
+    end;
+end;
 
 end.

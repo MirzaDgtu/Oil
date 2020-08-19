@@ -36,6 +36,5 @@ begin
   Application.Initialize;
   Application.CreateForm(TAppData, AppData);
   Application.CreateForm(TMainForm, MainForm);
-  Application.CreateForm(TTypeDocDetailForm, TypeDocDetailForm);
   Application.Run;
 end.

@@ -366,6 +366,7 @@ object TypeDocForm: TTypeDocForm
       Category = 'TypeDoc'
       Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
       ImageIndex = 2
+      OnExecute = AddActionExecute
     end
     object CorrAction: TAction
       Category = 'TypeDoc'

@@ -1,6 +1,6 @@
 object TypeDocDetailForm: TTypeDocDetailForm
-  Left = -1031
-  Top = 534
+  Left = -593
+  Top = 573
   BorderStyle = bsToolWindow
   Caption = #1044#1077#1090#1072#1083#1080' '#1090#1080#1087#1072' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
   ClientHeight = 130
@@ -59,12 +59,12 @@ object TypeDocDetailForm: TTypeDocDetailForm
     end
     object ReserveChB: TCheckBox
       Left = 192
-      Top = 78
+      Top = 77
       Width = 97
       Height = 17
       Alignment = taLeftJustify
       Caption = '&'#1056#1077#1079#1077#1088#1074
-      Color = clWindow
+      Color = clBtnFace
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clRed
       Font.Height = -11
