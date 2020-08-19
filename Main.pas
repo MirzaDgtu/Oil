@@ -547,6 +547,10 @@ begin
       TypeD := TTypeDocForm.Create(MainForm);
 
       try
+         AppData.TypeDocs.Active := False;
+         AppData.TypeDocs.CommandText := Format(SSQLGetTypeDocs, [0]);
+         AppData.TypeDocs.Active := True;
+
          TypeD.ShowModal();
       finally
          FreeAndNil(TypeD);

@@ -890,16 +890,17 @@ object AppData: TAppData
     Top = 280
     object TypeDocsTYPE_DOC: TStringField
       FieldName = 'TYPE_DOC'
+      Size = 40
     end
     object TypeDocsUID: TIntegerField
       FieldName = 'UID'
     end
-    object TypeDocsDESCRIPTION: TStringField
-      FieldName = 'DESCRIPTION'
-      Size = 40
-    end
     object TypeDocsRESERVE: TBooleanField
       FieldName = 'RESERVE'
+    end
+    object TypeDocsName: TStringField
+      FieldName = 'Name'
+      Size = 6
     end
   end
   object DriversL: TADODataSet

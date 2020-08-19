@@ -311,9 +311,8 @@ object TypeDocForm: TTypeDocForm
         Visible = True
       end
       item
-        Alignment = taCenter
         Expanded = False
-        FieldName = 'TYPE_DOC'
+        FieldName = 'Name'
         Title.Alignment = taCenter
         Title.Caption = #1050#1088#1072#1090#1082#1086#1077' '#1085'-'#1080#1077
         Title.Color = clSkyBlue
@@ -322,13 +321,18 @@ object TypeDocForm: TTypeDocForm
         Title.Font.Height = -11
         Title.Font.Name = 'MS Sans Serif'
         Title.Font.Style = [fsBold]
-        Width = 92
+        Width = 84
         Visible = True
       end
       item
         Alignment = taCenter
         Expanded = False
-        FieldName = 'DESCRIPTION'
+        FieldName = 'TYPE_DOC'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -8
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
         Title.Alignment = taCenter
         Title.Caption = #1054#1087#1080#1089#1072#1085#1080#1077
         Title.Color = clSkyBlue
@@ -337,7 +341,7 @@ object TypeDocForm: TTypeDocForm
         Title.Font.Height = -11
         Title.Font.Name = 'MS Sans Serif'
         Title.Font.Style = [fsBold]
-        Width = 247
+        Width = 250
         Visible = True
       end
       item
