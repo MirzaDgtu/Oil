@@ -65,6 +65,7 @@ type
     procedure SetUID_Car(const Value: integer);
     procedure SetNewDriver();
     procedure SetCorrDriver();
+    procedure SetViewDriver();
     { Private declarations }
   public
     { Public declarations }
@@ -112,7 +113,7 @@ begin
   case TypeView of
     g_New: SetNewDriver();
     g_Corr: SetCorrDriver();
-    g_View: ;
+    g_View: SetViewDriver();
   end;
 end;
 
@@ -168,6 +169,19 @@ end;
 procedure TDriverDetailDialog.SetUID_Car(const Value: integer);
 begin
   FUID_Car := Value;
+end;
+
+procedure TDriverDetailDialog.SetViewDriver;
+begin
+  SetCorrDriver();
+
+  // Блокировка полей
+  DriverGB.Enabled := False;
+  PassportGB.Enabled := False;
+  LicenseGB.Enabled := False;
+  DriverGB.Enabled := False;
+  PrimechGB.Enabled := False;
+
 end;
 
 end.

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, ExtCtrls, ComCtrls, Grids, DBGrids, DB, ADODB,
-  ActnList, ImgList;
+  ActnList, ImgList, Menus;
 
 type
   TDriversFrame = class(TFrame)
@@ -68,6 +68,13 @@ type
     IL: TImageList;
     AvailableAction: TAction;
     BitBtn1: TBitBtn;
+    DriverMenu: TPopupMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
     procedure DriversGridTitleClick(Column: TColumn);
     procedure RefreshActionExecute(Sender: TObject);
     procedure AddActionExecute(Sender: TObject);
@@ -77,6 +84,7 @@ type
     procedure FindEditKeyPress(Sender: TObject; var Key: Char);
     procedure FindEditChange(Sender: TObject);
     procedure FindBtnClick(Sender: TObject);
+    procedure ViewActionExecute(Sender: TObject);
   private
     { Private declarations }
     procedure SetInfoSB(KolDriver, KolAvailableDriver: integer);
@@ -145,7 +153,9 @@ begin
 
     with DriverD do
     try
-       if ShowModal = mrOk then
+      if ShowModal = mrOk then
+        if (Length(Trim(FamilyEdit.Text)) > 0) and
+           (Length(Trim(NameEdit.Text)) > 0) then
           try
              AppData.Command.CommandText := Format(SSQLInsDriver, [FamilyEdit.Text,
                                                                    NameEdit.Text,
@@ -184,7 +194,9 @@ begin
 
    with DriverD do
    try
-       if DriverD.ShowModal = mrOk then
+     if DriverD.ShowModal = mrOk then
+        if (Length(Trim(FamilyEdit.Text)) > 0) and
+           (Length(Trim(NameEdit.Text)) > 0) then
          try
              AppData.Command.CommandText := Format(SSQLCorrDriver, [AppData.DriversL.FieldByName('UID').AsInteger,
                                                                     FamilyEdit.Text,
@@ -279,6 +291,21 @@ procedure TDriversFrame.FindBtnClick(Sender: TObject);
 begin
     if Length(Trim(FindEdit.Text)) > 0 then
       SearchDriver(FindCB.ItemIndex, Trim(FindEdit.Text));
+end;
+
+procedure TDriversFrame.ViewActionExecute(Sender: TObject);
+var
+    DriverD: TDriverDetailDialog;
+begin
+    DriverD := TDriverDetailDialog.Create(Application, g_View);
+
+    if  (AppData.DriversL.Active) and
+        (AppData.DriversL.RecordCount > 0) then
+    try
+       DriverD.ShowModal;
+    finally
+       FreeAndNil(DriverD);
+    end;
 end;
 
 end.

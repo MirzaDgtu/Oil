@@ -2,12 +2,12 @@ object DriversFrame: TDriversFrame
   Left = 0
   Top = 0
   Width = 1372
-  Height = 717
+  Height = 596
   Align = alClient
   TabOrder = 0
   object SB: TStatusBar
     Left = 0
-    Top = 698
+    Top = 577
     Width = 1372
     Height = 19
     Panels = <
@@ -25,7 +25,7 @@ object DriversFrame: TDriversFrame
     Left = 1234
     Top = 25
     Width = 138
-    Height = 466
+    Height = 345
     Align = alRight
     TabOrder = 1
     object Bevel1: TBevel
@@ -411,10 +411,11 @@ object DriversFrame: TDriversFrame
     Left = 0
     Top = 25
     Width = 1234
-    Height = 466
+    Height = 345
     Align = alClient
     DataSource = AppData.DS_DriversL
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
+    PopupMenu = DriverMenu
     TabOrder = 3
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -792,7 +793,7 @@ object DriversFrame: TDriversFrame
   end
   object DriverInfoPanel: TPanel
     Left = 0
-    Top = 491
+    Top = 370
     Width = 1372
     Height = 207
     Align = alBottom
@@ -1120,6 +1121,7 @@ object DriversFrame: TDriversFrame
       Caption = '&'#1055#1088#1086#1089#1084#1086#1090#1088
       Hint = '&'#1055#1088#1086#1089#1084#1086#1090#1088' '#1076#1072#1085#1085#1099#1093' '#1074#1086#1076#1080#1090#1077#1083#1103
       ImageIndex = 5
+      OnExecute = ViewActionExecute
     end
     object DelAction: TAction
       Category = 'Driver'
@@ -1553,5 +1555,28 @@ object DriversFrame: TDriversFrame
       E007E007E007EF83F81FE007E007FE03F81FE007E00781FFE007E007E00781E7
       E007E007E00781C78181E007E0078007C183E007E00F800FE7E7E01FE01F901F
       F7EFE01FE03FB83FFFFFFFFFFFFFFFFF}
+  end
+  object DriverMenu: TPopupMenu
+    Images = IL
+    Left = 1080
+    Top = 104
+    object N1: TMenuItem
+      Action = AddAction
+    end
+    object N2: TMenuItem
+      Action = CorrAction
+    end
+    object N3: TMenuItem
+      Action = ViewAction
+    end
+    object N4: TMenuItem
+      Action = DelAction
+    end
+    object N5: TMenuItem
+      Action = AvailableAction
+    end
+    object N6: TMenuItem
+      Action = RefreshAction
+    end
   end
 end
