@@ -97,6 +97,7 @@ object CarStoryForm: TCarStoryForm
       Top = 0
       Width = 75
       Height = 25
+      Hint = #1048#1079#1084#1077#1085#1080#1090#1100' '#1087#1077#1088#1080#1086#1076
       Caption = '&'#1055#1077#1088#1080#1086#1076
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -104,6 +105,8 @@ object CarStoryForm: TCarStoryForm
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 1
       OnClick = RangeBtnClick
       Glyph.Data = {

@@ -607,8 +607,9 @@ begin
         end;
     finally
       FreeAndNil(typeDetail);
+      
       AppData.TypeDocs.Active := false;
-      AppData.TypeDocs.CommandText := Format(SSQLGetTypeDocs, [0]);  
+      AppData.TypeDocs.CommandText := Format(SSQLGetTypeDocs, [0]);
       AppData.TypeDocs.Active := True;
     end;     
 end;
@@ -675,7 +676,6 @@ begin
           end;
       finally
         TypeDocCB.Items.EndUpdate;
-        AppData.TypeDocs.Active := False;
         if Length(Trim(Name)) > 0 then
           TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf(AppData.Nakl.FieldByName('TYPE_DOC').AsString);
       end;

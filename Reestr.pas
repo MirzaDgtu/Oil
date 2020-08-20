@@ -190,8 +190,8 @@ end;
 
 procedure TReestrForm.RefreshNaklActionExecute(Sender: TObject);
 begin
-  Screen.Cursor := crSQLWait;
   try
+     Screen.Cursor := crSQLWait;
      AppData.Nakl.DisableControls;
      AppData.Nakl.Active := False;
      AppData.Nakl.CommandText := Format(SSQLGetNakl, [FormatDateTime('yyyy-mm-dd', BegD),
@@ -201,7 +201,7 @@ begin
   finally
      Screen.Cursor := crDefault;
      AppData.Nakl.EnableControls;
-     SetRangeCaption(BegD, EndD);
+    // SetRangeCaption(BegD, EndD);
   end;
 end;
 
@@ -220,8 +220,13 @@ begin
             Screen.Cursor := crSQLWait;
             AppData.Nakl.DisableControls;
 
-            AppData.Command.CommandText := Format(SSQLDelNakl, [AppData.Nakl.FieldByName('UNICUM_NUM').AsInteger]);
-            AppData.Command.Execute;
+            try
+              AppData.Command.CommandText := Format(SSQLDelNakl, [AppData.Nakl.FieldByName('UNICUM_NUM').AsInteger]);
+              AppData.Command.Execute;
+            except
+              on ex: Exception do
+                MessageDlg('Ошибка удаления документа!', mtError, [mbOK], 0);
+            end;
         finally
           RefreshNaklActionExecute(Self);
           Screen.Cursor := crDefault;
@@ -343,7 +348,7 @@ begin
                                                                          FloatToStr(NaklF.SumDoc),
                                                                          IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
                                                                          NaklF.UID_Car,
-                                                                         AppData.TypeDocsName.AsString,
+                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
                                                                          g_User,
                                                                          NaklF.PrimechMemo.Text]);
 
@@ -368,7 +373,7 @@ begin
                                                                         NaklF.ProductSG.Cells[4,i],
                                                                         NaklF.ProductSG.Cells[3,i],
                                                                         g_User,
-                                                                        AppData.TypeDocsName.AsString,
+                                                                        IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
                                                                         NaklF.ProductSG.Cells[6,i]]);
                   AppData.Command.Execute;
             except
@@ -420,7 +425,7 @@ begin
                                                                     FloatToStr(NaklF.SumDoc),
                                                                     IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
                                                                     NaklF.UID_Car,
-                                                                    AppData.TypeDocsName.AsString,
+                                                                    IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
                                                                     g_User,
                                                                     NaklF.PrimechMemo.Text]);
            AppData.Command.Execute;

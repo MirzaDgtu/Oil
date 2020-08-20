@@ -436,8 +436,14 @@ end;
 
 procedure TAppData.NaklAfterScroll(DataSet: TDataSet);
 begin
-  Move.Active := False;
-  Move.Active := True;
+  if (Nakl.Active) and
+     (not Nakl.IsEmpty) and
+      Assigned(fldUNICUM_NUM) and
+     (fldUNICUM_NUM.AsInteger <> 0) then
+      Begin
+        Move.Active := False;
+        Move.Active := True;
+      end;
 end;
 
 procedure TAppData.SetgBegD(const Value: variant);

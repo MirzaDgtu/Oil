@@ -1,7 +1,7 @@
 object AppData: TAppData
   OldCreateOrder = False
-  Left = 573
-  Top = 132
+  Left = 621
+  Top = 229
   Height = 431
   Width = 751
   object Connection: TADOConnection

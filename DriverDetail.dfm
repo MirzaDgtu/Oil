@@ -1,6 +1,6 @@
 object DriverDetailDialog: TDriverDetailDialog
-  Left = -1379
-  Top = 232
+  Left = 711
+  Top = 218
   BorderStyle = bsToolWindow
   Caption = #1044#1077#1090#1072#1083#1080#1079#1072#1094#1080#1103' '#1074#1086#1076#1080#1090#1077#1083#1103
   ClientHeight = 592
