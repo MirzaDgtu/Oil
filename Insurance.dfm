@@ -789,12 +789,14 @@ object InsuranceForm: TInsuranceForm
       Category = 'Action'
       Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
       ImageIndex = 9
+      ShortCut = 16429
       OnExecute = AddActionExecute
     end
     object CorrAction: TAction
       Category = 'Action'
       Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
       ImageIndex = 11
+      ShortCut = 115
       OnExecute = CorrActionExecute
     end
     object DeleteAction: TAction
@@ -802,19 +804,22 @@ object InsuranceForm: TInsuranceForm
       Caption = '&'#1059#1076#1072#1083#1080#1090#1100
       Hint = '&'#1059#1076#1072#1083#1077#1085#1080#1077' '#1089#1090#1088#1072#1093#1086#1074#1086#1075#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
       ImageIndex = 6
+      ShortCut = 16430
       OnExecute = DeleteActionExecute
     end
     object RefreshAction: TAction
       Category = 'Action'
       Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
       ImageIndex = 13
+      ShortCut = 116
       OnExecute = RefreshActionExecute
     end
     object TransferAction: TAction
       Category = 'Action'
-      Caption = '&'#1055#1077#1088#1077#1074#1077#1088#1089#1090#1080
+      Caption = '&'#1055#1077#1088#1077#1074#1077#1089#1090#1080
       Hint = #1055#1077#1088#1077#1074#1086#1076' '#1076#1086#1082#1091#1084#1077#1085#1090#1072' '#1074'/'#1080#1079' '#1088#1077#1079#1077#1088#1074'('#1072')'
       ImageIndex = 8
+      ShortCut = 16416
       OnExecute = TransferActionExecute
     end
     object FindAction: TAction
@@ -827,12 +832,14 @@ object InsuranceForm: TInsuranceForm
       Category = 'Action'
       Caption = '&'#1055#1077#1088#1080#1086#1076
       ImageIndex = 17
+      ShortCut = 16466
       OnExecute = RangeActionExecute
     end
     object StoryAction: TAction
       Category = 'Action'
       Caption = '&'#1048#1089#1090#1086#1088#1080#1103
       ImageIndex = 18
+      ShortCut = 16456
       OnExecute = StoryActionExecute
     end
   end
