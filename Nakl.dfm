@@ -1,7 +1,7 @@
 object NaklForm: TNaklForm
   Left = 631
   Top = 292
-  Width = 829
+  Width = 846
   Height = 498
   BorderStyle = bsSizeToolWin
   Caption = #1044#1086#1082#1091#1084#1077#1085#1090
@@ -18,7 +18,7 @@ object NaklForm: TNaklForm
   object ParametrsGB: TGroupBox
     Left = 0
     Top = 0
-    Width = 821
+    Width = 838
     Height = 132
     Align = alTop
     Caption = '&'#1055#1072#1088#1072#1084#1077#1090#1088#1099
@@ -32,7 +32,7 @@ object NaklForm: TNaklForm
     object ParamPanel: TPanel
       Left = 2
       Top = 15
-      Width = 229
+      Width = 247
       Height = 115
       Align = alLeft
       BorderStyle = bsSingle
@@ -85,7 +85,7 @@ object NaklForm: TNaklForm
       object DriverCB: TComboBox
         Left = 76
         Top = 60
-        Width = 125
+        Width = 142
         Height = 22
         Style = csOwnerDrawFixed
         ItemHeight = 16
@@ -93,7 +93,7 @@ object NaklForm: TNaklForm
         OnChange = DriverCBChange
       end
       object AddDriverBtn: TBitBtn
-        Left = 200
+        Left = 219
         Top = 59
         Width = 21
         Height = 22
@@ -132,14 +132,15 @@ object NaklForm: TNaklForm
       object TypeDocCB: TComboBox
         Left = 76
         Top = 85
-        Width = 125
+        Width = 142
         Height = 22
         Style = csOwnerDrawFixed
         ItemHeight = 16
         TabOrder = 4
+        OnChange = TypeDocCBChange
       end
       object AddTypeDocBtn: TBitBtn
-        Left = 200
+        Left = 219
         Top = 84
         Width = 21
         Height = 22
@@ -177,7 +178,7 @@ object NaklForm: TNaklForm
       end
     end
     object CarPanel: TPanel
-      Left = 231
+      Left = 249
       Top = 15
       Width = 325
       Height = 115
@@ -296,9 +297,9 @@ object NaklForm: TNaklForm
       end
     end
     object PrimechPanel: TPanel
-      Left = 556
+      Left = 574
       Top = 15
-      Width = 263
+      Width = 262
       Height = 115
       Align = alClient
       BorderStyle = bsSingle
@@ -306,7 +307,7 @@ object NaklForm: TNaklForm
       object PrimechGB: TGroupBox
         Left = 1
         Top = 1
-        Width = 257
+        Width = 256
         Height = 109
         Align = alClient
         Caption = '&'#1055#1088#1080#1084#1077#1095#1072#1085#1080#1077
@@ -314,7 +315,7 @@ object NaklForm: TNaklForm
         object PrimechMemo: TMemo
           Left = 2
           Top = 15
-          Width = 253
+          Width = 252
           Height = 92
           Align = alClient
           TabOrder = 0
@@ -325,7 +326,7 @@ object NaklForm: TNaklForm
   object SB: TStatusBar
     Left = 0
     Top = 443
-    Width = 821
+    Width = 838
     Height = 24
     Panels = <
       item
@@ -341,7 +342,7 @@ object NaklForm: TNaklForm
   object BottomTB: TToolBar
     Left = 0
     Top = 416
-    Width = 821
+    Width = 838
     Height = 27
     Align = alBottom
     Caption = 'BottomTB'
@@ -368,7 +369,7 @@ object NaklForm: TNaklForm
   object HeaderTB: TToolBar
     Left = 0
     Top = 132
-    Width = 821
+    Width = 838
     Height = 27
     Caption = 'HeaderTB'
     Images = IL
@@ -399,7 +400,7 @@ object NaklForm: TNaklForm
   object ProductSG: TStringGrid
     Left = 0
     Top = 159
-    Width = 821
+    Width = 838
     Height = 257
     Align = alClient
     Font.Charset = DEFAULT_CHARSET

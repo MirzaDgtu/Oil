@@ -343,7 +343,7 @@ begin
                                                                          FloatToStr(NaklF.SumDoc),
                                                                          IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
                                                                          NaklF.UID_Car,
-                                                                         NaklF.TypeDocCB.Text,
+                                                                         AppData.TypeDocsName.AsString,
                                                                          g_User,
                                                                          NaklF.PrimechMemo.Text]);
 
@@ -418,9 +418,9 @@ begin
            AppData.Command.CommandText := Format(SSQLCorrNaklHead, [AppData.fldUNICUM_NUM.AsInteger,
                                                                     FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
                                                                     FloatToStr(NaklF.SumDoc),
-                                                                    NaklF.DriverCB.Text,
+                                                                    IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
                                                                     NaklF.UID_Car,
-                                                                    NaklF.TypeDocCB.Text,
+                                                                    AppData.TypeDocsName.AsString,
                                                                     g_User,
                                                                     NaklF.PrimechMemo.Text]);
            AppData.Command.Execute;

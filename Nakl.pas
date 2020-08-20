@@ -79,6 +79,7 @@ type
     procedure HelpActionExecute(Sender: TObject);
     procedure ProductSGDblClick(Sender: TObject);
     procedure DriverCBChange(Sender: TObject);
+    procedure TypeDocCBChange(Sender: TObject);
   private
     { Private declarations }
     FUNICUM_NUM: integer;
@@ -93,8 +94,7 @@ type
     procedure SetCarInfo(Uid_Driver: integer);
     function GetSumDoc: Real;
     function SetSumProd(CountProd, PriceProd: real): Variant;
-    function CheckFullNessDoc: Boolean;
-
+    function CheckFullNessDoc: Boolean;   
 
   protected
     property UNICUM_NUM: integer read FUNICUM_NUM write SetUNICUM_NUM;
@@ -124,7 +124,7 @@ var
 implementation
 
 uses AppDM, Globals, Products, SConst, DB, CarStory, Math, ProductModal,
-  ProductPrice, DriverDetail;
+  ProductPrice, DriverDetail, TypeDocDetail;
 
 {$R *.dfm}
 
@@ -574,15 +574,43 @@ begin
 end;
 
 procedure TNaklForm.TypeDocActionExecute(Sender: TObject);
-var
-    Str: string;
-begin
-  if InputQuery('Тип документа', 'Наименование', Str) then
+//var
+//    Str: string;
+//begin
+{  if InputQuery('Тип документа', 'Наименование', Str) then
   begin
     Str := Trim(Str);
     TypeDocCB.Items.Add(Str);
     TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf(Str);
-  end;
+  end; }
+
+var
+    typeDetail: TTypeDocDetailForm;
+begin
+    typeDetail := TTypeDocDetailForm.Create(Application);
+
+    try
+      if typeDetail.ShowModal = mrOk then
+        if (Length(Trim(typeDetail.DescriptionEdit.Text)) > 0) and
+           (Length(Trim(typeDetail.NameEdit.Text)) > 0) then
+        try
+          AppData.Command.CommandText := Format(SSQLInsTypeDocs, [Trim(typeDetail.NameEdit.Text),
+                                                                  Trim(typeDetail.DescriptionEdit.Text),
+                                                                  Byte(typeDetail.ReserveChB.Checked)]);
+          AppData.Command.Execute;
+
+          TypeDocCB.Items.Add(Trim(typeDetail.DescriptionEdit.Text));
+          TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf(Trim(typeDetail.DescriptionEdit.Text));
+        except
+          on Ex: Exception do
+            MessageDlg('Ошибка добавления нового типа документа' + #13 + 'Сообщение: ' + ex.Message, mtError, [mbOK], 0);
+        end;
+    finally
+      FreeAndNil(typeDetail);
+      AppData.TypeDocs.Active := false;
+      AppData.TypeDocs.CommandText := Format(SSQLGetTypeDocs, [0]);  
+      AppData.TypeDocs.Active := True;
+    end;     
 end;
 
 procedure TNaklForm.SaveNaklActionExecute(Sender: TObject);
@@ -712,6 +740,14 @@ begin
       UID_Car := AppData.DriverCar.FieldByName('UID').AsInteger;
     finally 
     end;
+end;
+
+procedure TNaklForm.TypeDocCBChange(Sender: TObject);
+begin
+  if TypeDocCB.ItemIndex > -1 then
+    If (AppData.TypeDocs.Active) and
+       (not AppData.TypeDocs.IsEmpty) then
+          AppData.TypeDocs.Locate('TYPE_DOC', TypeDocCB.Text, [loCaseInsensitive, loPartialKey]);
 end;
 
 end.
