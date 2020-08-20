@@ -368,7 +368,7 @@ begin
                                                                         NaklF.ProductSG.Cells[4,i],
                                                                         NaklF.ProductSG.Cells[3,i],
                                                                         g_User,
-                                                                        NaklF.TypeDocCB.Text,
+                                                                        AppData.TypeDocsName.AsString,
                                                                         NaklF.ProductSG.Cells[6,i]]);
                   AppData.Command.Execute;
             except
@@ -438,7 +438,7 @@ begin
                                                                          NaklF.ProductSG.Cells[4,i],
                                                                          NaklF.ProductSG.Cells[3,i],
                                                                          g_User,
-                                                                         NaklF.TypeDocCB.Text,
+                                                                         AppData.TypeDocsName.AsString,
                                                                          NaklF.ProductSG.Cells[6,i]]);
                   AppData.Command.Execute;
          except

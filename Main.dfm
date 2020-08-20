@@ -43,7 +43,7 @@ object MainForm: TMainForm
     Top = 80
     Width = 1281
     Height = 329
-    ActivePage = ReestrNaklPC
+    ActivePage = Report1PC
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11

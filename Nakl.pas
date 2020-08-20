@@ -718,7 +718,7 @@ begin
       Delete(family, 1, pos(' ', family));
       Delete(name, pos(' ', name), Length(name) - pos(' ', name) + 1);
     finally
-      AppData.DriversL.Locate('Family;Name', VarArrayOf([family, name]), [loCaseInsensitive, loPartialKey]);
+      AppData.DriversL.Locate('Family;Name', VarArrayOf([name, family]), [loCaseInsensitive, loPartialKey]);
       SetCarInfo(AppData.DriversL.FieldByName('UID').AsInteger);
     end;
 end;
