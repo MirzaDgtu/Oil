@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, StdCtrls, Buttons, ExtCtrls, ComCtrls, Menus,
-  ImgList, ActnList;
+  ImgList, ActnList, DB, ADODB;
 
 type
   TTypeDocForm = class(TForm)
@@ -37,6 +37,9 @@ type
     procedure CorrActionExecute(Sender: TObject);
     procedure DelActionExecute(Sender: TObject);
     procedure TransferActionExecute(Sender: TObject);
+    procedure TypeDocGridTitleClick(Column: TColumn);
+    procedure TypeDocGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -48,7 +51,7 @@ var
 
 implementation
 
-uses AppDM, Globals, SConst, TypeDocDetail, DB;
+uses AppDM, Globals, SConst, TypeDocDetail;
 
 {$R *.dfm}
 
@@ -79,9 +82,13 @@ end;
 
 procedure TTypeDocForm.RefreshActionExecute(Sender: TObject);
 begin
-  AppData.TypeDocs.Active := False;
-  AppData.TypeDocs.CommandText := Format(SSQLGetTypeDocs, [Byte(ResevrChB.Checked)]);
-  AppData.TypeDocs.Active := True;
+  try
+    AppData.TypeDocs.Active := False;
+    AppData.TypeDocs.CommandText := Format(SSQLGetTypeDocs, [Byte(ResevrChB.Checked)]);
+    AppData.TypeDocs.Active := True;
+  finally
+    AppData.SetInfoToSB(AppData.TypeDocs, SB, 'Reserve');
+  end;
 end;
 
 procedure TTypeDocForm.CorrActionExecute(Sender: TObject);
@@ -101,8 +108,8 @@ begin
               if ShowModal = mrOk then
                 try
                   AppData.Command.CommandText := Format(SSQLCorrTypeDoc, [AppData.TypeDocs.FieldByName('UID').AsInteger,
-                                                                          DescriptionEdit.Text,
-                                                                          NameEdit.Text,
+                                                                          Trim(NameEdit.Text),
+                                                                          Trim(DescriptionEdit.Text),
                                                                           Byte(ReserveChB.Checked)]);
                   AppData.Command.Execute;
                 except
@@ -141,15 +148,46 @@ begin
            case Byte(AppData.TypeDocs.FieldByName('Reserve').AsBoolean) of
               0: if MessageBox(Handle, '¬ы действительно желаете перевести тип документ в резерв?', 'ѕеревод в резерв', MB_ICONWARNING+MB_YESNO) = ID_YES then
                   AppData.Command.CommandText := Format(SSQLTransferTypeDoc, [AppData.TypeDocs.FieldByName('UID').AsInteger,
-                                                                               0]);
+                                                                              1]);
               1:  AppData.Command.CommandText := Format(SSQLTransferTypeDoc, [AppData.TypeDocs.FieldByName('UID').AsInteger,
-                                                                               1]);
+                                                                              0]);
            end;
 
           AppData.Command.Execute;
         finally
           RefreshActionExecute(Self);
         end;
+end;
+
+procedure TTypeDocForm.TypeDocGridTitleClick(Column: TColumn);
+var
+  Str: string;
+begin
+  if Assigned(Column) and Assigned(Column.Field) and
+    (Column.Field.FieldKind = fkData) then
+    with TADODataset(Column.Grid.DataSource.Dataset) do
+    begin
+      Str := Column.FieldName;
+      if Pos(Str, IndexFieldNames) = 0 then
+        IndexFieldNames := Str
+      else
+        if Pos('DESC', IndexFieldNames) > 0 then
+          IndexFieldNames := Str
+        else
+          IndexFieldNames := Str + ' DESC';
+    end;
+end;
+
+procedure TTypeDocForm.TypeDocGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if (AppData.TypeDocs.Active) and
+     (not AppData.TypeDocs.IsEmpty) then
+         if AppData.TypeDocs.FieldByName('Reserve').AsBoolean = True then
+             TypeDocGrid.Canvas.Brush.Color := clRed;
+
+  TypeDocGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
 end.

@@ -1,14 +1,14 @@
 object DriversFrame: TDriversFrame
   Left = 0
   Top = 0
-  Width = 1294
-  Height = 622
+  Width = 1322
+  Height = 727
   Align = alClient
   TabOrder = 0
   object SB: TStatusBar
     Left = 0
-    Top = 603
-    Width = 1294
+    Top = 708
+    Width = 1322
     Height = 19
     Panels = <
       item
@@ -22,10 +22,10 @@ object DriversFrame: TDriversFrame
       end>
   end
   object BtnsPanel: TPanel
-    Left = 1156
+    Left = 1184
     Top = 25
     Width = 138
-    Height = 371
+    Height = 476
     Align = alRight
     TabOrder = 1
     object Bevel1: TBevel
@@ -401,7 +401,7 @@ object DriversFrame: TDriversFrame
   object HeaderPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1294
+    Width = 1322
     Height = 25
     Align = alTop
     TabOrder = 2
@@ -409,8 +409,8 @@ object DriversFrame: TDriversFrame
   object DriversGrid: TDBGrid
     Left = 0
     Top = 25
-    Width = 1156
-    Height = 371
+    Width = 1184
+    Height = 476
     Align = alClient
     DataSource = AppData.DS_DriversL
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -421,6 +421,7 @@ object DriversFrame: TDriversFrame
     TitleFont.Height = -11
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = []
+    OnDrawColumnCell = DriversGridDrawColumnCell
     OnTitleClick = DriversGridTitleClick
     Columns = <
       item
@@ -792,8 +793,8 @@ object DriversFrame: TDriversFrame
   end
   object DriverInfoPanel: TPanel
     Left = 0
-    Top = 396
-    Width = 1294
+    Top = 501
+    Width = 1322
     Height = 207
     Align = alBottom
     TabOrder = 4

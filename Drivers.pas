@@ -85,9 +85,10 @@ type
     procedure FindEditChange(Sender: TObject);
     procedure FindBtnClick(Sender: TObject);
     procedure ViewActionExecute(Sender: TObject);
+    procedure DriversGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
-    procedure SetInfoSB(KolDriver, KolAvailableDriver: integer);
     procedure SearchDriver(Index: integer; StrSearch: String);
   public
     { Public declarations }
@@ -135,14 +136,8 @@ begin
     for i := 0 to AppData.DriversL.RecordCount - 1 do
       Inc(CountAvai);
   finally
-    SetInfoSB(AppData.DriversL.RecordCount, CountAvai);
+    AppData.SetInfoToSB(AppData.DriversL, SB, 'Available');
   end;
-end;
-
-procedure TDriversFrame.SetInfoSB(KolDriver, KolAvailableDriver: integer);
-begin
-  SB.Panels[0].Text := Format('Водителей: %d', [KolDriver]);
-  SB.Panels[1].Text := Format('Уволенных: %d', [KolAvailableDriver]);
 end;
 
 procedure TDriversFrame.AddActionExecute(Sender: TObject);
@@ -260,6 +255,7 @@ procedure TDriversFrame.SearchDriver(Index: integer; StrSearch: String);
 var
     Str: String;
 begin
+  Str := EmptyStr;
   case Index of
     0: Str := 'UID = '  + Trim(FindEdit.Text);
     1: Str := 'Family LIKE ' + QuotedStr('%' + Trim(FindEdit.Text) + '%');
@@ -306,6 +302,18 @@ begin
     finally
        FreeAndNil(DriverD);
     end;
+end;
+
+procedure TDriversFrame.DriversGridDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if (AppData.DriversL.Active) and
+     (not AppData.DriversL.IsEmpty) then
+       if AppData.DriversL.FieldByName('Available').AsBoolean = True then
+         DriversGrid.Canvas.Brush.Color := clRed;
+
+  DriversGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
 end.

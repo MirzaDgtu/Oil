@@ -1,9 +1,9 @@
 object TypeDocDetailForm: TTypeDocDetailForm
-  Left = -590
-  Top = 32
+  Left = 661
+  Top = 446
   BorderStyle = bsToolWindow
   Caption = #1044#1077#1090#1072#1083#1080' '#1090#1080#1087#1072' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
-  ClientHeight = 130
+  ClientHeight = 134
   ClientWidth = 303
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object TypeDocDetailForm: TTypeDocDetailForm
     Left = 0
     Top = 0
     Width = 303
-    Height = 130
+    Height = 134
     Align = alClient
     Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1090#1080#1087#1072' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
     Font.Charset = DEFAULT_CHARSET
@@ -42,6 +42,12 @@ object TypeDocDetailForm: TTypeDocDetailForm
       Width = 140
       Height = 13
       Caption = '&'#1050#1088#1072#1090#1082#1086#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
+    end
+    object Bevel1: TBevel
+      Left = 39
+      Top = 98
+      Width = 225
+      Height = 31
     end
     object DescriptionEdit: TEdit
       Left = 128

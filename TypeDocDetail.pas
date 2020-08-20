@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons;
+  Dialogs, StdCtrls, Buttons, ExtCtrls;
 
 type
   TTypeDocDetailForm = class(TForm)
@@ -16,6 +16,7 @@ type
     ReserveChB: TCheckBox;
     OkBtn: TBitBtn;
     CancelBtn: TBitBtn;
+    Bevel1: TBevel;
   private
     { Private declarations }
   public

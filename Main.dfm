@@ -290,6 +290,7 @@ object MainForm: TMainForm
     object DriversTBI: TToolButton
       Left = 46
       Top = 2
+      Hint = #1052#1086#1076#1091#1083#1100' '#1074#1086#1076#1080#1090#1077#1083#1077#1081
       Action = DriversAction
       ParentShowHint = False
       ShowHint = True
@@ -297,6 +298,7 @@ object MainForm: TMainForm
     object ProductTBI: TToolButton
       Left = 69
       Top = 2
+      Hint = #1052#1086#1076#1091#1083#1100' '#1090#1086#1074#1072#1088#1086#1074
       Action = ProductAction
       ParentShowHint = False
       ShowHint = True
@@ -319,7 +321,7 @@ object MainForm: TMainForm
     object TypeDocTBI: TToolButton
       Left = 123
       Top = 2
-      Hint = '&'#1058#1080#1087#1099' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
+      Hint = #1058#1080#1087#1099' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
       Action = TypeDocAction
       ParentShowHint = False
       ShowHint = True

@@ -278,6 +278,7 @@ object TypeDocForm: TTypeDocForm
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 5
+      OnClick = RefreshActionExecute
     end
   end
   object TypeDocGrid: TDBGrid
@@ -295,6 +296,8 @@ object TypeDocForm: TTypeDocForm
     TitleFont.Height = -11
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = []
+    OnDrawColumnCell = TypeDocGridDrawColumnCell
+    OnTitleClick = TypeDocGridTitleClick
     Columns = <
       item
         Alignment = taCenter
@@ -366,30 +369,35 @@ object TypeDocForm: TTypeDocForm
       Category = 'TypeDoc'
       Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
       ImageIndex = 2
+      ShortCut = 16429
       OnExecute = AddActionExecute
     end
     object CorrAction: TAction
       Category = 'TypeDoc'
       Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
       ImageIndex = 3
+      ShortCut = 115
       OnExecute = CorrActionExecute
     end
     object DelAction: TAction
       Category = 'TypeDoc'
       Caption = '&'#1059#1076#1072#1083#1080#1090#1100
       ImageIndex = 0
+      ShortCut = 16430
       OnExecute = DelActionExecute
     end
     object TransferAction: TAction
       Category = 'TypeDoc'
       Caption = '&'#1055#1077#1088#1077#1074#1077#1089#1090#1080
       ImageIndex = 1
+      ShortCut = 16416
       OnExecute = TransferActionExecute
     end
     object RefreshAction: TAction
       Category = 'TypeDoc'
       Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
       ImageIndex = 4
+      ShortCut = 116
       OnExecute = RefreshActionExecute
     end
   end
@@ -397,7 +405,7 @@ object TypeDocForm: TTypeDocForm
     Left = 272
     Top = 219
     Bitmap = {
-      494C010105000900040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010105000900040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -797,9 +805,11 @@ object TypeDocForm: TTypeDocForm
       E7E7FEFFE007E001C183F8FFE007E0078181F8FFE007E007E007E0FFE007E007
       E007E001E007E007F81F8001E007E007F81F8001E007E007E007E001E007E007
       E007E001E007E0078181F8FFE007E007C183F8FFE007E00FE7E7FEFFE01FE01F
-      F7EFFEFFE01FE03FFFFFFFFFFFFFFFFF}
+      F7EFFEFFE01FE03FFFFFFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
   object PopMenu: TPopupMenu
+    Images = IL
     Left = 328
     Top = 176
     object N1: TMenuItem

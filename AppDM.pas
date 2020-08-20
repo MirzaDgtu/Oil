@@ -303,6 +303,7 @@ type
     function GetYearCarDoc: Variant;
   public
     class procedure SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
+    procedure SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar; ResFieldName: string);
     constructor Create(AOwner: TComponent); override;
 
   published
@@ -523,6 +524,22 @@ procedure TAppData.DriversLAfterScroll(DataSet: TDataSet);
 begin
   if Assigned(DriversForm) then
   TDriversForm.SetDriverDetail();
+end;
+
+procedure TAppData.SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar; ResFieldName: string);
+var
+    res, i: integer;
+begin
+  res := 0;
+   if (DataSet.Active) and (not DataSet.IsEmpty) then
+    try
+        for i := 0 to DataSet.RecordCount - 1 do
+          if DataSet.FieldByName(ResFieldName).AsBoolean then
+            Inc(res);
+    finally
+       SB.Panels[0].Text := Format(SAllRows, [DataSet.RecordCount]);
+       SB.Panels[1].Text := Format(SReserveRows, [res]);
+    end;
 end;
 
 end.
