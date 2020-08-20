@@ -677,7 +677,10 @@ begin
       finally
         TypeDocCB.Items.EndUpdate;
         if Length(Trim(Name)) > 0 then
-          TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf(AppData.Nakl.FieldByName('TYPE_DOC').AsString);
+          Begin
+            AppData.TypeDocs.Locate('NAME', Name, [loCaseInsensitive, loPartialKey]);
+            TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf(AppData.TypeDocs.FieldByName('TYPE_DOC').AsString);
+          end;
       end;
 end;
 
