@@ -603,12 +603,12 @@ object AppData: TAppData
     Parameters = <>
     Left = 296
     Top = 280
-    object GroupsProductNGROUP_TV2: TStringField
-      FieldName = 'NGROUP_TV2'
-      Size = 30
-    end
     object GroupsProductNGROUP_TVR: TStringField
       FieldName = 'NGROUP_TVR'
+      Size = 30
+    end
+    object GroupsProductNGROUP_TV2: TStringField
+      FieldName = 'NGROUP_TV2'
       Size = 30
     end
     object GroupsProductNGROUP_TV3: TStringField

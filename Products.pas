@@ -134,7 +134,7 @@ var
   Begin
     Flds := 0;
     Match := 0;
-    bOK := True;
+     bOK := True;
 
     for i := 0 to PRODUCT_CATEGORIES - 1 do
       Begin
