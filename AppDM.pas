@@ -303,7 +303,8 @@ type
     function GetYearCarDoc: Variant;
   public
     class procedure SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
-    procedure SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar; ResFieldName: string);
+    procedure SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar; ResFieldName: string); overload;
+    procedure SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar); overload;
     constructor Create(AOwner: TComponent); override;
 
   published
@@ -545,6 +546,15 @@ begin
     finally
        SB.Panels[0].Text := Format(SAllRows, [DataSet.RecordCount]);
        SB.Panels[1].Text := Format(SReserveRows, [res]);
+    end;
+end;
+
+procedure TAppData.SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar);
+begin
+  if (DataSet.Active) and (not DataSet.IsEmpty) then
+    try
+       SB.Panels[0].Text := Format(SProductRow, [DataSet.RecordCount]);
+    finally
     end;
 end;
 

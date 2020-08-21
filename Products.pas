@@ -302,8 +302,10 @@ begin
     AppData.Products.Active := True;
     
   finally
+    AppData.SetInfoToSB(AppData.Products,  ProdSB);
     Screen.Cursor := crDefault;
     AppData.Products.EnableControls;
+
   end;
 end;
 

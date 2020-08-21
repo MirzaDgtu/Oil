@@ -29,6 +29,7 @@ resourcestring
   SAllRows = 'Всего записей: %d';
   SReserveRows = 'Резервных: %d';
   SArchiveRows = 'Архивных: %d';
+  SProductRow  = 'Товаров: %d';
 { ============ SQL ==============================================}
 
   SSQLGetSubjects       = 'EXEC O_GetSubjects %d, %d';
