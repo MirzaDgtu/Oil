@@ -10,7 +10,7 @@ uses
 
 type
   TMainForm = class(TForm)
-    StatusBar1: TStatusBar;
+    MainSB: TStatusBar;
     Data: TClientDataSet;
     Adapter: TOLEAdapter;
     Report: TFlexCelReport;
@@ -57,6 +57,7 @@ type
     DriversTBI: TToolButton;
     TypeDocAction: TAction;
     TypeDocTBI: TToolButton;
+    ypeDocAction1: TMenuItem;
     procedure NextBtnClick(Sender: TObject);
     procedure PrevBtnClick(Sender: TObject);
     procedure DrawSheetCell(Sender: TObject; ACol, ARow: Integer;

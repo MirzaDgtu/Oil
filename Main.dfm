@@ -18,7 +18,7 @@ object MainForm: TMainForm
   WindowState = wsMaximized
   PixelsPerInch = 96
   TextHeight = 13
-  object StatusBar1: TStatusBar
+  object MainSB: TStatusBar
     Left = 0
     Top = 637
     Width = 1281
@@ -373,6 +373,9 @@ object MainForm: TMainForm
       object DriversItemMenu: TMenuItem
         Action = DriversAction
       end
+      object ypeDocAction1: TMenuItem
+        Action = TypeDocAction
+      end
     end
     object ReestrtemMenu: TMenuItem
       Action = ReestrAction
@@ -436,7 +439,8 @@ object MainForm: TMainForm
     end
     object TypeDocAction: TAction
       Category = 'Directory'
-      Caption = 'TypeDocAction'
+      Caption = '&'#1058#1080#1087#1099' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
+      Hint = #1057#1087#1088#1072#1074#1086#1095#1085#1080#1082' '#1090#1080#1087#1086' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
       ImageIndex = 27
       OnExecute = TypeDocActionExecute
     end
