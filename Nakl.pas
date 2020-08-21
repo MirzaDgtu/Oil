@@ -150,6 +150,7 @@ begin
   ColorEdit.Text := AppData.Nakl.FieldByName('COLOR').AsString;
   YearEdit.Text := AppData.Nakl.FieldByName('MADEYEAR').AsString;
   PrimechMemo.Text := AppData.Nakl.FieldByName('PRIMECH').AsString;
+  UID_Car := AppData.Nakl.FieldByName('CAR_UID').AsInteger;
 
   setDrivers(AppData.Nakl.FieldByName('Driver').AsString);
   setTypeDocs(AppData.Nakl.FieldByName('TYPE_DOC').AsString);
