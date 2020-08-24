@@ -303,8 +303,16 @@ object MainForm: TMainForm
       ParentShowHint = False
       ShowHint = True
     end
-    object ToolButton4: TToolButton
+    object TypeDocTBI: TToolButton
       Left = 92
+      Top = 2
+      Hint = #1058#1080#1087#1099' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
+      Action = TypeDocAction
+      ParentShowHint = False
+      ShowHint = True
+    end
+    object ToolButton4: TToolButton
+      Left = 115
       Top = 2
       Width = 8
       Caption = 'ToolButton4'
@@ -312,17 +320,9 @@ object MainForm: TMainForm
       Style = tbsSeparator
     end
     object ReestrTBI: TToolButton
-      Left = 100
-      Top = 2
-      Action = ReestrAction
-      ParentShowHint = False
-      ShowHint = True
-    end
-    object TypeDocTBI: TToolButton
       Left = 123
       Top = 2
-      Hint = #1058#1080#1087#1099' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
-      Action = TypeDocAction
+      Action = ReestrAction
       ParentShowHint = False
       ShowHint = True
     end

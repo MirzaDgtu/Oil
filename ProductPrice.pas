@@ -90,14 +90,14 @@ end;
 procedure TProductPriceForm.SetSumProd(const Value: Variant);
 begin
   FSumProd := Value;
-end;    
+end;
 
 procedure TProductPriceForm.CountEditChange(Sender: TObject);
 begin
   if Length(Trim(CountEdit.Text)) = 0 then
      CountEdit.Text := '0';
 
-  if Self.typeDoc <> 'Приходный документ' then
+  if (Self.typeDoc <> 'Приходный документ') or (Self.typeDoc <> 'Ревизия') then
     if (Length(Trim(CountEdit.Text)) > 0) and
        (StrToFloat(Trim(CountEdit.Text)) > StrToFloat(Trim(PowerEdit.Text))) then
          CountEdit.Text := PowerEdit.Text;
@@ -116,6 +116,13 @@ begin
 
                 if Pos(DecimalSeparator, CountEdit.Text) > 0 then
                     Key := #0;
+              end;
+    '-':      Begin
+                if Self.typeDoc <> 'Ревизия' then
+                  Key := #0;
+
+                if Pos ('-', CountEdit.Text) > 0 then
+                  Key := #0;
               end;
     else
           Key := #0;

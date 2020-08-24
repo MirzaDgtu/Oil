@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls, ToolWin, Grids, ActnList,
-  ImgList, StrUtils, ComObj, Menus;
+  ImgList, StrUtils, ComObj, Menus, Math;
 
 type
   TNaklForm = class(TForm)
@@ -123,7 +123,7 @@ var
 
 implementation
 
-uses AppDM, Globals, Products, SConst, DB, CarStory, Math, ProductModal,
+uses AppDM, Globals, Products, SConst, DB, CarStory, ProductModal,
   ProductPrice, DriverDetail, TypeDocDetail;
 
 {$R *.dfm}
@@ -450,13 +450,7 @@ begin
   if TypeDocCB.Text = EmptyStr then
     Begin
        MessageDlg('Не выбран тип документа.' + #13 + 'По умолчанию выставлен приходный документ!', mtWarning, [mbOK], 0);
-       {if TypeDocCB.Items.IndexOf('Приходный документ') = -1 then
-         Begin
-            TypeDocCB.Items.Add('Приходный документ');
-            TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf('Приходный документ');
-         end
-       else  }
-           TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf('Приходный документ');
+       TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf('Приходный документ');
     end;
 
       ProdF := TProductFrameModalForm.Create(Application);
@@ -759,11 +753,24 @@ begin
 end;
 
 procedure TNaklForm.TypeDocCBChange(Sender: TObject);
+var i: integer;
 begin
   if TypeDocCB.ItemIndex > -1 then
     If (AppData.TypeDocs.Active) and
        (not AppData.TypeDocs.IsEmpty) then
           AppData.TypeDocs.Locate('TYPE_DOC', TypeDocCB.Text, [loCaseInsensitive, loPartialKey]);
+
+    if TypeDocCB.ItemIndex <> TypeDocCB.Items.IndexOf('Ревизия') then
+      try
+         if ProductSG.RowCount > 1 then
+            for i := 1 to ProductSG.RowCount do
+              Begin
+                 if ProductSG.Cells[4, i] <> EmptyStr then
+                     ProductSG.Cells[4, i] := FloatToStr(ABS(StrToFloat(ProductSG.Cells[4, i])));
+              end;
+      finally
+
+      end;
 end;
 
 end.
