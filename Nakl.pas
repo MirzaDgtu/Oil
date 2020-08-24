@@ -325,16 +325,8 @@ end;
 
 procedure TNaklForm.DriverActionExecute(Sender: TObject);
 var
-//    Str: string;
     DriverD: TDriverDetailDialog;
 begin
- // if InputQuery('Водитель', 'ФИО', Str) then
- // begin
- //   Str := Trim(Str);
- //   DriverCB.Items.Add(Str);
-  //  DriverCB.ItemIndex := DriverCB.Items.IndexOf(Str);
- // end;
-
  DriverD := TDriverDetailDialog.Create(Application, g_New);
 
     with DriverD do
@@ -581,16 +573,6 @@ begin
 end;
 
 procedure TNaklForm.TypeDocActionExecute(Sender: TObject);
-//var
-//    Str: string;
-//begin
-{  if InputQuery('Тип документа', 'Наименование', Str) then
-  begin
-    Str := Trim(Str);
-    TypeDocCB.Items.Add(Str);
-    TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf(Str);
-  end; }
-
 var
     typeDetail: TTypeDocDetailForm;
 begin
@@ -766,7 +748,10 @@ begin
             for i := 1 to ProductSG.RowCount do
               Begin
                  if ProductSG.Cells[4, i] <> EmptyStr then
+                   Begin
                      ProductSG.Cells[4, i] := FloatToStr(ABS(StrToFloat(ProductSG.Cells[4, i])));
+                     ProductSG.Cells[5, i] := SetSumProd(StrToFloat(IfThen(ProductSG.Cells[4,i] = EmptyStr, '0', ProductSG.Cells[4, i])), StrToFloat(IfThen(ProductSG.Cells[3, i] = EmptyStr, '0', ProductSG.Cells[3, i])));
+                   end;
               end;
       finally
 
