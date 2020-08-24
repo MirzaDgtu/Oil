@@ -450,13 +450,13 @@ begin
   if TypeDocCB.Text = EmptyStr then
     Begin
        MessageDlg('Не выбран тип документа.' + #13 + 'По умолчанию выставлен приходный документ!', mtWarning, [mbOK], 0);
-       if TypeDocCB.Items.IndexOf('Приход') = -1 then
+       {if TypeDocCB.Items.IndexOf('Приходный документ') = -1 then
          Begin
-            TypeDocCB.Items.Add('Приход');
-            TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf('Приход');
+            TypeDocCB.Items.Add('Приходный документ');
+            TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf('Приходный документ');
          end
-       else
-           TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf('Приход');
+       else  }
+           TypeDocCB.ItemIndex := TypeDocCB.Items.IndexOf('Приходный документ');
     end;
 
       ProdF := TProductFrameModalForm.Create(Application);
@@ -528,23 +528,35 @@ begin
   Begin
     if (Col = 4) then
       Begin
-        case Key of
-          '0'..'9', #8, #13, #26: ;
-          ',', '.': Begin
-                       if Key <> DecimalSeparator then
-                          Key := DecimalSeparator;
+        if Cells[1, Row] = EmptyStr then
+          Key := #0
+        else
+          Begin
+            case Key of
+              '0'..'9', #8, #13, #26: ;
+              '-':  Begin
+                      if TypeDocCB.Text <> 'Ревизия' then
+                        Key := #0;
 
-                       if Pos(DecimalSeparator, Cells[Col, Row]) > 0 then Key := #0;
-                     end;
-          #27:       Begin
-                        keybd_event(VK_LCONTROL, 0, 0, 0);               // Нажатие клавищи Ctrl
-                        keybd_event(Ord('Z'), 0, 0, 0);                  // Нажатие клавищи Z
-                        keybd_event(Ord('Z'), 0, KEYEVENTF_KEYUP, 0);    // Отпускание клавищи Ctrl
-                        keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0); // Отпускание клавищи Z
-                     end;
-          else
-             Key := #0;
-        end;
+                      if Pos('-', Cells[Col, Row]) > 0 then Key := #0;
+                    end;
+
+              ',', '.': Begin
+                           if Key <> DecimalSeparator then
+                              Key := DecimalSeparator;
+
+                           if Pos(DecimalSeparator, Cells[Col, Row]) > 0 then Key := #0;
+                         end;
+              #27:       Begin
+                            keybd_event(VK_LCONTROL, 0, 0, 0);               // Нажатие клавищи Ctrl
+                            keybd_event(Ord('Z'), 0, 0, 0);                  // Нажатие клавищи Z
+                            keybd_event(Ord('Z'), 0, KEYEVENTF_KEYUP, 0);    // Отпускание клавищи Ctrl
+                            keybd_event(VK_LCONTROL, 0, KEYEVENTF_KEYUP, 0); // Отпускание клавищи Z
+                         end;
+              else
+                 Key := #0;
+            end;
+          end;
       end
     else
       if Col = 6 then

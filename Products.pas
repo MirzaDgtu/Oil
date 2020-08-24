@@ -463,18 +463,18 @@ begin
 
   if (Length(Trim(FindStr)) > 0) and
       (AppData.Products.Active) and
-      (AppData.Products.IsEmpty) then
+      (not AppData.Products.IsEmpty) then
     try
       case Index of
-         0: Str := ' COD_ARTIC = ' + FindStr;
-         1: Str := ' NAME_ARTIC LIKE ' + QuotedStr('%' + FindStr + '%');
-         2: Str := ' NGROUP_TVR LIKE ' + QuotedStr('%' + FindStr + '%');
-         3: Str := ' NGROUP_TV2 LIKE ' + QuotedStr('%' + FindStr + '%');
-         4: Str := ' NGROUP_TV3 LIKE ' + QuotedStr('%' + FindStr + '%');
-         5: Str := ' NGROUP_TV4 LIKE ' + QuotedStr('%' + FindStr + '%');
-         6: Str := ' NGROUP_TV5 LIKE ' + QuotedStr('%' + FindStr + '%');
-         7: Str := ' NGROUP_TV6 LIKE ' + QuotedStr('%' + FindStr + '%');
-         8: Str := ' TYPE_TOVR LIKE ' + QuotedStr('%' + FindStr + '%');
+         0: Str := ' COD_ARTIC = ' + Trim(FindStr);
+         1: Str := ' NAME_ARTIC LIKE ' + QuotedStr('%' + Trim(FindStr) + '%');
+         2: Str := ' NGROUP_TVR LIKE ' + QuotedStr('%' + Trim(FindStr) + '%');
+         3: Str := ' NGROUP_TV2 LIKE ' + QuotedStr('%' + Trim(FindStr) + '%');
+         4: Str := ' NGROUP_TV3 LIKE ' + QuotedStr('%' + Trim(FindStr) + '%');
+         5: Str := ' NGROUP_TV4 LIKE ' + QuotedStr('%' + Trim(FindStr) + '%');
+         6: Str := ' NGROUP_TV5 LIKE ' + QuotedStr('%' + Trim(FindStr) + '%');
+         7: Str := ' NGROUP_TV6 LIKE ' + QuotedStr('%' + Trim(FindStr) + '%');
+         8: Str := ' TYPE_TOVR LIKE '  + QuotedStr('%' + Trim(FindStr) + '%');
       end;
     finally
       if Length(Trim(Str)) > 0 then

@@ -443,9 +443,10 @@ begin
                                                                          NaklF.ProductSG.Cells[4,i],
                                                                          NaklF.ProductSG.Cells[3,i],
                                                                          g_User,
-                                                                         AppData.TypeDocsName.AsString,
+                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
                                                                          NaklF.ProductSG.Cells[6,i]]);
-                  AppData.Command.Execute;
+                ShowMessage(AppData.Command.CommandText);
+                AppData.Command.Execute;
          except
                on Err: Exception do
                 MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);

@@ -97,7 +97,7 @@ begin
   if Length(Trim(CountEdit.Text)) = 0 then
      CountEdit.Text := '0';
 
-  if Self.typeDoc <> 'Приход' then
+  if Self.typeDoc <> 'Приходный документ' then
     if (Length(Trim(CountEdit.Text)) > 0) and
        (StrToFloat(Trim(CountEdit.Text)) > StrToFloat(Trim(PowerEdit.Text))) then
          CountEdit.Text := PowerEdit.Text;
