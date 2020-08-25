@@ -1,0 +1,39 @@
+USE [REPORTS]
+GO
+
+/****** Object:  Table [dbo].[CARS_INSURANCE]    Script Date: 24.08.2020 12:58:24 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[CARS_INSURANCE](
+	[UID] [int] IDENTITY(1,1) NOT NULL,
+	[SERIAL] [int] NOT NULL,
+	[NUMBER] [int] NOT NULL,
+	[BEG_DATE] [smalldatetime] NULL,
+	[END_DATE] [smalldatetime] NULL,
+	[DOC_DATE] [smalldatetime] NULL,
+	[FAMILY] [varchar](10) NULL,
+	[CREATE_DATE] [smalldatetime] NULL,
+	[WHO_CORR] [varchar](10) NULL,
+	[CORR_DATE] [smalldatetime] NULL,
+	[RESERVE] [bit] NULL DEFAULT ((0)),
+	[PRIMECH] [varchar](200) NULL,
+	[CAR_UID] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[UID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+

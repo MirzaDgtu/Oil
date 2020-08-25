@@ -1,0 +1,43 @@
+USE [REPORTS]
+GO
+
+/****** Object:  Table [dbo].[CARS_HEAD_ARC]    Script Date: 24.08.2020 12:58:06 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[CARS_HEAD_ARC](
+	[ROWID] [int] IDENTITY(1,1) NOT NULL,
+	[UID] [int] NOT NULL,
+	[REG_SYMBOL] [varchar](15) NULL,
+	[VIN] [varchar](20) NULL,
+	[MODEL] [varchar](50) NULL,
+	[TYPE_TC] [varchar](30) NULL,
+	[CATEGORY] [varchar](5) NULL,
+	[MADEYEAR] [int] NULL DEFAULT ((0)),
+	[CARCASS] [varchar](12) NULL,
+	[COLOR] [varchar](40) NULL,
+	[MOTOR_POWER] [float] NULL DEFAULT ((0)),
+	[ECOLOGY] [varchar](30) NULL,
+	[RESERVE] [bit] NULL,
+	[CREATE_DATE] [smalldatetime] NULL DEFAULT (getdate()),
+	[FAMILY] [varchar](10) NULL,
+	[CORR_DATE] [smalldatetime] NULL,
+	[WHO_CORR] [varchar](10) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ROWID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+

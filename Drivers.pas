@@ -136,7 +136,7 @@ begin
     for i := 0 to AppData.DriversL.RecordCount - 1 do
       Inc(CountAvai);
   finally
-    AppData.SetInfoToSB(AppData.DriversL, SB, 'Available');
+      AppData.SetInfoToSB(AppData.DriversL, SB, False, True, EmptyStr, 'Available');
   end;
 end;
 

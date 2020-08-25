@@ -1,0 +1,39 @@
+USE [REPORTS]
+GO
+
+/****** Object:  Table [dbo].[O_NAKL]    Script Date: 24.08.2020 12:56:14 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[O_NAKL](
+	[UNICUM_NUM] [int] IDENTITY(1,1) NOT NULL,
+	[NUM_DOC] [int] NOT NULL,
+	[DATE_DOC] [smalldatetime] NULL,
+	[SUM_DOC] [float] NULL DEFAULT ((0)),
+	[DRIVER] [varchar](40) NULL,
+	[CAR_UID] [int] NULL,
+	[TYPE_DOC] [varchar](20) NULL,
+	[OTMETKA] [bit] NULL DEFAULT ((0)),
+	[FAMILY] [varchar](10) NULL,
+	[CREATE_DATE] [smalldatetime] NULL DEFAULT (getdate()),
+	[WHO_CORR] [varchar](10) NULL,
+	[CORR_DATE] [smalldatetime] NULL,
+	[PRIMECH] [varchar](200) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[UNICUM_NUM] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+

@@ -443,6 +443,7 @@ begin
       try
         UID_Ins := AppData.Insurance.FieldByName('UID').AsInteger;
         InsF := TIsnuranceStoryForm.Create(g_View, AppData.Insurance.FieldbyName('UID').AsInteger);
+        AppData.SetInfoToSB(AppData.InsuranceStory, SB, True, True, 'Archive', 'RESERVE');
         InsF.ShowModal();
       finally
         FreeAndNil(InsF);

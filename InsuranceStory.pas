@@ -46,7 +46,6 @@ type
     procedure SetTypeF(const Value: Shortint);
     procedure SetBegD(const Value: TDateTime);
     procedure SetEndD(const Value: TDateTime);
-    //procedure SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
     { Private declarations }
   protected
     property TypeF: Shortint read FTypeF write SetTypeF;
@@ -145,25 +144,28 @@ end;
 
 procedure TIsnuranceStoryForm.RefreshBtnClick(Sender: TObject);
 begin
-  case TypeF of
-    g_New:  Begin
-              SelectBtn.Visible := True;
-              InsuranceGrid.DataSource := AppData.DS_Insurance;
-              AppData.Insurance.Active := False;
-              AppData.Insurance.CommandText := Format(SSQLGetInsurance, [0,
-                                                                         FormatDateTime('yyyy-mm-dd', BegD),
-                                                                         FormatDateTime('yyyy-mm-dd', EndD)]);
-              AppData.Insurance.Active := True;
-            end;
-    g_Corr: ;
-    g_View: Begin
-               InsuranceGrid.DataSource := AppData.DS_InsuranceStory;
-               AppData.InsuranceStory.Active := False;
-               AppData.InsuranceStory.CommandText := Format(SSQLGetIsnuranceArc, [locUID]);
-               AppData.InsuranceStory.Active := True;
-            end;
+  try
+    case TypeF of
+      g_New:  Begin
+                SelectBtn.Visible := True;
+                InsuranceGrid.DataSource := AppData.DS_Insurance;
+                AppData.Insurance.Active := False;
+                AppData.Insurance.CommandText := Format(SSQLGetInsurance, [0,
+                                                                           FormatDateTime('yyyy-mm-dd', BegD),
+                                                                           FormatDateTime('yyyy-mm-dd', EndD)]);
+                AppData.Insurance.Active := True;
+              end;
+      g_Corr: ;
+      g_View: Begin
+                 InsuranceGrid.DataSource := AppData.DS_InsuranceStory;
+                 AppData.InsuranceStory.Active := False;
+                 AppData.InsuranceStory.CommandText := Format(SSQLGetIsnuranceArc, [locUID]);
+                 AppData.InsuranceStory.Active := True;
+              end;
+    end;
+  finally
+     AppData.SetInfoToSB(AppData.InsuranceStory, SB, True, True, 'Archive', 'RESERVE');
   end;
-  TAppData.SetInfoSB(TADODataSet(InsuranceGrid.DataSource.DataSet), SB);
 end;
 
 procedure TIsnuranceStoryForm.InsuranceGridDrawColumnCell(Sender: TObject;
@@ -221,46 +223,5 @@ begin
           IndexFieldNames := Str + ' DESC';
     end;
 end;
-
-{
-procedure TIsnuranceStoryForm.SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
-var
-    ValueRes, ValueArch, locUID: integer;
-begin
-  ValueRes := 0;
-  ValueArch := 0;
-
-  if (DataSet.Active) and  (not DataSet.IsEmpty) then
-    Try
-      locUID := DataSet.FieldByName('UID').AsInteger;
-      DataSet.DisableControls;
-      DataSet.First;
-      while not DataSet.Eof do
-        Begin
-          if DataSet.FieldByName('Reserve').AsBoolean then
-            ValueRes := ValueRes + 1;
-
-          if DataSet.FieldByName('Archive').AsString = '*' then
-            ValueArch := ValueArch + 1;
-
-          DataSet.Next;
-        end;
-    finally
-      if SB.Panels.Count = 3
-        Begin
-         with SB do
-          Begin
-            Panels[0].Text := Format(SAllRows, [DataSet.RecordCount]);
-            if DataSet.Name = 'Insurance' then
-              Panels[1].Text := Format(SReserveRows, [ValueRes])
-            else
-              Panels[1].Text := Format(SReserveRows, [0]);
-            Panels[2].Text := Format(SArchiveRows, [ValueArch]);
-          end;
-         end;
-       DataSet.Locate('UID', locUID, [loCaseInsensitive, loPartialKey]);
-       DataSet.EnableControls;
-    end;
-end;    }
 
 end.

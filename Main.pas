@@ -67,7 +67,6 @@ type
     procedure CarsActionExecute(Sender: TObject);
     procedure InsuranceActionExecute(Sender: TObject);
     procedure RangeActionExecute(Sender: TObject);
-    procedure CheckNaklActionExecute(Sender: TObject);
     procedure UnCheckNaklActionExecute(Sender: TObject);
     procedure NewNaklActionExecute(Sender: TObject);
     procedure DelNaklActionExecute(Sender: TObject);
@@ -412,28 +411,8 @@ begin
   end;
 end;
 
-procedure TMainForm.CheckNaklActionExecute(Sender: TObject);
-var
-    sUnicum_Num: string;
-begin
-   if not AppData.Nakl.IsEmpty then
-    Begin
-      sUnicum_Num := AppData.Nakl.FieldByName('UNICUM_NUM').AsString;
-      if AppData.Nakl.FieldByName('Archive').AsString = EmptyStr then
-        Begin
-          if MessageBox(Handle, 'Вы действительно желаете выставить отметку?', 'Отметка документа', MB_ICONWARNING + MB_YESNO) = ID_YES then
-            try
-              AppData.Command.CommandText := Format(SSQLTrancferNakl, [AppData.Nakl.FieldByName('UNICUM_NUM').AsInteger,
-                                                                       1,
-                                                                       g_User]);
-              AppData.Command.Execute;
-            finally
-             // RefreshNaklActionExecute(Self);
-              AppData.Nakl.Locate('UNICUM_NUM', sUnicum_Num,  [loCaseInsensitive, loPartialKey]);
-            end;
-        end;
-    end;
-end;
+
+
 
 procedure TMainForm.UnCheckNaklActionExecute(Sender: TObject);
 var

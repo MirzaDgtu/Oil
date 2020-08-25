@@ -438,6 +438,31 @@ procedure TNaklForm.AddRowActionExecute(Sender: TObject);
 var
     ProdF: TProductFrameModalForm;
     ProdP: TProductPriceForm;
+    i: integer;
+
+    // проверка на наличие товара в документе
+    function checkProduct(Article: string): Boolean;
+    var
+        i: integer;
+    Begin
+      for i := 1 to ProductSG.RowCount do
+        if ProductSG.Cells[1, i] = AppData.Products.FieldByName('COD_ARTIC').AsString then
+          Result := True;
+    end;
+
+    // Прибавление нового количества товара
+    procedure calcCount(Article, KolCount: string);
+    var
+        i: integer;
+    Begin
+      try
+        for i := 1 to ProductSG.RowCount do
+          if ProductSG.Cells[1, i] = AppData.Products.FieldByName('COD_ARTIC').AsString then
+             ProductSG.Cells[4, ProductSG.Row] := FloatToStr(StrToFloat(ProductSG.Cells[4, ProductSG.Row]) + StrToFloat(Trim(ProdP.CountEdit.Text)));
+        finally
+          ProductSG.Cells[5, i] := SetSumProd(StrToFloat(IfThen(ProductSG.Cells[4,i] = EmptyStr, '0', ProductSG.Cells[4, i])), StrToFloat(IfThen(ProductSG.Cells[3, i] = EmptyStr, '0', ProductSG.Cells[3, i])));
+        end;
+    end;
 begin
   if TypeDocCB.Text = EmptyStr then
     Begin
@@ -466,14 +491,20 @@ begin
                   Begin
                     with Self.ProductSG do
                       Begin
-                        if Cells[1,1] <> EmptyStr then
-                            RowCount := RowCount + 1;
-                        Cells[1, RowCount-1] := AppData.Products.FieldByName('COD_ARTIC').AsString;
-                        Cells[2, RowCount-1] := AppData.Products.FieldByName('NAME_ARTIC').AsString;
-                        Cells[3, RowCount-1] := AppData.Products.FieldByName('CENA_ARTC').AsString;
-                        Cells[4, RowCount-1] := ProdP.CountEdit.Text;
-                        Cells[5, RowCount-1] := ProdP.SumProd;
-                        Cells[6, RowCount-1] := ProdP.PrimechMemo.Text;
+                        if checkProduct(AppData.Products.FieldByName('COD_ARTIC').AsString) = True then
+                           calcCount(AppData.Products.FieldByName('COD_ARTIC').AsString, ProdP.CountEdit.Text)
+                        else
+                          Begin
+                            if Cells[1,1] <> EmptyStr then
+                                RowCount := RowCount + 1;
+
+                            Cells[1, RowCount-1] := AppData.Products.FieldByName('COD_ARTIC').AsString;
+                            Cells[2, RowCount-1] := AppData.Products.FieldByName('NAME_ARTIC').AsString;
+                            Cells[3, RowCount-1] := AppData.Products.FieldByName('CENA_ARTC').AsString;
+                            Cells[4, RowCount-1] := ProdP.CountEdit.Text;
+                            Cells[5, RowCount-1] := ProdP.SumProd;
+                            Cells[6, RowCount-1] := ProdP.PrimechMemo.Text;
+                          end;
                       end;
                   end;
               finally
@@ -753,8 +784,7 @@ begin
                      ProductSG.Cells[5, i] := SetSumProd(StrToFloat(IfThen(ProductSG.Cells[4,i] = EmptyStr, '0', ProductSG.Cells[4, i])), StrToFloat(IfThen(ProductSG.Cells[3, i] = EmptyStr, '0', ProductSG.Cells[3, i])));
                    end;
               end;
-      finally
-
+      finally  
       end;
 end;
 

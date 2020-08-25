@@ -1,0 +1,40 @@
+USE [REPORTS]
+GO
+
+/****** Object:  Table [dbo].[O_MOVE_ARC]    Script Date: 24.08.2020 12:56:00 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[O_MOVE_ARC](
+	[RECNO] [int] IDENTITY(1,1) NOT NULL,
+	[ROWID] [int] NOT NULL,
+	[UNICUM_NUM] [int] NOT NULL,
+	[NUM_PREDM] [int] NOT NULL,
+	[NAME_PREDM] [varchar](30) NOT NULL,
+	[KOLC_PREDM] [float] NOT NULL,
+	[SUM_PREDM] [float] NOT NULL,
+	[FAMILY] [varchar](10) NULL,
+	[CREATE_DATE] [smalldatetime] NULL DEFAULT (getdate()),
+	[TYPE_DOC] [varchar](20) NULL,
+	[NUM_DOC] [int] NOT NULL,
+	[WHO_CORR] [varchar](10) NULL,
+	[CORR_DATE] [smalldatetime] NULL,
+	[Primech] [varchar](200) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[RECNO] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+

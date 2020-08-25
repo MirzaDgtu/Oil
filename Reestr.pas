@@ -165,6 +165,7 @@ begin
     RefreshNaklActionExecute(Self);
     AppData.gBegD := BegD;
     AppData.gEndD := EndD;
+    SetRangeCaption(BegD, EndD);
   end;
 end;
 
@@ -201,14 +202,15 @@ begin
   finally
      Screen.Cursor := crDefault;
      AppData.Nakl.EnableControls;
-    // SetRangeCaption(BegD, EndD);
+     SetRangeCaption(BegD, EndD);
+     AppData.SetInfoToSB(AppData.Nakl,  SB, True, False, 'Archive', EmptyStr);
   end;
 end;
 
 procedure TReestrForm.SetRangeCaption(BegD, EndD: TDateTime);
 begin
     RangeLbl.Caption := Format(SRangeT, [FormatDateTime('yyyy-mm-dd', BegD),
-                                         FormatDateTime('yyyy-mm-dd', EndD)]);
+                                          FormatDateTime('yyyy-mm-dd', EndD)]);
 end;
 
 procedure TReestrForm.DelNaklActionExecute(Sender: TObject);

@@ -303,8 +303,8 @@ type
     function GetYearCarDoc: Variant;
   public
     class procedure SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
-    procedure SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar; ResFieldName: string); overload;
     procedure SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar); overload;
+    procedure SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar; Archive, Reserve: Boolean; ArchiveField, ReserveField: String); overload;
     constructor Create(AOwner: TComponent); override;
 
   published
@@ -533,22 +533,6 @@ begin
   TDriversForm.SetDriverDetail();
 end;
 
-procedure TAppData.SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar; ResFieldName: string);
-var
-    res, i: integer;
-begin
-  res := 0;
-   if (DataSet.Active) and (not DataSet.IsEmpty) then
-    try
-        for i := 0 to DataSet.RecordCount - 1 do
-          if DataSet.FieldByName(ResFieldName).AsBoolean then
-            Inc(res);
-    finally
-       SB.Panels[0].Text := Format(SAllRows, [DataSet.RecordCount]);
-       SB.Panels[1].Text := Format(SReserveRows, [res]);
-    end;
-end;
-
 procedure TAppData.SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar);
 begin
   if (DataSet.Active) and (not DataSet.IsEmpty) then
@@ -556,6 +540,33 @@ begin
        SB.Panels[0].Text := Format(SProductRow, [DataSet.RecordCount]);
     finally
     end;
+end;
+
+procedure TAppData.SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar;
+  Archive, Reserve: Boolean; ArchiveField, ReserveField: String);
+var
+    i, Res, Arch: integer;
+begin
+  Res := 0;
+  Arch := 0;
+
+  if (DataSet.Active) and (not DataSet.IsEmpty) then
+    try
+       if Reserve = True then
+          for i := 0 to DataSet.RecordCount-1 do
+             if DataSet.FieldByName(ReserveField).AsBoolean = True then
+               Inc(Res);
+
+        if Archive = True then
+          for i := 0 to DataSet.RecordCount-1 do
+            if DataSet.FieldByName(ArchiveField).AsBoolean = True then
+              Inc(Arch)
+    finally
+        SB.Panels[0].Text := Format(SAllRows, [DataSet.RecordCount]);
+        if Reserve = True then SB.Panels[1].Text := Format(SReserveRows, [Res]);
+        If Archive = True then SB.Panels[2].Text := Format(SArchiveRows, [Arch]);
+    end;
+
 end;
 
 end.

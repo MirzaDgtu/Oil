@@ -87,7 +87,7 @@ begin
     AppData.TypeDocs.CommandText := Format(SSQLGetTypeDocs, [Byte(ResevrChB.Checked)]);
     AppData.TypeDocs.Active := True;
   finally
-    AppData.SetInfoToSB(AppData.TypeDocs, SB, 'Reserve');
+    AppData.SetInfoToSB(AppData.TypeDocs, SB, False, True, EmptyStr, 'Reserve');
   end;
 end;
 
