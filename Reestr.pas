@@ -447,7 +447,6 @@ begin
                                                                          g_User,
                                                                          IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Ð', AppData.TypeDocs.FieldByName('Name').AsString),
                                                                          NaklF.ProductSG.Cells[6,i]]);
-                ShowMessage(AppData.Command.CommandText);
                 AppData.Command.Execute;
          except
                on Err: Exception do
