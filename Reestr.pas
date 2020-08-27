@@ -252,7 +252,7 @@ begin
      (Length(Trim(FindStr))> 0)  then
       try
          Case Index of
-           0: Str := ' UNICUM_NUM = ' + FindStr;
+           0: Str := ' NUM_DOC = ' + FindStr;
            1: Str := ' REG_SYMBOL LIKE ' + QuotedStr('%' + FindStr + '%');
            2: Str := ' VIN LIKE ' + QuotedStr('%' + FindStr + '%');
            3: Str := ' MODEL LIKE ' + QuotedStr('%' + FindStr + '%');
