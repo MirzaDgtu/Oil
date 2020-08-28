@@ -2,8 +2,8 @@ object AppData: TAppData
   OldCreateOrder = False
   Left = 621
   Top = 229
-  Height = 431
-  Width = 751
+  Height = 524
+  Width = 742
   object Connection: TADOConnection
     ConnectionTimeout = 10
     LoginPrompt = False
@@ -369,8 +369,8 @@ object AppData: TAppData
     Connection = Connection
     AfterScroll = NaklAfterScroll
     Parameters = <>
-    Left = 40
-    Top = 280
+    Left = 32
+    Top = 176
     object fldUNICUM_NUM: TIntegerField
       FieldName = 'UNICUM_NUM'
     end
@@ -455,8 +455,8 @@ object AppData: TAppData
     Connection = Connection
     BeforeOpen = MoveBeforeOpen
     Parameters = <>
-    Left = 96
-    Top = 280
+    Left = 88
+    Top = 176
     object MoveROWID: TIntegerField
       FieldName = 'ROWID'
     end
@@ -511,19 +511,19 @@ object AppData: TAppData
   end
   object DS_Nakl: TDataSource
     DataSet = Nakl
-    Left = 40
-    Top = 336
+    Left = 32
+    Top = 232
   end
   object DS_Move: TDataSource
     DataSet = Move
-    Left = 96
-    Top = 336
+    Left = 88
+    Top = 232
   end
   object Products: TADODataSet
     Connection = Connection
     Parameters = <>
-    Left = 160
-    Top = 280
+    Left = 152
+    Top = 176
     object ProductsCOD_ARTIC: TIntegerField
       FieldName = 'COD_ARTIC'
     end
@@ -595,14 +595,14 @@ object AppData: TAppData
   end
   object DS_Products: TDataSource
     DataSet = Products
-    Left = 160
-    Top = 336
+    Left = 152
+    Top = 232
   end
   object GroupsProduct: TADODataSet
     Connection = Connection
     Parameters = <>
-    Left = 296
-    Top = 280
+    Left = 288
+    Top = 176
     object GroupsProductNGROUP_TVR: TStringField
       FieldName = 'NGROUP_TVR'
       Size = 30
@@ -711,8 +711,8 @@ object AppData: TAppData
   object ProductDetail: TADODataSet
     Connection = Connection
     Parameters = <>
-    Left = 224
-    Top = 280
+    Left = 216
+    Top = 176
     object flCODE_ARTIC: TIntegerField
       FieldName = 'COD_ARTIC'
     end
@@ -786,8 +786,8 @@ object AppData: TAppData
     Connection = Connection
     BeforeOpen = TypeTovrBeforeOpen
     Parameters = <>
-    Left = 368
-    Top = 280
+    Left = 360
+    Top = 176
     object TypeTovrTYPE_TOVR: TStringField
       FieldName = 'TYPE_TOVR'
       Size = 10
@@ -863,21 +863,21 @@ object AppData: TAppData
   end
   object Adapter: TOLEAdapter
     SaveFormatExtended = []
-    Left = 616
+    Left = 296
     Top = 121
   end
   object Report: TFlexCelReport
     AutoClose = False
     Adapter = Adapter
     DataModule = Owner
-    Left = 560
+    Left = 240
     Top = 121
   end
   object Drivers: TADODataSet
     Connection = Connection
     Parameters = <>
-    Left = 224
-    Top = 336
+    Left = 216
+    Top = 232
     object DriversDriver: TStringField
       FieldName = 'Driver'
       Size = 40
@@ -886,8 +886,8 @@ object AppData: TAppData
   object TypeDocs: TADODataSet
     Connection = Connection
     Parameters = <>
-    Left = 560
-    Top = 280
+    Left = 552
+    Top = 176
     object TypeDocsTYPE_DOC: TStringField
       FieldName = 'TYPE_DOC'
       Size = 40
@@ -907,8 +907,8 @@ object AppData: TAppData
     Connection = Connection
     AfterScroll = DriversLAfterScroll
     Parameters = <>
-    Left = 424
-    Top = 280
+    Left = 416
+    Top = 176
     object DriversLUID: TIntegerField
       FieldName = 'UID'
     end
@@ -1000,14 +1000,14 @@ object AppData: TAppData
   end
   object DS_DriversL: TDataSource
     DataSet = DriversL
-    Left = 424
-    Top = 336
+    Left = 416
+    Top = 232
   end
   object DriverCar: TADODataSet
     Connection = Connection
     Parameters = <>
-    Left = 488
-    Top = 280
+    Left = 480
+    Top = 176
     object DriverCarUID: TIntegerField
       FieldName = 'UID'
     end
@@ -1033,7 +1033,38 @@ object AppData: TAppData
   end
   object DS_TypeDocs: TDataSource
     DataSet = TypeDocs
-    Left = 560
-    Top = 336
+    Left = 552
+    Top = 232
+  end
+  object ProductReport: TADODataSet
+    Connection = Connection
+    Parameters = <>
+    Left = 32
+    Top = 304
+    object ProductReportNUM_PREDM: TIntegerField
+      FieldName = 'NUM_PREDM'
+    end
+    object ProductReportNAME_PREDM: TStringField
+      FieldName = 'NAME_PREDM'
+      Size = 50
+    end
+    object ProductReportEDIN_IZMER: TStringField
+      FieldName = 'EDIN_IZMER'
+      Size = 10
+    end
+    object ProductReportKOLC_PREDM: TFloatField
+      FieldName = 'KOLC_PREDM'
+    end
+    object ProductReportSUM_PREDM: TFloatField
+      FieldName = 'SUM_PREDM'
+    end
+    object ProductReportEDN_V_UPAK: TFloatField
+      FieldName = 'EDN_V_UPAK'
+    end
+  end
+  object DS_ProductReport: TDataSource
+    DataSet = ProductReport
+    Left = 32
+    Top = 352
   end
 end

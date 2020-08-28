@@ -1,6 +1,6 @@
 object ReportsForm: TReportsForm
-  Left = 360
-  Top = 247
+  Left = 365
+  Top = 177
   Width = 1305
   Height = 675
   Caption = #1054#1090#1095#1077#1090#1099
@@ -177,6 +177,22 @@ object ReportsForm: TReportsForm
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
+      inline ReportProductFrame1: TReportProductFrame
+        Left = 0
+        Top = 0
+        Width = 1092
+        Height = 573
+        Align = alClient
+        TabOrder = 0
+        inherited SB: TStatusBar
+          Top = 554
+          Width = 1092
+        end
+        inherited ProductReportGrid: TDBGrid
+          Width = 1092
+          Height = 554
+        end
+      end
     end
   end
   object AL: TActionList
@@ -191,7 +207,7 @@ object ReportsForm: TReportsForm
       OnExecute = RefreshGroupActionExecute
     end
     object RangeAction: TAction
-      Category = 'Group'
+      Category = 'Refre'
       Hint = #1048#1079#1084#1077#1085#1080#1090#1100' '#1087#1077#1088#1080#1086#1076
       ImageIndex = 3
       ShortCut = 16466

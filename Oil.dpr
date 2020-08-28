@@ -27,7 +27,8 @@ uses
   DriverDetail in 'DriverDetail.pas' {DriverDetailDialog},
   TypeDoc in 'TypeDoc.pas' {TypeDocForm},
   TypeDocDetail in 'TypeDocDetail.pas' {TypeDocDetailForm},
-  Reports in 'Reports.pas' {ReportsForm};
+  Reports in 'Reports.pas' {ReportsForm},
+  ReportProduct in 'ReportProduct.pas' {ReportProductFrame: TFrame};
 
 {$R *.res}
 

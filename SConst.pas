@@ -129,6 +129,11 @@ resourcestring
   SSQLGetDriverCar = 'EXEC REPORTS..O_GetDriverCar %d'; //Получение информации о автомобиле водителя
 
 
+  // Модуль отчетов
+  SSQLGetProductReports = 'EXEC REPORTS..O_GetProductReports ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'''; // Отчет по группам товаров
+
+  
+
 
 
 

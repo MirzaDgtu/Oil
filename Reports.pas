@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ExtCtrls, ActnList, ToolWin, ImgList, StdCtrls,
-  Buttons;
+  Buttons, ReportProduct;
 
 type
   TReportsForm = class(TForm)
@@ -25,6 +25,7 @@ type
     RangeAction: TAction;
     RangeLbl: TLabel;
     Bevel1: TBevel;
+    ReportProductFrame1: TReportProductFrame;
     procedure GroupTVGetImageIndex(Sender: TObject; Node: TTreeNode);
     procedure GroupTVGetSelectedIndex(Sender: TObject; Node: TTreeNode);
     procedure RefreshGroupActionExecute(Sender: TObject);

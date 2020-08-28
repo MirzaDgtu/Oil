@@ -279,6 +279,14 @@ type
     TypeDocsRESERVE: TBooleanField;
     DS_TypeDocs: TDataSource;
     TypeDocsName: TStringField;
+    ProductReport: TADODataSet;
+    ProductReportNUM_PREDM: TIntegerField;
+    ProductReportNAME_PREDM: TStringField;
+    ProductReportEDIN_IZMER: TStringField;
+    ProductReportKOLC_PREDM: TFloatField;
+    ProductReportSUM_PREDM: TFloatField;
+    ProductReportEDN_V_UPAK: TFloatField;
+    DS_ProductReport: TDataSource;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
