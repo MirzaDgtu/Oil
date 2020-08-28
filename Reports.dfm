@@ -1,10 +1,9 @@
-object ProductsForm: TProductsForm
-  Left = 294
-  Top = 476
-  BorderStyle = bsSingle
-  Caption = #1058#1086#1074#1072#1088#1099
-  ClientHeight = 643
-  ClientWidth = 1829
+object ReportsForm: TReportsForm
+  Left = 360
+  Top = 247
+  Width = 1305
+  Height = 675
+  Caption = #1054#1090#1095#1077#1090#1099
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,23 +11,16 @@ object ProductsForm: TProductsForm
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   FormStyle = fsMDIChild
-  Menu = Menu
   OldCreateOrder = False
-  Position = poScreenCenter
+  Position = poDefault
   Visible = True
   WindowState = wsMaximized
-  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
-  object PanelSplitter: TSplitter
-    Left = 201
-    Top = 32
-    Height = 592
-  end
   object SB: TStatusBar
     Left = 0
-    Top = 624
-    Width = 1829
+    Top = 625
+    Width = 1297
     Height = 19
     Panels = <
       item
@@ -41,611 +33,174 @@ object ProductsForm: TProductsForm
         Width = 150
       end
       item
-        Width = 50
+        Width = 150
       end>
   end
-  object GroupGB: TGroupBox
-    Left = 0
-    Top = 32
-    Width = 201
-    Height = 592
-    Align = alLeft
-    Caption = '&'#1043#1088#1091#1087#1087#1099' '#1090#1086#1074#1072#1088#1086#1074
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 1
-    object GroupTV: TTreeView
-      Left = 2
-      Top = 15
-      Width = 197
-      Height = 550
-      Align = alClient
-      Images = Images
-      Indent = 19
-      PopupMenu = GroupPop
-      StateImages = Images
-      TabOrder = 0
-      OnGetImageIndex = GroupTVGetImageIndex
-      OnGetSelectedIndex = GroupTVGetSelectedIndex
-    end
-    object GroupBottomTB: TToolBar
-      Left = 2
-      Top = 565
-      Width = 197
-      Height = 25
-      Align = alBottom
-      ButtonWidth = 28
-      Caption = 'GroupBottomTB'
-      Images = IL
-      TabOrder = 1
-      object AddGrTBI: TToolButton
-        Left = 0
-        Top = 2
-        Action = AddGroupAction
-      end
-      object CorrGrTBI: TToolButton
-        Left = 28
-        Top = 2
-        Action = CorrGroupAction
-      end
-      object FontGrTBI: TToolButton
-        Left = 56
-        Top = 2
-        Action = FontSettingGroupAction
-      end
-      object OpenAllNodeGrTBI: TToolButton
-        Left = 84
-        Top = 2
-        Action = OpenAllTreeAction
-      end
-      object CloseAllNodeGrTBI: TToolButton
-        Left = 112
-        Top = 2
-        Action = CloseAllTreeAction
-      end
-      object refreshGrTBI: TToolButton
-        Left = 140
-        Top = 2
-        Action = RefreshGroupAction
-      end
-    end
-  end
-  object ProductsGB: TGroupBox
-    Left = 204
-    Top = 32
-    Width = 1625
-    Height = 592
-    Align = alClient
-    Caption = #1058#1086#1074#1072#1088#1099
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 2
-    object ProductsGrid: TDBGrid
-      Left = 2
-      Top = 15
-      Width = 1621
-      Height = 531
-      Align = alClient
-      DataSource = AppData.DS_Products
-      PopupMenu = ProductsPM
-      TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = [fsBold]
-      OnTitleClick = ProductsGridTitleClick
-      Columns = <
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'COD_ARTIC'
-          Title.Alignment = taCenter
-          Title.Caption = #1040#1088#1090#1080#1082#1091#1083
-          Title.Color = clSkyBlue
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'NAME_ARTIC'
-          Title.Alignment = taCenter
-          Title.Caption = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
-          Title.Color = clSkyBlue
-          Width = 288
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'CENA_ARTC'
-          Title.Alignment = taCenter
-          Title.Caption = #1062#1077#1085#1072
-          Title.Color = clSkyBlue
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'NDS_ARTIC'
-          Title.Alignment = taCenter
-          Title.Caption = #1053#1044#1057
-          Title.Color = clSkyBlue
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'EDIN_IZMER'
-          Title.Alignment = taCenter
-          Title.Caption = #1045#1076#1080#1085'. '#1080#1079#1084#1077#1088
-          Title.Color = clSkyBlue
-          Width = 91
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'KON_KOLCH'
-          Title.Alignment = taCenter
-          Title.Caption = #1054#1089#1090#1072#1090#1086#1082
-          Title.Color = clSkyBlue
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'VES_EDINIC'
-          Title.Alignment = taCenter
-          Title.Caption = #1042#1077#1089
-          Title.Color = clSkyBlue
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'EDN_V_UPAK'
-          Title.Alignment = taCenter
-          Title.Caption = #1045#1076#1085'. '#1074' '#1091#1087#1072#1082
-          Title.Color = clSkyBlue
-          Width = 90
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'NGROUP_TVR'
-          Title.Alignment = taCenter
-          Title.Caption = #1043#1088#1091#1087#1087#1072
-          Title.Color = clSkyBlue
-          Width = 129
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'NGROUP_TV2'
-          Title.Alignment = taCenter
-          Title.Caption = #1055#1086#1076#1075#1088#1091#1087#1087#1072' 1'
-          Title.Color = clSkyBlue
-          Width = 113
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'NGROUP_TV3'
-          Title.Alignment = taCenter
-          Title.Caption = #1055#1086#1076#1075#1088#1091#1087#1087#1072' 2'
-          Title.Color = clSkyBlue
-          Width = 106
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'NGROUP_TV4'
-          Title.Alignment = taCenter
-          Title.Caption = #1055#1086#1076#1075#1088#1091#1087#1087#1072' 3'
-          Title.Color = clSkyBlue
-          Width = 115
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'NGROUP_TV5'
-          Title.Alignment = taCenter
-          Title.Caption = #1055#1086#1076#1075#1088#1091#1087#1087#1072' 4'
-          Title.Color = clSkyBlue
-          Width = 119
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'NGROUP_TV6'
-          Title.Alignment = taCenter
-          Title.Caption = #1055#1086#1076#1075#1088#1091#1087#1087#1072' 5'
-          Title.Color = clSkyBlue
-          Width = 115
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'TYPE_TOVR'
-          Title.Alignment = taCenter
-          Title.Caption = #1058#1080#1087' '#1090#1086#1074#1072#1088#1072
-          Title.Color = clSkyBlue
-          Width = 76
-          Visible = True
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'FAMILY'
-          Title.Alignment = taCenter
-          Title.Color = clSkyBlue
-          Visible = False
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'CREATE_DATE'
-          Title.Alignment = taCenter
-          Title.Color = clSkyBlue
-          Visible = False
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'WHO_CORR'
-          Title.Alignment = taCenter
-          Title.Color = clSkyBlue
-          Visible = False
-        end
-        item
-          Alignment = taCenter
-          Expanded = False
-          FieldName = 'CORR_DATE'
-          Title.Alignment = taCenter
-          Title.Color = clSkyBlue
-          Visible = False
-        end>
-    end
-    object ProductBottomTB: TToolBar
-      Left = 2
-      Top = 565
-      Width = 1621
-      Height = 25
-      Cursor = crHandPoint
-      Align = alBottom
-      ButtonWidth = 28
-      Caption = 'ProductBottomTB'
-      Images = IL
-      TabOrder = 1
-      object AddProdTBI: TToolButton
-        Left = 0
-        Top = 2
-        Action = AddProdAction
-      end
-      object CorrProdTBI: TToolButton
-        Left = 28
-        Top = 2
-        Action = CorrProdAction
-      end
-      object DelProdTBI: TToolButton
-        Left = 56
-        Top = 2
-        Action = DelProdAction
-      end
-      object RefreshProdTBI: TToolButton
-        Left = 84
-        Top = 2
-        Action = RefreshProdAction
-      end
-      object FontProdTBI: TToolButton
-        Left = 112
-        Top = 2
-        Action = FontProdAction
-      end
-    end
-    object ProdSB: TStatusBar
-      Left = 2
-      Top = 546
-      Width = 1621
-      Height = 19
-      Panels = <
-        item
-          Width = 150
-        end
-        item
-          Width = 150
-        end
-        item
-          Width = 150
-        end
-        item
-          Width = 150
-        end>
-    end
-  end
-  object Panel1: TPanel
+  object HeadPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1829
-    Height = 32
+    Width = 1297
+    Height = 26
     Align = alTop
     BorderStyle = bsSingle
-    TabOrder = 3
-    object Label1: TLabel
-      Left = 8
-      Top = 8
-      Width = 72
-      Height = 13
-      Caption = '&'#1058#1080#1087' '#1090#1086#1074#1072#1088#1072':'
+    TabOrder = 1
+    object RangeLbl: TLabel
+      Left = 1
+      Top = 3
+      Width = 160
+      Height = 16
+      Alignment = taCenter
+      AutoSize = False
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
+      Font.Color = clMenuHighlight
+      Font.Height = -12
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
     end
     object Bevel1: TBevel
-      Left = 235
-      Top = -8
-      Width = 3
-      Height = 50
+      Left = 184
+      Top = 0
+      Width = 2
+      Height = 49
     end
-    object Label2: TLabel
-      Left = 240
-      Top = 8
-      Width = 38
-      Height = 13
-      Caption = '&'#1055#1086#1080#1089#1082
+    object RangeBtn: TBitBtn
+      Left = 164
+      Top = 1
+      Width = 18
+      Height = 19
+      Action = RangeAction
+      TabOrder = 0
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000000000000000000000000000000000000FF00FF00F4E7
+        DA00F4E7DA00F4E7DA00F4E7DA00F4E7DA00F4E7DA00F4E7DA00F4E7DA00F4E7
+        DA00F4E7DA00F4E7DA00F4E7DA00F4E7DA00F4E7DA00FF00FF00F4E7DA00F7D9
+        B800FCDEBD00FCDEBD00FCDEBD00FCDEBD00FCDEBD00FCDEBD00FCDEBD00FCDE
+        BD00FCDEBD00FCDEBD00FCDEBD00FCDEBD00F7D9B800F4E7DA00F4E7DA00F7E4
+        CF00FFF1E200FFF1E200FFF1E200FFF1E200FFF1E200FFF1E200FFF1E200FFF1
+        E200FFF1E200FFF1E200FFF1E200FFF1E200F7E4CF00F4E7DA00F4E7DA00F4E7
+        DA00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F4E7DA00F4E7DA00F4E7DA00F4E7
+        DA00FFFFFF00FFFCF900FFFCF900FFFAF400FFFEFC00FFFBF600FFFBF600FFFE
+        FC00FFFAF400FFFFFF00FFFFFF00FFFFFF00F4E7DA00F4E7DA00F4E7DA00F4E7
+        DA00FFFFFF00FFF7EE00FFF7EE00FFEEDC00FFFBF600FFF2E500FFF2E500FFFB
+        F600FFEEDC00FFFFFF00FFFFFF00FFFFFF00F4E7DA00F4E7DA00F4E7DA00F4E7
+        DA00FFFFFF00FFF7EE00FFF7EE00FFEEDC00FFFBF600FFF2E500FFF2E500FFFB
+        F600FFEEDC00FFF7EE00FFF7EE00FFFFFF00F4E7DA00F4E7DA00F4E7DA00F4E7
+        DA00FFFFFF00FFFCF900FFFCF900FFFAF400FFFEFC00FFFBF600FFFBF600FFFE
+        FC00FFFAF400FFFCF900FFFCF900FFFFFF00F4E7DA00F4E7DA00F4E7DA00F4E7
+        DA00FFFFFF00FFF4E800FFF4E800FEE8D000FFFAF400FFEEDC00FFEEDC00FFFA
+        F400FEE8D000FFF4E800FFF4E800FFFFFF00F4E7DA00F4E7DA00F4E7DA00F4E7
+        DA00FFFFFF00FFFFFF00FFFFFF00FFF4E800FFFCF900FFF7EE00FFF7EE00FFFC
+        F900FFF4E800FFFAF400FFFAF400FFFFFF00F4E7DA00F4E7DA00F4E7DA00F4E7
+        DA00FFFFFF00FFFFFF00FFFFFF00FFF4E800FFFCF900FFF7EE00FFF7EE00FFFC
+        F900FFF4E800FFFAF400FFFAF400FFFFFF00F4E7DA00F4E7DA00F4E7DA00F4E7
+        DA00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00F4E7DA00F4E7DA00F2E3D400EBD4
+        BC00F4E7DA00F4E7DA00F4E7DA00F4E7DA00F4E7DA00F4E7DA00F4E7DA00F4E7
+        DA00F4E7DA00F4E7DA00F4E7DA00F4E7DA00EBD4BC00F2E3D400EBD4BC00EABE
+        8E00F3CBA000F3CBA000F3CBA000F3CBA000F3CBA000F3CBA000F3CBA000F3CB
+        A000F3CBA000F3CBA000F3CBA000F3CBA000EABE8E00EBD4BC00EBD4BC00EABE
+        8E00F3CBA000F3CBA000F3CBA000F3CBA000F3CBA000F3CBA000F3CBA000F3CB
+        A000F3CBA000F3CBA000F3CBA000F3CBA000EABE8E00EBD4BC00FBF5F100EBD4
+        BC00EBD4BC00EBD4BC00EBD4BC00EBD4BC00EBD4BC00EBD4BC00EBD4BC00EBD4
+        BC00EBD4BC00EBD4BC00EBD4BC00EBD4BC00EBD4BC00FBF5F100}
+    end
+  end
+  object GroupPanel: TPanel
+    Left = 0
+    Top = 26
+    Width = 197
+    Height = 599
+    Align = alLeft
+    TabOrder = 2
+    object GroupTB: TToolBar
+      Left = 1
+      Top = 573
+      Width = 195
+      Height = 25
+      Cursor = crHandPoint
+      Align = alBottom
+      ButtonWidth = 25
+      Caption = 'GroupTB'
+      Color = clAppWorkSpace
+      EdgeBorders = [ebLeft, ebTop]
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Bevel2: TBevel
-      Left = 624
-      Top = -16
-      Width = 3
-      Height = 50
-    end
-    object TypeTorvCB: TComboBox
-      Left = 83
-      Top = 3
-      Width = 150
-      Height = 22
-      Style = csOwnerDrawFixed
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ItemHeight = 16
+      Font.Style = []
+      Images = IL
+      ParentColor = False
       ParentFont = False
       TabOrder = 0
+      object ToolButton1: TToolButton
+        Left = 0
+        Top = 2
+        Action = RefreshGroupAction
+      end
     end
-    object FieldCB: TComboBox
-      Left = 281
-      Top = 3
-      Width = 141
-      Height = 19
-      Style = csOwnerDrawFixed
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ItemHeight = 13
-      ItemIndex = 0
-      ParentFont = False
-      TabOrder = 1
-      Text = #1040#1088#1090#1080#1082#1091#1083#10
-      Items.Strings = (
-        #1040#1088#1090#1080#1082#1091#1083#10
-        ''
-        #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077#10
-        ''
-        #1043#1088#1091#1087#1087#1072#10
-        ''
-        #1055#1086#1076#1075#1088#1091#1087#1087#1072' 1'#10
-        ''
-        #1055#1086#1076#1075#1088#1091#1087#1087#1072' 2'#10
-        ''
-        #1055#1086#1076#1075#1088#1091#1087#1087#1072' 3'#10
-        ''
-        #1055#1086#1076#1075#1088#1091#1087#1087#1072' 4'#10
-        ''
-        #1055#1086#1076#1075#1088#1091#1087#1087#1072' 5'#10
-        ''
-        #1058#1080#1087' '#1090#1086#1074#1072#1088#1072)
-    end
-    object FindEdit: TEdit
-      Left = 426
-      Top = 3
-      Width = 121
-      Height = 21
-      TabOrder = 2
-      OnChange = FindEditChange
-      OnKeyPress = FindEditKeyPress
-    end
-    object FindBtn: TBitBtn
-      Left = 550
+    object GroupTV: TTreeView
+      Left = 1
       Top = 1
-      Width = 71
-      Height = 25
-      Caption = '&'#1053#1072#1081#1090#1080
+      Width = 197
+      Height = 572
+      Align = alLeft
+      Images = Images
+      Indent = 19
+      TabOrder = 1
+      OnGetImageIndex = GroupTVGetImageIndex
+      OnGetSelectedIndex = GroupTVGetSelectedIndex
+    end
+  end
+  object ReportsPC: TPageControl
+    Left = 197
+    Top = 26
+    Width = 1100
+    Height = 599
+    ActivePage = ProductReport
+    Align = alClient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+    TabPosition = tpBottom
+    object ProductReport: TTabSheet
+      Caption = #1055#1086' '#1090#1086#1074#1072#1088#1072#1084
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
+      Font.Style = []
       ParentFont = False
-      TabOrder = 3
-      OnClick = FindBtnClick
-      Glyph.Data = {
-        E6040000424DE604000000000000360000002800000014000000140000000100
-        180000000000B0040000C40E0000C40E00000000000000000000FFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFAA0A09EA3A3
-        A1F4F4F4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8C8C8575732075731C57574B
-        C8C8C8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7E7D6974721275731E6C6B486F6E4EE5
-        E5E5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFF89898372724F69694E75741A747214807F75FFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFEBEBEB6F6F567472127472127472126F6E3FDEDEDEFFFFFF
-        EBEBEBCDCDCDBBBBBBBCBCBCE6E6E6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFD8D8D871705976741574721274721660605A72725C6C6B4173
-        723075732B75732C6E6E4389897EF1F1F1FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFE8E8E87E7D6F7876287573176D6C4F7574216C6B437877517F7E
-        5084834F7877516F6E416C6B59E7E7E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFDFDFD60605A5A5A4867664D7F7E4B8684518D8D63868566838265
-        7E7C5C8A894A6D6C4E6D6D5DFBFBFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFE7E7E76C6C4670704C7B7A4E94936CCCC975CFCC74CFCC74CFCC74CFCC74A6
-        A4718C8A48646349979796FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB4B4B4
-        66664D87864ABBB875CFCC74CFCC74CFCC74CFCC74CFCC74CFCC74CFCC748C8B
-        677C7B4A747465FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAAAAAA78774983
-        8163CFCC74CFCC74CFCC74CFCC74CFCC74CFCC74CFCC74CFCC74ADAC7386864B
-        606057FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAFAFAF83834BA2A071CFCC
-        74CFCC74CFCC74CFCC74CFCC74CFCC74CFCC74CFCC7496946C888848777770FF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD1D1D181804AA6A472CFCC74CFCC74
-        CFCC74CFCC74CFCC74CFCC74CFCC74CFCC7482805C5D5C42CBCBCBFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF88876079785CCFCC74CFCC74CFCC74CF
-        CC74CFCC74CFCC74CFCC74A2A16F8E8D46949491FFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFC2C2C07E7D4E868566CFCC74CFCC74CFCC74CFCC
-        74CFCC74B0AF7482804D7D7C66FEFEFEFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFB1B1AD7B7A5182825C9A996EB8B675B0AD73838163
-        85834978785CEDEDEDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFDEDEDE88887583814C86854A88874984844A8D8D7EF4
-        F4F4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFF0F0F0C7C7C7C4C4C4EEEEEEFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFF}
     end
   end
   object AL: TActionList
     Images = IL
-    Left = 232
-    Top = 200
-    object AddGroupAction: TAction
-      Category = 'Group'
-      Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100' '#1075#1088#1091#1087#1087#1091
-      Hint = #1044#1086#1073#1072#1074#1080#1090#1100' '#1075#1088#1091#1087#1087#1091
-      ImageIndex = 17
-    end
-    object CorrGroupAction: TAction
-      Category = 'Group'
-      Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100' '#1075#1088#1091#1087#1087#1091
-      Hint = #1048#1079#1084#1077#1085#1080#1090#1100' '#1075#1088#1091#1087#1087#1091
-      ImageIndex = 19
-    end
-    object DelGroupAction: TAction
-      Category = 'Group'
-      Caption = '&'#1059#1076#1072#1083#1080#1090#1100' '#1075#1088#1091#1087#1087#1091
-      Hint = #1059#1076#1072#1083#1080#1090#1100' '#1075#1088#1091#1087#1087#1091
-      ImageIndex = 10
-    end
+    Left = 936
+    Top = 312
     object RefreshGroupAction: TAction
       Category = 'Group'
-      Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100' '#1075#1088#1091#1087#1087#1099
-      Hint = #1054#1073#1085#1086#1074#1080#1090#1100' '#1075#1088#1091#1087#1087#1099
-      ImageIndex = 20
-      OnExecute = RefreshGroupActionExecute
-    end
-    object AddProdAction: TAction
-      Category = 'Products'
-      Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
-      Hint = #1044#1086#1073#1072#1074#1083#1077#1085#1080#1077' '#1085#1086#1074#1086#1075#1086' '#1090#1086#1074#1072#1088#1072
-      ImageIndex = 17
-      ShortCut = 16429
-      OnExecute = AddProdActionExecute
-    end
-    object CorrProdAction: TAction
-      Category = 'Products'
-      Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
-      Hint = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1090#1086#1074#1072#1088#1072
-      ImageIndex = 19
-      ShortCut = 115
-      OnExecute = CorrProdActionExecute
-    end
-    object DelProdAction: TAction
-      Category = 'Products'
-      Caption = '&'#1059#1076#1072#1083#1080#1090#1100
-      Hint = #1059#1076#1072#1083#1077#1085#1080#1077' '#1090#1086#1074#1072#1088#1072
-      ImageIndex = 10
-      ShortCut = 16430
-      OnExecute = DelProdActionExecute
-    end
-    object RefreshProdAction: TAction
-      Category = 'Products'
       Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
       ImageIndex = 20
       ShortCut = 116
-      OnExecute = RefreshProdActionExecute
+      OnExecute = RefreshGroupActionExecute
     end
-    object FindAction: TAction
-      Category = 'Products'
-      Caption = '&'#1053#1072#1081#1090#1080
-      Hint = #1055#1086#1080#1089#1082
-      ImageIndex = 24
-    end
-    object OpenAllTreeAction: TAction
+    object RangeAction: TAction
       Category = 'Group'
-      Caption = '&'#1054#1090#1082#1088#1099#1090#1100' '#1074#1089#1077
-      Hint = #1054#1090#1082#1088#1099#1090#1100' '#1074#1089#1077' '#1075#1088#1091#1087#1087#1099
-      ImageIndex = 26
-      OnExecute = OpenAllTreeActionExecute
-    end
-    object CloseAllTreeAction: TAction
-      Category = 'Group'
-      Caption = '&'#1047#1072#1082#1088#1099#1090#1100' '#1074#1089#1077
-      Hint = #1047#1072#1082#1088#1099#1090#1100' '#1074#1089#1077' '#1075#1088#1091#1087#1087#1099
-      ImageIndex = 25
-      OnExecute = CloseAllTreeActionExecute
-    end
-    object CorrCategoriesProdAction: TAction
-      Category = 'Products'
-      Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100' '#1082#1072#1090#1077#1088#1080#1080
-    end
-    object CorrPriceProdAction: TAction
-      Category = 'Products'
-      Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100' '#1094#1077#1085#1091
-    end
-    object FontSettingGroupAction: TAction
-      Category = 'Group'
-      Hint = #1048#1079#1084#1077#1085#1080#1090#1100' '#1087#1072#1088#1072#1084#1077#1090#1088#1099' '#1096#1088#1080#1092#1090#1072
-      ImageIndex = 13
-      OnExecute = FontSettingGroupActionExecute
-    end
-    object FontProdAction: TAction
-      Category = 'Products'
-      Hint = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1096#1088#1080#1092#1090#1072' '#1090#1086#1074#1072#1088#1086#1074
-      ImageIndex = 13
-      ShortCut = 16457
-      OnExecute = FontProdActionExecute
+      Hint = #1048#1079#1084#1077#1085#1080#1090#1100' '#1087#1077#1088#1080#1086#1076
+      ImageIndex = 3
+      ShortCut = 16466
+      OnExecute = RangeActionExecute
     end
   end
   object IL: TImageList
-    Left = 272
-    Top = 200
+    Left = 984
+    Top = 312
     Bitmap = {
       494C01011B001D00040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000008000000001002000000000000080
@@ -1709,57 +1264,6 @@ object ProductsForm: TProductsForm
       00000000000000000000000000000000000000000000000000000000FFFF0000
       00000000FFFF000000008200FFFF000000000000000000000000000000000000
       000000000000}
-  end
-  object Menu: TMainMenu
-    Images = IL
-    Left = 320
-    Top = 200
-  end
-  object ProductsPM: TPopupMenu
-    Images = IL
-    Left = 376
-    Top = 200
-    object AddIP: TMenuItem
-      Action = AddProdAction
-    end
-    object CorrIP: TMenuItem
-      Action = CorrProdAction
-    end
-    object DelIP: TMenuItem
-      Action = DelProdAction
-    end
-    object RefreshIP: TMenuItem
-      Action = RefreshProdAction
-    end
-  end
-  object GroupPop: TPopupMenu
-    Images = IL
-    Left = 104
-    Top = 200
-    object AddGrIP: TMenuItem
-      Action = AddGroupAction
-    end
-    object DelGrIP: TMenuItem
-      Action = DelGroupAction
-    end
-    object OpenAllTreeIP: TMenuItem
-      Action = OpenAllTreeAction
-    end
-    object CloseAllTreeIP: TMenuItem
-      Action = CloseAllTreeAction
-    end
-    object RefreshGrIP: TMenuItem
-      Action = RefreshGroupAction
-    end
-  end
-  object FD: TFontDialog
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    Left = 232
-    Top = 264
   end
   object Images: TImageList
     Left = 56

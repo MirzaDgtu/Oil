@@ -26,7 +26,8 @@ uses
   DriversF in 'DriversF.pas' {DriversForm},
   DriverDetail in 'DriverDetail.pas' {DriverDetailDialog},
   TypeDoc in 'TypeDoc.pas' {TypeDocForm},
-  TypeDocDetail in 'TypeDocDetail.pas' {TypeDocDetailForm};
+  TypeDocDetail in 'TypeDocDetail.pas' {TypeDocDetailForm},
+  Reports in 'Reports.pas' {ReportsForm};
 
 {$R *.res}
 

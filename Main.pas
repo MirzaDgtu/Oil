@@ -58,6 +58,8 @@ type
     TypeDocAction: TAction;
     TypeDocTBI: TToolButton;
     ypeDocAction1: TMenuItem;
+    ReportAction: TAction;
+    ReportItemMenu: TMenuItem;
     procedure NextBtnClick(Sender: TObject);
     procedure PrevBtnClick(Sender: TObject);
     procedure DrawSheetCell(Sender: TObject; ACol, ARow: Integer;
@@ -77,6 +79,7 @@ type
     procedure ReestrActionExecute(Sender: TObject);
     procedure DriversActionExecute(Sender: TObject);
     procedure TypeDocActionExecute(Sender: TObject);
+    procedure ReportActionExecute(Sender: TObject);
   private
     FDayCount: Integer;
     FItems: TList;
@@ -112,7 +115,7 @@ implementation
 
 uses
    SConst, AppDM, Car, Insurance, Range, Products, Child, Reestr, DriversF,
-  TypeDoc;
+  TypeDoc, Reports;
 
 {$R *.dfm}
 
@@ -533,6 +536,11 @@ begin
          FreeAndNil(TypeD);
       end;
 
+end;
+
+procedure TMainForm.ReportActionExecute(Sender: TObject);
+begin
+  CreateChild(TReportsForm, ReportsForm);
 end;
 
 end.
