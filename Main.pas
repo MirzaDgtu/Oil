@@ -60,6 +60,7 @@ type
     ypeDocAction1: TMenuItem;
     ReportAction: TAction;
     ReportItemMenu: TMenuItem;
+    ReportTBI: TToolButton;
     procedure NextBtnClick(Sender: TObject);
     procedure PrevBtnClick(Sender: TObject);
     procedure DrawSheetCell(Sender: TObject; ACol, ARow: Integer;

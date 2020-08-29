@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ExtCtrls, ActnList, ToolWin, ImgList, StdCtrls,
-  Buttons, ReportProduct;
+  Buttons, ReportProduct, Globals;
 
 type
   TReportsForm = class(TForm)
@@ -18,22 +18,33 @@ type
     ReportsPC: TPageControl;
     IL: TImageList;
     RefreshGroupAction: TAction;
-    ToolButton1: TToolButton;
+    RefreshTBI: TToolButton;
     ProductReport: TTabSheet;
     Images: TImageList;
-    RangeBtn: TBitBtn;
     RangeAction: TAction;
     RangeLbl: TLabel;
-    Bevel1: TBevel;
     ReportProductFrame1: TReportProductFrame;
+    RefreshMainAction: TAction;
+    ReportToExcelAction: TAction;
+    HeaderTB: TToolBar;
+    ToolButton2: TToolButton;
+    ToolButton1: TToolButton;
+    RefreshMainTBI: TToolButton;
+    ReportToExcelTBI: TToolButton;
     procedure GroupTVGetImageIndex(Sender: TObject; Node: TTreeNode);
     procedure GroupTVGetSelectedIndex(Sender: TObject; Node: TTreeNode);
     procedure RefreshGroupActionExecute(Sender: TObject);
     procedure RangeActionExecute(Sender: TObject);
+    procedure RefreshMainActionExecute(Sender: TObject);
+    procedure ReportToExcelActionExecute(Sender: TObject);
   private
       { Private declarations }
     FDateE: TDateTime;
-    FDateB: TDateTime;
+    FDateB: TDateTime; 
+    FGroup: array [0..PRODUCT_CATEGORIES-1] of String[30];
+    function GetGroupStr: Variant;
+    procedure ClearGroup();
+    procedure GetGroups();
     procedure SetDateB(const Value: TDateTime);
     procedure SetDateE(const Value: TDateTime);
     procedure setActualDate();
@@ -47,7 +58,7 @@ type
 
     constructor Create(AOwner: TComponent); override;
   published
-
+    property GroupStr: Variant read GetGroupStr;
   end;
 
 var
@@ -55,7 +66,7 @@ var
 
 implementation
 
-uses AppDM, Globals, SConst, Range, Math;
+uses AppDM, SConst, Range, Math;
 
 {$R *.dfm}
 
@@ -241,6 +252,61 @@ procedure TReportsForm.setActualDate;
 begin
   RangeLbl.Caption := Format('[%s] - [%s]', [FormatDateTime('dd-mm-yyyy', DateB),
                                              FormatDateTime('dd-mm-yyyy', DateE)]);
+end;
+
+procedure TReportsForm.ClearGroup;
+var
+  i: integer;
+begin
+  for i := 0 to PRODUCT_CATEGORIES - 1 DO
+    FGroup[I] := EmptyStr;
+end;
+
+procedure TReportsForm.GetGroups;
+var
+  Node: TTreeNode;
+begin
+   ClearGroup();
+   Node := GroupTV.Selected;
+   if Assigned(Node) then
+    Begin
+     while (Assigned(Node) and (Node.Level > 0)) do
+      Begin
+        FGroup[Node.Level - 1] := Node.Text;
+        Node := Node.Parent;
+      end;
+    end;
+end;
+
+function TReportsForm.GetGroupStr: Variant;
+var
+    Item: TTreeNode;
+    Str: String;
+begin
+  Item := GroupTV.Selected;
+  if ( not Assigned(Item)) and (Item.Level = 0) then
+    Result := SAllCategories
+  else
+    Begin
+      Str := Item.Text;
+
+      while Item.Level > 1 do
+        Begin
+          Item := Item.Parent;
+          Str := Item.Text + ' - ' +  Str;
+        end;
+        Result := Str;
+    end;
+end;
+
+procedure TReportsForm.RefreshMainActionExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TReportsForm.ReportToExcelActionExecute(Sender: TObject);
+begin
+//
 end;
 
 end.
