@@ -36,7 +36,7 @@ object ReportsForm: TReportsForm
         Width = 150
       end>
   end
-  object HeadPanel: TPanel
+  object Pan: TPanel
     Left = 0
     Top = 0
     Width = 1297
@@ -46,7 +46,7 @@ object ReportsForm: TReportsForm
     TabOrder = 1
     object RangeLbl: TLabel
       Left = 1
-      Top = 5
+      Top = 4
       Width = 160
       Height = 16
       Alignment = taCenter
@@ -58,13 +58,27 @@ object ReportsForm: TReportsForm
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label1: TLabel
+      Left = 251
+      Top = 5
+      Width = 72
+      Height = 13
+      Alignment = taCenter
+      Caption = '&'#1058#1080#1087' '#1090#1086#1074#1072#1088#1072':'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object HeaderTB: TToolBar
       Left = 167
       Top = -3
-      Width = 329
+      Width = 84
       Height = 23
       Align = alNone
-      ButtonHeight = 32
+      ButtonHeight = 29
       Caption = 'HeaderTB'
       EdgeBorders = []
       Images = IL
@@ -92,6 +106,21 @@ object ReportsForm: TReportsForm
         Top = 2
         Action = ReportToExcelAction
       end
+    end
+    object TypeTovrCB: TComboBox
+      Left = 328
+      Top = 1
+      Width = 111
+      Height = 22
+      Style = csOwnerDrawFixed
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ItemHeight = 16
+      ParentFont = False
+      TabOrder = 1
     end
   end
   object GroupPanel: TPanel

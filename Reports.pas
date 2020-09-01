@@ -11,7 +11,7 @@ type
   TReportsForm = class(TForm)
     SB: TStatusBar;
     AL: TActionList;
-    HeadPanel: TPanel;
+    Pan: TPanel;
     GroupPanel: TPanel;
     GroupTB: TToolBar;
     GroupTV: TTreeView;
@@ -31,6 +31,8 @@ type
     ToolButton1: TToolButton;
     RefreshMainTBI: TToolButton;
     ReportToExcelTBI: TToolButton;
+    Label1: TLabel;
+    TypeTovrCB: TComboBox;
     procedure GroupTVGetImageIndex(Sender: TObject; Node: TTreeNode);
     procedure GroupTVGetSelectedIndex(Sender: TObject; Node: TTreeNode);
     procedure RefreshGroupActionExecute(Sender: TObject);
@@ -43,6 +45,7 @@ type
     FDateB: TDateTime; 
     FGroup: array [0..PRODUCT_CATEGORIES-1] of String[30];
     function GetGroupStr: Variant;
+    procedure GetTypeTovr();
     procedure ClearGroup();
     procedure GetGroups();
     procedure SetDateB(const Value: TDateTime);
@@ -212,6 +215,7 @@ begin
   DateB := Now();
   DateE := DateB + 1;
   setActualDate();
+  GetTypeTovr();
 end;
 
 procedure TReportsForm.RangeActionExecute(Sender: TObject);
@@ -307,6 +311,31 @@ end;
 procedure TReportsForm.ReportToExcelActionExecute(Sender: TObject);
 begin
 //
+end;
+
+procedure TReportsForm.GetTypeTovr;
+begin
+  AppData.TypeTovr.Active := False;
+  AppData.TypeTovr.Active := True;
+
+  if not AppData.TypeTovr.IsEmpty then
+    try
+       TypeTovrCB.Items.BeginUpdate;
+       TypeTovrCB.Items.Clear;
+       TypeTovrCB.Items.Add('[Выбрать]');
+
+       AppData.TypeTovr.First;
+       while not AppData.TypeTovr.Eof do
+        Begin
+          TypeTovrCB.Items.Add(AppData.TypeTovr.FieldByName('TYPE_TOVR').AsString);
+          AppData.TypeTovr.Next;
+        end;
+
+    finally
+        TypeTovrCB.Items.EndUpdate;
+        TypeTovrCB.ItemIndex := 0;
+        AppData.TypeTovr.Active := False;
+    end;
 end;
 
 end.
