@@ -170,6 +170,7 @@ begin
     try
       with InsF do
         Begin
+          InsF.Caption := 'Выбор страхового документа';
           if ShowModal = mrok then
             Begin
               if AppData.Insurance.FieldByName('ValidDay').AsInteger > 0 then

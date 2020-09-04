@@ -1,6 +1,6 @@
 object ProductsForm: TProductsForm
-  Left = 294
-  Top = 476
+  Left = 448
+  Top = 289
   BorderStyle = bsSingle
   Caption = #1058#1086#1074#1072#1088#1099
   ClientHeight = 643

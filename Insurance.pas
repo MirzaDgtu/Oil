@@ -42,6 +42,7 @@ type
     RangeAction: TAction;
     StoryBtn: TBitBtn;
     StoryAction: TAction;
+    N1: TMenuItem;
     procedure InsuranceGridDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);

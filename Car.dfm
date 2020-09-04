@@ -1,6 +1,6 @@
 object CarForm: TCarForm
-  Left = 254
-  Top = 232
+  Left = 438
+  Top = 244
   Width = 1598
   Height = 771
   Caption = #1059#1095#1077#1090' '#1084#1072#1096#1080#1085
@@ -1130,30 +1130,35 @@ object CarForm: TCarForm
       Category = 'Action'
       Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
       ImageIndex = 4
+      ShortCut = 45
       OnExecute = AddActionExecute
     end
     object CorrAction: TAction
       Category = 'Action'
       Caption = '&'#1048#1079#1084#1077#1085#1080#1090#1100
       ImageIndex = 2
+      ShortCut = 115
       OnExecute = CorrActionExecute
     end
     object DelAction: TAction
       Category = 'Action'
       Caption = '&'#1059#1076#1072#1083#1080#1090#1100
       ImageIndex = 0
+      ShortCut = 16430
       OnExecute = DelActionExecute
     end
     object RefreshAction: TAction
       Category = 'Action'
       Caption = '&'#1054#1073#1085#1086#1074#1080#1090#1100
       ImageIndex = 1
+      ShortCut = 116
       OnExecute = RefreshActionExecute
     end
     object TransferAction: TAction
       Category = 'Action'
       Caption = '&'#1055#1077#1088#1077#1074#1077#1089#1090#1080
       ImageIndex = 5
+      ShortCut = 16416
       OnExecute = TransferActionExecute
     end
     object FindAction: TAction
@@ -1173,6 +1178,7 @@ object CarForm: TCarForm
       Category = 'Action'
       Caption = '&'#1048#1089#1090#1086#1088#1080#1103
       ImageIndex = 7
+      ShortCut = 16456
       OnExecute = StoryActionExecute
     end
     object PrintCarReestrAction: TAction

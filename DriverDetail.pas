@@ -90,6 +90,7 @@ begin
   CarF := TCarStoryForm.Create(g_New, 0);
 
   try
+        CarF.Caption := 'Выбор автомобиля';
         if CarF.ShowModal = mrOk then
           try
              ModelEdit.Text := AppData.Cars.FieldByName('Model').AsString;

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ExtCtrls, ActnList, ToolWin, ImgList, StdCtrls,
-  Buttons, ReportProduct, Globals;
+  Buttons, ReportProduct, Globals, ADODB,DB, StrUtils;
 
 type
   TReportsForm = class(TForm)
@@ -304,8 +304,32 @@ begin
 end;
 
 procedure TReportsForm.RefreshMainActionExecute(Sender: TObject);
+var
+    DataSet: TADODataSet;
 begin
-//
+  Screen.Cursor := crSQLWait;
+  try
+    GetGroups();
+    case ReportsPC.ActivePageIndex of
+      0: Begin
+           DataSet := AppData.ProductReport;
+
+           DataSet.Active := False;
+           DataSet.CommandText := Format(SSQLGetProductReports, [FGroup[0],
+                                                                 FGroup[1],
+                                                                 FGroup[2],
+                                                                 FGroup[3],
+                                                                 FGroup[4],
+                                                                 FGroup[5],
+                                                                 IfThen(TypeTovrCB.ItemIndex = 0, EmptyStr, TypeTovrCB.Text),
+                                                                 FormatDateTime('yyyy-mm-dd', DateB),
+                                                                 FormatDateTime('yyyy-mm-dd', DateE)]);
+           DataSet.Active := True;
+         end;
+    end;
+  finally
+    Screen.Cursor := crDefault; 
+  end;
 end;
 
 procedure TReportsForm.ReportToExcelActionExecute(Sender: TObject);

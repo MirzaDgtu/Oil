@@ -1,14 +1,14 @@
 object DriversFrame: TDriversFrame
   Left = 0
   Top = 0
-  Width = 443
-  Height = 273
+  Width = 1181
+  Height = 589
   Align = alClient
   TabOrder = 0
   object SB: TStatusBar
     Left = 0
-    Top = 254
-    Width = 443
+    Top = 570
+    Width = 1181
     Height = 19
     Panels = <
       item
@@ -22,10 +22,10 @@ object DriversFrame: TDriversFrame
       end>
   end
   object BtnsPanel: TPanel
-    Left = 305
+    Left = 1043
     Top = 25
     Width = 138
-    Height = 22
+    Height = 338
     Align = alRight
     TabOrder = 1
     object Bevel1: TBevel
@@ -401,7 +401,7 @@ object DriversFrame: TDriversFrame
   object HeaderPanel: TPanel
     Left = 0
     Top = 0
-    Width = 443
+    Width = 1181
     Height = 25
     Align = alTop
     TabOrder = 2
@@ -409,8 +409,8 @@ object DriversFrame: TDriversFrame
   object DriversGrid: TDBGrid
     Left = 0
     Top = 25
-    Width = 305
-    Height = 22
+    Width = 1043
+    Height = 338
     Align = alClient
     DataSource = AppData.DS_DriversL
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -793,8 +793,8 @@ object DriversFrame: TDriversFrame
   end
   object DriverInfoPanel: TPanel
     Left = 0
-    Top = 47
-    Width = 443
+    Top = 363
+    Width = 1181
     Height = 207
     Align = alBottom
     TabOrder = 4
@@ -1145,6 +1145,7 @@ object DriversFrame: TDriversFrame
       Category = 'Search'
       Caption = '&'#1053#1072#1081#1090#1080
       ImageIndex = 4
+      OnExecute = FindActionExecute
     end
     object AvailableAction: TAction
       Category = 'Driver'

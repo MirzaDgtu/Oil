@@ -2,7 +2,7 @@ object CarDetailForm: TCarDetailForm
   Left = 728
   Top = 198
   BorderStyle = bsToolWindow
-  Caption = 'CarDetailForm'
+  Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099' '#1072#1074#1090#1086#1084#1086#1073#1080#1083#1103
   ClientHeight = 657
   ClientWidth = 401
   Color = clBtnFace

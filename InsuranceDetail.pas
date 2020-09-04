@@ -84,6 +84,9 @@ begin
   CarF := TCarStoryForm.Create(g_New, 0);
 
   try
+     if AppData.Insurance.FieldByName('ValidDay').AsInteger > 0 then
+       Begin
+        CarF.Caption := 'Выбор автомобиля';
         if CarF.ShowModal = mrOk then
           try
              ModelEdit.Text := AppData.Cars.FieldByName('Model').AsString;
@@ -94,6 +97,10 @@ begin
              UID_Car := AppData.Cars.FieldByName('UID').AsInteger;
           finally
           end;
+       end
+     else
+       MessageDlg('Срок действия данного документа исчерпан!' + #13 + 'Выбор автомобиля недопустим!', mtInformation, [mbOK],0);
+
   finally
     FreeAndNil(CarF);
   end;

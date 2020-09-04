@@ -83,10 +83,10 @@ type
     procedure AvailableActionExecute(Sender: TObject);
     procedure FindEditKeyPress(Sender: TObject; var Key: Char);
     procedure FindEditChange(Sender: TObject);
-    procedure FindBtnClick(Sender: TObject);
     procedure ViewActionExecute(Sender: TObject);
     procedure DriversGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FindActionExecute(Sender: TObject);
   private
     { Private declarations }
     procedure SearchDriver(Index: integer; StrSearch: String);
@@ -283,12 +283,6 @@ begin
       AppData.DriversL.Filtered := False;
 end;
 
-procedure TDriversFrame.FindBtnClick(Sender: TObject);
-begin
-    if Length(Trim(FindEdit.Text)) > 0 then
-      SearchDriver(FindCB.ItemIndex, Trim(FindEdit.Text));
-end;
-
 procedure TDriversFrame.ViewActionExecute(Sender: TObject);
 var
     DriverD: TDriverDetailDialog;
@@ -314,6 +308,12 @@ begin
          DriversGrid.Canvas.Brush.Color := clRed;
 
   DriversGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TDriversFrame.FindActionExecute(Sender: TObject);
+begin       
+    if Length(Trim(FindEdit.Text)) > 0 then
+      SearchDriver(FindCB.ItemIndex, Trim(FindEdit.Text));
 end;
 
 end.

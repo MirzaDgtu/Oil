@@ -859,6 +859,9 @@ object InsuranceForm: TInsuranceForm
     object TransferPop: TMenuItem
       Action = TransferAction
     end
+    object N1: TMenuItem
+      Action = StoryAction
+    end
     object RefreshPop: TMenuItem
       Action = RefreshAction
     end
