@@ -85,6 +85,12 @@ type
     procedure FindEditChange(Sender: TObject);
     procedure FindEditKeyPress(Sender: TObject; var Key: Char);
     procedure FindBtnClick(Sender: TObject);
+    procedure SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
+    procedure ProdSBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
+    procedure GroupTVExpanding(Sender: TObject; Node: TTreeNode;
+      var AllowExpansion: Boolean);
   private
     { Private declarations }
     FGroup: array [0..PRODUCT_CATEGORIES-1] of String[30];
@@ -94,6 +100,7 @@ type
     procedure GetGroups();
     procedure GetTypeTorv();
     procedure FindProduct(Index: integer; FindStr: string);
+    procedure GetGroupInfoSB();
   public
     { Public declarations }
     procedure SetTreeNodes(Tree: TTreeView);
@@ -303,6 +310,7 @@ begin
     
   finally
     AppData.SetInfoToSB(AppData.Products,  ProdSB);
+    GetGroupInfoSB();
     Screen.Cursor := crDefault;
     AppData.Products.EnableControls;
 
@@ -501,6 +509,53 @@ end;
 procedure TProductsForm.FindBtnClick(Sender: TObject);
 begin
   FindProduct(FieldCB.ItemIndex,  Trim(FindEdit.Text));
+end;
+
+procedure TProductsForm.SBDrawPanel(StatusBar: TStatusBar;
+  Panel: TStatusPanel; const Rect: TRect);
+begin
+  with StatusBar.Canvas do
+    Begin
+      Font.Style := Font.Style + [fsBold];
+      Font.Color := clNavy;
+      TextOut(Rect.Left, Rect.Top, Panel.Text);
+    end;
+end;
+
+procedure TProductsForm.GetGroupInfoSB;
+var
+    strGroup: string;
+    i: integer;
+begin
+   strGroup := EmptyStr;
+   GetGroups();
+    try
+       if FGroup[0] <> EmptyStr then strGroup := strGroup + FGroup[0];
+       if FGroup[1] <> EmptyStr then strGroup := strGroup + '->' + FGroup[1];
+       if FGroup[2] <> EmptyStr then strGroup := strGroup + '->' + FGroup[2];
+       if FGroup[3] <> EmptyStr then strGroup := strGroup + '->' + FGroup[3];
+       if FGroup[4] <> EmptyStr then strGroup := strGroup + '->' + FGroup[4];
+       if FGroup[5] <> EmptyStr then strGroup := strGroup + '->' + FGroup[5];
+    finally
+      SB.Panels[0].Text := strGroup;
+    end;
+end;
+
+procedure TProductsForm.ProdSBDrawPanel(StatusBar: TStatusBar;
+  Panel: TStatusPanel; const Rect: TRect);
+begin  
+  with StatusBar.Canvas do
+    Begin
+      Font.Style := Font.Style + [fsBold];
+      Font.Color := clGreen;
+      TextOut(Rect.Left, Rect.Top, Panel.Text);
+    end;
+end;
+
+procedure TProductsForm.GroupTVExpanding(Sender: TObject; Node: TTreeNode;
+  var AllowExpansion: Boolean);
+begin
+  GetGroupInfoSB();
 end;
 
 end.

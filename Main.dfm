@@ -25,18 +25,21 @@ object MainForm: TMainForm
     Height = 21
     Panels = <
       item
-        Width = 400
+        Style = psOwnerDraw
+        Width = 200
       end
       item
         Alignment = taCenter
-        Width = 70
+        Style = psOwnerDraw
+        Width = 150
       end
       item
-        Width = 70
+        Width = 100
       end
       item
         Width = 50
       end>
+    OnDrawPanel = MainSBDrawPanel
   end
   object PC: TPageControl
     Left = 0

@@ -81,6 +81,8 @@ type
     procedure DriversActionExecute(Sender: TObject);
     procedure TypeDocActionExecute(Sender: TObject);
     procedure ReportActionExecute(Sender: TObject);
+    procedure MainSBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
   private
     FDayCount: Integer;
     FItems: TList;
@@ -127,6 +129,9 @@ begin
   FItems := TList.Create;
   MakeDataset();
   RangeChanged();
+
+  MainSB.Panels[0].Text := Format('Сервер: %s', [g_Server]);
+  MainSB.Panels[1].Text := Format('Пользователь: %s', [g_User]);
 end;
 
 destructor TMainForm.Destroy;
@@ -542,6 +547,17 @@ end;
 procedure TMainForm.ReportActionExecute(Sender: TObject);
 begin
   CreateChild(TReportsForm, ReportsForm);
+end;
+
+procedure TMainForm.MainSBDrawPanel(StatusBar: TStatusBar;
+  Panel: TStatusPanel; const Rect: TRect);
+begin
+  with StatusBar.Canvas do
+    begin
+      Font.Color := clRed;
+      Font.Style := Font.Style + [fsBold];
+      TextOut(Rect.Left, Rect.Top, Panel.Text);
+    end;
 end;
 
 end.

@@ -1,6 +1,6 @@
 object CarForm: TCarForm
-  Left = 438
-  Top = 244
+  Left = 79
+  Top = 278
   Width = 1598
   Height = 771
   Caption = #1059#1095#1077#1090' '#1084#1072#1096#1080#1085

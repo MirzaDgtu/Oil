@@ -32,17 +32,21 @@ object ProductsForm: TProductsForm
     Height = 19
     Panels = <
       item
+        Style = psOwnerDraw
+        Width = 500
+      end
+      item
+        Style = psOwnerDraw
         Width = 150
       end
       item
-        Width = 150
-      end
-      item
+        Style = psOwnerDraw
         Width = 150
       end
       item
         Width = 50
       end>
+    OnDrawPanel = SBDrawPanel
   end
   object GroupGB: TGroupBox
     Left = 0
@@ -67,8 +71,11 @@ object ProductsForm: TProductsForm
       Images = Images
       Indent = 19
       PopupMenu = GroupPop
+      ReadOnly = True
       StateImages = Images
       TabOrder = 0
+      OnCollapsing = GroupTVExpanding
+      OnExpanding = GroupTVExpanding
       OnGetImageIndex = GroupTVGetImageIndex
       OnGetSelectedIndex = GroupTVGetSelectedIndex
     end
@@ -366,9 +373,11 @@ object ProductsForm: TProductsForm
       Height = 19
       Panels = <
         item
+          Style = psOwnerDraw
           Width = 150
         end
         item
+          Style = psOwnerDraw
           Width = 150
         end
         item
@@ -377,6 +386,7 @@ object ProductsForm: TProductsForm
         item
           Width = 150
         end>
+      OnDrawPanel = ProdSBDrawPanel
     end
   end
   object Panel1: TPanel
