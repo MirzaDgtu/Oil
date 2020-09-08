@@ -1,6 +1,6 @@
 object ReestrForm: TReestrForm
-  Left = 380
-  Top = 199
+  Left = 303
+  Top = 160
   Width = 1397
   Height = 675
   Caption = #1056#1077#1077#1089#1090#1088' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
@@ -1005,10 +1005,12 @@ object ReestrForm: TReestrForm
         Left = 6
         Top = 20
         Width = 101
-        Height = 22
-        Style = csOwnerDrawFixed
-        ItemHeight = 16
+        Height = 21
+        Style = csDropDownList
+        ItemHeight = 13
+        ItemIndex = 0
         TabOrder = 0
+        Text = #1053#1086#1084#1077#1088
         Items.Strings = (
           #1053#1086#1084#1077#1088
           #1056#1077#1075'. '#1089#1080#1084#1074#1086#1083

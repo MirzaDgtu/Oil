@@ -98,6 +98,8 @@ type
     procedure StoryActionExecute(Sender: TObject);
     procedure PrintCarReestrActionExecute(Sender: TObject);
     procedure PrintCarDetailActionExecute(Sender: TObject);
+    procedure SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
   private
     FBegD: TDateTime;
     FEndD: TDateTime;
@@ -264,6 +266,11 @@ begin
        CarD := TCarDetailForm.Create(g_Corr)
     else
        CarD := TCarDetailForm.Create(g_View);
+
+    AppData.CarDetail.Active := False;
+    AppData.CarDetail.CommandText := Format(SSQLGetCarDetail, [AppData.Cars.FieldByName('UID').AsInteger,
+                                                               AppData.Cars.FieldByName('Archive').AsString]);
+    AppData.CarDetail.Active := True;
        
       with CarD do
         Begin
@@ -521,6 +528,25 @@ begin
          AppData.Cars.EnableControls;
          Screen.Cursor := crDefault;
       end;
+end;
+
+procedure TCarForm.SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+  const Rect: TRect);
+begin
+  with StatusBar.Canvas do
+    try
+      Font.Style := Font.Style + [fsBold];
+      Font.Name := 'Times New Roman';
+     // Brush.Color := clWhite;
+      if Panel = SB.Panels[0] then
+        Font.Color := clGreen;
+      if Panel = SB.Panels[1] then
+        Font.Color := clOlive;
+      if Panel = SB.Panels[2] then
+        Font.Color := clRed;
+    finally
+      TextOut(Rect.Left, Rect.Top, Panel.Text);
+    end;
 end;
 
 end.
