@@ -58,6 +58,8 @@ type
     procedure InsuranceGridTitleClick(Column: TColumn);
     procedure StoryActionExecute(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
   private
     { Private declarations }
     FBegDate: TDateTime;
@@ -472,6 +474,25 @@ begin
 
   AppData.gBegD := BegDate;
   AppData.gEndD := EndDate;
+end;
+
+procedure TInsuranceForm.SBDrawPanel(StatusBar: TStatusBar;
+  Panel: TStatusPanel; const Rect: TRect);
+begin
+  with StatusBar.Canvas do
+    try
+      Font.Style := Font.Style + [fsBold];
+      Font.Name := 'Times New Roman';
+     // Brush.Color := clWhite;
+      if Panel = SB.Panels[0] then
+        Font.Color := clGreen;
+      if Panel = SB.Panels[1] then
+        Font.Color := clOlive;
+      if Panel = SB.Panels[2] then
+        Font.Color := clRed;
+    finally
+      TextOut(Rect.Left, Rect.Top, Panel.Text);
+    end;
 end;
 
 end.

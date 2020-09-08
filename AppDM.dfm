@@ -450,6 +450,9 @@ object AppData: TAppData
       FieldName = 'DRIVER'
       Size = 40
     end
+    object NaklBusy: TBooleanField
+      FieldName = 'Busy'
+    end
   end
   object Move: TADODataSet
     Connection = Connection
@@ -507,6 +510,9 @@ object AppData: TAppData
     end
     object MoveRes_Sum: TFloatField
       FieldName = 'Res_Sum'
+    end
+    object MoveBusy: TBooleanField
+      FieldName = 'Busy'
     end
   end
   object DS_Nakl: TDataSource

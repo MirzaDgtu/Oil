@@ -1,6 +1,6 @@
 object CarForm: TCarForm
-  Left = 206
-  Top = 62
+  Left = 280
+  Top = 197
   Width = 1598
   Height = 771
   Caption = #1059#1095#1077#1090' '#1084#1072#1096#1080#1085
@@ -48,7 +48,11 @@ object CarForm: TCarForm
         Width = 150
       end
       item
-        Width = 50
+        Style = psOwnerDraw
+        Width = 164
+      end
+      item
+        Width = 164
       end>
     OnDrawPanel = SBDrawPanel
   end

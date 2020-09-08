@@ -70,6 +70,8 @@ type
     procedure CarGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure CarGridTitleClick(Column: TColumn);
+    procedure SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
   private
     FBegD: TDateTime;
     FEndD: TDateTime;
@@ -284,4 +286,23 @@ begin
           IndexFieldNames := Str + ' DESC';
     end;
 end;
+procedure TCarStoryForm.SBDrawPanel(StatusBar: TStatusBar;
+  Panel: TStatusPanel; const Rect: TRect);
+begin
+  with StatusBar.Canvas do
+    try
+      Font.Style := Font.Style + [fsBold];
+      Font.Name := 'Times New Roman';
+     // Brush.Color := clWhite;
+      if Panel = SB.Panels[0] then
+        Font.Color := clGreen;
+      if Panel = SB.Panels[1] then
+        Font.Color := clOlive;
+      if Panel = SB.Panels[2] then
+        Font.Color := clRed;
+    finally
+      TextOut(Rect.Left, Rect.Top, Panel.Text);
+    end;
+end;
+
 end.

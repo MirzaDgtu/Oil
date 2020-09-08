@@ -25,17 +25,21 @@ object InsuranceForm: TInsuranceForm
     Height = 19
     Panels = <
       item
+        Style = psOwnerDraw
         Width = 200
       end
       item
+        Style = psOwnerDraw
         Width = 200
       end
       item
+        Style = psOwnerDraw
         Width = 200
       end
       item
         Width = 50
       end>
+    OnDrawPanel = SBDrawPanel
   end
   object BtnsPanel: TPanel
     Left = 1189

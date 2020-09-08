@@ -37,6 +37,8 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure InsuranceGridTitleClick(Column: TColumn);
+    procedure SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
   private
     FlocUID: integer;
     FTypeF: Shortint;
@@ -221,6 +223,25 @@ begin
           IndexFieldNames := Str
         else
           IndexFieldNames := Str + ' DESC';
+    end;
+end;
+
+procedure TIsnuranceStoryForm.SBDrawPanel(StatusBar: TStatusBar;
+  Panel: TStatusPanel; const Rect: TRect);
+begin
+  with StatusBar.Canvas do
+    try
+      Font.Style := Font.Style + [fsBold];
+      Font.Name := 'Times New Roman';
+     // Brush.Color := clWhite;
+      if Panel = SB.Panels[0] then
+        Font.Color := clGreen;
+      if Panel = SB.Panels[1] then
+        Font.Color := clOlive;
+      if Panel = SB.Panels[2] then
+        Font.Color := clRed;
+    finally
+      TextOut(Rect.Left, Rect.Top, Panel.Text);
     end;
 end;
 

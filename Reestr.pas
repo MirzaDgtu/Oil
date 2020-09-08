@@ -59,6 +59,8 @@ type
     N5: TMenuItem;
     BitBtn1: TBitBtn;
     ViewNaklAction: TAction;
+    Range1Btn: TBitBtn;
+    Range1Action: TAction;
     procedure NaklGridTitleClick(Column: TColumn);
     procedure MoveGridTitleClick(Column: TColumn);
     procedure RangeActionExecute(Sender: TObject);
@@ -72,14 +74,15 @@ type
     procedure NewNaklActionExecute(Sender: TObject);
     procedure ViewNaklActionExecute(Sender: TObject);
     procedure CorrNaklActionExecute(Sender: TObject);
+    procedure Range1ActionExecute(Sender: TObject);
+    procedure SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
   private
   { Private declarations }
     FBegD: TDateTime;
     FEndD: TDateTime;
     procedure SetBegD(const Value: TDateTime);
     procedure SetEndD(const Value: TDateTime);
-    procedure SetRangeCaption(BegD, EndD: TDateTime);
-
     function GetNumDoc: Variant;
     function GetDateDoc: Variant;
 
@@ -88,7 +91,6 @@ type
 
   public
     { Public declarations }
-
     constructor Create(AOwner: TComponent); override;
     
   published
@@ -165,7 +167,7 @@ begin
     RefreshNaklActionExecute(Self);
     AppData.gBegD := BegD;
     AppData.gEndD := EndD;
-    SetRangeCaption(BegD, EndD);
+//    SetRangeCaption(BegD, EndD);
   end;
 end;
 
@@ -202,15 +204,9 @@ begin
   finally
      Screen.Cursor := crDefault;
      AppData.Nakl.EnableControls;
-     SetRangeCaption(BegD, EndD);
      AppData.SetInfoToSB(AppData.Nakl,  SB, True, False, 'Archive', EmptyStr);
+     TAppData.SetRangeCaption(BegD, EndD, SB.Panels[3]);
   end;
-end;
-
-procedure TReestrForm.SetRangeCaption(BegD, EndD: TDateTime);
-begin
-    RangeLbl.Caption := Format(SRangeT, [FormatDateTime('yyyy-mm-dd', BegD),
-                                          FormatDateTime('yyyy-mm-dd', EndD)]);
 end;
 
 procedure TReestrForm.DelNaklActionExecute(Sender: TObject);
@@ -460,4 +456,51 @@ begin
       AppData.Nakl.Locate('UNICUM_NUM', un_Num, [loCaseInsensitive, loPartialKey]);
    end;
 end;
+procedure TReestrForm.Range1ActionExecute(Sender: TObject);
+var
+    RangeF: TRangeForm;
+begin
+  RangeF := TRangeForm.Create(Application);
+
+  try
+    RangeF.BegDP.Date := BegD;
+    RangeF.EndDP.Date := EndD;
+
+    if RangeF.ShowModal = mrOk then
+     Begin
+       BegD := RangeF.BegDP.Date;
+       EndD := RangeF.EndDP.Date;
+     end;
+  finally
+    FreeAndNil(RangeF);
+    RefreshNaklActionExecute(Self);
+    AppData.gBegD := BegD;
+    AppData.gEndD := EndD;
+    TAppData.SetRangeCaption(BegD, EndD, SB.Panels[3]);
+  end;
+end;
+
+procedure TReestrForm.SBDrawPanel(StatusBar: TStatusBar;
+  Panel: TStatusPanel; const Rect: TRect);
+begin
+  with StatusBar.Canvas do
+    Begin
+       Font.Style := Font.Style + [fsBold];
+
+       if Panel = StatusBar.Panels[0] then
+         Font.Color := clGreen;
+
+       if Panel = StatusBar.Panels[1] then
+         Font.Color := clOlive;
+
+       if Panel = StatusBar.Panels[2] then
+         Font.Color := clRed;
+
+       if Panel = StatusBar.Panels[3] then
+         Font.Color := clBlue;
+
+       TextOut(Rect.Left, Rect.Top, Panel.Text);
+    end;
+end;
+
 end.

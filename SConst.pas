@@ -73,6 +73,8 @@ resourcestring
 
   SSQLDelNakl = 'EXEC REPORTS..O_DelNakl %d';                         // Удаление накладной
 
+  SSQLCorrNaklBusy = 'EXEC REPORTS..O_CorrNaklBusy %d, %d';           //Изменение статуса занятости документа
+
 // Получение информации в справочники документа
   SSQLGetDrivers = 'EXEC REPORTS..O_GetDrivers';    // Получение списка водителей
 

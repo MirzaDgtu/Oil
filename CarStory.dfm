@@ -41,6 +41,7 @@ object CarStoryForm: TCarStoryForm
       item
         Width = 50
       end>
+    OnDrawPanel = SBDrawPanel
   end
   object HeaderPanel: TPanel
     Left = 0

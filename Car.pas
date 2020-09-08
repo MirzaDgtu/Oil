@@ -233,7 +233,8 @@ begin
                                                      FormatDateTime('yyyy-mm-dd', EndD)]);
     AppData.Cars.Active := True;
   finally
-    TAppData.SetInfoSB(AppData.Cars, SB);
+    TAppData.SetInfoSB(AppData.Cars, SB);    
+    TAppData.SetRangeCaption(BegD, EndD, SB.Panels[3]);
   end;
 end;
 
@@ -404,6 +405,7 @@ begin
     RefreshActionExecute(Self);
     AppData.gBegD := BegD;
     AppData.gEndD := EndD;
+    TAppData.SetRangeCaption(BegD, EndD, SB.Panels[3]);
   end;
 end;
 
@@ -537,13 +539,17 @@ begin
     try
       Font.Style := Font.Style + [fsBold];
       Font.Name := 'Times New Roman';
-     // Brush.Color := clWhite;
       if Panel = SB.Panels[0] then
         Font.Color := clGreen;
       if Panel = SB.Panels[1] then
         Font.Color := clOlive;
       if Panel = SB.Panels[2] then
         Font.Color := clRed;
+      if Panel = StatusBar.Panels[3] then
+        Begin
+          Font.Color := clBlue;
+          Font.Name := 'Segoe UI';
+        end;
     finally
       TextOut(Rect.Left, Rect.Top, Panel.Text);
     end;

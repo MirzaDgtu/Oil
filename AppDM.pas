@@ -287,6 +287,8 @@ type
     ProductReportSUM_PREDM: TFloatField;
     ProductReportEDN_V_UPAK: TFloatField;
     DS_ProductReport: TDataSource;
+    NaklBusy: TBooleanField;
+    MoveBusy: TBooleanField;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
@@ -313,6 +315,7 @@ type
     class procedure SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
     procedure SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar); overload;
     procedure SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar; Archive, Reserve: Boolean; ArchiveField, ReserveField: String); overload;
+    class procedure SetRangeCaption(BegD, EndD: TDateTime; Panel: TStatusPanel);
     constructor Create(AOwner: TComponent); override;
 
   published
@@ -575,6 +578,13 @@ begin
         If Archive = True then SB.Panels[2].Text := Format(SArchiveRows, [Arch]);
     end;
 
+end;
+
+class procedure TAppData.SetRangeCaption(BegD, EndD: TDateTime;
+  Panel: TStatusPanel);
+begin
+  Panel.Text := Format(SRange, [FormatDateTime('dd-mm-yyyy', BegD),
+                                 FormatDateTime('dd-mm-yyyy', EndD)]);
 end;
 
 end.

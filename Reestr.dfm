@@ -1,6 +1,6 @@
 object ReestrForm: TReestrForm
-  Left = 303
-  Top = 160
+  Left = 329
+  Top = 162
   Width = 1397
   Height = 675
   Caption = #1056#1077#1077#1089#1090#1088' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
@@ -24,17 +24,26 @@ object ReestrForm: TReestrForm
     Height = 23
     Panels = <
       item
+        Style = psOwnerDraw
         Width = 150
       end
       item
+        Style = psOwnerDraw
         Width = 150
       end
       item
+        Style = psOwnerDraw
         Width = 150
       end
       item
-        Width = 150
+        Style = psOwnerDraw
+        Width = 164
+      end
+      item
+        Style = psOwnerDraw
+        Width = 50
       end>
+    OnDrawPanel = SBDrawPanel
   end
   object HeaderPanel: TPanel
     Left = 0
@@ -593,7 +602,7 @@ object ReestrForm: TReestrForm
     end
     object CheckNaklBtn: TBitBtn
       Left = 12
-      Top = 136
+      Top = 448
       Width = 101
       Height = 23
       Action = CheckNaklAction
@@ -640,7 +649,7 @@ object ReestrForm: TReestrForm
     end
     object UnCheckNaklBtn: TBitBtn
       Left = 12
-      Top = 160
+      Top = 424
       Width = 101
       Height = 23
       Action = UnCheckNaklAction
@@ -837,8 +846,8 @@ object ReestrForm: TReestrForm
       TabOrder = 6
     end
     object PrintGB: TGroupBox
-      Left = 6
-      Top = 395
+      Left = 8
+      Top = 307
       Width = 113
       Height = 73
       Caption = '&'#1055#1077#1095#1072#1090#1100
@@ -924,7 +933,7 @@ object ReestrForm: TReestrForm
     end
     object RangeGB: TGroupBox
       Left = 8
-      Top = 211
+      Top = 475
       Width = 112
       Height = 78
       Caption = '&'#1055#1077#1088#1080#1086#1076
@@ -935,6 +944,7 @@ object ReestrForm: TReestrForm
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 8
+      Visible = False
       object RangeLbl: TLabel
         Left = 8
         Top = 17
@@ -990,7 +1000,7 @@ object ReestrForm: TReestrForm
     end
     object FindGB: TGroupBox
       Left = 8
-      Top = 293
+      Top = 213
       Width = 113
       Height = 95
       Caption = '&'#1055#1086#1080#1089#1082
@@ -1116,6 +1126,42 @@ object ReestrForm: TReestrForm
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8F1E9F4E7DAF4E7DAF4E7DAF4E7DAF4
         E7DAF4E7DAF1E0CFFDFDFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
     end
+    object Range1Btn: TBitBtn
+      Left = 13
+      Top = 135
+      Width = 100
+      Height = 22
+      Action = RangeAction
+      Caption = '&'#1055#1077#1088#1080#1086#1076
+      TabOrder = 11
+      Glyph.Data = {
+        36030000424D3603000000000000360000002800000010000000100000000100
+        18000000000000030000C40E0000C40E00000000000000000000FDFAF8F4E7DA
+        F4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7
+        DAF4E7DAF4E7DAFDFAF8F4E7DAF7D9B8FCDEBDFCDEBDFCDEBDFCDEBDFCDEBDFC
+        DEBDFCDEBDFCDEBDFCDEBDFCDEBDFCDEBDFCDEBDF7D9B8F4E7DAF4E7DAF7E4CF
+        FFF1E2FFF1E2FFF1E2FFF1E2FFF1E2FFF1E2FFF1E2FFF1E2FFF1E2FFF1E2FFF1
+        E2FFF1E2F7E4CFF4E7DAF4E7DAF4E7DAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4E7DAF4E7DAF4E7DAF4E7DA
+        FFFFFFFFFCF9FFFCF9FFFAF4FFFEFCFFFBF6FFFBF6FFFEFCFFFAF4FFFFFFFFFF
+        FFFFFFFFF4E7DAF4E7DAF4E7DAF4E7DAFFFFFFFFF7EEFFF7EEFFEEDCFFFBF6FF
+        F2E5FFF2E5FFFBF6FFEEDCFFFFFFFFFFFFFFFFFFF4E7DAF4E7DAF4E7DAF4E7DA
+        FFFFFFFFF7EEFFF7EEFFEEDCFFFBF6FFF2E5FFF2E5FFFBF6FFEEDCFFF7EEFFF7
+        EEFFFFFFF4E7DAF4E7DAF4E7DAF4E7DAFFFFFFFFFCF9FFFCF9FFFAF4FFFEFCFF
+        FBF6FFFBF6FFFEFCFFFAF4FFFCF9FFFCF9FFFFFFF4E7DAF4E7DAF4E7DAF4E7DA
+        FFFFFFFFF4E8FFF4E8FEE8D0FFFAF4FFEEDCFFEEDCFFFAF4FEE8D0FFF4E8FFF4
+        E8FFFFFFF4E7DAF4E7DAF4E7DAF4E7DAFFFFFFFFFFFFFFFFFFFFF4E8FFFCF9FF
+        F7EEFFF7EEFFFCF9FFF4E8FFFAF4FFFAF4FFFFFFF4E7DAF4E7DAF4E7DAF4E7DA
+        FFFFFFFFFFFFFFFFFFFFF4E8FFFCF9FFF7EEFFF7EEFFFCF9FFF4E8FFFAF4FFFA
+        F4FFFFFFF4E7DAF4E7DAF4E7DAF4E7DAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF4E7DAF4E7DAF2E3D4EBD4BC
+        F4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7DAF4E7
+        DAF4E7DAEBD4BCF2E3D4EBD4BCEABE8EF3CBA0F3CBA0F3CBA0F3CBA0F3CBA0F3
+        CBA0F3CBA0F3CBA0F3CBA0F3CBA0F3CBA0F3CBA0EABE8EEBD4BCEBD4BCEABE8E
+        F3CBA0F3CBA0F3CBA0F3CBA0F3CBA0F3CBA0F3CBA0F3CBA0F3CBA0F3CBA0F3CB
+        A0F3CBA0EABE8EEBD4BCFBF5F1EBD4BCEBD4BCEBD4BCEBD4BCEBD4BCEBD4BCEB
+        D4BCEBD4BCEBD4BCEBD4BCEBD4BCEBD4BCEBD4BCEBD4BCFBF5F1}
+    end
   end
   object AL: TActionList
     Images = IL
@@ -1163,7 +1209,6 @@ object ReestrForm: TReestrForm
       Category = 'DlgForm'
       Caption = '&'#1055#1077#1088#1080#1086#1076
       ImageIndex = 3
-      ShortCut = 16466
       OnExecute = RangeActionExecute
     end
     object FindAction: TAction
@@ -1188,6 +1233,13 @@ object ReestrForm: TReestrForm
       Caption = '&'#1055#1088#1086#1089#1084#1086#1090#1088
       ImageIndex = 31
       OnExecute = ViewNaklActionExecute
+    end
+    object Range1Action: TAction
+      Category = 'DlgForm'
+      Caption = '&'#1055#1077#1088#1080#1086#1076
+      ImageIndex = 3
+      ShortCut = 16466
+      OnExecute = Range1ActionExecute
     end
   end
   object IL: TImageList
@@ -2406,7 +2458,7 @@ object ReestrForm: TReestrForm
       Action = RefreshNaklAction
     end
     object N5: TMenuItem
-      Action = RangeAction
+      Action = Range1Action
     end
   end
   object MovePopMenu: TPopupMenu

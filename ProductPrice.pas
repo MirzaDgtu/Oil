@@ -97,10 +97,13 @@ begin
   if Length(Trim(CountEdit.Text)) = 0 then
      CountEdit.Text := '0';
 
-  if (Self.typeDoc <> 'Приходный документ') or (Self.typeDoc <> 'Ревизия') then
-    if (Length(Trim(CountEdit.Text)) > 0) and
-       (StrToFloat(Trim(CountEdit.Text)) > StrToFloat(Trim(PowerEdit.Text))) then
-         CountEdit.Text := PowerEdit.Text;
+  if (Length(Trim(CountEdit.Text)) > 0) then
+    Begin
+      if (StrToFloat(Trim(CountEdit.Text)) > StrToFloat(Trim(PowerEdit.Text))) and
+         (Self.typeDoc <> 'Приходный документ') and
+         (Self.typeDoc <> 'Ревизия') then
+           CountEdit.Text := PowerEdit.Text;
+    end;
 
   SetSummProduct(StrToFloat(IfThen(CountEdit.Text = EmptyStr, '0', Trim(CountEdit.Text))), StrToFloat(PriceEdit.Text));
 end;
