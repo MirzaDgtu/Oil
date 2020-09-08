@@ -256,6 +256,7 @@ begin
            1: Str := ' REG_SYMBOL LIKE ' + QuotedStr('%' + FindStr + '%');
            2: Str := ' VIN LIKE ' + QuotedStr('%' + FindStr + '%');
            3: Str := ' MODEL LIKE ' + QuotedStr('%' + FindStr + '%');
+           4: Str := ' DRIVER LIKE ' + QuotedStr('%' + FindStr + '%');
          end;
       finally
         if Length(Str) > 0 then

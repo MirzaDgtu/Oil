@@ -130,8 +130,8 @@ begin
   MakeDataset();
   RangeChanged();
 
-  MainSB.Panels[0].Text := Format('Сервер: %s', [g_Server]);
-  MainSB.Panels[1].Text := Format('Пользователь: %s', [g_User]);
+  MainSB.Panels[1].Text := Format('Сервер: %s', [g_Server]);
+  MainSB.Panels[2].Text := Format('Пользователь: %s', [g_User]);
 end;
 
 destructor TMainForm.Destroy;

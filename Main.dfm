@@ -26,15 +26,16 @@ object MainForm: TMainForm
     Panels = <
       item
         Style = psOwnerDraw
-        Width = 200
+        Width = 150
       end
       item
         Alignment = taCenter
         Style = psOwnerDraw
-        Width = 150
+        Width = 200
       end
       item
-        Width = 100
+        Style = psOwnerDraw
+        Width = 150
       end
       item
         Width = 50

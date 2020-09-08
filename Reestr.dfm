@@ -1,7 +1,7 @@
 object ReestrForm: TReestrForm
   Left = 380
   Top = 199
-  Width = 1156
+  Width = 1397
   Height = 675
   Caption = #1056#1077#1077#1089#1090#1088' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
   Color = clBtnFace
@@ -20,7 +20,7 @@ object ReestrForm: TReestrForm
   object SB: TStatusBar
     Left = 0
     Top = 621
-    Width = 1148
+    Width = 1389
     Height = 23
     Panels = <
       item
@@ -39,7 +39,7 @@ object ReestrForm: TReestrForm
   object HeaderPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1148
+    Width = 1389
     Height = 25
     Align = alTop
     TabOrder = 1
@@ -47,7 +47,7 @@ object ReestrForm: TReestrForm
   object DocReestrGB: TGroupBox
     Left = 0
     Top = 25
-    Width = 1021
+    Width = 1262
     Height = 596
     Align = alClient
     Caption = '&'#1044#1086#1082#1091#1084#1077#1085#1090#1099
@@ -61,7 +61,7 @@ object ReestrForm: TReestrForm
     object Splitter1: TSplitter
       Left = 2
       Top = 486
-      Width = 1017
+      Width = 1258
       Height = 3
       Cursor = crVSplit
       Align = alBottom
@@ -69,7 +69,7 @@ object ReestrForm: TReestrForm
     object NaklGrid: TDBGrid
       Left = 2
       Top = 15
-      Width = 1017
+      Width = 1258
       Height = 471
       Align = alClient
       DataSource = AppData.DS_Nakl
@@ -195,7 +195,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 198
+          Width = 155
           Visible = True
         end
         item
@@ -211,6 +211,20 @@ object ReestrForm: TReestrForm
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
           Width = 122
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DRIVER'
+          Title.Alignment = taCenter
+          Title.Caption = #1042#1086#1076#1080#1090#1077#1083#1100
+          Title.Color = clSkyBlue
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clBlack
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 184
           Visible = True
         end
         item
@@ -296,7 +310,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 114
+          Width = 109
           Visible = True
         end
         item
@@ -311,7 +325,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 89
+          Width = 84
           Visible = True
         end
         item
@@ -326,7 +340,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 146
+          Width = 137
           Visible = True
         end
         item
@@ -341,8 +355,7 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 64
-          Visible = True
+          Visible = False
         end
         item
           Alignment = taCenter
@@ -356,14 +369,13 @@ object ReestrForm: TReestrForm
           Title.Font.Height = -11
           Title.Font.Name = 'Tahoma'
           Title.Font.Style = [fsBold]
-          Width = 64
-          Visible = True
+          Visible = False
         end>
     end
     object MoveGB: TGroupBox
       Left = 2
       Top = 489
-      Width = 1017
+      Width = 1258
       Height = 105
       Align = alBottom
       Caption = '&'#1057#1086#1076#1077#1088#1078#1080#1084#1086#1077' '#1076'-'#1090#1072
@@ -371,7 +383,7 @@ object ReestrForm: TReestrForm
       object MoveGrid: TDBGrid
         Left = 2
         Top = 15
-        Width = 1013
+        Width = 1254
         Height = 88
         Align = alClient
         DataSource = AppData.DS_Move
@@ -521,7 +533,7 @@ object ReestrForm: TReestrForm
     end
   end
   object BtnsRightPanel: TPanel
-    Left = 1021
+    Left = 1262
     Top = 25
     Width = 127
     Height = 596
@@ -996,14 +1008,13 @@ object ReestrForm: TReestrForm
         Height = 22
         Style = csOwnerDrawFixed
         ItemHeight = 16
-        ItemIndex = 0
         TabOrder = 0
-        Text = #1053#1086#1084#1077#1088
         Items.Strings = (
           #1053#1086#1084#1077#1088
           #1056#1077#1075'. '#1089#1080#1084#1074#1086#1083
           'Vin '#1085#1086#1084#1077#1088
-          #1052#1086#1076#1077#1083#1100)
+          #1052#1086#1076#1077#1083#1100
+          #1042#1086#1076#1080#1090#1077#1083#1100)
       end
       object FindEdit: TEdit
         Left = 6

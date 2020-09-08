@@ -91,6 +91,7 @@ type
       const Rect: TRect);
     procedure GroupTVExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
+    procedure GroupTVExpanded(Sender: TObject; Node: TTreeNode);
   private
     { Private declarations }
     FGroup: array [0..PRODUCT_CATEGORIES-1] of String[30];
@@ -556,6 +557,11 @@ procedure TProductsForm.GroupTVExpanding(Sender: TObject; Node: TTreeNode;
   var AllowExpansion: Boolean);
 begin
   GetGroupInfoSB();
+end;
+
+procedure TProductsForm.GroupTVExpanded(Sender: TObject; Node: TTreeNode);
+begin
+  GetGroupInfoSB();   
 end;
 
 end.

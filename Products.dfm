@@ -74,8 +74,10 @@ object ProductsForm: TProductsForm
       ReadOnly = True
       StateImages = Images
       TabOrder = 0
+      OnCollapsed = GroupTVExpanded
       OnCollapsing = GroupTVExpanding
       OnExpanding = GroupTVExpanding
+      OnExpanded = GroupTVExpanded
       OnGetImageIndex = GroupTVGetImageIndex
       OnGetSelectedIndex = GroupTVGetSelectedIndex
     end
