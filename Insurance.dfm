@@ -26,17 +26,22 @@ object InsuranceForm: TInsuranceForm
     Panels = <
       item
         Style = psOwnerDraw
-        Width = 200
+        Width = 150
       end
       item
         Style = psOwnerDraw
-        Width = 200
+        Width = 150
       end
       item
         Style = psOwnerDraw
-        Width = 200
+        Width = 150
       end
       item
+        Style = psOwnerDraw
+        Width = 164
+      end
+      item
+        Style = psOwnerDraw
         Width = 50
       end>
     OnDrawPanel = SBDrawPanel

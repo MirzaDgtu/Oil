@@ -22,14 +22,18 @@ object TypeDocForm: TTypeDocForm
     Height = 19
     Panels = <
       item
-        Width = 100
+        Style = psOwnerDraw
+        Width = 150
       end
       item
-        Width = 100
+        Style = psOwnerDraw
+        Width = 150
       end
       item
-        Width = 50
+        Style = psOwnerDraw
+        Width = 150
       end>
+    OnDrawPanel = SBDrawPanel
   end
   object BtnsPanel: TPanel
     Left = 430
@@ -314,6 +318,7 @@ object TypeDocForm: TTypeDocForm
         Visible = True
       end
       item
+        Alignment = taCenter
         Expanded = False
         FieldName = 'Name'
         Title.Alignment = taCenter
@@ -344,7 +349,7 @@ object TypeDocForm: TTypeDocForm
         Title.Font.Height = -11
         Title.Font.Name = 'MS Sans Serif'
         Title.Font.Style = [fsBold]
-        Width = 250
+        Width = 233
         Visible = True
       end
       item

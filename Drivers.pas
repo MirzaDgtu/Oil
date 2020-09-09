@@ -87,6 +87,8 @@ type
     procedure DriversGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure FindActionExecute(Sender: TObject);
+    procedure SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
   private
     { Private declarations }
     procedure SearchDriver(Index: integer; StrSearch: String);
@@ -314,6 +316,21 @@ procedure TDriversFrame.FindActionExecute(Sender: TObject);
 begin       
     if Length(Trim(FindEdit.Text)) > 0 then
       SearchDriver(FindCB.ItemIndex, Trim(FindEdit.Text));
+end;
+
+procedure TDriversFrame.SBDrawPanel(StatusBar: TStatusBar;
+  Panel: TStatusPanel; const Rect: TRect);
+begin
+    with StatusBar.Canvas do
+      try
+         Font.Style := Font.Style + [fsBold];
+         if Panel = SB.Panels[0] then
+            Font.Color := $1ec01e;
+         if Panel = SB.Panels[1] then
+            Font.Color :=  $998888;
+      finally
+         TextOut(Rect.Left, Rect.Top, Panel.Text);
+      end;
 end;
 
 end.

@@ -166,6 +166,7 @@ begin
      setInfoSB();
    finally
      TAppData.SetInfoSB(AppData.Insurance, SB);
+     TAppData.SetRangeCaption(BegDate, EndDate, SB.Panels[3]);
      Screen.Cursor := crDefault;
    end;
 end;
@@ -410,6 +411,7 @@ begin
         end;
     finally
       FreeAndNil(RangeF);
+      TAppData.SetRangeCaption(BegDate, EndDate, SB.Panels[3]);
       RefreshActionExecute(Self);
       
       AppData.gBegD := BegDate;
@@ -483,13 +485,17 @@ begin
     try
       Font.Style := Font.Style + [fsBold];
       Font.Name := 'Times New Roman';
-     // Brush.Color := clWhite;
       if Panel = SB.Panels[0] then
         Font.Color := clGreen;
       if Panel = SB.Panels[1] then
         Font.Color := clOlive;
       if Panel = SB.Panels[2] then
-        Font.Color := clRed;
+        Font.Color := clRed;      
+      if Panel = StatusBar.Panels[3] then
+       Begin
+        Font.Color := clBlue;
+        Font.Name := 'Segoe UI';
+       end;
     finally
       TextOut(Rect.Left, Rect.Top, Panel.Text);
     end;

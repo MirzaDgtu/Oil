@@ -164,7 +164,7 @@ begin
                 AppData.CarStory.Active := True;
               end;
     end;
-
+    TAppData.SetRangeCaption(BegD, EndD, SB.Panels[3]);
     TAppData.SetInfoSB(TADODataSet(CarGrid.DataSource.DataSet), SB);
 end;
 
@@ -300,6 +300,11 @@ begin
         Font.Color := clOlive;
       if Panel = SB.Panels[2] then
         Font.Color := clRed;
+      if Panel = StatusBar.Panels[3] then
+        Begin
+          Font.Color := clBlue;
+          Font.Name := 'Segoe UI';
+        end;
     finally
       TextOut(Rect.Left, Rect.Top, Panel.Text);
     end;

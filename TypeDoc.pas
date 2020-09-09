@@ -40,6 +40,8 @@ type
     procedure TypeDocGridTitleClick(Column: TColumn);
     procedure TypeDocGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
   private
     { Private declarations }
   public
@@ -188,6 +190,23 @@ begin
              TypeDocGrid.Canvas.Brush.Color := clRed;
 
   TypeDocGrid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TTypeDocForm.SBDrawPanel(StatusBar: TStatusBar;
+  Panel: TStatusPanel; const Rect: TRect);
+begin
+    with StatusBar.Canvas do
+      try
+         Brush.Color := clSkyBlue;
+         FillRect(Rect);
+         Font.Style := Font.Style + [fsBold];
+         if Panel = SB.Panels[0] then
+            Font.Color := clGreen;
+         if Panel = SB.Panels[1] then
+            Font.Color :=  clRed;
+      finally
+         TextOut(Rect.Left, Rect.Top, Panel.Text);
+      end;
 end;
 
 end.

@@ -39,6 +39,11 @@ type
     procedure RangeActionExecute(Sender: TObject);
     procedure RefreshMainActionExecute(Sender: TObject);
     procedure ReportToExcelActionExecute(Sender: TObject);
+    procedure SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
+    procedure GroupTVExpanding(Sender: TObject; Node: TTreeNode;
+      var AllowExpansion: Boolean);
+    procedure GroupTVExpanded(Sender: TObject; Node: TTreeNode);
   private
       { Private declarations }
     FDateE: TDateTime;
@@ -51,6 +56,7 @@ type
     procedure SetDateB(const Value: TDateTime);
     procedure SetDateE(const Value: TDateTime);
     procedure setActualDate();
+    procedure GetGroupInfoSB();
 
   protected
     property DateB: TDateTime read FDateB write SetDateB;
@@ -328,6 +334,7 @@ begin
          end;
     end;
   finally
+    GetGroupInfoSB();
     Screen.Cursor := crDefault; 
   end;
 end;
@@ -360,6 +367,46 @@ begin
         TypeTovrCB.ItemIndex := 0;
         AppData.TypeTovr.Active := False;
     end;
+end;
+
+procedure TReportsForm.SBDrawPanel(StatusBar: TStatusBar;
+  Panel: TStatusPanel; const Rect: TRect);
+begin
+  with StatusBar.Canvas do
+    Begin
+      Font.Style := Font.Style + [fsBold];
+      Font.Color := clNavy;
+      TextOut(Rect.Left, Rect.Top, Panel.Text);
+    end;
+end;
+
+procedure TReportsForm.GetGroupInfoSB;
+var
+    strGroup: string;
+begin
+   strGroup := EmptyStr;
+   GetGroups();
+    try
+       if FGroup[0] <> EmptyStr then strGroup := strGroup + FGroup[0];
+       if FGroup[1] <> EmptyStr then strGroup := strGroup + '->' + FGroup[1];
+       if FGroup[2] <> EmptyStr then strGroup := strGroup + '->' + FGroup[2];
+       if FGroup[3] <> EmptyStr then strGroup := strGroup + '->' + FGroup[3];
+       if FGroup[4] <> EmptyStr then strGroup := strGroup + '->' + FGroup[4];
+       if FGroup[5] <> EmptyStr then strGroup := strGroup + '->' + FGroup[5];
+    finally
+      SB.Panels[0].Text := strGroup;
+    end;
+end;
+
+procedure TReportsForm.GroupTVExpanding(Sender: TObject; Node: TTreeNode;
+  var AllowExpansion: Boolean);
+begin
+  GetGroupInfoSB();
+end;
+
+procedure TReportsForm.GroupTVExpanded(Sender: TObject; Node: TTreeNode);
+begin
+  GetGroupInfoSB();
 end;
 
 end.

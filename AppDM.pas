@@ -416,7 +416,7 @@ begin
       DataSet.First;
       while not DataSet.Eof do
         Begin
-          if DataSet.FieldByName('Reserve').AsBoolean then
+          if DataSet.FieldByName('Reserve').AsBoolean = True then
             ValueRes := ValueRes + 1;
 
           if DataSet.FieldByName('Archive').AsString = '*' then

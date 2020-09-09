@@ -30,16 +30,24 @@ object CarStoryForm: TCarStoryForm
     Height = 19
     Panels = <
       item
+        Style = psOwnerDraw
         Width = 150
       end
       item
+        Style = psOwnerDraw
         Width = 150
       end
       item
+        Style = psOwnerDraw
         Width = 150
       end
       item
-        Width = 50
+        Style = psOwnerDraw
+        Width = 164
+      end
+      item
+        Style = psOwnerDraw
+        Width = 164
       end>
     OnDrawPanel = SBDrawPanel
   end

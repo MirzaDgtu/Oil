@@ -24,17 +24,22 @@ object ReportsForm: TReportsForm
     Height = 19
     Panels = <
       item
+        Style = psOwnerDraw
+        Width = 400
+      end
+      item
+        Style = psOwnerDraw
         Width = 150
       end
       item
+        Style = psOwnerDraw
         Width = 150
       end
       item
-        Width = 150
-      end
-      item
+        Style = psOwnerDraw
         Width = 150
       end>
+    OnDrawPanel = SBDrawPanel
   end
   object Pan: TPanel
     Left = 0
@@ -162,9 +167,19 @@ object ReportsForm: TReportsForm
       Width = 197
       Height = 570
       Align = alLeft
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
       Images = Images
       Indent = 19
+      ParentFont = False
       TabOrder = 1
+      OnCollapsed = GroupTVExpanded
+      OnCollapsing = GroupTVExpanding
+      OnExpanding = GroupTVExpanding
+      OnExpanded = GroupTVExpanded
       OnGetImageIndex = GroupTVGetImageIndex
       OnGetSelectedIndex = GroupTVGetSelectedIndex
     end

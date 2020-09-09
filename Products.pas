@@ -526,7 +526,6 @@ end;
 procedure TProductsForm.GetGroupInfoSB;
 var
     strGroup: string;
-    i: integer;
 begin
    strGroup := EmptyStr;
    GetGroups();

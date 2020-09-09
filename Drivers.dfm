@@ -1,31 +1,35 @@
 object DriversFrame: TDriversFrame
   Left = 0
   Top = 0
-  Width = 1181
-  Height = 589
+  Width = 696
+  Height = 273
   Align = alClient
   TabOrder = 0
   object SB: TStatusBar
     Left = 0
-    Top = 570
-    Width = 1181
+    Top = 254
+    Width = 696
     Height = 19
     Panels = <
       item
+        Style = psOwnerDraw
         Width = 150
       end
       item
+        Style = psOwnerDraw
         Width = 150
       end
       item
-        Width = 50
+        Style = psOwnerDraw
+        Width = 150
       end>
+    OnDrawPanel = SBDrawPanel
   end
   object BtnsPanel: TPanel
-    Left = 1043
+    Left = 558
     Top = 25
     Width = 138
-    Height = 338
+    Height = 22
     Align = alRight
     TabOrder = 1
     object Bevel1: TBevel
@@ -401,7 +405,7 @@ object DriversFrame: TDriversFrame
   object HeaderPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1181
+    Width = 696
     Height = 25
     Align = alTop
     TabOrder = 2
@@ -409,8 +413,8 @@ object DriversFrame: TDriversFrame
   object DriversGrid: TDBGrid
     Left = 0
     Top = 25
-    Width = 1043
-    Height = 338
+    Width = 558
+    Height = 22
     Align = alClient
     DataSource = AppData.DS_DriversL
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]
@@ -793,8 +797,8 @@ object DriversFrame: TDriversFrame
   end
   object DriverInfoPanel: TPanel
     Left = 0
-    Top = 363
-    Width = 1181
+    Top = 47
+    Width = 696
     Height = 207
     Align = alBottom
     TabOrder = 4
