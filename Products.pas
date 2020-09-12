@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls, ComCtrls, Grids, DBGrids, ActnList, Menus,
-  ImgList, Buttons, ADODB, ToolWin, Globals, StrUtils;
+  ImgList, Buttons, ADODB, ToolWin, Globals, StrUtils, IniFiles;
+
 
 type
   TProductsForm = class(TForm)
@@ -69,10 +70,11 @@ type
     FindBtn: TBitBtn;
     Bevel2: TBevel;
     FontProdTBI: TToolButton;
+    N1: TMenuItem;
+    N2: TMenuItem;
     procedure FontSettingGroupActionExecute(Sender: TObject);
     procedure ProductsGridTitleClick(Column: TColumn);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure FontProdActionExecute(Sender: TObject);
     procedure OpenAllTreeActionExecute(Sender: TObject);
     procedure CloseAllTreeActionExecute(Sender: TObject);
     procedure AddProdActionExecute(Sender: TObject);
@@ -92,6 +94,7 @@ type
     procedure GroupTVExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
     procedure GroupTVExpanded(Sender: TObject; Node: TTreeNode);
+    procedure FontProdActionExecute(Sender: TObject);
   private
     { Private declarations }
     FGroup: array [0..PRODUCT_CATEGORIES-1] of String[30];
@@ -102,15 +105,25 @@ type
     procedure GetTypeTorv();
     procedure FindProduct(Index: integer; FindStr: string);
     procedure GetGroupInfoSB();
+    procedure SetFontParam(PointName: string);
   public
     { Public declarations }
     procedure SetTreeNodes(Tree: TTreeView);
+    procedure GetFontParam(PointName: string);
 
     constructor Create(AOwner: TComponent); override;
 
   published
     property GroupStr: Variant read GetGroupStr;
   end;
+
+
+const
+  fsBoldMask      = 8;                { Constants Used to Determine Font Style }
+  fsItalicMask    = 4;
+  fsUnderlineMask = 2;
+  fsStrikeOutMask = 1;
+  fsNormal        = 0;
 
 var
   ProductsForm: TProductsForm;
@@ -217,9 +230,23 @@ begin
 end;
 
 procedure TProductsForm.FontSettingGroupActionExecute(Sender: TObject);
+var
+    iniFile: TIniFile;
 begin
-  if FD.Execute then
-    GroupTV.Font := FD.Font;
+{  if FD.Execute then
+    try
+      iniFile := TIniFile.Create(ExtractFilePath(Application.ExeName)+ '\Setting.ini');
+      with iniFile do
+        Begin
+          WriteString('FontTreeGroup', 'Name', FD.Font.Name);
+          WriteInteger('FontTreeGroup', 'Color', FD.Font.Color);
+          WriteInteger('FontTreeGroup', 'Size', FD.Font.Size);
+        end;
+    finally
+      GroupTV.Font := FD.Font;
+    end;     }
+
+    SetFontParam('FontTreeGroup');
 end;
 
 procedure TProductsForm.ProductsGridTitleClick(Column: TColumn);
@@ -245,15 +272,6 @@ procedure TProductsForm.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   Action := caFree;
-end;
-
-procedure TProductsForm.FontProdActionExecute(Sender: TObject);
-begin
-  if FD.Execute then
-    Begin
-      ProductsGrid.Font := FD.Font;
-      ProductsGrid.TitleFont :=FD.Font;
-    end;
 end;
 
 procedure TProductsForm.OpenAllTreeActionExecute(Sender: TObject);
@@ -462,6 +480,8 @@ begin
   inherited;
   GetTypeTorv();
   SetTreeNodes(GroupTV);
+  GetFontParam('FontTreeGroup');
+  GetFontParam('FontProducts');
 end;
 
 procedure TProductsForm.FindProduct(Index: integer; FindStr: string);
@@ -561,6 +581,88 @@ end;
 procedure TProductsForm.GroupTVExpanded(Sender: TObject; Node: TTreeNode);
 begin
   GetGroupInfoSB();   
+end;
+
+procedure TProductsForm.GetFontParam(PointName: string);
+var
+    iniFile: TIniFile;
+    StyleBits: Byte;
+    BoldStyle: Boolean;
+begin
+     iniFile := TIniFile.Create(ExtractFilePath(Application.ExeName) + '\Setting.ini');
+     BoldStyle := True;
+
+     try
+        with FD.Font do
+          Begin
+             Name := iniFile.ReadString(PointName, 'Name', 'MS Sans Serif');
+             Color := iniFile.ReadInteger(PointName, 'Color', clWindowText);
+             Size := iniFile.ReadInteger(PointName, 'Size', 8);
+             if BoldStyle then
+                StyleBits := iniFile.ReadInteger( PointName, 'Style', Ord( fsBold ) )
+             else
+                StyleBits := iniFile.ReadInteger( PointName, 'Style', Ord( fsNormal ) );
+              Style := [];
+             if StyleBits and fsBoldMask = fsBoldMask then
+                Style := Style + [ fsBold ];
+             if StyleBits and fsItalicMask = fsItalicMask then
+                Style := Style + [ fsItalic ];
+             if StyleBits and fsUnderlineMask = fsUnderlineMask then
+                Style := Style + [ fsUnderline ];
+             if StyleBits and fsStrikeOutMask = fsStrikeOutMask then
+                Style := Style + [ fsStrikeOut ];
+          end;
+     finally
+        if PointName = 'FontTreeGroup' then GroupTV.Font := FD.Font;
+        if PointName = 'FontProducts' then
+          Begin
+            ProductsGrid.Font := FD.Font;
+            ProductsGrid.TitleFont :=FD.Font;
+          end;
+     end;
+end;
+
+procedure TProductsForm.SetFontParam(PointName: string);
+var
+    iniFile: TIniFile;
+    StyleBits: Byte;
+begin
+     StyleBits := 0;
+  if FD.Execute then
+    Begin
+     iniFile := TIniFile.Create(ExtractFilePath(Application.ExeName) + '\Setting.ini');
+
+     with iniFile do
+     try
+       with FD.Font do
+        Begin
+          WriteString(PointName, 'Name', FD.Font.Name);
+          WriteInteger(PointName, 'Color', FD.Font.Color);
+          WriteInteger(PointName, 'Size', FD.Font.Size);
+          if fsBold in Style then
+            StyleBits := fsBoldMask;
+          if fsItalic in Style then
+            StyleBits := StyleBits + fsItalicMask;
+          if fsUnderline in Style then
+            StyleBits := StyleBits + fsUnderlineMask;
+          if fsStrikeOut in Style then
+            StyleBits := StyleBits + fsStrikeOutMask;
+          WriteInteger(PointName, 'Style', StyleBits );
+        end;
+     finally
+        if PointName = 'FontTreeGroup' then GroupTV.Font := FD.Font;
+        if PointName = 'FontProducts' then
+          Begin
+            ProductsGrid.Font := FD.Font;
+            ProductsGrid.TitleFont :=FD.Font;
+          end;
+     end;
+    end;
+end;
+
+procedure TProductsForm.FontProdActionExecute(Sender: TObject);
+begin
+  SetFontParam('FontProducts');
 end;
 
 end.

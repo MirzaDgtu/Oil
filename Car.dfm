@@ -1,7 +1,7 @@
 object CarForm: TCarForm
-  Left = 280
-  Top = 197
-  Width = 1598
+  Left = 0
+  Top = 198
+  Width = 1280
   Height = 771
   Caption = #1059#1095#1077#1090' '#1084#1072#1096#1080#1085
   Color = clBtnFace
@@ -21,7 +21,7 @@ object CarForm: TCarForm
   object Splitter1: TSplitter
     Left = 0
     Top = 576
-    Width = 1590
+    Width = 1272
     Height = 3
     Cursor = crVSplit
     Align = alBottom
@@ -29,7 +29,7 @@ object CarForm: TCarForm
   object SB: TStatusBar
     Left = 0
     Top = 721
-    Width = 1590
+    Width = 1272
     Height = 19
     Panels = <
       item
@@ -59,13 +59,13 @@ object CarForm: TCarForm
   object HeaderPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1590
+    Width = 1272
     Height = 25
     Align = alTop
     TabOrder = 1
   end
   object BtnsPanel: TPanel
-    Left = 1454
+    Left = 1136
     Top = 25
     Width = 136
     Height = 551
@@ -603,7 +603,7 @@ object CarForm: TCarForm
   object DetailGB: TGroupBox
     Left = 0
     Top = 579
-    Width = 1590
+    Width = 1272
     Height = 142
     Align = alBottom
     Caption = '&'#1055#1072#1088#1072#1084#1077#1090#1088#1099
@@ -837,7 +837,7 @@ object CarForm: TCarForm
   object GridsGB: TGroupBox
     Left = 0
     Top = 25
-    Width = 1454
+    Width = 1136
     Height = 551
     Align = alClient
     Caption = '&'#1056#1077#1077#1089#1090#1088' '#1072#1074#1090#1086#1084#1086#1073#1080#1083#1077#1081
@@ -851,7 +851,7 @@ object CarForm: TCarForm
     object CarGrid: TDBGrid
       Left = 2
       Top = 15
-      Width = 1450
+      Width = 1132
       Height = 534
       Align = alClient
       DataSource = AppData.DS_Cars

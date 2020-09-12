@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 365
-  Top = 181
-  Width = 1289
+  Left = 375
+  Top = 179
+  Width = 1280
   Height = 709
   Caption = #1056#1072#1089#1093#1086#1076' '#1090#1086#1087#1083#1080#1074#1072' '#1090#1088#1072#1085#1089#1087#1086#1088#1090#1085#1099#1084#1080' '#1089#1088#1077#1076#1089#1090#1074#1072#1084#1080
   Color = clBtnFace
@@ -21,7 +21,7 @@ object MainForm: TMainForm
   object MainSB: TStatusBar
     Left = 0
     Top = 637
-    Width = 1281
+    Width = 1272
     Height = 21
     Panels = <
       item
@@ -272,7 +272,7 @@ object MainForm: TMainForm
   object MainTB: TToolBar
     Left = 0
     Top = 0
-    Width = 1281
+    Width = 1272
     Height = 29
     Caption = 'MainTB'
     Images = IL

@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, DB, ADODB, ComCtrls, UCustomFlexCelReport,
-  UFlexCelReport, UExcelAdapter, OLEAdapter;
+  UFlexCelReport, UExcelAdapter, OLEAdapter, IniFiles, Dialogs;
 
 type
   TAppData = class(TDataModule)
@@ -344,7 +344,8 @@ var
 implementation
 
 uses
-  Windows, SConst, Login, Globals, Controls, Forms, Dialogs, Car, DriversF;
+  Windows, SConst, Login, Globals, Controls, Forms, Car, DriversF,
+  DateUtils;
 
 {$R *.dfm}
 

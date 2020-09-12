@@ -1,10 +1,10 @@
 object ProductsForm: TProductsForm
-  Left = 448
-  Top = 289
+  Left = 390
+  Top = 163
   BorderStyle = bsSingle
   Caption = #1058#1086#1074#1072#1088#1099
   ClientHeight = 643
-  ClientWidth = 1829
+  ClientWidth = 1272
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -28,7 +28,7 @@ object ProductsForm: TProductsForm
   object SB: TStatusBar
     Left = 0
     Top = 624
-    Width = 1829
+    Width = 1272
     Height = 19
     Panels = <
       item
@@ -126,7 +126,7 @@ object ProductsForm: TProductsForm
   object ProductsGB: TGroupBox
     Left = 204
     Top = 32
-    Width = 1625
+    Width = 1068
     Height = 592
     Align = alClient
     Caption = #1058#1086#1074#1072#1088#1099
@@ -140,7 +140,7 @@ object ProductsForm: TProductsForm
     object ProductsGrid: TDBGrid
       Left = 2
       Top = 15
-      Width = 1621
+      Width = 1064
       Height = 531
       Align = alClient
       DataSource = AppData.DS_Products
@@ -334,7 +334,7 @@ object ProductsForm: TProductsForm
     object ProductBottomTB: TToolBar
       Left = 2
       Top = 565
-      Width = 1621
+      Width = 1064
       Height = 25
       Cursor = crHandPoint
       Align = alBottom
@@ -371,7 +371,7 @@ object ProductsForm: TProductsForm
     object ProdSB: TStatusBar
       Left = 2
       Top = 546
-      Width = 1621
+      Width = 1064
       Height = 19
       Panels = <
         item
@@ -394,7 +394,7 @@ object ProductsForm: TProductsForm
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1829
+    Width = 1272
     Height = 32
     Align = alTop
     BorderStyle = bsSingle
@@ -1740,6 +1740,10 @@ object ProductsForm: TProductsForm
     object DelIP: TMenuItem
       Action = DelProdAction
     end
+    object N1: TMenuItem
+      Action = FontProdAction
+      Caption = #1064#1088#1080#1092#1090
+    end
     object RefreshIP: TMenuItem
       Action = RefreshProdAction
     end
@@ -1759,6 +1763,10 @@ object ProductsForm: TProductsForm
     end
     object CloseAllTreeIP: TMenuItem
       Action = CloseAllTreeAction
+    end
+    object N2: TMenuItem
+      Action = FontSettingGroupAction
+      Caption = #1064#1088#1080#1092#1090
     end
     object RefreshGrIP: TMenuItem
       Action = RefreshGroupAction

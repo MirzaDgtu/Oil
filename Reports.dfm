@@ -1,7 +1,7 @@
 object ReportsForm: TReportsForm
-  Left = 320
-  Top = 223
-  Width = 1305
+  Left = 0
+  Top = 224
+  Width = 1280
   Height = 675
   Caption = #1054#1090#1095#1077#1090#1099
   Color = clBtnFace
@@ -20,7 +20,7 @@ object ReportsForm: TReportsForm
   object SB: TStatusBar
     Left = 0
     Top = 625
-    Width = 1297
+    Width = 1272
     Height = 19
     Panels = <
       item
@@ -44,7 +44,7 @@ object ReportsForm: TReportsForm
   object Pan: TPanel
     Left = 0
     Top = 0
-    Width = 1297
+    Width = 1272
     Height = 28
     Align = alTop
     BorderStyle = bsSingle
@@ -187,7 +187,7 @@ object ReportsForm: TReportsForm
   object ReportsPC: TPageControl
     Left = 197
     Top = 28
-    Width = 1100
+    Width = 1075
     Height = 597
     ActivePage = ProductReport
     Align = alClient
@@ -210,16 +210,16 @@ object ReportsForm: TReportsForm
       inline ReportProductFrame1: TReportProductFrame
         Left = 0
         Top = 0
-        Width = 1092
+        Width = 1067
         Height = 571
         Align = alClient
         TabOrder = 0
         inherited SB: TStatusBar
           Top = 552
-          Width = 1092
+          Width = 1067
         end
         inherited ProductReportGrid: TDBGrid
-          Width = 1092
+          Width = 1067
           Height = 552
         end
       end

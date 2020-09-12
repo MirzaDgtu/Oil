@@ -361,7 +361,6 @@ begin
           TypeTovrCB.Items.Add(AppData.TypeTovr.FieldByName('TYPE_TOVR').AsString);
           AppData.TypeTovr.Next;
         end;
-
     finally
         TypeTovrCB.Items.EndUpdate;
         TypeTovrCB.ItemIndex := 0;

@@ -1,14 +1,14 @@
 object ReportProductFrame: TReportProductFrame
   Left = 0
   Top = 0
-  Width = 821
-  Height = 543
+  Width = 443
+  Height = 273
   Align = alClient
   TabOrder = 0
   object SB: TStatusBar
     Left = 0
-    Top = 524
-    Width = 821
+    Top = 254
+    Width = 443
     Height = 19
     Panels = <
       item
@@ -24,8 +24,8 @@ object ReportProductFrame: TReportProductFrame
   object ProductReportGrid: TDBGrid
     Left = 0
     Top = 0
-    Width = 821
-    Height = 524
+    Width = 443
+    Height = 254
     Align = alClient
     DataSource = AppData.DS_ProductReport
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgMultiSelect]

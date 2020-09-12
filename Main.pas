@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, ExtCtrls, ComCtrls, Buttons, StdCtrls, Spin, Globals,
   UCustomFlexCelReport, UFlexCelReport, UExcelAdapter, OLEAdapter, DB,
-  DBClient, Menus, ActnList, ImgList, DBGrids, DateUtils, ADODB, ToolWin;
+  DBClient, Menus, ActnList, ImgList, DBGrids, DateUtils, ADODB, ToolWin, IniFiles;
 
 type
   TMainForm = class(TForm)
