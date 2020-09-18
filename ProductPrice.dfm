@@ -192,6 +192,7 @@ object ProductPriceForm: TProductPriceForm
       Height = 21
       ReadOnly = True
       TabOrder = 2
+      Text = '0'
     end
     object EdnVUpakEdit: TEdit
       Left = 327

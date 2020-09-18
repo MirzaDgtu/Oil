@@ -413,49 +413,74 @@ begin
   if (AppData.Nakl.Active) and
      (not AppData.Nakl.IsEmpty) then
    try
-     NaklF := TNaklForm.Create(AppData.fldUNICUM_NUM.AsInteger, g_Corr);
-     un_Num := AppData.fldUNICUM_NUM.AsInteger;
+      AppData.Move.Active := False;
+      AppData.Move.CommandText := Format(SSQLGetNaklDetail, [AppData.fldUNICUM_NUM.AsInteger,
+                                                             g_New]);
+      AppData.Move.Active := True;
 
-     if NaklF.ShowModal = mrOk then
-       Begin
-        try
-           AppData.Command.CommandText := Format(SSQLCorrNaklHead, [AppData.fldUNICUM_NUM.AsInteger,
-                                                                    FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
-                                                                    FloatToStr(NaklF.SumDoc),
-                                                                    IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
-                                                                    NaklF.UID_Car,
-                                                                    IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
-                                                                    g_User,
-                                                                    NaklF.PrimechMemo.Text]);
-           AppData.Command.Execute;
-        except
-           on Err: Exception do
-            MessageDlg('При изменении документа произошла ошибка!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
-        end;
+      if AppData.Move.FieldByName('Busy').AsBoolean then
+        Begin
+          if MessageBox(Handle, 'Документ корректируется другим пользователем!' + #13 + 'Открыть в режиме просмотра?', 'Корректировка документа', MB_ICONWARNING+MB_YESNO) = ID_YES then
+              ViewNaklActionExecute(Self);
+        end
+      else
+        Begin
+          // Свойство занятости документа (1 - занят)
+           AppData.Command.CommandText := Format(SSQLCorrNaklBusy, [AppData.fldUNICUM_NUM.AsInteger,
+                                                                    1]);
+           AppData.Command.Execute();
+           NaklF := TNaklForm.Create(AppData.fldUNICUM_NUM.AsInteger, g_Corr);
+           un_Num := AppData.fldUNICUM_NUM.AsInteger;
 
-        for i := 1 to NaklF.ProductSG.RowCount-1 do
-         try
-                AppData.Command.CommandText := Format(SSQLCorrNaklMove, [AppData.fldUNICUM_NUM.AsInteger,
-                                                                         AppData.fldNUM_DOC.AsInteger,
-                                                                         StrToInt(NaklF.ProductSG.Cells[1,i]),
-                                                                         NaklF.ProductSG.Cells[2,i],
-                                                                         NaklF.ProductSG.Cells[4,i],
-                                                                         NaklF.ProductSG.Cells[3,i],
-                                                                         g_User,
-                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
-                                                                         NaklF.ProductSG.Cells[6,i]]);
-                AppData.Command.Execute;
-         except
-               on Err: Exception do
-                MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+           if NaklF.ShowModal = mrOk then
+             Begin
+              try
+                 AppData.Command.CommandText := Format(SSQLCorrNaklHead, [AppData.fldUNICUM_NUM.AsInteger,
+                                                                          FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
+                                                                          FloatToStr(NaklF.SumDoc),
+                                                                          IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
+                                                                          NaklF.UID_Car,
+                                                                          IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
+                                                                          g_User,
+                                                                          NaklF.PrimechMemo.Text]);
+                 AppData.Command.Execute;
+              except
+                 on Err: Exception do
+                  MessageDlg('При изменении документа произошла ошибка!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+              end;
+
+              for i := 1 to NaklF.ProductSG.RowCount-1 do
+               try
+                      AppData.Command.CommandText := Format(SSQLCorrNaklMove, [AppData.fldUNICUM_NUM.AsInteger,
+                                                                               AppData.fldNUM_DOC.AsInteger,
+                                                                               StrToInt(NaklF.ProductSG.Cells[1,i]),
+                                                                               NaklF.ProductSG.Cells[2,i],
+                                                                               NaklF.ProductSG.Cells[4,i],
+                                                                               NaklF.ProductSG.Cells[3,i],
+                                                                               g_User,
+                                                                               IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
+                                                                               NaklF.ProductSG.Cells[6,i]]);
+                      AppData.Command.Execute;
+
+
+                // Свойство занятости документа (0 - свободен для корркктировки)
+                      AppData.Command.CommandText := Format(SSQLCorrNaklBusy, [AppData.fldUNICUM_NUM.AsInteger,
+                                                                               0]);
+                      AppData.Command.Execute();
+               except
+                     on Err: Exception do
+                      MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+               end;
+             end;
+           end;
+         finally
+            FreeAndNil(NaklF);
+            RefreshNaklActionExecute(Self);
+            AppData.Nakl.Locate('UNICUM_NUM', un_Num, [loCaseInsensitive, loPartialKey]);
          end;
-       end;
-   finally
-      FreeAndNil(NaklF);
-      RefreshNaklActionExecute(Self);
-      AppData.Nakl.Locate('UNICUM_NUM', un_Num, [loCaseInsensitive, loPartialKey]);
-   end;
 end;
+
+
 procedure TReestrForm.Range1ActionExecute(Sender: TObject);
 var
     RangeF: TRangeForm;

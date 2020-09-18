@@ -138,7 +138,7 @@ begin
 
   AppData.Move.Active := False;
   AppData.Move.CommandText := Format(SSQLGetNaklDetail, [UNICUM_NUM,
-                                                                  g_New]);
+                                                         g_New]);
   AppData.Move.Active := True;
 
   // Головная часть документа
@@ -177,7 +177,6 @@ begin
                   AppData.Move.Next;
               end;
           end;
-
           SetNumSG(ProductSG, ProductSG.RowCount);
       except
         on Err: Exception do
