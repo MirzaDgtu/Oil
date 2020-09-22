@@ -240,6 +240,8 @@ end;
 
 procedure TCarForm.CarGridDblClick(Sender: TObject);
 begin
+  if (AppData.Cars.Active) and
+     (AppData.Cars.RecordCount > 0) then
     SetCarDetail();
 end;
 

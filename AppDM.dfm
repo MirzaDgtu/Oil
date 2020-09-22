@@ -1003,6 +1003,10 @@ object AppData: TAppData
     object DriversLLicense_EndDate: TDateTimeField
       FieldName = 'License_EndDate'
     end
+    object DriversLFullName: TStringField
+      FieldName = 'FullName'
+      Size = 100
+    end
   end
   object DS_DriversL: TDataSource
     DataSet = DriversL

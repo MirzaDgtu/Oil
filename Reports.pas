@@ -22,17 +22,22 @@ type
     ProductReport: TTabSheet;
     Images: TImageList;
     RangeAction: TAction;
-    RangeLbl: TLabel;
     ReportProductFrame1: TReportProductFrame;
     RefreshMainAction: TAction;
     ReportToExcelAction: TAction;
     HeaderTB: TToolBar;
     ToolButton2: TToolButton;
-    ToolButton1: TToolButton;
     RefreshMainTBI: TToolButton;
     ReportToExcelTBI: TToolButton;
     Label1: TLabel;
     TypeTovrCB: TComboBox;
+    Bevel1: TBevel;
+    Label2: TLabel;
+    DriverCB: TComboBox;
+    Bevel2: TBevel;
+    Label3: TLabel;
+    TypeDocCB: TComboBox;
+    Bevel3: TBevel;
     procedure GroupTVGetImageIndex(Sender: TObject; Node: TTreeNode);
     procedure GroupTVGetSelectedIndex(Sender: TObject; Node: TTreeNode);
     procedure RefreshGroupActionExecute(Sender: TObject);
@@ -55,8 +60,9 @@ type
     procedure GetGroups();
     procedure SetDateB(const Value: TDateTime);
     procedure SetDateE(const Value: TDateTime);
-    procedure setActualDate();
     procedure GetGroupInfoSB();
+    procedure GetDrivers();
+    procedure GetTypeDoc();
 
   protected
     property DateB: TDateTime read FDateB write SetDateB;
@@ -220,8 +226,11 @@ begin
   SetTreeNodes(GroupTV);
   DateB := Now();
   DateE := DateB + 1;
-  setActualDate();
+  
   GetTypeTovr();
+  GetDrivers();
+  GetTypeDoc();
+  TAppData.SetRangeCaption(DateB, DateE, SB.Panels[1]);
 end;
 
 procedure TReportsForm.RangeActionExecute(Sender: TObject);
@@ -241,10 +250,10 @@ begin
         end;
     finally
       FreeAndNil(rangeF);
-      setActualDate();
 
       AppData.gBegD := DateB;
       AppData.gEndD := DateE;
+      TAppData.SetRangeCaption(DateB, DateE, SB.Panels[1]);
     end;
 end;
 
@@ -256,12 +265,6 @@ end;
 procedure TReportsForm.SetDateE(const Value: TDateTime);
 begin
   FDateE := Value;
-end;
-
-procedure TReportsForm.setActualDate;
-begin
-  RangeLbl.Caption := Format('[%s] - [%s]', [FormatDateTime('dd-mm-yyyy', DateB),
-                                             FormatDateTime('dd-mm-yyyy', DateE)]);
 end;
 
 procedure TReportsForm.ClearGroup;
@@ -329,7 +332,9 @@ begin
                                                                  FGroup[5],
                                                                  IfThen(TypeTovrCB.ItemIndex = 0, EmptyStr, TypeTovrCB.Text),
                                                                  FormatDateTime('yyyy-mm-dd', DateB),
-                                                                 FormatDateTime('yyyy-mm-dd', DateE)]);
+                                                                 FormatDateTime('yyyy-mm-dd', DateE),
+                                                                 IfThen(AppData.DriversL.Locate('Fullname', DriverCB.Text, [loCaseInsensitive, loPartialKey]) = False, -1, AppData.DriversL.FieldByName('UID').AsInteger),
+                                                                 IfThen(AppData.TypeDocs.Locate('TYPE_DOC', TypeDocCB.Text, [loCaseInsensitive, loPartialKey]) = False, 'Р', AppData.TypeDocs.FieldByName('Name').AsString)]);
            DataSet.Active := True;
          end;
     end;
@@ -406,6 +411,54 @@ end;
 procedure TReportsForm.GroupTVExpanded(Sender: TObject; Node: TTreeNode);
 begin
   GetGroupInfoSB();
+end;
+
+procedure TReportsForm.GetDrivers;
+begin
+    AppData.DriversL.Active := False;
+    AppData.DriversL.CommandText := Format(SSQLGetDriversL, [0]);
+    AppData.DriversL.Active := True;
+
+    if not AppData.DriversL.IsEmpty then
+      try
+        DriverCB.Items.BeginUpdate;
+        DriverCB.Items.Clear;
+        DriverCB.Items.Add('[Выбрать]');
+        AppData.DriversL.First;
+
+        while not AppData.DriversL.Eof do
+          begin
+            DriverCB.Items.Add(AppData.DriversL.FieldByName('FullName').AsString);
+            AppData.DriversL.Next;
+          end;
+      finally
+         DriverCB.Items.EndUpdate();
+         DriverCB.ItemIndex := 0;
+      end;
+end;
+
+procedure TReportsForm.GetTypeDoc;
+begin
+    AppData.TypeDocs.Active := False;
+    AppData.TypeDocs.CommandText := Format(SSQLGetTypeDocs, [0]);
+    AppData.TypeDocs.Active := True;
+
+    if not AppData.TypeDocs.IsEmpty then
+      try
+        TypeDocCB.Items.BeginUpdate;
+        TypeDocCB.Items.Clear;
+        AppData.TypeDocs.First;
+        TypeDocCB.Items.Add('[Выбрать]');
+
+        while not AppData.TypeDocs.Eof do
+          Begin
+            TypeDocCB.Items.Add(AppData.TypeDocs.FieldByName('type_DOC').AsString);
+            AppData.TypeDocs.Next;
+          end;
+      finally
+        TypeDocCB.Items.EndUpdate;
+        TypeDocCB.ItemIndex := 0;
+      end;
 end;
 
 end.

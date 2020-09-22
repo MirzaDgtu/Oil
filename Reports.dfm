@@ -1,6 +1,6 @@
 object ReportsForm: TReportsForm
-  Left = 0
-  Top = 224
+  Left = 297
+  Top = 274
   Width = 1280
   Height = 675
   Caption = #1054#1090#1095#1077#1090#1099
@@ -29,7 +29,7 @@ object ReportsForm: TReportsForm
       end
       item
         Style = psOwnerDraw
-        Width = 150
+        Width = 164
       end
       item
         Style = psOwnerDraw
@@ -49,22 +49,8 @@ object ReportsForm: TReportsForm
     Align = alTop
     BorderStyle = bsSingle
     TabOrder = 1
-    object RangeLbl: TLabel
-      Left = 1
-      Top = 4
-      Width = 160
-      Height = 16
-      Alignment = taCenter
-      AutoSize = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clMenuHighlight
-      Font.Height = -12
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
     object Label1: TLabel
-      Left = 251
+      Left = 99
       Top = 5
       Width = 72
       Height = 13
@@ -77,43 +63,81 @@ object ReportsForm: TReportsForm
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Bevel1: TBevel
+      Left = 288
+      Top = -8
+      Width = 3
+      Height = 50
+    end
+    object Label2: TLabel
+      Left = 549
+      Top = 5
+      Width = 61
+      Height = 13
+      Caption = '&'#1042#1086#1076#1080#1090#1077#1083#1100':'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Bevel2: TBevel
+      Left = 87
+      Top = -8
+      Width = 3
+      Height = 50
+    end
+    object Label3: TLabel
+      Left = 296
+      Top = 5
+      Width = 94
+      Height = 13
+      Caption = #1058#1080#1087' '#1076#1086#1082#1091#1084#1077#1085#1090#1072':'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Bevel3: TBevel
+      Left = 539
+      Top = -8
+      Width = 3
+      Height = 50
+    end
     object HeaderTB: TToolBar
-      Left = 167
-      Top = -3
+      Left = 1
+      Top = -1
       Width = 84
-      Height = 23
+      Height = 22
       Align = alNone
       ButtonHeight = 29
       Caption = 'HeaderTB'
       EdgeBorders = []
       Images = IL
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 0
       object ToolButton2: TToolButton
         Left = 0
         Top = 2
         Action = RangeAction
       end
-      object ToolButton1: TToolButton
-        Left = 23
-        Top = 2
-        Width = 5
-        Caption = 'ToolButton1'
-        ImageIndex = 4
-        Style = tbsSeparator
-      end
       object RefreshMainTBI: TToolButton
-        Left = 28
+        Left = 23
         Top = 2
         Action = RefreshMainAction
       end
       object ReportToExcelTBI: TToolButton
-        Left = 51
+        Left = 46
         Top = 2
         Action = ReportToExcelAction
       end
     end
     object TypeTovrCB: TComboBox
-      Left = 328
+      Left = 176
       Top = 1
       Width = 111
       Height = 22
@@ -126,6 +150,36 @@ object ReportsForm: TReportsForm
       ItemHeight = 16
       ParentFont = False
       TabOrder = 1
+    end
+    object DriverCB: TComboBox
+      Left = 613
+      Top = 1
+      Width = 157
+      Height = 22
+      Style = csOwnerDrawFixed
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ItemHeight = 16
+      ParentFont = False
+      TabOrder = 2
+    end
+    object TypeDocCB: TComboBox
+      Left = 392
+      Top = 1
+      Width = 146
+      Height = 22
+      Style = csOwnerDrawFixed
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ItemHeight = 16
+      ParentFont = False
+      TabOrder = 3
     end
   end
   object GroupPanel: TPanel

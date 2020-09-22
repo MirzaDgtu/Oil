@@ -132,7 +132,7 @@ resourcestring
 
 
   // Модуль отчетов
-  SSQLGetProductReports = 'EXEC REPORTS..O_GetProductReports ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'''; // Отчет по группам товаров
+  SSQLGetProductReports = 'EXEC REPORTS..O_GetProductReports ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', %d, ''%s'''; // Отчет по группам товаров
 
   
 

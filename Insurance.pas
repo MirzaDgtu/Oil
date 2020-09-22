@@ -476,6 +476,7 @@ begin
 
   AppData.gBegD := BegDate;
   AppData.gEndD := EndDate;
+  TAppData.SetRangeCaption(BegDate, EndDate, SB.Panels[3]);
 end;
 
 procedure TInsuranceForm.SBDrawPanel(StatusBar: TStatusBar;

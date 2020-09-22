@@ -1,5 +1,5 @@
 object TypeDocForm: TTypeDocForm
-  Left = -589
+  Left = 1331
   Top = 196
   Width = 574
   Height = 373

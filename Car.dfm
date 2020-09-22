@@ -1,5 +1,5 @@
 object CarForm: TCarForm
-  Left = 0
+  Left = 597
   Top = 198
   Width = 1280
   Height = 771

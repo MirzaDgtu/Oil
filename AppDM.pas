@@ -289,6 +289,7 @@ type
     DS_ProductReport: TDataSource;
     NaklBusy: TBooleanField;
     MoveBusy: TBooleanField;
+    DriversLFullName: TStringField;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);
