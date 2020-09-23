@@ -244,6 +244,7 @@ begin
        ColWidths[6] := 200;
     finally
         ProductSG.DefaultRowHeight := 20;
+        GetFontParam('FontNakl');
     end;
 end;
 
@@ -543,8 +544,9 @@ end;
 
 procedure TNaklForm.FontActionExecute(Sender: TObject);
 begin
-    If FD.Execute then
-      ProductSG.Font := FD.Font; 
+//    If FD.Execute then
+ //     ProductSG.Font := FD.Font;
+ SetFontParam('FontNakl'); 
 end;
 
 procedure TNaklForm.ProductSGKeyPress(Sender: TObject; var Key: Char);
@@ -824,73 +826,77 @@ end;
 
 procedure TNaklForm.SetFieldGS(TypeDoc: string);
 begin
-  case StringToCaseSelect(TypeDoc, ['П', 'Р', 'С', 'РВ']) of
-    0,1,2: Begin
-                     with ProductSG do
-                      try
-                         RowCount := 2;
-                         ColCount := 7;
-                         FixedCols := 1;
-                         FixedCols := 1;
+  try
+      case StringToCaseSelect(TypeDoc, ['П', 'Р', 'С', 'РВ']) of
+        0,1,2: Begin
+                         with ProductSG do
+                          try
+                             RowCount := 2;
+                             ColCount := 7;
+                             FixedCols := 1;
+                             FixedCols := 1;
 
-                         Cols[0].Text := '№';
-                         Cols[1].Text := 'Артикул';
-                         Cols[2].Text := 'Наименование';
-                         Cols[3].Text := 'Цена';
-                         Cols[4].Text := 'Количество';
-                         Cols[5].Text := 'Сумма';
-                         Cols[6].Text := 'Примечание';
+                             Cols[0].Text := '№';
+                             Cols[1].Text := 'Артикул';
+                             Cols[2].Text := 'Наименование';
+                             Cols[3].Text := 'Цена';
+                             Cols[4].Text := 'Количество';
+                             Cols[5].Text := 'Сумма';
+                             Cols[6].Text := 'Примечание';
 
-                         ColWidths[0] := 30;
-                         ColWidths[1] := 80;
-                         ColWidths[2] := 230;
-                         ColWidths[3] := 70;
-                         ColWidths[4] := 90;
-                         ColWidths[5] := 90;
-                         ColWidths[6] := 200;
-                      finally
-                          ProductSG.DefaultRowHeight := 20;
-                      end;
-                    end;
-    3:           Begin
-                      with ProductSG do
-                      try
-                         RowCount := 2;
-                         ColCount := 11;
-                         FixedCols := 1;
-                         FixedCols := 1;
+                             ColWidths[0] := 30;
+                             ColWidths[1] := 80;
+                             ColWidths[2] := 230;
+                             ColWidths[3] := 70;
+                             ColWidths[4] := 90;
+                             ColWidths[5] := 90;
+                             ColWidths[6] := 200;
+                          finally
+                              ProductSG.DefaultRowHeight := 20;
+                          end;
+                        end;
+        3:           Begin
+                          with ProductSG do
+                          try
+                             RowCount := 2;
+                             ColCount := 11;
+                             FixedCols := 1;
+                             FixedCols := 1;
 
-                         Cols[0].Text := '№';
-                         Cols[1].Text := 'Артикул';
-                         Cols[2].Text := 'Наименование';
-                         Cols[3].Text := 'Цена';
-                         Cols[4].Text := 'Количество';
-                         Cols[5].Text := 'Сумма';
-                         Cols[6].Text := 'Количество(Ф)';
-                         Cols[7].Text := 'Сумма(Ф)';
-                         Cols[8].Text := 'Разница';
-                         Cols[9].Text := 'Сумма(Р)';
-                         Cols[10].Text := 'Примечание';
+                             Cols[0].Text := '№';
+                             Cols[1].Text := 'Артикул';
+                             Cols[2].Text := 'Наименование';
+                             Cols[3].Text := 'Цена';
+                             Cols[4].Text := 'Количество';
+                             Cols[5].Text := 'Сумма';
+                             Cols[6].Text := 'Количество(Ф)';
+                             Cols[7].Text := 'Сумма(Ф)';
+                             Cols[8].Text := 'Разница';
+                             Cols[9].Text := 'Сумма(Р)';
+                             Cols[10].Text := 'Примечание';
 
-                         ColWidths[0] := 30;
-                         ColWidths[1] := 80;
-                         ColWidths[2] := 230;
-                         ColWidths[3] := 70;
-                         ColWidths[4] := 90;
-                         ColWidths[5] := 100;
-                         ColWidths[6] := 90;
-                         ColWidths[7] := 90;
-                         ColWidths[8] := 90;
-                         ColWidths[9] := 90;
-                         ColWidths[10] := 200;
+                             ColWidths[0] := 30;
+                             ColWidths[1] := 80;
+                             ColWidths[2] := 230;
+                             ColWidths[3] := 70;
+                             ColWidths[4] := 90;
+                             ColWidths[5] := 100;
+                             ColWidths[6] := 90;
+                             ColWidths[7] := 90;
+                             ColWidths[8] := 90;
+                             ColWidths[9] := 90;
+                             ColWidths[10] := 200;
 
-                      finally
-                          ProductSG.DefaultRowHeight := 20;
-                          Self.Width := 1190;
-                      end;
-                    end;
-    else
-        SetFieldsSG();
+                          finally
+                              ProductSG.DefaultRowHeight := 20;
+                              Self.Width := 1190;
+                          end;
+                        end;
+        else
+            SetFieldsSG();
+      end;
+  finally
+    GetFontParam('FontNakl');
   end;
 end;
 

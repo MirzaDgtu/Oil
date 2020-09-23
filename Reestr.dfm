@@ -1171,7 +1171,6 @@ object ReestrForm: TReestrForm
       Category = 'Nakl'
       Caption = '&'#1044#1086#1073#1072#1074#1080#1090#1100
       ImageIndex = 23
-      ShortCut = 16429
       OnExecute = NewNaklActionExecute
     end
     object CorrNaklAction: TAction
