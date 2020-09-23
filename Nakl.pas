@@ -944,8 +944,36 @@ begin
 end;
 
 procedure TNaklForm.SetFontParam(PointName: string);
+var
+    iniFile: TIniFile;
+    StyleBits: Byte;
 begin
+     StyleBits := 0;
+  if FD.Execute then
+    Begin
+     iniFile := TIniFile.Create(ExtractFilePath(Application.ExeName) + '\Setting.ini');
 
+     with iniFile do
+     try
+       with FD.Font do
+        Begin
+          WriteString(PointName, 'Name', FD.Font.Name);
+          WriteInteger(PointName, 'Color', FD.Font.Color);
+          WriteInteger(PointName, 'Size', FD.Font.Size);
+          if fsBold in Style then
+            StyleBits := fsBoldMask;
+          if fsItalic in Style then
+            StyleBits := StyleBits + fsItalicMask;
+          if fsUnderline in Style then
+            StyleBits := StyleBits + fsUnderlineMask;
+          if fsStrikeOut in Style then
+            StyleBits := StyleBits + fsStrikeOutMask;
+          WriteInteger(PointName, 'Style', StyleBits );
+        end;
+     finally
+       ProductSG.Font := FD.Font;
+     end;
+    end;
 end;
 
 procedure TNaklForm.ProductSGDrawCell(Sender: TObject; ACol, ARow: Integer;
