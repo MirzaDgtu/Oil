@@ -61,6 +61,19 @@ type
     ViewNaklAction: TAction;
     Range1Btn: TBitBtn;
     Range1Action: TAction;
+    NewNaklIncreaseAction: TAction;
+    NewNaklExpenseAction: TAction;
+    NewNaklRevisionAction: TAction;
+    NewNaklWriteOffAction: TAction;
+    N6: TMenuItem;
+    N7: TMenuItem;
+    N8: TMenuItem;
+    N9: TMenuItem;
+    PopShowAction: TAction;
+    N10: TMenuItem;
+    N11: TMenuItem;
+    N12: TMenuItem;
+    N13: TMenuItem;
     procedure NaklGridTitleClick(Column: TColumn);
     procedure MoveGridTitleClick(Column: TColumn);
     procedure RangeActionExecute(Sender: TObject);
@@ -77,6 +90,11 @@ type
     procedure Range1ActionExecute(Sender: TObject);
     procedure SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
       const Rect: TRect);
+    procedure PopShowActionExecute(Sender: TObject);
+    procedure NewNaklIncreaseActionExecute(Sender: TObject);
+    procedure NewNaklExpenseActionExecute(Sender: TObject);
+    procedure NewNaklWriteOffActionExecute(Sender: TObject);
+    procedure NewNaklRevisionActionExecute(Sender: TObject);
   private
   { Private declarations }
     FBegD: TDateTime;
@@ -525,6 +543,235 @@ begin
          Font.Color := clBlue;
 
        TextOut(Rect.Left, Rect.Top, Panel.Text);
+    end;
+end;
+
+procedure TReestrForm.PopShowActionExecute(Sender: TObject);
+begin
+  MovePopMenu.Popup(NewNaklBtn.ClientOrigin.X+NewNaklBtn.Width, NewNaklBtn.ClientOrigin.Y+NewNaklBtn.Height);
+end;
+
+procedure TReestrForm.NewNaklIncreaseActionExecute(Sender: TObject);
+var
+    NaklF: TNaklForm;
+    UNICUM_NUM, NUM_DOC, i: integer;
+begin
+    NaklF := TNaklForm.Create(g_New, g_New, 'П');
+    UNICUM_NUM := g_New;
+    NUM_DOC := g_New;
+
+    try
+       if NaklF.ShowModal = mrOk then
+         Begin
+            try
+                AppData.Command.CommandText  := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
+                                                                         FloatToStr(NaklF.SumDoc),
+                                                                         IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
+                                                                         NaklF.UID_Car,
+                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
+                                                                         g_User,
+                                                                         NaklF.PrimechMemo.Text]);
+
+                AppData.Command.Execute;
+                RefreshNaklActionExecute(Self);
+                AppData.Nakl.Last;
+
+                UNICUM_NUM := AppData.Nakl.FieldByName('UNICUM_NUM').AsInteger;
+                NUM_DOC := AppData.Nakl.FieldByName('NUM_DOC').AsInteger;
+
+            except
+              on Err: Exception do
+                MessageDlg('Ошибка сохранения головной части документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+            end;
+
+            for i := 1 to NaklF.ProductSG.RowCount-1 do
+            try
+                AppData.Command.CommandText := Format(SSQLInsNaklMove, [UNICUM_NUM,
+                                                                        NUM_DOC,
+                                                                        StrToInt(NaklF.ProductSG.Cells[1,i]),
+                                                                        NaklF.ProductSG.Cells[2,i],
+                                                                        NaklF.ProductSG.Cells[4,i],
+                                                                        NaklF.ProductSG.Cells[3,i],
+                                                                        g_User,
+                                                                        IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
+                                                                        NaklF.ProductSG.Cells[6,i]]);
+                  AppData.Command.Execute;
+            except
+               on Err: Exception do
+                MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+            end;
+         end;
+    finally
+      FreeAndNil(NaklF);
+      RefreshNaklActionExecute(Self);
+    end;
+end;
+
+procedure TReestrForm.NewNaklExpenseActionExecute(Sender: TObject);
+var
+    NaklF: TNaklForm;
+    UNICUM_NUM, NUM_DOC, i: integer;
+begin
+    NaklF := TNaklForm.Create(g_New, g_New, 'Р');
+    UNICUM_NUM := g_New;
+    NUM_DOC := g_New;
+
+    try
+       if NaklF.ShowModal = mrOk then
+         Begin
+            try
+                AppData.Command.CommandText  := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
+                                                                         FloatToStr(NaklF.SumDoc),
+                                                                         IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
+                                                                         NaklF.UID_Car,
+                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
+                                                                         g_User,
+                                                                         NaklF.PrimechMemo.Text]);
+
+                AppData.Command.Execute;
+                RefreshNaklActionExecute(Self);
+                AppData.Nakl.Last;
+
+                UNICUM_NUM := AppData.Nakl.FieldByName('UNICUM_NUM').AsInteger;
+                NUM_DOC := AppData.Nakl.FieldByName('NUM_DOC').AsInteger;
+
+            except
+              on Err: Exception do
+                MessageDlg('Ошибка сохранения головной части документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+            end;
+
+            for i := 1 to NaklF.ProductSG.RowCount-1 do
+            try
+                AppData.Command.CommandText := Format(SSQLInsNaklMove, [UNICUM_NUM,
+                                                                        NUM_DOC,
+                                                                        StrToInt(NaklF.ProductSG.Cells[1,i]),
+                                                                        NaklF.ProductSG.Cells[2,i],
+                                                                        NaklF.ProductSG.Cells[4,i],
+                                                                        NaklF.ProductSG.Cells[3,i],
+                                                                        g_User,
+                                                                        IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
+                                                                        NaklF.ProductSG.Cells[6,i]]);
+                  AppData.Command.Execute;
+            except
+               on Err: Exception do
+                MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+            end;
+         end;
+    finally
+      FreeAndNil(NaklF);
+      RefreshNaklActionExecute(Self);
+    end;
+end;
+
+procedure TReestrForm.NewNaklWriteOffActionExecute(Sender: TObject);
+var
+    NaklF: TNaklForm;
+    UNICUM_NUM, NUM_DOC, i: integer;
+begin
+    NaklF := TNaklForm.Create(g_New, g_New, 'С');
+    UNICUM_NUM := g_New;
+    NUM_DOC := g_New;
+
+    try
+       if NaklF.ShowModal = mrOk then
+         Begin
+            try
+                AppData.Command.CommandText  := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
+                                                                         FloatToStr(NaklF.SumDoc),
+                                                                         IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
+                                                                         NaklF.UID_Car,
+                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
+                                                                         g_User,
+                                                                         NaklF.PrimechMemo.Text]);
+
+                AppData.Command.Execute;
+                RefreshNaklActionExecute(Self);
+                AppData.Nakl.Last;
+
+                UNICUM_NUM := AppData.Nakl.FieldByName('UNICUM_NUM').AsInteger;
+                NUM_DOC := AppData.Nakl.FieldByName('NUM_DOC').AsInteger;
+
+            except
+              on Err: Exception do
+                MessageDlg('Ошибка сохранения головной части документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+            end;
+
+            for i := 1 to NaklF.ProductSG.RowCount-1 do
+            try
+                AppData.Command.CommandText := Format(SSQLInsNaklMove, [UNICUM_NUM,
+                                                                        NUM_DOC,
+                                                                        StrToInt(NaklF.ProductSG.Cells[1,i]),
+                                                                        NaklF.ProductSG.Cells[2,i],
+                                                                        NaklF.ProductSG.Cells[4,i],
+                                                                        NaklF.ProductSG.Cells[3,i],
+                                                                        g_User,
+                                                                        IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
+                                                                        NaklF.ProductSG.Cells[6,i]]);
+                  AppData.Command.Execute;
+            except
+               on Err: Exception do
+                MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+            end;
+         end;
+    finally
+      FreeAndNil(NaklF);
+      RefreshNaklActionExecute(Self);
+    end;
+end;
+
+procedure TReestrForm.NewNaklRevisionActionExecute(Sender: TObject);
+var
+    NaklF: TNaklForm;
+    UNICUM_NUM, NUM_DOC, i: integer;
+begin
+    NaklF := TNaklForm.Create(g_New, g_New, 'РВ');
+    UNICUM_NUM := g_New;
+    NUM_DOC := g_New;
+
+    try
+       if NaklF.ShowModal = mrOk then
+         Begin
+            try
+                AppData.Command.CommandText  := Format(SSQLInsNaklHead, [FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
+                                                                         FloatToStr(NaklF.SumDoc),
+                                                                         IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
+                                                                         NaklF.UID_Car,
+                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
+                                                                         g_User,
+                                                                         NaklF.PrimechMemo.Text]);
+
+                AppData.Command.Execute;
+                RefreshNaklActionExecute(Self);
+                AppData.Nakl.Last;
+
+                UNICUM_NUM := AppData.Nakl.FieldByName('UNICUM_NUM').AsInteger;
+                NUM_DOC := AppData.Nakl.FieldByName('NUM_DOC').AsInteger;
+
+            except
+              on Err: Exception do
+                MessageDlg('Ошибка сохранения головной части документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+            end;
+
+            for i := 1 to NaklF.ProductSG.RowCount-1 do
+            try
+                AppData.Command.CommandText := Format(SSQLInsNaklMove, [UNICUM_NUM,
+                                                                        NUM_DOC,
+                                                                        StrToInt(NaklF.ProductSG.Cells[1,i]),
+                                                                        NaklF.ProductSG.Cells[2,i],
+                                                                        NaklF.ProductSG.Cells[4,i],
+                                                                        NaklF.ProductSG.Cells[3,i],
+                                                                        g_User,
+                                                                        IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
+                                                                        NaklF.ProductSG.Cells[6,i]]);
+                  AppData.Command.Execute;
+            except
+               on Err: Exception do
+                MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+            end;
+         end;
+    finally
+      FreeAndNil(NaklF);
+      RefreshNaklActionExecute(Self);
     end;
 end;
 

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ComCtrls, Buttons, ExtCtrls, ToolWin, Grids, ActnList,
-  ImgList, StrUtils, ComObj, Menus, Math;
+  ImgList, StrUtils, ComObj, Menus, Math, IniFiles, WinProcs;
 
 type
   TNaklForm = class(TForm)
@@ -80,6 +80,8 @@ type
     procedure ProductSGDblClick(Sender: TObject);
     procedure DriverCBChange(Sender: TObject);
     procedure TypeDocCBChange(Sender: TObject);
+    procedure ProductSGDrawCell(Sender: TObject; ACol, ARow: Integer;
+      Rect: TRect; State: TGridDrawState);
   private
     { Private declarations }
     FUNICUM_NUM: integer;
@@ -87,32 +89,39 @@ type
     FUID_Car: integer;
     procedure SetiTypeF(const Value: Shortint);
     procedure SetUNICUM_NUM(const Value: integer);
-    procedure SetFieldsSG();
+    procedure SetFieldsSG(); overload;
+    procedure SetFieldGS(TypeDoc: string); overload;
     procedure SetUID_Car(const Value: integer);
     procedure DeleteRow(StringGrid: TStringGrid; ARow: Integer);
     procedure SetNumSG(SG: TStringGrid; Value: integer);
-    procedure SetCarInfo(Uid_Driver: integer);
+    procedure SetCarInfo(Uid_Driver: integer);                                         
+    procedure SetFontParam(PointName: string);
     function GetSumDoc: Real;
     function SetSumProd(CountProd, PriceProd: real): Variant;
-    function CheckFullNessDoc: Boolean;   
+    function CheckFullNessDoc: Boolean;
+    function StringToCaseSelect(Selector : string; CaseList: array of string): Integer;
 
   protected
     property UNICUM_NUM: integer read FUNICUM_NUM write SetUNICUM_NUM;
     property iTypeF: Shortint read FiTypeF write SetiTypeF;
-    
+
   public
     { Public declarations }
 
     // Блок настроек формы
-    procedure NewNaklSetting();
+    procedure NewNaklSetting(); overload;
+    procedure NewNaklSetting(TypeDoc: String); overload;
+
     procedure CorrNaklSetting(UNICUM_NUM: integer);
     procedure ViewNaklSetting(UNICUM_NUM: integer);
-    
+
     procedure setDrivers(Name: string);
     procedure setTypeDocs(Name: string);
+    procedure GetFontParam(PointName: string);
 
 
     constructor Create(Unucim_Num, TypeF: integer); overload;
+    constructor Create(Unucim_Num, TypeF: integer; typeDoc: string); overload;
    published
      property UID_Car: integer read FUID_Car write SetUID_Car;
      property SumDoc: Real read GetSumDoc;
@@ -689,8 +698,7 @@ begin
 
         while not AppData.TypeDocs.Eof do
           Begin
-            if AppData.TypeDocs.FieldByName('TYPE_DOC').AsString <> EmptyStr then
-              TypeDocCB.Items.Add(AppData.TypeDocs.FieldByName('TYPE_DOC').AsString);
+            TypeDocCB.Items.Add(AppData.TypeDocs.FieldByName('TYPE_DOC').AsString);
             AppData.TypeDocs.Next;
           end;
       finally
@@ -785,6 +793,175 @@ begin
               end;
       finally  
       end;
+end;
+
+procedure TNaklForm.NewNaklSetting(TypeDoc: String);
+begin
+  DateDocDP.Date := Now();
+  Self.Caption := Self.Caption + ' -> [Новый документ]';
+  setTypeDocs(TypeDoc);
+  setDrivers(EmptyStr);
+  TypeDocCB.Enabled := False;
+  SetFieldGS(TypeDoc);
+end;
+
+constructor TNaklForm.Create(Unucim_Num, TypeF: integer; typeDoc: string);
+begin
+inherited Create(Application);
+  Self.UNICUM_NUM := Unucim_Num;
+  Self.iTypeF := TypeF;
+  DateDocDP.Date := Now();
+  SetFieldsSG();
+
+  case TypeF of
+    g_New: NewNaklSetting(typeDoc);
+    g_Corr: CorrNaklSetting(Unucim_Num);
+    g_View: ViewNaklSetting(Unucim_Num);
+  end;
+
+  SetNumSG(Self.ProductSG, Self.ProductSG.RowCount);
+end;
+
+procedure TNaklForm.SetFieldGS(TypeDoc: string);
+begin
+  case StringToCaseSelect(TypeDoc, ['П', 'Р', 'С', 'РВ']) of
+    0,1,2: Begin
+                     with ProductSG do
+                      try
+                         RowCount := 2;
+                         ColCount := 7;
+                         FixedCols := 1;
+                         FixedCols := 1;
+
+                         Cols[0].Text := '№';
+                         Cols[1].Text := 'Артикул';
+                         Cols[2].Text := 'Наименование';
+                         Cols[3].Text := 'Цена';
+                         Cols[4].Text := 'Количество';
+                         Cols[5].Text := 'Сумма';
+                         Cols[6].Text := 'Примечание';
+
+                         ColWidths[0] := 30;
+                         ColWidths[1] := 80;
+                         ColWidths[2] := 230;
+                         ColWidths[3] := 70;
+                         ColWidths[4] := 90;
+                         ColWidths[5] := 90;
+                         ColWidths[6] := 200;
+                      finally
+                          ProductSG.DefaultRowHeight := 20;
+                      end;
+                    end;
+    3:           Begin
+                      with ProductSG do
+                      try
+                         RowCount := 2;
+                         ColCount := 11;
+                         FixedCols := 1;
+                         FixedCols := 1;
+
+                         Cols[0].Text := '№';
+                         Cols[1].Text := 'Артикул';
+                         Cols[2].Text := 'Наименование';
+                         Cols[3].Text := 'Цена';
+                         Cols[4].Text := 'Количество';
+                         Cols[5].Text := 'Сумма';
+                         Cols[6].Text := 'Количество(Ф)';
+                         Cols[7].Text := 'Сумма(Ф)';
+                         Cols[8].Text := 'Разница';
+                         Cols[9].Text := 'Сумма(Р)';
+                         Cols[10].Text := 'Примечание';
+
+                         ColWidths[0] := 30;
+                         ColWidths[1] := 80;
+                         ColWidths[2] := 230;
+                         ColWidths[3] := 70;
+                         ColWidths[4] := 90;
+                         ColWidths[5] := 100;
+                         ColWidths[6] := 90;
+                         ColWidths[7] := 90;
+                         ColWidths[8] := 90;
+                         ColWidths[9] := 90;
+                         ColWidths[10] := 200;
+
+                      finally
+                          ProductSG.DefaultRowHeight := 20;
+                          Self.Width := 1190;
+                      end;
+                    end;
+    else
+        SetFieldsSG();
+  end;
+end;
+
+function TNaklForm.StringToCaseSelect(Selector: string;
+  CaseList: array of string): Integer;
+var
+    cnt: integer;
+begin
+  Result := -1;
+
+  for cnt := 0 to Length(CaseList)-1 do
+    Begin
+      if CompareText(Selector, Caselist[cnt]) = 0 then
+        Begin
+             Result := cnt;
+             Break;
+        end;
+    end;
+end;
+
+procedure TNaklForm.GetFontParam(PointName: string);
+var
+   iniFile: TIniFile;
+   StyleBits: Byte;
+   BoldStyle: Boolean;
+begin
+    iniFile := TIniFile.Create(ExtractFilePath(Application.ExeName) + '\Setting.ini');
+    BoldStyle := True;
+
+    with FD.Font do
+      try
+        Name := iniFile.ReadString(PointName, 'Name', 'MS Sans Serif');
+        Color := iniFile.ReadInteger(PointName, 'Color', clWindowText);
+        Size := iniFile.ReadInteger(PointName, 'Size', 8);
+        if BoldStyle then
+           StyleBits := iniFile.ReadInteger( PointName, 'Style', Ord( fsBold ) )
+        else
+           StyleBits := iniFile.ReadInteger( PointName, 'Style', Ord( fsNormal ) );
+         Style := [];
+        if StyleBits and fsBoldMask = fsBoldMask then
+           Style := Style + [ fsBold ];
+        if StyleBits and fsItalicMask = fsItalicMask then
+           Style := Style + [ fsItalic ];
+        if StyleBits and fsUnderlineMask = fsUnderlineMask then
+           Style := Style + [ fsUnderline ];
+        if StyleBits and fsStrikeOutMask = fsStrikeOutMask then
+           Style := Style + [ fsStrikeOut ];
+      finally
+         ProductSG.Font := FD.Font;
+      end;
+end;
+
+procedure TNaklForm.SetFontParam(PointName: string);
+begin
+
+end;
+
+procedure TNaklForm.ProductSGDrawCell(Sender: TObject; ACol, ARow: Integer;
+  Rect: TRect; State: TGridDrawState);
+var
+    Format: Word;
+    C: array[0..255] of Char;
+begin
+  if ACol = 0 then
+    Format := DT_CENTER;
+  if ARow = 0 then
+    Format := DT_CENTER;
+
+  ProductSG.Canvas.FillRect(Rect);
+  StrPCopy(C, ProductSG.Cells[ACol, ARow]);
+  WinProcs.DrawText(ProductSG.Canvas.Handle, C, StrLen(C), Rect, Format);
 end;
 
 end.

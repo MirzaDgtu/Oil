@@ -56,6 +56,13 @@ const
     'Декабрь'
   );
 
+const
+  fsBoldMask      = 8;                { Constants Used to Determine Font Style }
+  fsItalicMask    = 4;
+  fsUnderlineMask = 2;
+  fsStrikeOutMask = 1;
+  fsNormal        = 0;  
+
 procedure GetMonthList(const List: TStrings);
 procedure NextMonth(var Y, M: Integer);
 procedure PrevMonth(var Y, M: Integer);

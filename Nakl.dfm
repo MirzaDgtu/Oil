@@ -413,6 +413,7 @@ object NaklForm: TNaklForm
     PopupMenu = MovePop
     TabOrder = 4
     OnDblClick = ProductSGDblClick
+    OnDrawCell = ProductSGDrawCell
     OnKeyPress = ProductSGKeyPress
     OnSelectCell = ProductSGSelectCell
     OnSetEditText = ProductSGSetEditText
