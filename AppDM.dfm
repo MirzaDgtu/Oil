@@ -514,6 +514,15 @@ object AppData: TAppData
     object MoveBusy: TBooleanField
       FieldName = 'Busy'
     end
+    object MoveDifference: TFloatField
+      FieldName = 'Difference'
+    end
+    object MoveKolSclad: TFloatField
+      FieldName = 'KolSclad'
+    end
+    object MoveSummSclad: TFloatField
+      FieldName = 'SummSclad'
+    end
   end
   object DS_Nakl: TDataSource
     DataSet = Nakl

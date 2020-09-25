@@ -290,6 +290,9 @@ type
     NaklBusy: TBooleanField;
     MoveBusy: TBooleanField;
     DriversLFullName: TStringField;
+    MoveDifference: TFloatField;
+    MoveKolSclad: TFloatField;
+    MoveSummSclad: TFloatField;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);

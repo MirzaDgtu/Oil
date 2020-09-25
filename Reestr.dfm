@@ -537,6 +537,14 @@ object ReestrForm: TReestrForm
             Title.Color = clSkyBlue
             Width = 278
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'Difference'
+            Title.Alignment = taCenter
+            Title.Caption = #1056#1072#1079#1085#1080#1094#1072
+            Title.Color = clSkyBlue
+            Visible = False
           end>
       end
     end
