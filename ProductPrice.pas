@@ -39,6 +39,7 @@ type
     procedure CountEditChange(Sender: TObject);
     procedure CountEditKeyPress(Sender: TObject; var Key: Char);
     procedure PrimechMemoKeyPress(Sender: TObject; var Key: Char);
+    procedure CountEditExit(Sender: TObject);
   private
     { Private declarations }
     FSumProd: Variant;
@@ -76,12 +77,18 @@ begin
 end;
 
 procedure TProductPriceForm.SetSummProduct(Count, Price: real);
+var
+    valD: Double;
 begin
+  SumProd := '0';
   try
-    ResultLabel.Caption := Format(SSumProd, [FloatToStr(Count),
-                                             FloatToStr(Price),
-                                             FloatToStr(Count * Price)]);
-    SumProd := FloatToStr(Count * Price);
+    if TryStrToFloat (CountEdit.Text, valD) then
+      Begin
+        ResultLabel.Caption := Format(SSumProd, [FloatToStr(Count),
+                                                 FloatToStr(Price),
+                                                 FloatToStr(Count * Price)]);
+        SumProd := FloatToStr(Count * Price);
+      End;
   finally
     SummEdit.Text := SumProd;
   end;
@@ -99,20 +106,19 @@ begin
 
   if (Length(Trim(CountEdit.Text)) > 0) then
     Begin
-      if (StrToFloat(Trim(CountEdit.Text)) > StrToFloat(Trim(PowerEdit.Text))) and
+      if (StrToFloat(Trim(IfThen((CountEdit.Text = EmptyStr) or (CountEdit.Text = '-'), '0', CountEdit.Text))) > StrToFloat(Trim(PowerEdit.Text))) and
          (Self.typeDoc <> 'Приходный документ') and
          (Self.typeDoc <> 'Ревизия') then
            CountEdit.Text := PowerEdit.Text;
     end;
-
-  SetSummProduct(StrToFloat(IfThen(CountEdit.Text = EmptyStr, '0', Trim(CountEdit.Text))), StrToFloat(PriceEdit.Text));
 end;
 
 procedure TProductPriceForm.CountEditKeyPress(Sender: TObject;
   var Key: Char);
 begin
   case Key of
-    '0'..'9', #8, #13: ;
+    '0'..'9', #8: ;
+    #13: SetSummProduct(StrToFloat(IfThen((CountEdit.Text = EmptyStr) or (CountEdit.Text = '-'), '0', Trim(CountEdit.Text))), StrToFloat(PriceEdit.Text));
     ',', '.': Begin
                 if Key <> DecimalSeparator then
                   Key := DecimalSeparator;
@@ -142,6 +148,11 @@ end;
 procedure TProductPriceForm.SettypeDoc(const Value: string);
 begin
   FtypeDoc := Value;
+end;
+
+procedure TProductPriceForm.CountEditExit(Sender: TObject);
+begin
+  SetSummProduct(StrToFloat(IfThen((CountEdit.Text = EmptyStr) or (CountEdit.Text = '-'), '0', Trim(CountEdit.Text))), StrToFloat(PriceEdit.Text));
 end;
 
 end.

@@ -322,7 +322,10 @@ begin
         Screen.Cursor := crSQLWait;
         AppData.Nakl.DisableControls;
 
-        AppData.Report.Template := SNakl;
+        if AppData.Nakl.FieldByName('TYPE_DOC').AsString = 'ÐÂ' then
+          AppData.Report.Template := SNaklRevision
+        else
+          AppData.Report.Template := SNakl;
         AppData.Report.Run;
       finally
          Screen.Cursor := crDefault;
@@ -769,11 +772,11 @@ begin
                                                                         NUM_DOC,
                                                                         StrToInt(NaklF.ProductSG.Cells[1,i]),
                                                                         NaklF.ProductSG.Cells[2,i],
-                                                                        NaklF.ProductSG.Cells[4,i],
+                                                                        NaklF.ProductSG.Cells[8,i],
                                                                         NaklF.ProductSG.Cells[3,i],
                                                                         g_User,
                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Ð', AppData.TypeDocs.FieldByName('Name').AsString),
-                                                                        NaklF.ProductSG.Cells[6,i]]);
+                                                                        NaklF.ProductSG.Cells[9,i]]);
                   AppData.Command.Execute;
             except
                on Err: Exception do

@@ -210,6 +210,7 @@ object ProductPriceForm: TProductPriceForm
       TabOrder = 4
       Text = '0'
       OnChange = CountEditChange
+      OnExit = CountEditExit
       OnKeyPress = CountEditKeyPress
     end
   end

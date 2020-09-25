@@ -520,7 +520,8 @@ begin
                             if TypeDocCB.Text = 'Ревизия' then
                               Cells[6,RowCount-1] := AppData.Products.FieldByName('KON_KOLCH').AsString;
                             Cells[7, RowCount-1] := FloatToStr(AppData.Products.FieldByName('KON_KOLCH').AsFloat * AppData.Products.FieldByName('CENA_ARTC').AsFloat);
-                            Cells[8, RowCount-1] := ProdP.PrimechMemo.Text;
+                            Cells[8, RowCount-1] := SetDifference(Abs(StrToFloat(ProdP.CountEdit.Text)), Abs(AppData.Products.FieldByName('KON_KOLCH').AsFloat));
+                            Cells[9, RowCount-1] := ProdP.PrimechMemo.Text;
                           end;
                       end;
                   end;
@@ -626,14 +627,27 @@ end;
 
 procedure TNaklForm.ProductSGSetEditText(Sender: TObject; ACol,
   ARow: Integer; const Value: String);
-begin
-  if ACol = 4 then
-    Begin
-      ProductSG.Cells[5, ARow] := SetSumProd(StrToFloat(IfThen(ProductSG.Cells[4,ARow] = EmptyStr, '0', ProductSG.Cells[4, ARow])), StrToFloat(IfThen(ProductSG.Cells[3, ARow] = EmptyStr, '0', ProductSG.Cells[3, ARow])));
-      if TypeDocCB.Text = 'Ревизия' then
-        ProductSG.Cells[8, ARow] := SetDifference(StrToFloat(IfThen(ProductSG.Cells[4,ARow] = EmptyStr, '0', ProductSG.Cells[4, ARow])), StrToFloat(IfThen(ProductSG.Cells[6, ARow] = EmptyStr, '0', ProductSG.Cells[6, ARow])));
-    end;
 
+  function StrIsReal(AString: string): Boolean;
+  var
+    i: Extended;
+    Code: Integer;
+  begin
+    Val(AString, I, Code);
+    Result := Code = 0;
+  end;
+begin
+  if TypeDocCB.Text = 'Ревизия' then
+  Begin
+    if ACol = 4 then
+      if StrIsReal(ProductSG.Cells[4,ARow]) then
+        ProductSG.Cells[8, ARow] := SetDifference(StrToFloat(IfThen(ProductSG.Cells[4,ARow] = EmptyStr, '0', ProductSG.Cells[4, ARow])), StrToFloat(IfThen(ProductSG.Cells[6, ARow] = EmptyStr, '0', ProductSG.Cells[6, ARow])));
+  end
+  else
+    Begin
+      if ACol = 4 then
+          ProductSG.Cells[5, ARow] := SetSumProd(StrToFloat(IfThen(ProductSG.Cells[4,ARow] = EmptyStr, '0', ProductSG.Cells[4, ARow])), StrToFloat(IfThen(ProductSG.Cells[3, ARow] = EmptyStr, '0', ProductSG.Cells[3, ARow])));
+    end;
 end;
 
 procedure TNaklForm.TypeDocActionExecute(Sender: TObject);

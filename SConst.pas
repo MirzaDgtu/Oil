@@ -145,7 +145,7 @@ resourcestring
  // Печать
   SReestr = 'Template\Reestr';      // Печать реестра
   SNakl = 'Template\Nakl';          // Печать документа
-  SNaklReserve = 'Temlate\NaklReserve'; // Печать резервного документ
+  SNaklRevision = 'Temlate\NaklReserve'; // Печать резервного документ
   SCarReestr = 'Template\CarReestr'; // Печать реестра автомобилей
   SCarDetail = 'Template\CarDetail'; // Печать информации об автомобиле
 implementation
