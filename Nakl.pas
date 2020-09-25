@@ -113,8 +113,11 @@ type
     procedure NewNaklSetting(); overload;
     procedure NewNaklSetting(TypeDoc: String); overload;
 
-    procedure CorrNaklSetting(UNICUM_NUM: integer);
-    procedure ViewNaklSetting(UNICUM_NUM: integer);
+    procedure CorrNaklSetting(UNICUM_NUM: integer); overload;
+    procedure CorrNaklSetting(UNICUM_NUM: integer; TypeDoc: String); overload;
+
+    procedure ViewNaklSetting(UNICUM_NUM: integer); overload;
+    //procedure ViewNaklSetting(UNICUM_NUM: integer; TypeDoc: String); overload;
 
     procedure setDrivers(Name: string);
     procedure setTypeDocs(Name: string);
@@ -1036,6 +1039,63 @@ end;
 function TNaklForm.SetDifference(KolCounl, KolFactCount: real): Variant;
 begin
   Result := FloatToStr(KolCounl - KolFactCount);
+end;
+
+procedure TNaklForm.CorrNaklSetting(UNICUM_NUM: integer; TypeDoc: String);
+var
+  i: integer;
+begin
+  Self.Caption := Self.Caption + ' -> [Корректировка документа]';
+
+  AppData.Move.Active := False;
+  AppData.Move.CommandText := Format(SSQLGetNaklDetail, [UNICUM_NUM,
+                                                         g_New]);
+  AppData.Move.Active := True;
+
+  // Головная часть документа
+  NumDocEdit.Text := AppData.Nakl.FieldbyName('NUM_DOC').AsString;
+  DateDocDP.Date := AppData.Nakl.FieldByName('DATE_DOC').AsDateTime;
+  ModelEdit.Text := AppData.Nakl.FieldByName('MODEL').AsString;
+  RegSymbolEdit.Text := AppData.Nakl.FieldByName('REG_SYMBOL').AsString;
+  TypeEdit.Text := AppData.Nakl.FieldByName('TYPE_TC').AsString;
+  ColorEdit.Text := AppData.Nakl.FieldByName('COLOR').AsString;
+  YearEdit.Text := AppData.Nakl.FieldByName('MADEYEAR').AsString;
+  PrimechMemo.Text := AppData.Nakl.FieldByName('PRIMECH').AsString;
+  UID_Car := AppData.Nakl.FieldByName('CAR_UID').AsInteger;
+
+  setDrivers(AppData.Nakl.FieldByName('Driver').AsString);
+  setTypeDocs(AppData.Nakl.FieldByName('TYPE_DOC').AsString);
+  SetFieldGS(TypeDoc);
+
+  // Тело документа
+  if (AppData.Move.Active) and
+     (not AppData.Move.IsEmpty) then
+      try
+        ProductSG.RowCount := AppData.Move.RecordCount + 1;
+        while not AppData.Move.Eof do
+          Begin
+            for i := 1 to ProductSG.RowCount - 1 do
+              Begin
+                with ProductSG do
+                  Begin
+                    Cells[1,i] := AppData.Move.FieldByName('NUM_PREDM').AsString;
+                    Cells[2,i] := AppData.Move.FieldByName('NAME_PREDM').AsString;
+                    Cells[3,i] := AppData.Move.FieldByName('SUM_PREDM').AsString;
+                    Cells[4,i] := AppData.Move.FieldByName('KOLC_PREDM').AsString;
+                    Cells[5,i] := AppData.Move.FieldByName('Res_Sum').AsString;
+                    if TypeDoc = 'РВ' then
+                      Cells[9,i] := AppData.Move.FieldByName('Primech').AsString
+                    else
+                      Cells[6,i] := AppData.Move.FieldByName('Primech').AsString;
+                  end;
+                  AppData.Move.Next;
+              end;
+          end;
+          SetNumSG(ProductSG, ProductSG.RowCount);
+      except
+        on Err: Exception do
+          MessageDlg('Ошибка получения информации о документе!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+      end;
 end;
 
 end.

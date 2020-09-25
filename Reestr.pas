@@ -454,7 +454,7 @@ begin
            AppData.Command.CommandText := Format(SSQLCorrNaklBusy, [AppData.fldUNICUM_NUM.AsInteger,
                                                                     g_Corr]);
            AppData.Command.Execute();
-           NaklF := TNaklForm.Create(AppData.fldUNICUM_NUM.AsInteger, g_Corr);
+           NaklF := TNaklForm.Create(AppData.fldUNICUM_NUM.AsInteger, g_Corr, AppData.Nakl.FieldByName('TYPE_DOC').AsString);
            un_Num := AppData.fldUNICUM_NUM.AsInteger;
 
            if NaklF.ShowModal = mrOk then
