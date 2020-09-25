@@ -1,6 +1,6 @@
 object ReestrForm: TReestrForm
-  Left = 329
-  Top = 162
+  Left = 315
+  Top = 148
   Width = 1397
   Height = 675
   Caption = #1056#1077#1077#1089#1090#1088' '#1076#1086#1082#1091#1084#1077#1085#1090#1086#1074
@@ -1131,7 +1131,7 @@ object ReestrForm: TReestrForm
       Top = 135
       Width = 100
       Height = 22
-      Action = RangeAction
+      Action = Range1Action
       Caption = '&'#1055#1077#1088#1080#1086#1076
       TabOrder = 11
       Glyph.Data = {
@@ -2649,17 +2649,5 @@ object ReestrForm: TReestrForm
     object N9: TMenuItem
       Action = NewNaklWriteOffAction
     end
-  end
-  object Report: TFlexCelReport
-    AutoClose = False
-    Adapter = Adapter
-    DataModule = Owner
-    Left = 800
-    Top = 257
-  end
-  object Adapter: TOLEAdapter
-    SaveFormatExtended = []
-    Left = 856
-    Top = 257
   end
 end

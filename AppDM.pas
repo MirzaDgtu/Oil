@@ -312,6 +312,8 @@ type
     function GetTypeTcDoc: Variant;
     function GetColorDoc: Variant;
     function GetYearCarDoc: Variant;
+    function GetdBeg: Variant;
+    function GetdEnd: Variant;
   public
     class procedure SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
     procedure SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar); overload;
@@ -330,6 +332,10 @@ type
     property DriverDoc: Variant read GetDriverDoc;
     property TypeDoc: Variant read GetTypeDoc;
     property PrimechDoc: Variant read GetPrimechDoc;
+
+    // Начальная и конечная дата (Только для чтения)
+    property dBeg: Variant read GetdBeg;
+    property dEnd: Variant read GetdEnd;
 
       // Свойства автомобиля из документа (Car)
     property ModelCarDoc: Variant read GetModelCarDoc;
@@ -587,6 +593,16 @@ class procedure TAppData.SetRangeCaption(BegD, EndD: TDateTime;
 begin
   Panel.Text := Format(SRange, [FormatDateTime('dd-mm-yyyy', BegD),
                                  FormatDateTime('dd-mm-yyyy', EndD)]);
+end;
+
+function TAppData.GetdBeg: Variant;
+begin
+    Result := dBeg;
+end;
+
+function TAppData.GetdEnd: Variant;
+begin
+    Result := dEnd;
 end;
 
 end.

@@ -98,6 +98,7 @@ type
     procedure SetFontParam(PointName: string);
     function GetSumDoc: Real;
     function SetSumProd(CountProd, PriceProd: real): Variant;
+    function SetDifference(KolCounl, KolFactCount: real): Variant;
     function CheckFullNessDoc: Boolean;
     function StringToCaseSelect(Selector : string; CaseList: array of string): Integer;
 
@@ -401,7 +402,7 @@ procedure TNaklForm.DeleteRow(StringGrid: TStringGrid; ARow: Integer);
 var i, j: Integer;
 begin
   if (ProductSG.ColCount > 1) and
-     (ProductSG.Row <> 1) then
+     (ProductSG.Row <> 0) then
    try
       with StringGrid do
       try
@@ -417,7 +418,11 @@ begin
       end;
 
       if ProductSG.RowCount = 1 then
-         ProductSG.RowCount := ProductSG.RowCount + 1; 
+        Begin
+          ProductSG.RowCount := ProductSG.RowCount + 1;
+          ProductSG.FixedRows := 1;
+        end;
+
    finally
      SetNumSG(ProductSG, ProductSG.RowCount);
    end;
@@ -511,8 +516,11 @@ begin
                             Cells[2, RowCount-1] := AppData.Products.FieldByName('NAME_ARTIC').AsString;
                             Cells[3, RowCount-1] := AppData.Products.FieldByName('CENA_ARTC').AsString;
                             Cells[4, RowCount-1] := ProdP.CountEdit.Text;
-                            Cells[5, RowCount-1] := ProdP.SumProd;
-                            Cells[6, RowCount-1] := ProdP.PrimechMemo.Text;
+                            Cells[5, RowCount-1] := IfThen(ProdP.SumProd=EmptyStr, '0', ProdP.SumProd);
+                            if TypeDocCB.Text = 'Ревизия' then
+                              Cells[6,RowCount-1] := AppData.Products.FieldByName('KON_KOLCH').AsString;
+                            Cells[7, RowCount-1] := FloatToStr(AppData.Products.FieldByName('KON_KOLCH').AsFloat * AppData.Products.FieldByName('CENA_ARTC').AsFloat);
+                            Cells[8, RowCount-1] := ProdP.PrimechMemo.Text;
                           end;
                       end;
                   end;
@@ -586,19 +594,29 @@ begin
           end;
       end
     else
-      if Col = 6 then
-        if Key in ['''', '"', '~', '`'] then
-           Key := #0;
+      if Col in [6, 9] then
+          if Key in ['''', '"', '~', '`'] then
+            Key := #0;
   end;
 end;
 
 procedure TNaklForm.ProductSGSelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
-  if ACol in [4, 6] then
-    ProductSG.Options := ProductSG.Options + [goEditing]
+  if (TypeDocCB.Text = 'Ревизия') then
+    Begin
+      if ACol in [4, 9] then
+          ProductSG.Options := ProductSG.Options + [goEditing]
+      else
+          ProductSG.Options := ProductSG.Options - [goEditing];
+    end
   else
-    ProductSG.Options := ProductSG.Options - [goEditing];
+    Begin
+        if ACol in [4, 6] then
+          ProductSG.Options := ProductSG.Options + [goEditing]
+        else
+          ProductSG.Options := ProductSG.Options - [goEditing];
+    end;
 end;
 
 function TNaklForm.SetSumProd(CountProd, PriceProd: real): Variant;
@@ -610,7 +628,12 @@ procedure TNaklForm.ProductSGSetEditText(Sender: TObject; ACol,
   ARow: Integer; const Value: String);
 begin
   if ACol = 4 then
-    ProductSG.Cells[5, ARow] := SetSumProd(StrToFloat(IfThen(ProductSG.Cells[4,ARow] = EmptyStr, '0', ProductSG.Cells[4, ARow])), StrToFloat(IfThen(ProductSG.Cells[3, ARow] = EmptyStr, '0', ProductSG.Cells[3, ARow])));
+    Begin
+      ProductSG.Cells[5, ARow] := SetSumProd(StrToFloat(IfThen(ProductSG.Cells[4,ARow] = EmptyStr, '0', ProductSG.Cells[4, ARow])), StrToFloat(IfThen(ProductSG.Cells[3, ARow] = EmptyStr, '0', ProductSG.Cells[3, ARow])));
+      if TypeDocCB.Text = 'Ревизия' then
+        ProductSG.Cells[8, ARow] := SetDifference(StrToFloat(IfThen(ProductSG.Cells[4,ARow] = EmptyStr, '0', ProductSG.Cells[4, ARow])), StrToFloat(IfThen(ProductSG.Cells[6, ARow] = EmptyStr, '0', ProductSG.Cells[6, ARow])));
+    end;
+
 end;
 
 procedure TNaklForm.TypeDocActionExecute(Sender: TObject);
@@ -859,7 +882,7 @@ begin
                           with ProductSG do
                           try
                              RowCount := 2;
-                             ColCount := 11;
+                             ColCount := 10;
                              FixedCols := 1;
                              FixedCols := 1;
 
@@ -867,13 +890,12 @@ begin
                              Cols[1].Text := 'Артикул';
                              Cols[2].Text := 'Наименование';
                              Cols[3].Text := 'Цена';
-                             Cols[4].Text := 'Количество';
+                             Cols[4].Text := 'Количество(Ф)';
                              Cols[5].Text := 'Сумма';
-                             Cols[6].Text := 'Количество(Ф)';
-                             Cols[7].Text := 'Сумма(Ф)';
+                             Cols[6].Text := 'Количество';
+                             Cols[7].Text := 'Сумма';
                              Cols[8].Text := 'Разница';
-                             Cols[9].Text := 'Сумма(Р)';
-                             Cols[10].Text := 'Примечание';
+                             Cols[9].Text := 'Примечание';
 
                              ColWidths[0] := 30;
                              ColWidths[1] := 80;
@@ -884,12 +906,11 @@ begin
                              ColWidths[6] := 90;
                              ColWidths[7] := 90;
                              ColWidths[8] := 90;
-                             ColWidths[9] := 90;
-                             ColWidths[10] := 200;
+                             ColWidths[9] := 200;
 
                           finally
                               ProductSG.DefaultRowHeight := 20;
-                              Self.Width := 1190;
+                              Self.Width := 1100;
                           end;
                         end;
         else
@@ -996,6 +1017,11 @@ begin
   ProductSG.Canvas.FillRect(Rect);
   StrPCopy(C, ProductSG.Cells[ACol, ARow]);
   WinProcs.DrawText(ProductSG.Canvas.Handle, C, StrLen(C), Rect, Format);
+end;
+
+function TNaklForm.SetDifference(KolCounl, KolFactCount: real): Variant;
+begin
+  Result := FloatToStr(KolCounl - KolFactCount);
 end;
 
 end.

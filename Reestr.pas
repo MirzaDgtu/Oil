@@ -48,8 +48,6 @@ type
     FindEdit: TEdit;
     FindBtn: TBitBtn;
     FindAction: TAction;
-    Report: TFlexCelReport;
-    Adapter: TOLEAdapter;
     PrintReestrAction: TAction;
     PrintDocAction: TAction;
     N1: TMenuItem;
@@ -185,7 +183,7 @@ begin
     RefreshNaklActionExecute(Self);
     AppData.gBegD := BegD;
     AppData.gEndD := EndD;
-//    SetRangeCaption(BegD, EndD);
+    
   end;
 end;
 
@@ -237,8 +235,14 @@ begin
             AppData.Nakl.DisableControls;
 
             try
+              // Удаление тела накладной
+              AppData.Command.CommandText := Format(SSQLDelMove, [AppData.Nakl.FieldByName('UNICUM_NUM').AsInteger]);
+              AppData.Command.Execute;
+              // Удаление шапки накладной
               AppData.Command.CommandText := Format(SSQLDelNakl, [AppData.Nakl.FieldByName('UNICUM_NUM').AsInteger]);
               AppData.Command.Execute;
+
+
             except
               on ex: Exception do
                 MessageDlg('Ошибка удаления документа!', mtError, [mbOK], 0);
@@ -445,7 +449,7 @@ begin
         Begin
           // Свойство занятости документа (1 - занят)
            AppData.Command.CommandText := Format(SSQLCorrNaklBusy, [AppData.fldUNICUM_NUM.AsInteger,
-                                                                    1]);
+                                                                    g_Corr]);
            AppData.Command.Execute();
            NaklF := TNaklForm.Create(AppData.fldUNICUM_NUM.AsInteger, g_Corr);
            un_Num := AppData.fldUNICUM_NUM.AsInteger;
@@ -453,6 +457,9 @@ begin
            if NaklF.ShowModal = mrOk then
              Begin
               try
+                 AppData.Command.CommandText := Format(SSQLDelMove, [AppData.fldUNICUM_NUM.AsInteger]);
+                 AppData.Command.Execute;
+
                  AppData.Command.CommandText := Format(SSQLCorrNaklHead, [AppData.fldUNICUM_NUM.AsInteger,
                                                                           FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
                                                                           FloatToStr(NaklF.SumDoc),
@@ -479,21 +486,25 @@ begin
                                                                                IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
                                                                                NaklF.ProductSG.Cells[6,i]]);
                       AppData.Command.Execute;
-
-
-                // Свойство занятости документа (0 - свободен для корркктировки)
-                      AppData.Command.CommandText := Format(SSQLCorrNaklBusy, [AppData.fldUNICUM_NUM.AsInteger,
-                                                                               0]);
-                      AppData.Command.Execute();
                except
                      on Err: Exception do
-                      MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+                      Begin
+                        MessageDlg('Ошибка сохранения детализации документа!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+                                   // Свойство занятости документа (0 - свободен для корркктировки)
+                        AppData.Command.CommandText := Format(SSQLCorrNaklBusy, [AppData.fldUNICUM_NUM.AsInteger,
+                                                                                 g_New]);
+                        AppData.Command.Execute();
+                      end;
                end;
              end;
            end;
          finally
             FreeAndNil(NaklF);
             RefreshNaklActionExecute(Self);
+           // Свойство занятости документа (0 - свободен для корркктировки)
+            AppData.Command.CommandText := Format(SSQLCorrNaklBusy, [AppData.fldUNICUM_NUM.AsInteger,
+                                                                     g_New]);
+            AppData.Command.Execute();
             AppData.Nakl.Locate('UNICUM_NUM', un_Num, [loCaseInsensitive, loPartialKey]);
          end;
 end;

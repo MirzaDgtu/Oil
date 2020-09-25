@@ -654,7 +654,7 @@ begin
         if PointName = 'FontProducts' then
           Begin
             ProductsGrid.Font := FD.Font;
-            ProductsGrid.TitleFont :=FD.Font;
+            ProductsGrid.TitleFont := FD.Font;
           end;
      end;
     end;
