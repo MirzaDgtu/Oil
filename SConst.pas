@@ -62,8 +62,8 @@ resourcestring
   SSQLGetNaklDetail = 'EXEC REPORTS..O_GetNaklDetail %d, %d';       // Получение детализации накладной (Unicum_Num, Archive - 0,1)
   SSQLInsNaklHead = 'EXEC REPORTS..O_InsNaklHead ''%s'', ''%s'', ''%s'', %d, ''%s'', ''%s'', ''%s''';  // Создание новой накладной (Головная часть)
                                      // (DATE_DOC, SUM_DOC, DRIVER, Car_UID, Type_Doc, Family, Primech)
-  SSQLInsNaklMove = 'EXEC REPORTS..O_InsNaklMove %d, %d, %d, ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s''';   // Создание новой накланой (Тело накладной)
-                                     // (Unicum_Num, Num_Doc, Num_Predm, Name_Predm, KOLC_Predm, Sum_Predm, Family, Type_Doc, Primech)
+  SSQLInsNaklMove = 'EXEC REPORTS..O_InsNaklMove %d, %d, %d, ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s'', ''%s''';   // Создание новой накланой (Тело накладной)
+                                     // (Unicum_Num, Num_Doc, Num_Predm, Name_Predm, KOLC_Predm, Sum_Predm, Family, Type_Doc, Primech, KolKonchProd)
   SSQLDelMove = 'EXEC REPORTS..O_DelMove %d'; // Удаление товаров накладной (UNICUM_NUM)
   SSQLTrancferNakl = 'EXEC REPORTS..O_TrancferNakl %d, %d, ''%s''';   // Отметка накладной (Unicum_Num, Otmetka, Family) (Отложен до востребования)
 

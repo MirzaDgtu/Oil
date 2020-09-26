@@ -398,7 +398,8 @@ begin
                                                                         NaklF.ProductSG.Cells[3,i],
                                                                         g_User,
                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Ð', AppData.TypeDocs.FieldByName('Name').AsString),
-                                                                        NaklF.ProductSG.Cells[6,i]]);
+                                                                        NaklF.ProductSG.Cells[6,i],
+                                                                        0.0]);
                   AppData.Command.Execute;
             except
                on Err: Exception do
@@ -419,7 +420,7 @@ begin
   if (AppData.Nakl.Active) and
      (not AppData.Nakl.IsEmpty) then
    try
-     NaklF := TNaklForm.Create(AppData.fldUNICUM_NUM.AsInteger, g_View);
+     NaklF := TNaklForm.Create(AppData.fldUNICUM_NUM.AsInteger, g_View, AppData.Nakl.FieldByName('TYPE_DOC').AsString);
      un_Num := AppData.fldUNICUM_NUM.AsInteger;
 
      NaklF.ShowModal();
@@ -608,7 +609,8 @@ begin
                                                                         NaklF.ProductSG.Cells[3,i],
                                                                         g_User,
                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Ð', AppData.TypeDocs.FieldByName('Name').AsString),
-                                                                        NaklF.ProductSG.Cells[6,i]]);
+                                                                        NaklF.ProductSG.Cells[6,i],
+                                                                        0.0]);
                   AppData.Command.Execute;
             except
                on Err: Exception do
@@ -664,7 +666,8 @@ begin
                                                                         NaklF.ProductSG.Cells[3,i],
                                                                         g_User,
                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Ð', AppData.TypeDocs.FieldByName('Name').AsString),
-                                                                        NaklF.ProductSG.Cells[6,i]]);
+                                                                        NaklF.ProductSG.Cells[6,i],
+                                                                        0.0]);
                   AppData.Command.Execute;
             except
                on Err: Exception do
@@ -720,7 +723,8 @@ begin
                                                                         NaklF.ProductSG.Cells[3,i],
                                                                         g_User,
                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Ð', AppData.TypeDocs.FieldByName('Name').AsString),
-                                                                        NaklF.ProductSG.Cells[6,i]]);
+                                                                        NaklF.ProductSG.Cells[6,i],
+                                                                        0.0]);
                   AppData.Command.Execute;
             except
                on Err: Exception do
@@ -776,7 +780,8 @@ begin
                                                                         NaklF.ProductSG.Cells[3,i],
                                                                         g_User,
                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Ð', AppData.TypeDocs.FieldByName('Name').AsString),
-                                                                        NaklF.ProductSG.Cells[9,i]]);
+                                                                        NaklF.ProductSG.Cells[9,i],
+                                                                        NaklF.ProductSG.Cells[6,i]]);
                   AppData.Command.Execute;
             except
                on Err: Exception do

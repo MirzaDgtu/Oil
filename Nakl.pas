@@ -94,7 +94,7 @@ type
     procedure SetUID_Car(const Value: integer);
     procedure DeleteRow(StringGrid: TStringGrid; ARow: Integer);
     procedure SetNumSG(SG: TStringGrid; Value: integer);
-    procedure SetCarInfo(Uid_Driver: integer);                                         
+    procedure SetCarInfo(Uid_Driver: integer);
     procedure SetFontParam(PointName: string);
     function GetSumDoc: Real;
     function SetSumProd(CountProd, PriceProd: real): Variant;
@@ -117,7 +117,7 @@ type
     procedure CorrNaklSetting(UNICUM_NUM: integer; TypeDoc: String); overload;
 
     procedure ViewNaklSetting(UNICUM_NUM: integer); overload;
-    //procedure ViewNaklSetting(UNICUM_NUM: integer; TypeDoc: String); overload;
+    procedure ViewNaklSetting(UNICUM_NUM: integer; TypeDoc: String); overload;
 
     procedure setDrivers(Name: string);
     procedure setTypeDocs(Name: string);
@@ -317,7 +317,7 @@ begin
           MessageDlg('Ошибка получения информации о документе!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
       end;
 
-  // Запрет на корректировку  
+  // Запрет на корректировку
   NumDocEdit.ReadOnly := True;
   PrimechMemo.ReadOnly := True;
 
@@ -333,7 +333,6 @@ begin
   AddRowTBI.Enabled := False;
   DeleteTBI.Enabled := False;
   CarBtn.Enabled := False;
-
 end;
 
 procedure TNaklForm.DriverActionExecute(Sender: TObject);
@@ -857,8 +856,8 @@ inherited Create(Application);
 
   case TypeF of
     g_New: NewNaklSetting(typeDoc);
-    g_Corr: CorrNaklSetting(Unucim_Num);
-    g_View: ViewNaklSetting(Unucim_Num);
+    g_Corr: CorrNaklSetting(Unucim_Num, typeDoc);
+    g_View: ViewNaklSetting(Unucim_Num, typeDoc);
   end;
 
   SetNumSG(Self.ProductSG, Self.ProductSG.RowCount);
@@ -1084,9 +1083,15 @@ begin
                     Cells[4,i] := AppData.Move.FieldByName('KOLC_PREDM').AsString;
                     Cells[5,i] := AppData.Move.FieldByName('Res_Sum').AsString;
                     if TypeDoc = 'РВ' then
-                      Cells[9,i] := AppData.Move.FieldByName('Primech').AsString
+                      Begin
+                        Cells[6,i] := AppData.Move.FieldByName('KolSclad').AsString;
+                        Cells[7,i] := AppData.Move.FieldByName('SummSclad').AsString;
+                        Cells[8,i] := AppData.Move.FieldByName('Difference').AsString;
+                        Cells[9,i] := AppData.Move.FieldByName('Primech').AsString;
+                      end
                     else
                       Cells[6,i] := AppData.Move.FieldByName('Primech').AsString;
+
                   end;
                   AppData.Move.Next;
               end;
@@ -1096,6 +1101,87 @@ begin
         on Err: Exception do
           MessageDlg('Ошибка получения информации о документе!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
       end;
+end;
+
+procedure TNaklForm.ViewNaklSetting(UNICUM_NUM: integer; TypeDoc: String);
+var
+   i: integer;
+begin
+  // Ограничения на сохранение и какие либо изменения документа
+  Self.Caption := Self.Caption + ' -> [Просмотр документа]';
+
+  AppData.Move.Active := False;
+  AppData.Move.CommandText := Format(SSQLGetNaklDetail, [UNICUM_NUM,
+                                                                  g_New]);
+  AppData.Move.Active := True;
+
+  // Головная часть документа
+  NumDocEdit.Text := AppData.Nakl.FieldbyName('NUM_DOC').AsString;
+  DateDocDP.Date := AppData.Nakl.FieldByName('DATE_DOC').AsDateTime;
+  //DriverCB.ItemIndex := DriverCB.Items.IndexOf(AppData.Nakl.FieldByName('Driver').AsString);
+  ModelEdit.Text := AppData.Nakl.FieldByName('MODEL').AsString;
+  RegSymbolEdit.Text := AppData.Nakl.FieldByName('REG_SYMBOL').AsString;
+  TypeEdit.Text := AppData.Nakl.FieldByName('TYPE_TC').AsString;
+  ColorEdit.Text := AppData.Nakl.FieldByName('COLOR').AsString;
+  YearEdit.Text := AppData.Nakl.FieldByName('MADEYEAR').AsString;
+  PrimechMemo.Text := AppData.Nakl.FieldByName('PRIMECH').AsString;
+
+  setDrivers(AppData.Nakl.FieldByName('Driver').AsString);
+  setTypeDocs(AppData.Nakl.FieldByName('TYPE_DOC').AsString);
+
+
+  // Тело документа
+  if (AppData.Move.Active) and
+     (not AppData.Move.IsEmpty) then
+      try
+        ProductSG.RowCount := AppData.Move.RecordCount + 1;
+        while not AppData.Move.Eof do
+          Begin
+            for i := 1 to ProductSG.RowCount - 1 do
+              Begin
+                with ProductSG do
+                  Begin
+                    Cells[1,i] := AppData.Move.FieldByName('NUM_PREDM').AsString;
+                    Cells[2,i] := AppData.Move.FieldByName('NAME_PREDM').AsString;
+                    Cells[3,i] := AppData.Move.FieldByName('SUM_PREDM').AsString;
+                    Cells[4,i] := AppData.Move.FieldByName('KOLC_PREDM').AsString;
+                    Cells[5,i] := AppData.Move.FieldByName('Res_Sum').AsString;
+                    if TypeDoc = 'РВ' then
+                      Begin
+                        Cells[6,i] := AppData.Move.FieldByName('KolSclad').AsString;
+                        Cells[7,i] := AppData.Move.FieldByName('SummSclad').AsString;
+                        Cells[8,i] := AppData.Move.FieldByName('Difference').AsString;
+                        Cells[9,i] := AppData.Move.FieldByName('Primech').AsString;
+                      end
+                    else
+                      Cells[6,i] := AppData.Move.FieldByName('Primech').AsString;
+                  end;
+                  AppData.Move.Next;
+              end;
+          end;
+
+          SetNumSG(ProductSG, ProductSG.RowCount);
+      except
+        on Err: Exception do
+          MessageDlg('Ошибка получения информации о документе!' + #13 + 'Сообщение: ' + Err.Message, mtError, [mbOK], 0);
+      end;
+
+  // Запрет на корректировку
+  NumDocEdit.ReadOnly := True;
+  PrimechMemo.ReadOnly := True;
+
+  ProductSG.Options := ProductSG.Options - [goEditing];
+  DateDocDP.Enabled := False;
+  DriverCB.Enabled := False;
+  TypeDocCB.Enabled := False;
+
+  // Кнопки
+  SaveTBI.Enabled := False;
+  AddDriverBtn.Enabled := False;
+  AddTypeDocBtn.Enabled := False;
+  AddRowTBI.Enabled := False;
+  DeleteTBI.Enabled := False;
+  CarBtn.Enabled := False;
 end;
 
 end.
