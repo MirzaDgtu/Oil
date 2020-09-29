@@ -135,23 +135,11 @@ object AppData: TAppData
     object CarDetailUID_CAR: TIntegerField
       FieldName = 'UID_CAR'
     end
-    object CarDetailPASSPORT_NUM: TIntegerField
-      FieldName = 'PASSPORT_NUM'
-    end
-    object flPASSPORT_SERIAL: TIntegerField
-      FieldName = 'PASSPORT_SERIAL'
-    end
     object CarDetailMASS_MAX: TFloatField
       FieldName = 'MASS_MAX'
     end
     object CarDetailMASS_LOADOUT: TFloatField
       FieldName = 'MASS_LOADOUT'
-    end
-    object CarDetailINS_NUM: TIntegerField
-      FieldName = 'INS_NUM'
-    end
-    object CarDetailINS_SERIAL: TIntegerField
-      FieldName = 'INS_SERIAL'
     end
     object CarDetailBEG_DATE: TDateTimeField
       FieldName = 'BEG_DATE'
@@ -161,7 +149,7 @@ object AppData: TAppData
     end
     object CarDetailSHASSIS: TStringField
       FieldName = 'SHASSIS'
-      Size = 15
+      Size = 30
     end
     object CarDetailWORKSTATE: TStringField
       FieldName = 'WORKSTATE'
@@ -173,12 +161,6 @@ object AppData: TAppData
     end
     object CarDetailPassport: TStringField
       FieldName = 'Passport'
-    end
-    object CarDetailDOC_SERIAL: TIntegerField
-      FieldName = 'DOC_SERIAL'
-    end
-    object CarDetailDOC_NUM: TIntegerField
-      FieldName = 'DOC_NUM'
     end
     object CarDetailINS_UID: TIntegerField
       FieldName = 'INS_UID'
@@ -223,6 +205,30 @@ object AppData: TAppData
       FieldName = 'CATEGORY'
       Size = 5
     end
+    object CarDetailPASSPORT_NUM: TStringField
+      FieldName = 'PASSPORT_NUM'
+      Size = 30
+    end
+    object CarDetailPASSPORT_SERIAL: TStringField
+      FieldName = 'PASSPORT_SERIAL'
+      Size = 30
+    end
+    object CarDetailINS_NUM: TStringField
+      FieldName = 'INS_NUM'
+      Size = 30
+    end
+    object CarDetailINS_SERIAL: TStringField
+      FieldName = 'INS_SERIAL'
+      Size = 30
+    end
+    object CarDetailDOC_SERIAL: TStringField
+      FieldName = 'DOC_SERIAL'
+      Size = 30
+    end
+    object CarDetailDOC_NUM: TStringField
+      FieldName = 'DOC_NUM'
+      Size = 30
+    end
   end
   object Command: TADOCommand
     Connection = Connection
@@ -237,12 +243,6 @@ object AppData: TAppData
     Top = 16
     object InsuranceUID: TIntegerField
       FieldName = 'UID'
-    end
-    object InsuranceSERIAL: TIntegerField
-      FieldName = 'SERIAL'
-    end
-    object InsuranceNUMBER: TIntegerField
-      FieldName = 'NUMBER'
     end
     object InsuranceDOC_DATE: TDateTimeField
       FieldName = 'DOC_DATE'
@@ -292,6 +292,14 @@ object AppData: TAppData
     object InsuranceValidDay: TIntegerField
       FieldName = 'ValidDay'
     end
+    object InsuranceSERIAL: TStringField
+      FieldName = 'SERIAL'
+      Size = 30
+    end
+    object InsuranceNUMBER: TStringField
+      FieldName = 'NUMBER'
+      Size = 30
+    end
   end
   object InsuranceDetail: TADODataSet
     Connection = Connection
@@ -300,12 +308,6 @@ object AppData: TAppData
     Top = 16
     object InsuranceDetailUID: TIntegerField
       FieldName = 'UID'
-    end
-    object InsuranceDetailSERIAL: TIntegerField
-      FieldName = 'SERIAL'
-    end
-    object InsuranceDetailNUMBER: TIntegerField
-      FieldName = 'NUMBER'
     end
     object InsuranceDetailBEG_DATE: TDateTimeField
       FieldName = 'BEG_DATE'
@@ -358,6 +360,14 @@ object AppData: TAppData
     end
     object InsuranceDetailMADEYEAR: TIntegerField
       FieldName = 'MADEYEAR'
+    end
+    object InsuranceDetailSERIAL: TStringField
+      FieldName = 'SERIAL'
+      Size = 30
+    end
+    object InsuranceDetailNUMBER: TStringField
+      FieldName = 'NUMBER'
+      Size = 30
     end
   end
   object DS_Insurance: TDataSource
@@ -816,12 +826,6 @@ object AppData: TAppData
     object IntegerField3: TIntegerField
       FieldName = 'UID'
     end
-    object IntegerField4: TIntegerField
-      FieldName = 'SERIAL'
-    end
-    object IntegerField5: TIntegerField
-      FieldName = 'NUMBER'
-    end
     object DateTimeField5: TDateTimeField
       FieldName = 'DOC_DATE'
     end
@@ -869,6 +873,14 @@ object AppData: TAppData
     end
     object IntegerField6: TIntegerField
       FieldName = 'ValidDay'
+    end
+    object InsuranceStorySERIAL: TStringField
+      FieldName = 'SERIAL'
+      Size = 30
+    end
+    object InsuranceStoryNUMBER: TStringField
+      FieldName = 'NUMBER'
+      Size = 30
     end
   end
   object DS_InsuranceStory: TDataSource

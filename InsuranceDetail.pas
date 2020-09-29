@@ -38,7 +38,6 @@ type
     TypeEdit: TEdit;
     ColorEdit: TEdit;
     YearEdit: TEdit;
-    procedure SerialEditKeyPress(Sender: TObject; var Key: Char);
     procedure CarBtnClick(Sender: TObject);
     procedure BegDPChange(Sender: TObject);
   private
@@ -64,18 +63,6 @@ implementation
 uses Car, AppDM, DB, Globals, CarStory;
 
 {$R *.dfm}
-
-procedure TInsuranceDetailForm.SerialEditKeyPress(Sender: TObject;
-  var Key: Char);
-begin
-    case Key of
-      '0'..'9': ;
-      #8, #13: ;
-    else
-      Key := #0;
-    end;
-
-end;
 
 procedure TInsuranceDetailForm.CarBtnClick(Sender: TObject);
 var

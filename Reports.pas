@@ -353,12 +353,12 @@ procedure TReportsForm.GetTypeTovr;
 begin
   AppData.TypeTovr.Active := False;
   AppData.TypeTovr.Active := True;
+  TypeTovrCB.Items.Clear;
+  TypeTovrCB.Items.Add('[Все]');
 
   if not AppData.TypeTovr.IsEmpty then
     try
        TypeTovrCB.Items.BeginUpdate;
-       TypeTovrCB.Items.Clear;
-       TypeTovrCB.Items.Add('[Выбрать]');
 
        AppData.TypeTovr.First;
        while not AppData.TypeTovr.Eof do
@@ -418,12 +418,12 @@ begin
     AppData.DriversL.Active := False;
     AppData.DriversL.CommandText := Format(SSQLGetDriversL, [0]);
     AppData.DriversL.Active := True;
+    DriverCB.Items.Clear;
+    DriverCB.Items.Add('[Все]');
 
     if not AppData.DriversL.IsEmpty then
       try
         DriverCB.Items.BeginUpdate;
-        DriverCB.Items.Clear;
-        DriverCB.Items.Add('[Выбрать]');
         AppData.DriversL.First;
 
         while not AppData.DriversL.Eof do
@@ -442,13 +442,13 @@ begin
     AppData.TypeDocs.Active := False;
     AppData.TypeDocs.CommandText := Format(SSQLGetTypeDocs, [0]);
     AppData.TypeDocs.Active := True;
+    TypeDocCB.Items.Clear;
+    TypeDocCB.Items.Add('[Все]');
 
     if not AppData.TypeDocs.IsEmpty then
       try
         TypeDocCB.Items.BeginUpdate;
-        TypeDocCB.Items.Clear;
         AppData.TypeDocs.First;
-        TypeDocCB.Items.Add('[Выбрать]');
 
         while not AppData.TypeDocs.Eof do
           Begin

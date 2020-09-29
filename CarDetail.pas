@@ -65,7 +65,6 @@ type
     InsBtn: TBitBtn;
     procedure MassMaxEditKeyPress(Sender: TObject; var Key: Char);
     procedure MassLoadOutEditKeyPress(Sender: TObject; var Key: Char);
-    procedure PasSerialEditKeyPress(Sender: TObject; var Key: Char);
     procedure PowerEditKeyPress(Sender: TObject; var Key: Char);
     procedure InsBtnClick(Sender: TObject);
   private
@@ -125,18 +124,6 @@ begin
       else
             Key := #0;
       end;
-end;
-
-procedure TCarDetailForm.PasSerialEditKeyPress(Sender: TObject;
-  var Key: Char);
-begin
-    case Key of
-      '0'..'9': ;
-      #13: ;
-      #8: ;
-    else
-      Key := #0;
-    end;
 end;
 
 procedure TCarDetailForm.PowerEditKeyPress(Sender: TObject; var Key: Char);

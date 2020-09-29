@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ADODB;
+  Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ADODB, StrUtils;
 
 type
   TProductDetailForm = class(TForm)
@@ -359,10 +359,10 @@ begin
   if Length(Trim(NameEdit.Text)) > 0 then
     try
       AppData.Command.CommandText := Format(SSQLInsProduct, [Trim(NameEdit.Text),
-                                                             PriceEdit.Text,
+                                                             StringReplace(PriceEdit.Text, ',','.', [rfReplaceAll, rfIgnoreCase]),
                                                              NDSEdit.Text,
                                                              EdnIzmerEdit.Text,
-                                                             BalanceEdit.Text,
+                                                             StringReplace((IfThen(BalanceEdit.Text = EmptyStr, '0', BalanceEdit.Text)), ',','.', [rfReplaceAll, rfIgnoreCase]),
                                                              WeightEdit.Text,
                                                              EdnVUpakEdit.Text,
                                                              GroupCB.Text,

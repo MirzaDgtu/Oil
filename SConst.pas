@@ -40,9 +40,9 @@ resourcestring
   SSQLGetCarDetail = 'EXEC REPORTS..O_GetCarDetail %d, ''%s''';       // UID, Archive
   SSQLGetCarArc = 'EXEC REPORTS..O_GetCarArc %d';                     //Вывод архивных версий автомобиля (UID)
   SSQLInsCar = 'EXEC REPORTS..O_InsCar ''%s'',  ''%s'', ''%s'', ''%s'', ''%s'', %d, ''%s'', ''%s'', ''%s'', ''%s'', %d, ''%s'', ' +
-                                       '%d, %d, ''%s'', ''%s'', %d, ''%s'', ''%s'', %d, %d,  ''%s''';
+                                       '''%s'', ''%s'', ''%s'', ''%s'', %d, ''%s'', ''%s'', ''%s'', ''%s'',  ''%s''';
   SSQLCorrCar = 'EXEC REPORTS..O_CorrCar %d, ''%s'',  ''%s'', ''%s'', ''%s'', ''%s'', %d, ''%s'', ''%s'', ''%s'', ''%s'', %d, ''%s'', ' +
-                                        '%d, %d, ''%s'', ''%s'', %d, ''%s'', ''%s'', %d, %d,  ''%s''';
+                                        '''%s'', ''%s'', ''%s'', ''%s'', %d, ''%s'', ''%s'', ''%s'', ''%s'',  ''%s''';
   SSQLDeleteCars  = 'EXEC REPORTS..O_DeleteCars %d';                 // Удаление автомобиля
   SSQLTrancferCars = 'EXEC REPORTS..O_TrancferCars %d, %d, ''%s''';          // Перевод автомобиля в резерв
 
@@ -51,8 +51,8 @@ resourcestring
   SSQLGetInsurance  = 'EXEC REPORTS..O_GetInsurance %d, ''%s'', ''%s''';      // Получение списка страховых документов 0 - без резерва, 1 - все записи
   SSQLGetInsuranceDetail = 'EXEC REPORTS..O_GetInsuranceDetail %d'; //  Получение информации о страховом документе
   SSQLGetIsnuranceArc = 'EXEC REPORTS..O_GetIsnuranceArc %d';       //  Получение архивных записей страхового документа
-  SSQLInsInsurance  = 'EXEC REPORTS..O_InsInsurance %d, %d, ''%s'',  ''%s'', ''%s'', %d, ''%s'', %d, ''%s''';       // Добавление страхового документа
-  SSQLCorrInsurance = 'EXEC REPORTS..O_CorrInsurance %d, %d, %d, ''%s'',  ''%s'', ''%s'', %d, ''%s'', %d, ''%s''';  // Изменение страхового документа
+  SSQLInsInsurance  = 'EXEC REPORTS..O_InsInsurance ''%s'', ''%s'', ''%s'',  ''%s'', ''%s'', %d, ''%s'', %d, ''%s''';       // Добавление страхового документа
+  SSQLCorrInsurance = 'EXEC REPORTS..O_CorrInsurance %d, ''%s'', ''%s'', ''%s'',  ''%s'', ''%s'', %d, ''%s'', %d, ''%s''';  // Изменение страхового документа
   SSQLTrancferInsurance = 'EXEC REPORTS..O_TrancferInsurance %d, %d, ''%s''';                                       // Перевод страхового документа в резерв
   SSQLDelInsurance = 'EXEC REPORTS..O_DelInsurance %d';                                                             // Удаление страхового документа
 

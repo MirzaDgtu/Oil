@@ -133,8 +133,8 @@ begin
 
     if ShowModal = mrOk then
     try
-        AppData.Command.CommandText := Format(SSQLInsInsurance, [StrToInt(IfThen(SerialEdit.Text = EmptyStr, '0', SerialEdit.Text)),
-                                                                 StrToInt(IfThen(NumberEdit.Text = EmptyStr, '0', NumberEdit.Text)),
+        AppData.Command.CommandText := Format(SSQLInsInsurance, [IfThen(SerialEdit.Text = EmptyStr, '0', SerialEdit.Text),
+                                                                 IfThen(NumberEdit.Text = EmptyStr, '0', NumberEdit.Text),
                                                                  FormatDateTime('yyyy-mm-dd', BegDP.Date),
                                                                  FormatDateTime('yyyy-mm-dd', EndDP.Date),
                                                                  FormatDateTime('yyyy-mm-dd', DocDP.Date),
@@ -212,8 +212,8 @@ begin
                   if  ShowModal = mrOk then
                     try
                       AppData.Command.CommandText := Format(SSQLCorrInsurance, [AppData.Insurance.FieldByName('UID').AsInteger,
-                                                                                StrToInt(IfThen(SerialEdit.Text = EmptyStr, '0', SerialEdit.Text)),
-                                                                                StrToInt(IfThen(NumberEdit.Text = EmptyStr, '0', NumberEdit.Text)),
+                                                                                IfThen(SerialEdit.Text = EmptyStr, '0', SerialEdit.Text),
+                                                                                IfThen(NumberEdit.Text = EmptyStr, '0', NumberEdit.Text),
                                                                                 FormatDateTime('yyyy-mm-dd', BegDP.Date),
                                                                                 FormatDateTime('yyyy-mm-dd', EndDP.Date),
                                                                                 FormatDateTime('yyyy-mm-dd', DocDP.Date),
@@ -292,8 +292,8 @@ var
     strFilter: string;
 begin
   case FindCB.ItemIndex of
-    0: strFilter := ' SERIAL = ' + Trim(FindEdit.Text);
-    1: strFilter := ' NUMBER = ' + Trim(FindEdit.Text);
+    0: strFilter := ' SERIAL LIKE ' + QuotedStr('%' + Trim(FindEdit.Text) + '%');
+    1: strFilter := ' NUMBER LIKE ' + QuotedStr('%' + Trim(FindEdit.Text) + '%');
     2: strFilter := ' InsConcat LIKE ' + QuotedStr('%' + Trim(FindEdit.Text) + '%');
   end;
 
@@ -320,7 +320,7 @@ end;
 
 procedure TInsuranceForm.FindEditKeyPress(Sender: TObject; var Key: Char);
 begin
-    case FindCB.ItemIndex of
+{    case FindCB.ItemIndex of
       0, 1: begin
              case Key of
                 '0'..'9': ;
@@ -340,7 +340,7 @@ begin
                 Key := #0;
              end;
            end;
-      end;
+      end; }
 end;
 
 procedure TInsuranceForm.setInfoSB;

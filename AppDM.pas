@@ -31,12 +31,8 @@ type
     CarsRESERVE: TBooleanField;
     CarDetailROWID: TIntegerField;
     CarDetailUID_CAR: TIntegerField;
-    CarDetailPASSPORT_NUM: TIntegerField;
-    flPASSPORT_SERIAL: TIntegerField;
     CarDetailMASS_MAX: TFloatField;
     CarDetailMASS_LOADOUT: TFloatField;
-    CarDetailINS_NUM: TIntegerField;
-    CarDetailINS_SERIAL: TIntegerField;
     CarDetailBEG_DATE: TDateTimeField;
     CarDetailEND_DATE: TDateTimeField;
     CarDetailSHASSIS: TStringField;
@@ -49,8 +45,6 @@ type
     CarDetailPassport: TStringField;
     Command: TADOCommand;
     CarsVIN: TStringField;
-    CarDetailDOC_SERIAL: TIntegerField;
-    CarDetailDOC_NUM: TIntegerField;
     CarDetailINS_UID: TIntegerField;
     CarsEmployeeName: TStringField;
     CarssWHO_CORR: TStringField;
@@ -58,8 +52,6 @@ type
     InsuranceDetail: TADODataSet;
     DS_Insurance: TDataSource;
     InsuranceUID: TIntegerField;
-    InsuranceSERIAL: TIntegerField;
-    InsuranceNUMBER: TIntegerField;
     InsuranceDOC_DATE: TDateTimeField;
     InsuranceBEG_DATE: TDateTimeField;
     InsuranceEND_DATE: TDateTimeField;
@@ -73,8 +65,6 @@ type
     InsuranceInsConcat: TStringField;
     InsurancePRIMECH: TStringField;
     InsuranceDetailUID: TIntegerField;
-    InsuranceDetailSERIAL: TIntegerField;
-    InsuranceDetailNUMBER: TIntegerField;
     InsuranceDetailBEG_DATE: TDateTimeField;
     InsuranceDetailEND_DATE: TDateTimeField;
     InsuranceDetailDOC_DATE: TDateTimeField;
@@ -204,8 +194,6 @@ type
     TypeTovrTYPE_TOVR: TStringField;
     InsuranceStory: TADODataSet;
     IntegerField3: TIntegerField;
-    IntegerField4: TIntegerField;
-    IntegerField5: TIntegerField;
     DateTimeField5: TDateTimeField;
     DateTimeField6: TDateTimeField;
     DateTimeField7: TDateTimeField;
@@ -293,6 +281,18 @@ type
     MoveDifference: TFloatField;
     MoveKolSclad: TFloatField;
     MoveSummSclad: TFloatField;
+    CarDetailPASSPORT_NUM: TStringField;
+    CarDetailPASSPORT_SERIAL: TStringField;
+    CarDetailINS_NUM: TStringField;
+    CarDetailINS_SERIAL: TStringField;
+    CarDetailDOC_SERIAL: TStringField;
+    CarDetailDOC_NUM: TStringField;
+    InsuranceDetailSERIAL: TStringField;
+    InsuranceDetailNUMBER: TStringField;
+    InsuranceSERIAL: TStringField;
+    InsuranceNUMBER: TStringField;
+    InsuranceStorySERIAL: TStringField;
+    InsuranceStoryNUMBER: TStringField;
     procedure SubjectsBeforeOpen(DataSet: TDataSet);
     procedure ConsumptionsBeforeOpen(DataSet: TDataSet);
     procedure TypeTovrBeforeOpen(DataSet: TDataSet);

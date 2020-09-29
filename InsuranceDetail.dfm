@@ -71,7 +71,6 @@ object InsuranceDetailForm: TInsuranceDetailForm
       Width = 89
       Height = 21
       TabOrder = 1
-      OnKeyPress = SerialEditKeyPress
     end
     object NumberEdit: TEdit
       Left = 224
@@ -79,7 +78,6 @@ object InsuranceDetailForm: TInsuranceDetailForm
       Width = 121
       Height = 21
       TabOrder = 2
-      OnKeyPress = SerialEditKeyPress
     end
     object DocDP: TDateTimePicker
       Left = 224

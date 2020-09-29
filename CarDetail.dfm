@@ -138,7 +138,6 @@ object CarDetailForm: TCarDetailForm
       Top = 12
       Width = 169
       Height = 21
-      MaxLength = 15
       TabOrder = 0
     end
     object VinEdit: TEdit
@@ -146,7 +145,6 @@ object CarDetailForm: TCarDetailForm
       Top = 36
       Width = 169
       Height = 21
-      MaxLength = 20
       TabOrder = 1
     end
     object ModelEdit: TEdit
@@ -162,7 +160,6 @@ object CarDetailForm: TCarDetailForm
       Top = 85
       Width = 273
       Height = 21
-      MaxLength = 30
       TabOrder = 3
     end
     object CategoryCB: TComboBox
@@ -207,7 +204,6 @@ object CarDetailForm: TCarDetailForm
       Top = 158
       Width = 169
       Height = 21
-      MaxLength = 15
       TabOrder = 6
     end
     object CarcassEdit: TEdit
@@ -215,7 +211,6 @@ object CarDetailForm: TCarDetailForm
       Top = 182
       Width = 169
       Height = 21
-      MaxLength = 12
       TabOrder = 7
     end
     object ColorEdit: TEdit
@@ -239,7 +234,6 @@ object CarDetailForm: TCarDetailForm
       Top = 254
       Width = 233
       Height = 21
-      MaxLength = 30
       TabOrder = 10
     end
     object ReservChB: TCheckBox
@@ -328,7 +322,6 @@ object CarDetailForm: TCarDetailForm
       Height = 21
       ReadOnly = True
       TabOrder = 0
-      OnKeyPress = PasSerialEditKeyPress
     end
     object InsSerialEdit: TEdit
       Left = 88
@@ -337,7 +330,6 @@ object CarDetailForm: TCarDetailForm
       Height = 21
       ReadOnly = True
       TabOrder = 1
-      OnKeyPress = PasSerialEditKeyPress
     end
     object DateBegPicker: TDateTimePicker
       Left = 88
@@ -607,7 +599,6 @@ object CarDetailForm: TCarDetailForm
       Width = 117
       Height = 21
       TabOrder = 0
-      OnKeyPress = PasSerialEditKeyPress
     end
     object PasSerialEdit: TEdit
       Left = 88
@@ -615,7 +606,6 @@ object CarDetailForm: TCarDetailForm
       Width = 89
       Height = 21
       TabOrder = 1
-      OnKeyPress = PasSerialEditKeyPress
     end
     object MassMaxEdit: TEdit
       Left = 268
@@ -691,7 +681,6 @@ object CarDetailForm: TCarDetailForm
       Width = 117
       Height = 21
       TabOrder = 0
-      OnKeyPress = PasSerialEditKeyPress
     end
     object DocSerialEdit: TEdit
       Left = 88
@@ -699,7 +688,6 @@ object CarDetailForm: TCarDetailForm
       Width = 89
       Height = 21
       TabOrder = 1
-      OnKeyPress = PasSerialEditKeyPress
     end
   end
   object PrimechBG: TGroupBox

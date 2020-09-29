@@ -173,15 +173,15 @@ begin
                                                              Byte(CarD.ReservChB.Checked),
                                                              g_User,
 
-                                                             StrToInt(IfThen(PasSerialEdit.Text = EmptyStr, '0', PasSerialEdit.Text)),
-                                                             StrToInt(IfThen(PasNumEdit.Text = EmptyStr, '0', PasNumEdit.Text)),
+                                                             IfThen(PasSerialEdit.Text = EmptyStr, '0', PasSerialEdit.Text),
+                                                             IfThen(PasNumEdit.Text = EmptyStr, '0', PasNumEdit.Text),
                                                              MassMaxEdit.Text,
                                                              MassLoadOutEdit.Text,
                                                              UID_Insurance,
                                                              Trim(ShassisEdit.Text),
                                                              StateCB.Text,
-                                                             StrToInt(IfThen(DocSerialEdit.Text = EmptyStr, '0', DocSerialEdit.Text)),
-                                                             StrToInt(IfThen(DocNumEdit.Text = EmptyStr, '0', DocNumEdit.Text)),
+                                                             IfThen(DocSerialEdit.Text = EmptyStr, '0', DocSerialEdit.Text),
+                                                             IfThen(DocNumEdit.Text = EmptyStr, '0', DocNumEdit.Text),
                                                              Trim(CarD.PrimechMemo.Text)]);
         AppData.Command.Execute;
         except
@@ -319,15 +319,15 @@ begin
                                                                   Byte(CarD.ReservChB.Checked),
                                                                   g_User,
 
-                                                                  StrToInt(IfThen(PasSerialEdit.Text = EmptyStr, '0', PasSerialEdit.Text)),
-                                                                  StrToInt(IfThen(PasNumEdit.Text = EmptyStr, '0', PasNumEdit.Text)),
+                                                                  IfThen(PasSerialEdit.Text = EmptyStr, '0', PasSerialEdit.Text),
+                                                                  IfThen(PasNumEdit.Text = EmptyStr, '0', PasNumEdit.Text),
                                                                   MassMaxEdit.Text,
                                                                   MassLoadOutEdit.Text,
                                                                   UID_Insurance,
                                                                   Trim(ShassisEdit.Text),
                                                                   StateCB.Text,
-                                                                  StrToInt(IfThen(DocSerialEdit.Text = EmptyStr, '0', DocSerialEdit.Text)),
-                                                                  StrToInt(IfThen(DocNumEdit.Text = EmptyStr, '0', DocNumEdit.Text)),
+                                                                  IfThen(DocSerialEdit.Text = EmptyStr, '0', DocSerialEdit.Text),
+                                                                  IfThen(DocNumEdit.Text = EmptyStr, '0', DocNumEdit.Text),
                                                                   Trim(CarD.PrimechMemo.Text)]);
               AppData.Command.Execute;
             except
@@ -445,7 +445,7 @@ if (AppData.Cars.Active) and
    (not AppData.Cars.IsEmpty) and
    (AppData.Cars.FieldByName('Archive').AsString = EmptyStr) then
     try
-       if MessageBox(Handle, '¬ы действительно желаете удалить выбранный автомобилль?', '”даление автомобил€', MB_ICONSTOP+MB_YESNO) = ID_YES then
+       if MessageBox(Handle, '¬ы действительно желаете удалить выбранный автомобиль?', '”даление автомобил€', MB_ICONSTOP+MB_YESNO) = ID_YES then
         try
             AppData.Command.CommandText := Format(SSQLDeleteCars, [AppData.Cars.FieldByName('UID').AsInteger]);
             AppData.Command.Execute;
