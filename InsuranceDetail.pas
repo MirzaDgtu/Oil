@@ -38,8 +38,10 @@ type
     TypeEdit: TEdit;
     ColorEdit: TEdit;
     YearEdit: TEdit;
+    ClearCarBtn: TBitBtn;
     procedure CarBtnClick(Sender: TObject);
     procedure BegDPChange(Sender: TObject);
+    procedure ClearCarBtnClick(Sender: TObject);
   private
     { Private declarations }
     FUID_Car: integer;
@@ -60,7 +62,7 @@ var
 
 implementation
 
-uses Car, AppDM, DB, Globals, CarStory;
+uses Car, AppDM, DB, Globals, CarStory, DateUtils;
 
 {$R *.dfm}
 
@@ -68,11 +70,12 @@ procedure TInsuranceDetailForm.CarBtnClick(Sender: TObject);
 var
     CarF: TCarStoryForm;
 begin
-  CarF := TCarStoryForm.Create(g_New, 0);
 
   try
-     if AppData.Insurance.FieldByName('ValidDay').AsInteger > 0 then
+     if //(AppData.Insurance.FieldByName('ValidDay').AsInteger > 0) or
+        (DaysBetween(BegDP.Date, EndDP.Date) > 0) then
        Begin
+        CarF := TCarStoryForm.Create(g_New, 0);
         CarF.Caption := 'Выбор автомобиля';
         if CarF.ShowModal = mrOk then
           try
@@ -131,6 +134,19 @@ begin
   except
       ShowMessage('Ошибка ограничения действий в модуле!');
   end;
+end;
+
+procedure TInsuranceDetailForm.ClearCarBtnClick(Sender: TObject);
+var
+    i: integer;
+begin
+  UID_Car := 0;
+  with CarGB do
+    Begin
+      for i := 0 to ControlCount -1 do
+        if Controls[i] is TEdit then
+          TEdit(Controls[i]).Text := EmptyStr;
+    end;
 end;
 
 end.

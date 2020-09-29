@@ -63,10 +63,12 @@ type
     PrimechBG: TGroupBox;
     PrimechMemo: TMemo;
     InsBtn: TBitBtn;
+    ClearInsBtn: TBitBtn;
     procedure MassMaxEditKeyPress(Sender: TObject; var Key: Char);
     procedure MassLoadOutEditKeyPress(Sender: TObject; var Key: Char);
     procedure PowerEditKeyPress(Sender: TObject; var Key: Char);
     procedure InsBtnClick(Sender: TObject);
+    procedure ClearInsBtnClick(Sender: TObject);
   private
     FUID_Insurance: integer;
     procedure SetUID_Insurance(const Value: integer);
@@ -201,6 +203,15 @@ begin
      finally
         CancelBtn.Enabled := True;
      end;
+end;
+
+procedure TCarDetailForm.ClearInsBtnClick(Sender: TObject);
+begin
+  UID_Insurance := 0;
+  InsSerialEdit.Text := EmptyStr;
+  InsNumEdit.Text := EmptyStr;
+  DateBegPicker.Date := Now();
+  DateEndPicker.Date :=  DateBegPicker.Date + 1;
 end;
 
 end.
