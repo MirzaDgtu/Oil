@@ -349,7 +349,6 @@ object InsuranceForm: TInsuranceForm
         Height = 21
         TabOrder = 0
         OnChange = FindEditChange
-        OnKeyPress = FindEditKeyPress
       end
       object FindBtn: TBitBtn
         Left = 22

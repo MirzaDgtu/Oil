@@ -874,6 +874,7 @@ object CarForm: TCarForm
       OnTitleClick = CarGridTitleClick
       Columns = <
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'UID'
           Title.Alignment = taCenter
@@ -886,6 +887,7 @@ object CarForm: TCarForm
           Visible = False
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'REG_SYMBOL'
           Title.Alignment = taCenter
@@ -900,6 +902,7 @@ object CarForm: TCarForm
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'VIN'
           Title.Alignment = taCenter
@@ -910,10 +913,11 @@ object CarForm: TCarForm
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
-          Width = 82
+          Width = 157
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'MODEL'
           Title.Alignment = taCenter
@@ -924,10 +928,11 @@ object CarForm: TCarForm
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
-          Width = 134
+          Width = 167
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'CARCASS'
           Title.Alignment = taCenter
@@ -938,10 +943,11 @@ object CarForm: TCarForm
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
-          Width = 110
+          Width = 147
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'TYPE_TC'
           Title.Alignment = taCenter
@@ -955,6 +961,7 @@ object CarForm: TCarForm
           Visible = False
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'CATEGORY'
           Title.Alignment = taCenter
@@ -968,6 +975,7 @@ object CarForm: TCarForm
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'MADEYEAR'
           Title.Alignment = taCenter
@@ -982,6 +990,7 @@ object CarForm: TCarForm
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'COLOR'
           Title.Alignment = taCenter
@@ -996,6 +1005,7 @@ object CarForm: TCarForm
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'MOTOR_POWER'
           Title.Alignment = taCenter
@@ -1010,6 +1020,7 @@ object CarForm: TCarForm
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'ECOLOGY'
           Title.Alignment = taCenter
@@ -1023,6 +1034,7 @@ object CarForm: TCarForm
           Visible = False
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'RESERVE'
           Title.Alignment = taCenter
@@ -1036,6 +1048,7 @@ object CarForm: TCarForm
           Visible = False
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'EmployeeName'
           Title.Alignment = taCenter
@@ -1050,6 +1063,7 @@ object CarForm: TCarForm
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'FAMILY'
           Title.Alignment = taCenter
@@ -1063,6 +1077,7 @@ object CarForm: TCarForm
           Visible = False
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'CREATE_DATE'
           Title.Alignment = taCenter
@@ -1073,10 +1088,11 @@ object CarForm: TCarForm
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
-          Width = 107
+          Width = 139
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'sWHO_CORR'
           Title.Alignment = taCenter
@@ -1091,6 +1107,7 @@ object CarForm: TCarForm
           Visible = True
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'WHO_CORR'
           Title.Alignment = taCenter
@@ -1104,6 +1121,7 @@ object CarForm: TCarForm
           Visible = False
         end
         item
+          Alignment = taCenter
           Expanded = False
           FieldName = 'CORR_DATE'
           Title.Alignment = taCenter

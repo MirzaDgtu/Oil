@@ -55,6 +55,12 @@ type
     SubGroup4CB: TComboBox;
     SubGroup5CB: TComboBox;
     SubGroup6CB: TComboBox;
+    ClearSubGroup2Btn: TBitBtn;
+    ClearSubGroup3Btn: TBitBtn;
+    ClearTvrBtn: TBitBtn;
+    ClearSubGroup4Btn: TBitBtn;
+    ClearSubGroup5Btn: TBitBtn;
+    ClearSubGroup6Btn: TBitBtn;
     procedure AddGrBtnClick(Sender: TObject);
     procedure AddGr1BtnClick(Sender: TObject);
     procedure AddGr2BtnClick(Sender: TObject);
@@ -78,6 +84,12 @@ type
     procedure SubGroup4AfterOpen(DataSet: TDataSet);
     procedure SubGroup5AfterOpen(DataSet: TDataSet);
     procedure SubGroup6AfterOpen(DataSet: TDataSet);
+    procedure ClearTvrBtnClick(Sender: TObject);
+    procedure ClearSubGroup2BtnClick(Sender: TObject);
+    procedure ClearSubGroup3BtnClick(Sender: TObject);
+    procedure ClearSubGroup4BtnClick(Sender: TObject);
+    procedure ClearSubGroup5BtnClick(Sender: TObject);
+    procedure ClearSubGroup6BtnClick(Sender: TObject);
   private
     { Private declarations }
     function CreateNewGroup(Str, StrName: string; Combo: TComboBox): Boolean;
@@ -542,6 +554,36 @@ begin
       finally
         SubGroup6CB.Items.EndUpdate;
       end;
+end;
+
+procedure TProductDetailForm.ClearTvrBtnClick(Sender: TObject);
+begin
+  GroupCB.ItemIndex := -1;
+end;
+
+procedure TProductDetailForm.ClearSubGroup2BtnClick(Sender: TObject);
+begin
+  SubGroup2CB.ItemIndex := -1;
+end;
+
+procedure TProductDetailForm.ClearSubGroup3BtnClick(Sender: TObject);
+begin
+    SubGroup3CB.ItemIndex := -1;
+end;
+
+procedure TProductDetailForm.ClearSubGroup4BtnClick(Sender: TObject);
+begin
+  SubGroup4CB.ItemIndex := -1;
+end;
+
+procedure TProductDetailForm.ClearSubGroup5BtnClick(Sender: TObject);
+begin
+  SubGroup5CB.ItemIndex := -1;
+end;
+
+procedure TProductDetailForm.ClearSubGroup6BtnClick(Sender: TObject);
+begin
+  SubGroup6CB.ItemIndex := -1;
 end;
 
 end.

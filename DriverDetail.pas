@@ -59,7 +59,9 @@ type
     Label17: TLabel;
     HiringDP: TDateTimePicker;
     Label18: TLabel;
+    ClearCarBtn: TBitBtn;
     procedure CarBtnClick(Sender: TObject);
+    procedure ClearCarBtnClick(Sender: TObject);
   private
     FUID_Car: integer;
     procedure SetUID_Car(const Value: integer);
@@ -185,4 +187,16 @@ begin
 
 end;
 
+procedure TDriverDetailDialog.ClearCarBtnClick(Sender: TObject);
+var
+    i: integer;
+begin
+  UID_Car := 0;
+  with CarGB do
+    Begin
+      for i := 0 to ControlCount -1 do
+        if Controls[i] is TEdit then
+          TEdit(Controls[i]).Text := EmptyStr;
+    end;
+end;
 end.

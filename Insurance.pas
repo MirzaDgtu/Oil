@@ -53,7 +53,6 @@ type
     procedure DeleteActionExecute(Sender: TObject);
     procedure FindActionExecute(Sender: TObject);
     procedure FindEditChange(Sender: TObject);
-    procedure FindEditKeyPress(Sender: TObject; var Key: Char);
     procedure RangeActionExecute(Sender: TObject);
     procedure InsuranceGridTitleClick(Column: TColumn);
     procedure StoryActionExecute(Sender: TObject);
@@ -316,31 +315,6 @@ begin
     end
   else
       FindBtn.Enabled := True;
-end;
-
-procedure TInsuranceForm.FindEditKeyPress(Sender: TObject; var Key: Char);
-begin
-{    case FindCB.ItemIndex of
-      0, 1: begin
-             case Key of
-                '0'..'9': ;
-                #13: ;
-                #8: ;
-             else
-                Key := #0;
-             end;
-           end;
-      2:   begin
-             case Key of
-                '0'..'9': ;
-                #13: ;
-                #8: ;
-                #32: ;
-             else
-                Key := #0;
-             end;
-           end;
-      end; }
 end;
 
 procedure TInsuranceForm.setInfoSB;
