@@ -302,6 +302,9 @@ type
   private
     FgBegD: variant;
     FgEndD: variant;
+    FDriverReport: Variant;
+    FTypeTovrReport: Variant;
+    FTypeDocReport: Variant;
     procedure QuitApplication(const Msg: string);
     procedure SetgBegD(const Value: variant);
     procedure SetgEndD(const Value: variant);
@@ -317,6 +320,9 @@ type
     function GetYearCarDoc: Variant;
     function GetdBeg: Variant;
     function GetdEnd: Variant;
+    procedure SetDriverReport(const Value: Variant);
+    procedure SetTypeDocReport(const Value: Variant);
+    procedure SetTypeTovrReport(const Value: Variant);
   public
     class procedure SetInfoSB(DataSet: TADODataSet; SB: TStatusBar);
     procedure SetInfoToSB(DataSet: TADODataSet; SB: TStatusBar); overload;
@@ -346,6 +352,12 @@ type
     property TypeTcCarDoc: Variant read GetTypeTcDoc;
     property ColorCarDoc: Variant read GetColorDoc;
     property YearCarDoc: Variant read GetYearCarDoc;
+
+    // Свойства для печати
+    property TypeTovrReport: Variant read FTypeTovrReport write SetTypeTovrReport;
+    property TypeDocReport: Variant read FTypeDocReport write SetTypeDocReport;
+    property DriverReport: Variant read FDriverReport write SetDriverReport;
+    
   end;
 
 var
@@ -606,6 +618,21 @@ end;
 function TAppData.GetdEnd: Variant;
 begin
     Result := dEnd;
+end;
+
+procedure TAppData.SetDriverReport(const Value: Variant);
+begin
+  FDriverReport := Value;
+end;
+
+procedure TAppData.SetTypeDocReport(const Value: Variant);
+begin
+  FTypeDocReport := Value;
+end;
+
+procedure TAppData.SetTypeTovrReport(const Value: Variant);
+begin
+  FTypeTovrReport := Value;
 end;
 
 end.

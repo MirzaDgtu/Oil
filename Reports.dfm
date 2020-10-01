@@ -1,6 +1,6 @@
 object ReportsForm: TReportsForm
-  Left = 297
-  Top = 274
+  Left = 346
+  Top = 220
   Width = 1280
   Height = 675
   Caption = #1054#1090#1095#1077#1090#1099

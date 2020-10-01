@@ -148,6 +148,9 @@ resourcestring
   SNaklRevision = 'Temlate\NaklReserve'; // Печать резервного документ
   SCarReestr = 'Template\CarReestr'; // Печать реестра автомобилей
   SCarDetail = 'Template\CarDetail'; // Печать информации об автомобиле
+
+  //Отчет
+  SReportOfProducts = 'Template\ReportOfProducts'; // Печать отчета по товарам
 implementation
 
 end.

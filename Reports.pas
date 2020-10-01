@@ -63,6 +63,7 @@ type
     procedure GetGroupInfoSB();
     procedure GetDrivers();
     procedure GetTypeDoc();
+    procedure PrintReport(Index: smallint);
 
   protected
     property DateB: TDateTime read FDateB write SetDateB;
@@ -346,7 +347,7 @@ end;
 
 procedure TReportsForm.ReportToExcelActionExecute(Sender: TObject);
 begin
-//
+  PrintReport(ReportsPC.TabIndex);
 end;
 
 procedure TReportsForm.GetTypeTovr;
@@ -459,6 +460,23 @@ begin
         TypeDocCB.Items.EndUpdate;
         TypeDocCB.ItemIndex := 0;
       end;
+end;
+
+procedure TReportsForm.PrintReport(Index: smallint);
+begin
+  try
+    AppData.TypeTovrReport := TypeTovrCB.Text;
+    AppData.TypeDocReport := TypeDocCB.Text;
+    AppData.DriverReport := DriverCB.Text;
+
+    case Index of
+      0: AppData.Report.Template := SReportOfProducts;
+      1: ;
+      2: ;
+    end;
+  finally
+    AppData.Report.Run;
+  end;
 end;
 
 end.
