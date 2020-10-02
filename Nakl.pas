@@ -63,6 +63,8 @@ type
     TypeDocAction: TAction;
     HelpAction: TAction;
     HelpBTI: TToolButton;
+    ClearDriverBtn: TBitBtn;
+    ClearDriverAction: TAction;
     procedure DriverActionExecute(Sender: TObject);
     procedure CarActionExecute(Sender: TObject);
     procedure DelRowActionExecute(Sender: TObject);
@@ -82,6 +84,7 @@ type
     procedure TypeDocCBChange(Sender: TObject);
     procedure ProductSGDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
+    procedure ClearDriverActionExecute(Sender: TObject);
   private
     { Private declarations }
     FUNICUM_NUM: integer;
@@ -1182,6 +1185,11 @@ begin
   AddRowTBI.Enabled := False;
   DeleteTBI.Enabled := False;
   CarBtn.Enabled := False;
+end;
+
+procedure TNaklForm.ClearDriverActionExecute(Sender: TObject);
+begin
+  DriverCB.ItemIndex := -1;
 end;
 
 end.
