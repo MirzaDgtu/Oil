@@ -469,13 +469,15 @@ begin
                  AppData.Command.Execute;
 
                  AppData.Command.CommandText := Format(SSQLCorrNaklHead, [AppData.fldUNICUM_NUM.AsInteger,
-                                                                          FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.DateTime),
+                                                                          FormatDateTime('yyyy-mm-dd', NaklF.DateDocDP.Date),
                                                                           StringReplace(FloatToStr(NaklF.SumDoc), ',','.', [rfReplaceAll, rfIgnoreCase]),
                                                                           IfThen(NaklF.DriverCB.Text = EmptyStr, '0', AppData.DriversL.FieldByName('UID').AsString),
                                                                           NaklF.UID_Car,
                                                                           IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
                                                                           g_User,
-                                                                          NaklF.PrimechMemo.Text]);
+                                                                          NaklF.PrimechMemo.Text
+                                                                          ]);
+
                  AppData.Command.Execute;
               except
                  on Err: Exception do
@@ -484,7 +486,7 @@ begin
 
               for i := 1 to NaklF.ProductSG.RowCount-1 do
                try
-                      AppData.Command.CommandText := Format(SSQLCorrNaklMove, [AppData.fldUNICUM_NUM.AsInteger,
+                      AppData.Command.CommandText := Format(SSQLInsNaklMove,  [AppData.fldUNICUM_NUM.AsInteger,
                                                                                AppData.fldNUM_DOC.AsInteger,
                                                                                StrToInt(NaklF.ProductSG.Cells[1,i]),
                                                                                NaklF.ProductSG.Cells[2,i],
@@ -492,7 +494,8 @@ begin
                                                                                StringReplace(NaklF.ProductSG.Cells[3,i], ',','.', [rfReplaceAll, rfIgnoreCase]),
                                                                                g_User,
                                                                                IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
-                                                                               NaklF.ProductSG.Cells[6,i]]);
+                                                                               NaklF.ProductSG.Cells[6,i],
+                                                                               '0.0']);
                       AppData.Command.Execute;
                except
                      on Err: Exception do
@@ -509,7 +512,7 @@ begin
          finally
             FreeAndNil(NaklF);
             RefreshNaklActionExecute(Self);
-           // Свойство занятости документа (0 - свободен для корркктировки)
+           // Свойство занятости документа (0 - свободен для корректировки)
             AppData.Command.CommandText := Format(SSQLCorrNaklBusy, [AppData.fldUNICUM_NUM.AsInteger,
                                                                      g_New]);
             AppData.Command.Execute();
@@ -614,8 +617,8 @@ begin
                                                                         g_User,
                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
                                                                         NaklF.ProductSG.Cells[6,i],
-                                                                        0.0,
-                                                                        NaklF.ProductSG.Cells[7,i]]);
+                                                                        '0.0'
+                                                                        ]);
                   AppData.Command.Execute;
             except
                on Err: Exception do
@@ -672,7 +675,7 @@ begin
                                                                         g_User,
                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
                                                                         NaklF.ProductSG.Cells[6,i],
-                                                                        0.0]);
+                                                                        '0.0']);
                   AppData.Command.Execute;
             except
                on Err: Exception do
@@ -729,7 +732,7 @@ begin
                                                                         g_User,
                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Р', AppData.TypeDocs.FieldByName('Name').AsString),
                                                                         NaklF.ProductSG.Cells[6,i],
-                                                                        0.0]);
+                                                                        '0.0']);
                   AppData.Command.Execute;
             except
                on Err: Exception do
@@ -843,7 +846,7 @@ begin
                                                                         g_User,
                                                                         IfThen(NaklF.TypeDocCB.Text = EmptyStr, 'Ч', AppData.TypeDocs.FieldByName('Name').AsString),
                                                                         NaklF.ProductSG.Cells[6,i],
-                                                                        0.0]);
+                                                                        '0.0']);
                   AppData.Command.Execute;
             except
                on Err: Exception do
