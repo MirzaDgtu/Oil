@@ -108,7 +108,8 @@ begin
     Begin
       if (StrToFloat(Trim(IfThen((CountEdit.Text = EmptyStr) or (CountEdit.Text = '-'), '0', CountEdit.Text))) > StrToFloat(Trim(PowerEdit.Text))) and
          (Self.typeDoc <> 'Приходный документ') and
-         (Self.typeDoc <> 'Ревизия') then
+         (Self.typeDoc <> 'Ревизия') and
+         (Self.typeDoc <> 'Чек') then
            CountEdit.Text := PowerEdit.Text;
     end;
 end;

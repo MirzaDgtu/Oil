@@ -85,11 +85,14 @@ type
     procedure ProductSGDrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure ClearDriverActionExecute(Sender: TObject);
+    procedure SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+      const Rect: TRect);
   private
     { Private declarations }
     FUNICUM_NUM: integer;
     FiTypeF: Shortint;
     FUID_Car: integer;
+    FsTypeDoc: string;
     procedure SetiTypeF(const Value: Shortint);
     procedure SetUNICUM_NUM(const Value: integer);
     procedure SetFieldsSG(); overload;
@@ -104,10 +107,13 @@ type
     function SetDifference(KolCounl, KolFactCount: real): Variant;
     function CheckFullNessDoc: Boolean;
     function StringToCaseSelect(Selector : string; CaseList: array of string): Integer;
+    procedure SetInfoSB();
+    procedure SetsTypeDoc(const Value: string);
 
   protected
     property UNICUM_NUM: integer read FUNICUM_NUM write SetUNICUM_NUM;
     property iTypeF: Shortint read FiTypeF write SetiTypeF;
+    property sTypeDoc: string read FsTypeDoc write SetsTypeDoc;
 
   public
     { Public declarations }
@@ -140,7 +146,7 @@ var
 implementation
 
 uses AppDM, Globals, Products, SConst, DB, CarStory, ProductModal,
-  ProductPrice, DriverDetail, TypeDocDetail;
+  ProductPrice, DriverDetail, TypeDocDetail, Types;
 
 {$R *.dfm}
 
@@ -436,6 +442,7 @@ end;
 procedure TNaklForm.DelRowActionExecute(Sender: TObject);
 begin
   DeleteRow(Self.ProductSG, Self.ProductSG.Row);
+  SetInfoSB();
 end;
 
 procedure TNaklForm.SetNumSG(SG: TStringGrid; Value: integer);
@@ -537,6 +544,7 @@ begin
       finally
         SetNumSG(ProductSG, ProductSG.RowCount);
         FreeAndNil(ProdF);
+        SetInfoSB();
       end;
 end;
 
@@ -558,8 +566,6 @@ end;
 
 procedure TNaklForm.FontActionExecute(Sender: TObject);
 begin
-//    If FD.Execute then
- //     ProductSG.Font := FD.Font;
  SetFontParam('FontNakl'); 
 end;
 
@@ -854,6 +860,7 @@ begin
 inherited Create(Application);
   Self.UNICUM_NUM := Unucim_Num;
   Self.iTypeF := TypeF;
+  Self.sTypeDoc := typeDoc;
   DateDocDP.Date := Now();
   SetFieldsSG();
 
@@ -869,8 +876,8 @@ end;
 procedure TNaklForm.SetFieldGS(TypeDoc: string);
 begin
   try
-      case StringToCaseSelect(TypeDoc, ['П', 'Р', 'С', 'РВ']) of
-        0,1,2: Begin
+      case StringToCaseSelect(TypeDoc, ['П', 'Р', 'С', 'РВ', 'Ч']) of
+        0,1,2,4: Begin
                          with ProductSG do
                           try
                              RowCount := 2;
@@ -1190,6 +1197,55 @@ end;
 procedure TNaklForm.ClearDriverActionExecute(Sender: TObject);
 begin
   DriverCB.ItemIndex := -1;
+end;
+
+procedure TNaklForm.SetsTypeDoc(const Value: string);
+begin
+  FsTypeDoc := Value;
+end;
+
+procedure TNaklForm.SetInfoSB;
+var
+    i: integer;
+    sumProd: real;
+begin
+  if ProductSG.RowCount > 1 then
+    try
+      if ProductSG.Cells[1,1] <> EmptyStr then
+        Begin
+          for i := 1 to ProductSG.RowCount - 1 do
+              sumProd := sumProd + StrToFloat(IfThen(ProductSG.Cells[5,i] = EmptyStr, '0', ProductSG.Cells[5,i]));
+        end;
+    finally
+       if ProductSG.Cells[1,1] = EmptyStr then
+         SB.Panels[0].Text := Format('Товаров: %d', [0])
+       else
+         SB.Panels[0].Text := Format('Товаров: %d', [ProductSG.RowCount - 1]);
+       SB.Panels[1].Text := Format('Сумма: %f', [sumProd]);
+    end;
+end;
+
+procedure TNaklForm.SBDrawPanel(StatusBar: TStatusBar; Panel: TStatusPanel;
+  const Rect: TRect);
+begin
+  with SB.Canvas do
+    try
+      Font.Style := Font.Style + [fsBold];
+      Font.Name := 'Times New Roman';
+      if Panel = SB.Panels[0] then
+        Font.Color := clGreen;
+      if Panel = SB.Panels[1] then
+        Font.Color := clNavy;
+      if Panel = SB.Panels[2] then
+        Font.Color := clRed;
+      {if Panel = StatusBar.Panels[3] then
+       Begin
+        Font.Color := clBlue;
+        Font.Name := 'Segoe UI';
+       end;}
+    finally
+      TextOut(Rect.Left, Rect.Top, Panel.Text);
+    end;
 end;
 
 end.
