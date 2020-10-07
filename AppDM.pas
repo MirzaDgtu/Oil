@@ -478,7 +478,9 @@ begin
       Begin
         Move.Active := False;
         Move.Active := True;
-      end;
+      end
+  else
+        Move.Active := False;
 end;
 
 procedure TAppData.SetgBegD(const Value: variant);
